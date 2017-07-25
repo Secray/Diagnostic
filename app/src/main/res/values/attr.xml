@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="color" format="color"/>
+    <attr name="radius" format="float"/>
+    <declare-styleable name="TouchCircleView">
+        <attr name="color"/>
+        <attr name="radius"/>
+    </declare-styleable>
+</resources>

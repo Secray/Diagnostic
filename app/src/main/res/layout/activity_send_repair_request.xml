@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg_color">
+
+    <include layout="@layout/toolbar"/>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/send_repair_request_padding"
+            android:paddingRight="@dimen/send_repair_request_padding"
+            android:orientation="vertical">
+            <TextView
+                style="@style/AppTheme.SendRepairRequest.Text.Title"
+                android:layout_marginTop="30dp"
+                android:text="@string/repair_request_title"/>
+
+            <TextView
+                style="@style/AppTheme.SendRepairRequest.Text.SubTitle"
+                android:text="@string/repair_request_first_name"/>
+
+            <EditText
+                android:nextFocusDown="@+id/edt_last_name"
+                android:id="@+id/edt_first_name"
+                style="@style/AppTheme.SendRepairRequest.EditText" />
+
+            <TextView
+                style="@style/AppTheme.SendRepairRequest.Text.SubTitle"
+                android:text="@string/repair_request_last_name"/>
+
+            <EditText
+                android:nextFocusDown="@+id/edt_email"
+                android:id="@+id/edt_last_name"
+                style="@style/AppTheme.SendRepairRequest.EditText" />
+
+            <TextView
+                style="@style/AppTheme.SendRepairRequest.Text.SubTitle"
+                android:text="@string/repair_request_email"/>
+
+            <EditText
+                android:nextFocusDown="@+id/edt_phone"
+                android:id="@+id/edt_email"
+                style="@style/AppTheme.SendRepairRequest.EditText"/>
+
+            <TextView
+                style="@style/AppTheme.SendRepairRequest.Text.SubTitle"
+                android:text="@string/repair_request_phone"/>
+
+            <EditText
+                android:nextFocusDown="@+id/edt_cellphone"
+                android:id="@+id/edt_phone"
+                style="@style/AppTheme.SendRepairRequest.EditText"/>
+
+            <TextView
+                style="@style/AppTheme.SendRepairRequest.Text.SubTitle"
+                android:text="@string/repair_request_cell_phone"/>
+
+            <EditText
+                android:nextFocusDown="@+id/spn_country"
+                android:id="@+id/edt_cellphone"
+                style="@style/AppTheme.SendRepairRequest.EditText"/>
+
+            <TextView
+                style="@style/AppTheme.SendRepairRequest.Text.SubTitle"
+                android:text="@string/repair_request_country"/>
+
+            <Spinner
+                android:nextFocusDown="@+id/spn_address"
+                android:id="@+id/spn_country"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/send_repair_request_edittext_height"></Spinner>
+
+            <TextView
+                style="@style/AppTheme.SendRepairRequest.Text.SubTitle"
+                android:text="@string/repair_request_address"/>
+
+            <Spinner
+                android:nextFocusDown="@+id/edt_detail_address"
+                android:id="@+id/spn_address"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/send_repair_request_edittext_height"></Spinner>
+
+            <EditText
+                android:nextFocusDown="@+id/edt_state"
+                android:id="@+id/edt_detail_address"
+                android:layout_marginTop="@dimen/send_repair_request_edittext_margin_top"
+                android:hint="@string/repair_request_detail_address"
+                style="@style/AppTheme.SendRepairRequest.EditText"/>
+
+            <TextView
+                style="@style/AppTheme.SendRepairRequest.Text.SubTitle"
+                android:text="@string/repair_request_state"/>
+
+            <EditText
+                android:id="@+id/edt_state"
+                android:nextFocusDown="@+id/edt_description"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/send_repair_request_edittext_height" />
+
+            <EditText
+                android:id="@+id/edt_description"
+                android:layout_marginTop="@dimen/send_repair_request_edittext_margin_top"
+                android:hint="@string/repair_request_description"
+                style="@style/AppTheme.SendRepairRequest.EditText" />
+            
+            <android.support.v7.widget.AppCompatButton
+                android:textAllCaps="false"
+                android:background="@drawable/ripple_circle_button_bg"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="@dimen/send_repair_request_btn_margin_top"
+                android:layout_marginBottom="@dimen/send_repair_request_btn_margin_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/repair_request_btn_send"/>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

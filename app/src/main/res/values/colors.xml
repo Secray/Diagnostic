@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1d1d1d</color>
+    <color name="colorPrimaryDark">#292929</color>
+    <color name="colorAccent">#0daaeb</color>
+    <color name="colorControlNormal">#8f8f8f</color>
+
+    <!-- MainActivity -->
+    <color name="main_bg_color">#1d1d1d</color>
+    <color name="main_text_color">#b3b6b9</color>
+    <color name="main_cpu_line_color">#0daaeb</color>
+    <color name="main_battery_line_color">#1b9503</color>
+
+    <color name="cpu_0_50">#00f6ff</color>
+    <color name="cpu_0_50_bg">#400092cf</color>
+    <color name="cpu_50_80">#fbc02d</color>
+    <color name="cpu_50_80_bg">#40ff9800</color>
+    <color name="cpu_80_100">#ff7800</color>
+    <color name="cpu_80_100_bg">#40ff3d00</color>
+    
+    <color name="battery_10_20">#ff40ee</color>
+    <color name="battery_10_20_bg">#f70440</color>
+    <color name="battery_20_50">#fdd835</color>
+    <color name="battery_20_50_bg">#bfd508</color>
+    <color name="batter_50_100">#a0ce00</color>
+    <color name="batter_50_100_bg">#35910f</color>
+
+    <color name="main_bottom_button_color">#292929</color>
+    <color name="main_bottom_button_color_pressed">#222</color>
+
+    <color name="main_bottom_button_text_color">#b3b6b9</color>
+    <color name="main_bottom_button_text_color_pressed">#8f8f8f</color>
+
+    <!-- RepairActivity && HelpActivity -->
+    <color name="list_item_text_color">#b3b6b9</color>
+    <color name="list_item_text_color_pressed">#909090</color>
+    <color name="list_divider_color">#212121</color>
+    <color name="list_item_background_color">#292929</color>
+    <color name="list_item_background_color_pressed">#202020</color>
+    
+    <!-- Test Common -->
+    <color name="test_result_pass">#77c40a</color>
+    <color name="test_result_fail">#ff1147</color>
+    <color name="test_testing_text_color">#fff</color>
+    <color name="test_checkbox_title_color">#ababab</color>
+
+    <!-- Touch test -->
+    <color name="test_touch_circle_color_1">#b0b966</color>
+    <color name="test_touch_circle_color_2">#7fb966</color>
+    <color name="test_touch_circle_color_3">#5fcf98</color>
+    <color name="test_touch_circle_color_4">#66b0b9</color>
+    <color name="test_touch_circle_color_5">#6687B9</color>
+    <color name="test_touch_circle_color_6">#7466B9</color>
+    <color name="test_touch_circle_color_7">#9366B9</color>
+    <color name="test_touch_circle_color_8">#B96683</color>
+    <color name="test_touch_circle_color_9">#b98366</color>
+    <color name="test_touch_circle_color_10">#b9a666</color>
+</resources>

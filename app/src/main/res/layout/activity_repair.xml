@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg_color">
+    <include layout="@layout/toolbar"/>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/list_margin_top"
+        style="@style/AppTheme.ListItem">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_update"/>
+
+        <TextView
+            style="@style/AppTheme.ListItem.Text"
+            android:text="@string/repair_list_item_software_update"/>
+    </LinearLayout>
+
+    <include layout="@layout/list_divider"/>
+
+    <LinearLayout
+        style="@style/AppTheme.ListItem">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_safe_mode"/>
+
+        <TextView
+            style="@style/AppTheme.ListItem.Text"
+            android:text="@string/repair_list_item_safe_mode"/>
+    </LinearLayout>
+
+    <include layout="@layout/list_divider"/>
+
+    <LinearLayout
+        style="@style/AppTheme.ListItem">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_factory_reset"/>
+
+        <TextView
+            style="@style/AppTheme.ListItem.Text"
+            android:text="@string/repair_list_item_factory_reset"/>
+    </LinearLayout>
+</LinearLayout>

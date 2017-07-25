@@ -1,0 +1,87 @@
+<resources>
+    <!-- App name -->
+    <string name="app_name">Self Diagnostic</string>
+    <!-- BaseActivity -->
+    <string name="reset_dialog_title">Reset</string>
+    <string name="reset_dialog_content">Tap reset to clear all of the test result?</string>
+
+    <!-- MainActivity -->
+    <string name="main_cpu_title">CPU Load</string>
+    <string name="main_battery_title">Battery Level</string>
+    <string name="title_activity_main3">Main3Activity</string>
+
+    <string name="menu_test_result">Test Results</string>
+    <string name="menu_test_clear">Clear</string>
+    <string name="menu_test_reset">Reset</string>
+    <string name="menu_test_about">About</string>
+
+    <string name="default_cpu_percent">"54"</string>
+    <string name="default_battery_percent">"60"</string>
+
+    <string name="chart_legend_temperature">Temperature:</string>
+    <string name="chart_legend_cpu">CPU</string>
+    <string name="chart_legend_battery">Battery</string>
+
+    <string name="main_bottom_button_test_all">Test all</string>
+    <string name="main_bottom_button_single_test">Single test</string>
+    <string name="main_bottom_button_repair">Repair</string>
+    <string name="main_bottom_button_help">Help</string>
+
+
+    <!-- RepairActivity -->
+    <string name="repair_list_item_software_update">Software Update</string>
+    <string name="repair_list_item_safe_mode">Safe Mode</string>
+    <string name="repair_list_item_factory_reset">Factory Reset</string>
+
+    <!-- HelpActivity -->
+    <string name="help_list_item_hotline_service">Hotline service</string>
+    <string name="help_list_item_send_request">Send a repair request</string>
+
+    <!-- AboutActivity -->
+    <string name="about_version">Version</string>
+    <string name="about_version_value">V1.0.2</string>
+    <string name="about_legal_info">Legal information</string>
+    <string name="about_legal_info_value">Use this software is subject to terms and conditions on ASUS.</string>
+    <string name="about_website">Website</string>
+    <string name="about_website_value">Http://www.asus.com</string>
+
+    <!-- HotlineServiceActivity -->
+    <string name="hotline_service_product">Product</string>
+    <string name="hotline_service_product_value1">All products</string>
+    <string name="hotline_service_product_value2">Eee Pad</string>
+    <string name="hotline_service_open_hour">Open hour</string>
+    <string name="hotline_service_open_hour_value">Mon~Fri,9:00&#8211;17:00</string>
+    <string name="hotline_service_customer_support_number">Customer product support Phone Number</string>
+    <string name="hotline_service_customer_support_number_value">0800&#8211;093&#8211;456</string>
+    <string name="hotline_service_vip_support_number">ASUS Nexus 7 VIP support Phone Number</string>
+    <string name="hotline_service_vip_support_number_value">0800&#8211;093&#8211;789</string>
+
+    <!-- SendRepairRequestActivity -->
+    <string name="repair_request_name">Repair Request</string>
+    <string name="repair_request_title">Please fill the blanks and send the repair request.</string>
+    <string name="repair_request_first_name">First Name:</string>
+    <string name="repair_request_last_name">Last Name:</string>
+    <string name="repair_request_email">Email:</string>
+    <string name="repair_request_phone">Phone:</string>
+    <string name="repair_request_cell_phone">Cellphone:</string>
+    <string name="repair_request_country">Country:</string>
+    <string name="repair_request_address">Address:</string>
+    <string name="repair_request_detail_address">Detail Address</string>
+    <string name="repair_request_state">State:</string>
+    <string name="repair_request_description">Leave some words to describe your request</string>
+    <string name="repair_request_btn_send">Send</string>
+
+    <!-- Test ListItem -->
+    <string name="list_item_result_passed">Passed: %1$d</string>
+    <string name="list_item_result_failed">Failed: %1$d</string>
+
+    <!-- Testing -->
+    <string name="touch_title">Touch</string>
+    <string name="btn_test_again">Test again</string>
+    <string name="btn_start">Start</string>
+    <string name="test_description">Description about the test item.Description about the test item.Description about the test item.Description about the test item.</string>
+    <string name="test_touch_pass">The Touch is work well</string>
+    <string name="test_touch_fail">The Touch is not work</string>
+    <string name="test_fail_btn">Fail</string>
+    <string name="test_pass_btn">Pass</string>
+</resources>

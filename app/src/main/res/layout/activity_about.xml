@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg_color">
+    <include layout="@layout/toolbar"/>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/list_margin_top"
+        style="@style/AppTheme.About.Item">
+        <TextView
+            style="@style/AppTheme.About.Text.Title"
+            android:text="@string/about_version"/>
+        <TextView
+            style="@style/AppTheme.About.Text.Value"
+            android:text="@string/about_version_value"/>
+    </LinearLayout>
+
+    <include layout="@layout/list_divider"/>
+    <LinearLayout
+        style="@style/AppTheme.About.Item">
+        <TextView
+            style="@style/AppTheme.About.Text.Title"
+            android:text="@string/about_legal_info"/>
+        <TextView
+            style="@style/AppTheme.About.Text.Value"
+            android:text="@string/about_legal_info_value"/>
+    </LinearLayout>
+
+    <include layout="@layout/list_divider"/>
+    <LinearLayout
+        style="@style/AppTheme.About.Item">
+        <TextView
+            style="@style/AppTheme.About.Text.Title"
+            android:text="@string/about_website"/>
+        <TextView
+            style="@style/AppTheme.About.Text.Value"
+            android:text="@string/about_website_value"/>
+    </LinearLayout>
+
+</LinearLayout>

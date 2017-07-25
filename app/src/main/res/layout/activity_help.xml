@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg_color">
+
+    <include layout="@layout/toolbar"/>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/list_margin_top"
+        style="@style/AppTheme.ListItem">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_hotline"/>
+
+        <TextView
+            android:id="@+id/txt_hotline_service"
+            style="@style/AppTheme.ListItem.Text"
+            android:text="@string/help_list_item_hotline_service"/>
+    </LinearLayout>
+
+    <include layout="@layout/list_divider"/>
+
+    <LinearLayout
+        style="@style/AppTheme.ListItem">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_send_repair_request"/>
+
+        <TextView
+            android:id="@+id/txt_send_repair_request"
+            style="@style/AppTheme.ListItem.Text"
+            android:text="@string/help_list_item_send_request"/>
+    </LinearLayout>
+
+</LinearLayout>

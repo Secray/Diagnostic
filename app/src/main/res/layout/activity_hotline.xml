@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg_color">
+    <include layout="@layout/toolbar"/>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/list_margin_top"
+        style="@style/AppTheme.Hotline.Item">
+
+        <TextView
+            style="@style/AppTheme.Hotline.Title"
+            android:text="@string/hotline_service_product"/>
+        <TextView
+            style="@style/AppTheme.Hotline.Value"
+            android:text="@string/hotline_service_product_value1"/>
+
+        <TextView
+            android:layout_marginTop="@dimen/list_margin"
+            style="@style/AppTheme.Hotline.Title"
+            android:text="@string/hotline_service_open_hour"/>
+        <TextView
+            style="@style/AppTheme.Hotline.Value"
+            android:text="@string/hotline_service_open_hour_value"/>
+
+        <TextView
+            android:layout_marginTop="@dimen/list_margin"
+            style="@style/AppTheme.Hotline.Value"
+            android:text="@string/hotline_service_customer_support_number"/>
+
+        <RelativeLayout
+            android:layout_marginLeft="@dimen/img_margin_left"
+            android:layout_marginTop="@dimen/list_margin"
+            android:layout_marginRight="@dimen/img_margin_right"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:layout_alignParentLeft="true"
+                android:textSize="@dimen/phone_number_txt_size"
+                android:textColor="#fff"
+                android:text="@string/hotline_service_customer_support_number_value"/>
+
+            <ImageView
+                android:id="@+id/img_customer_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_phone" />
+        </RelativeLayout>
+    </LinearLayout>
+    <include layout="@layout/list_divider"/>
+    <LinearLayout
+        android:layout_marginTop="@dimen/list_margin_top"
+        style="@style/AppTheme.Hotline.Item">
+
+        <TextView
+            style="@style/AppTheme.Hotline.Title"
+            android:text="@string/hotline_service_product"/>
+        <TextView
+            style="@style/AppTheme.Hotline.Value"
+            android:text="@string/hotline_service_product_value2"/>
+
+        <TextView
+            android:layout_marginTop="@dimen/list_margin"
+            style="@style/AppTheme.Hotline.Title"
+            android:text="@string/hotline_service_open_hour"/>
+        <TextView
+            style="@style/AppTheme.Hotline.Value"
+            android:text="@string/hotline_service_open_hour_value"/>
+
+        <TextView
+            android:layout_marginTop="@dimen/list_margin"
+            style="@style/AppTheme.Hotline.Value"
+            android:text="@string/hotline_service_vip_support_number"/>
+
+        <RelativeLayout
+            android:layout_marginLeft="@dimen/img_margin_left"
+            android:layout_marginTop="@dimen/list_margin"
+            android:layout_marginRight="@dimen/img_margin_right"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:layout_alignParentLeft="true"
+                android:textSize="@dimen/phone_number_txt_size"
+                android:textColor="#fff"
+                android:text="@string/hotline_service_vip_support_number_value"/>
+
+            <ImageView
+                android:id="@+id/img_vip_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_phone" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

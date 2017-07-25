@@ -1,0 +1,204 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/colorControlNormal</item>
+        <item name="colorButtonNormal">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.NoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.CustomToolbarTitle" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="AppTheme.BottomActionText">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/bottom_action_text_color</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="AppTheme.BottomAction">
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:layout_rowWeight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:background">@drawable/drawable_bottom_button</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="AppTheme.LineChartLegendTitle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textColor">@color/main_text_color</item>
+    </style>
+
+    <style name="AppTheme.ListItem">
+        <item name="android:layout_height">@dimen/list_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginLeft">@dimen/list_margin</item>
+        <item name="android:layout_marginRight">@dimen/list_margin</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="AppTheme.ListItem.Text">
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/common_list_item_text_color</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:clickable">true</item>
+        <item name="android:layout_marginLeft">@dimen/list_margin</item>
+    </style>
+
+    <style name="AppTheme.About"/>
+    <style name="AppTheme.About.Item">
+        <item name="android:paddingLeft">@dimen/list_margin</item>
+        <item name="android:paddingRight">@dimen/list_margin</item>
+        <item name="android:paddingTop">@dimen/about_padding</item>
+        <item name="android:paddingBottom">@dimen/about_padding</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="AppTheme.About.Text">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/list_item_text_color</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:gravity">start</item>
+        <item name="android:layout_marginLeft">@dimen/about_text_padding</item>
+    </style>
+
+    <style name="AppTheme.About.Text.Title">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="AppTheme.About.Text.Value">
+        <item name="android:layout_marginTop">@dimen/about_text_value_padding</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+
+    <style name="AppTheme.Hotline"/>
+    <style name="AppTheme.Hotline.Item" parent="AppTheme.About.Item"/>
+    <style name="AppTheme.Hotline.Text" parent="AppTheme.About.Text"/>
+    <style name="AppTheme.Hotline.Title" parent="AppTheme.About.Text.Title"/>
+    <style name="AppTheme.Hotline.Value" parent="AppTheme.About.Text.Value"/>
+
+    <style name="AppTheme.SendRepairRequest"/>
+    <style name="AppTheme.SendRepairRequest.Text">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textColor">@color/list_item_text_color</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="AppTheme.SendRepairRequest.Text.Title">
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingBottom">@dimen/txt_send_repair_request_title_padding</item>
+    </style>
+
+    <style name="AppTheme.SendRepairRequest.Text.SubTitle">
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_marginTop">@dimen/txt_send_repair_request_subtitle_margin_top</item>
+        <item name="android:layout_marginBottom">@dimen/txt_send_repair_request_subtitle_margin_bottom</item>
+    </style>
+    <style name="AppTheme.SendRepairRequest.EditText">
+        <item name="android:textColorHint">@color/list_item_text_color</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="AppTheme.Test"/>
+    <style name="AppTheme.Test.BottomAction">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/ripple_bottom_action_button</item>
+    </style>
+
+    <style name="AppTheme.Test.ListItem"/>
+    <style name="AppTheme.Test.ListItem.Text">
+        <item name="android:textColor">@color/list_item_text_color</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+    <style name="AppTheme.Test.ListItem.Text.Title">
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="AppTheme.Test.ListItem.Text.SubTitle">
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="AppTheme.Test.Text">
+        <item name="android:textColor">@color/list_item_text_color</item>
+    </style>
+
+    <style name="AppTheme.Test.Text.Description">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="AppTheme.Test.Text.Result">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/test_result_pass</item>
+    </style>
+
+    <style name="AppTheme.Test.Text.Testing">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/test_testing_text_color</item>
+    </style>
+
+    <style name="AppTheme.Test.Dialog" parent="AlertDialog.AppCompat">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
+
+    <style name="AppTheme.Test.Text.Indicator">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:textColor">@color/list_item_text_color</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:maxWidth">112dp</item>
+    </style>
+</resources>

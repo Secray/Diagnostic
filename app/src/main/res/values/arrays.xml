@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="test_cases">
+        <item>Bluetooth Test</item>
+        <item>Wi-Fi Test</item>
+        <item>Battery Test</item>
+        <item>E-Compass Test</item>
+        <item>Gyroscope Test</item>
+        <item>Modem Test</item>
+        <item>Touch Test</item>
+        <item>G-Sensor Test</item>
+        <item>Wireless Charging Test</item>
+        <item>Keypad Test</item>
+        <item>MultiTouch Test</item>
+        <item>Vibrator Test</item>
+        <item>Receiver Test</item>
+        <item>Speaker Test</item>
+        <item>BoardMic Test</item>
+        <item>MainCam Test</item>
+        <item>VGACam Test</item>
+        <item>Camera Flash Test</item>
+        <item>Display Test</item>
+        <item>Headset Test</item>
+        <item>HeadsetMic Test</item>
+        <item>HeadsetKey Test</item>
+        <item>Proximity Test</item>
+        <item>LightSensor Test</item>
+        <item>CMD Mouse Test</item>
+        <item>SD Card Test</item>
+        <item>SIM Card Test</item>
+        <item>NFC Test</item>
+        <item>HDMI Test</item>
+        <item>Fingerprint Test</item>
+        <item>SIM2 Test</item>
+        <item>SecondaryMic Test</item>
+    </string-array>
+
+    <integer-array name="test_icons">
+        <item>@drawable/ic_bluetooth</item>
+        <item>@drawable/ic_wifi</item>
+        <item>@drawable/ic_battery</item>
+        <item>@drawable/ic_compass</item>
+        <item>@drawable/ic_gyroscope</item>
+        <item>@drawable/ic_modem</item>
+        <item>@drawable/ic_touch</item>
+        <item>@drawable/ic_g_sensor</item>
+        <item>@drawable/ic_wireless_charging</item>
+        <item>@drawable/ic_keypad</item>
+        <item>@drawable/ic_multi_touch</item>
+        <item>@drawable/ic_vibrator</item>
+        <item>@drawable/ic_receiver</item>
+        <item>@drawable/ic_speaker</item>
+        <item>@drawable/ic_mic</item>
+        <item>@drawable/ic_camera</item>
+        <item>@drawable/ic_camera</item>
+        <item>@drawable/ic_flash</item>
+        <item>@drawable/ic_display</item>
+        <item>@drawable/ic_headset</item>
+        <item>@drawable/ic_headset_mic</item>
+        <item>@drawable/ic_headset</item>
+        <item>@drawable/ic_proximity</item>
+        <item>@drawable/ic_light_sensor</item>
+        <item>@drawable/ic_mouse</item>
+        <item>@drawable/ic_sd_card</item>
+        <item>@drawable/ic_sim_card</item>
+        <item>@drawable/ic_nfc</item>
+        <item>@drawable/ic_hdmi</item>
+        <item>@drawable/ic_fingerprint</item>
+        <item>@drawable/ic_sim_card</item>
+        <item>@drawable/ic_mic</item>
+    </integer-array>
+</resources>

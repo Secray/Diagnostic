@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/test_icon"
+        android:layout_marginLeft="@dimen/icon_margin_left"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_marginLeft="@dimen/test_item_icon_text_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_toLeftOf="@+id/test_indicator"
+        android:layout_toStartOf="@+id/test_indicator"
+        android:layout_toRightOf="@+id/test_icon"
+        android:layout_toEndOf="@+id/test_icon">
+
+        <TextView
+            android:id="@+id/test_title"
+            style="@style/AppTheme.Test.ListItem.Text.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/test_result_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/AppTheme.Test.ListItem.Text.SubTitle"
+                android:id="@+id/test_passed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                style="@style/AppTheme.Test.ListItem.Text.SubTitle"
+                android:paddingLeft="@dimen/test_item_result_padding"
+                android:id="@+id/test_failed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/icon_margin_left"
+        android:id="@+id/test_indicator"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

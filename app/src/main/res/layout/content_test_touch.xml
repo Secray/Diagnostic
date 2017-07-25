@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/main_bg_color"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/touch_title"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center|bottom"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:fontFamily="sans-serif"
+            android:textSize="40sp"
+            android:text="10"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="8dp"
+            android:fontFamily="sans-serif"
+            android:textSize="18sp"
+            android:text="touch"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/touch_title"
+        android:layout_above="@+id/touch_fail_btn"
+        app:rowCount="4"
+        app:columnCount="3">
+        <com.wingtech.diagnostic.widget.TouchCircleView
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:color="@color/test_touch_circle_color_1"
+            app:radius="70"/>
+
+        <com.wingtech.diagnostic.widget.TouchCircleView
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:color="@color/test_touch_circle_color_2"
+            app:radius="70"/>
+
+        <com.wingtech.diagnostic.widget.TouchCircleView
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:color="@color/test_touch_circle_color_3"
+            app:radius="70"/>
+
+        <com.wingtech.diagnostic.widget.TouchCircleView
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:color="@color/test_touch_circle_color_4"
+            app:radius="70"/>
+
+        <com.wingtech.diagnostic.widget.TouchCircleView
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:color="@color/test_touch_circle_color_5"
+            app:radius="70" />
+
+        <com.wingtech.diagnostic.widget.TouchCircleView
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:color="@color/test_touch_circle_color_6"
+            app:radius="70"/>
+
+        <com.wingtech.diagnostic.widget.TouchCircleView
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:color="@color/test_touch_circle_color_7"
+            app:radius="70"/>
+
+        <com.wingtech.diagnostic.widget.TouchCircleView
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:color="@color/test_touch_circle_color_8"
+            app:radius="70"/>
+
+        <com.wingtech.diagnostic.widget.TouchCircleView
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:color="@color/test_touch_circle_color_9"
+            app:radius="70"/>
+
+        <com.wingtech.diagnostic.widget.TouchCircleView
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:color="@color/test_touch_circle_color_10"
+            app:layout_columnSpan="3"
+            app:radius="70"/>
+    </android.support.v7.widget.GridLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/touch_fail_btn"
+        android:textAllCaps="false"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/test_action_button_height"
+        android:textColor="@android:color/white"
+        android:background="@drawable/ripple_test_fail_btn_bg"
+        android:text="@string/test_fail_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="@dimen/fail_btn_margin_left_right"
+        android:layout_marginRight="@dimen/fail_btn_margin_left_right"
+        android:layout_marginBottom="@dimen/fail_btn_margin_bottom"
+        android:layout_marginTop="@dimen/fail_btn_margin_top" />
+</RelativeLayout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:background="@drawable/ripple_circle_list_item_bg"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="@dimen/list_single_test_item_height">
+    <include layout="@layout/list_test_item"/>
+</LinearLayout>

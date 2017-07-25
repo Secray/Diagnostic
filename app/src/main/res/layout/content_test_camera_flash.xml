@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:paddingRight="@dimen/test_item_result_padding"
+    android:paddingLeft="@dimen/test_item_result_padding"
+    android:background="@color/main_bg_color"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_marginTop="@dimen/test_camera_flash_margin_top"
+        style="@style/AppTheme.Test.Text.Testing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Please check whether the camera flash light on or not and make a judge."/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/test_camera_flash_margin_bottom"
+        android:gravity="bottom">
+
+        <android.support.v7.widget.AppCompatButton
+            android:layout_alignParentLeft="true"
+            android:textAllCaps="false"
+            android:layout_width="@dimen/test_action_button_width"
+            android:layout_height="@dimen/test_action_button_height"
+            android:textColor="@android:color/white"
+            android:background="@drawable/ripple_test_fail_btn_bg"
+            android:text="@string/test_fail_btn"/>
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:layout_alignParentRight="true"
+            android:textAllCaps="false"
+            android:background="@drawable/ripple_circle_button_bg"
+            android:textColor="@android:color/white"
+            android:layout_width="@dimen/test_action_button_width"
+            android:layout_height="@dimen/test_action_button_height"
+            android:text="@string/test_pass_btn"/>
+    </RelativeLayout>
+</LinearLayout>

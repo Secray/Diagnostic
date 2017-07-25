@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:paddingRight="@dimen/test_item_result_padding"
+    android:paddingLeft="@dimen/test_item_result_padding"
+    android:background="@color/main_bg_color"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_marginTop="@dimen/test_camera_flash_margin_top"
+        android:layout_marginBottom="@dimen/list_margin"
+        style="@style/AppTheme.Test.Text.Testing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="If not NFC card found, please tap the fail button."/>
+
+    <View android:layout_width="match_parent"
+        android:layout_height="@dimen/list_divider"
+        android:background="@color/list_divider_color">
+    </View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/test_checkbox_item_height"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_pass"/>
+
+        <TextView
+            style="@style/AppTheme.Test.Text.Testing"
+            android:layout_marginLeft="@dimen/test_checkbox_item_padding_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/test_checkbox_title_color"
+            android:text="NFC card found"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/test_camera_flash_margin_bottom"
+        android:gravity="bottom">
+
+        <android.support.v7.widget.AppCompatButton
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/test_action_button_height"
+            android:textColor="@android:color/white"
+            android:background="@drawable/ripple_test_fail_btn_bg"
+            android:text="@string/test_fail_btn"/>
+    </RelativeLayout>
+</LinearLayout>

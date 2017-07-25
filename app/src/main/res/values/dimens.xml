@@ -1,0 +1,71 @@
+<resources>
+    <!-- MainActivity dimens -->
+    <dimen name="percent_margin_top">8dp</dimen>
+    <dimen name="chart_legend_margin_top">30dp</dimen>
+    <dimen name="chart_legend_padding_title">10dp</dimen>
+    <dimen name="chart_legend_padding_cpu">4dp</dimen>
+    <dimen name="chart_legend_padding_cpu_battery">12dp</dimen>
+    <dimen name="chart_legend_padding_top">6dp</dimen>
+
+    <dimen name="main_bottom_button_divider_line">0.5dp</dimen>
+
+    <!-- RepairActivity HelpActivity dimens -->
+    <dimen name="list_margin_top">10dp</dimen>
+    <dimen name="list_height">60dp</dimen>
+    <dimen name="list_divider">1dp</dimen>
+    <dimen name="list_margin">16dp</dimen>
+
+    <!-- AboutActivity dimens -->
+    <dimen name="about_padding">20dp</dimen>
+    <dimen name="about_text_padding">8dp</dimen>
+    <dimen name="about_text_value_padding">4dp</dimen>
+
+
+    <!-- HotlineServiceActivity dimens -->
+    <dimen name="img_margin_left">8dp</dimen>
+    <dimen name="img_margin_right">4dp</dimen>
+    <dimen name="phone_number_txt_size">30sp</dimen>
+
+    <!-- SendRepairRequestActivity dimens -->
+    <dimen name="txt_send_repair_request_title_padding">4dp</dimen>
+    <dimen name="txt_send_repair_request_subtitle_margin_top">24dp</dimen>
+    <dimen name="txt_send_repair_request_subtitle_margin_bottom">10dp</dimen>
+    <dimen name="send_repair_request_padding">24dp</dimen>
+    <dimen name="send_repair_request_edittext_height">54dp</dimen>
+    <dimen name="send_repair_request_edittext_margin_top">18dp</dimen>
+    <dimen name="send_repair_request_btn_margin_top">36dp</dimen>
+    <dimen name="send_repair_request_btn_margin_bottom">20dp</dimen>
+    
+    <!-- Test ListItem dimens -->
+    <dimen name="test_item_list_padding_top">10dp</dimen>
+    <dimen name="test_item_list_padding_Bottom">48dp</dimen>
+    <dimen name="test_item_result_padding">24dp</dimen>
+    <dimen name="test_item_result_height">75dp</dimen>
+    <dimen name="icon_margin_left">8dp</dimen>
+    <dimen name="test_item_icon_text_margin">18dp</dimen>
+
+    <!-- Touch Test -->
+    <dimen name="btn_test_again_height">40dp</dimen>
+    <dimen name="btn_test_again_width">328dp</dimen>
+    <dimen name="main_test_padding_bottom">8dp</dimen>
+    <dimen name="main_test_pic_height">240dp</dimen>
+    <dimen name="btn_test_again_text_size">16sp</dimen>
+
+    <!-- Testing -->
+    <dimen name="content_testing_pic_text_margin">20dp</dimen>
+    <dimen name="list_single_test_item_height">60dp</dimen>
+    <dimen name="test_camera_flash_margin_top">80dp</dimen>
+    <dimen name="test_camera_flash_margin_bottom">20dp</dimen>
+    <dimen name="test_action_button_width">142dp</dimen>
+    <dimen name="test_action_button_height">40dp</dimen>
+    <dimen name="test_checkbox_item_height">50dp</dimen>
+    <dimen name="test_checkbox_item_padding_left">10dp</dimen>
+    <dimen name="test_text_switch_margin_left">20dp</dimen>
+    <dimen name="fail_btn_margin_bottom">20dp</dimen>
+    <dimen name="fail_btn_margin_top">16dp</dimen>
+    <dimen name="fail_btn_margin_left_right">24dp</dimen>
+    <dimen name="bottom_indicator_pic_margin_right">13dp</dimen>
+    <dimen name="bottom_indicator_pic_margin_left">5dp</dimen>
+    <dimen name="bottom_indicator_margin_top">8dp</dimen>
+    <dimen name="bottom_indicator_height">48dp</dimen>
+</resources>

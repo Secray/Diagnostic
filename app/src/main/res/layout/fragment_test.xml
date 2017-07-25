@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/main_test_padding_bottom"
+    android:background="@color/main_bg_color">
+    
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_test_pic_height"
+        android:scaleType="fitXY"
+        android:src="@mipmap/touch"
+        android:id="@+id/imageView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        style="@style/AppTheme.Test.Text.Description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_test_padding_bottom"
+        android:paddingLeft="@dimen/list_margin"
+        android:paddingRight="@dimen/list_margin"
+        android:text="@string/test_description"
+        android:id="@+id/test_description"
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_above="@+id/test_action"
+        android:layout_below="@+id/test_description"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:visibility="gone"
+        android:id="@+id/result_field">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_test_pass" />
+
+        <TextView
+            style="@style/AppTheme.Test.Text.Result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_test_padding_bottom"
+            android:text="@string/test_touch_pass" />
+    </LinearLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:textAllCaps="false"
+        android:layout_width="@dimen/btn_test_again_width"
+        android:layout_height="@dimen/btn_test_again_height"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:fontFamily="sans-serif"
+        android:textSize="@dimen/btn_test_again_text_size"
+        android:background="@drawable/ripple_circle_button_bg"
+        android:textColor="@android:color/white"
+        android:text="@string/btn_start"
+        android:id="@+id/test_action" />
+
+</RelativeLayout>
