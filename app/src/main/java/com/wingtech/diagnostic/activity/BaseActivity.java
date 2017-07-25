@@ -10,9 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.wingtech.diagnostic.R;
+import com.asus.atd.smmitest.R;
 
-import butterknife.ButterKnife;
 
 /**
  * @author xiekui
@@ -25,7 +24,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResId());
-        ButterKnife.bind(this);
+        initViews();
         handleIntent(getIntent());
         initToolbar();
         onWork();
@@ -72,6 +71,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected abstract @LayoutRes int getLayoutResId();
+    protected abstract void initViews();
     protected abstract void initToolbar();
     protected abstract void onWork();
     protected void handleIntent(Intent intent) {

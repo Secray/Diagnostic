@@ -12,7 +12,7 @@
         style="@style/AppTheme.Test.Text.Testing"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="If not NFC card found, please tap the fail button."/>
+        android:text="@string/if_not_nfc_card_found_please_tap_the_fail_button"/>
 
     <View android:layout_width="match_parent"
         android:layout_height="@dimen/list_divider"
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/test_checkbox_title_color"
-            android:text="NFC card found"/>
+            android:text="@string/nfc_card_found"/>
     </LinearLayout>
 
     <RelativeLayout

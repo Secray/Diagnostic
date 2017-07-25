@@ -18,7 +18,7 @@
             android:orientation="vertical">
             <TextView
                 style="@style/AppTheme.SendRepairRequest.Text.Title"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="@dimen/send_repair_text_margin_top"
                 android:text="@string/repair_request_title"/>
 
             <TextView

@@ -43,7 +43,7 @@
                 android:fontFamily="sans-serif"
                 android:layout_alignParentLeft="true"
                 android:textSize="@dimen/phone_number_txt_size"
-                android:textColor="#fff"
+                android:textColor="@android:color/white"
                 android:text="@string/hotline_service_customer_support_number_value"/>
 
             <ImageView
@@ -93,7 +93,7 @@
                 android:fontFamily="sans-serif"
                 android:layout_alignParentLeft="true"
                 android:textSize="@dimen/phone_number_txt_size"
-                android:textColor="#fff"
+                android:textColor="@android:color/white"
                 android:text="@string/hotline_service_vip_support_number_value"/>
 
             <ImageView

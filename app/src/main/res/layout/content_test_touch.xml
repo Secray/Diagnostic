@@ -8,7 +8,7 @@
     <LinearLayout
         android:id="@+id/touch_title"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="@dimen/touch_test_title_height"
         android:gravity="center|bottom"
         android:orientation="horizontal">
 
@@ -17,17 +17,17 @@
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
             android:fontFamily="sans-serif"
-            android:textSize="40sp"
-            android:text="10"/>
+            android:textSize="@dimen/touch_test_title_size"
+            android:text="@string/ten"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="@dimen/about_text_padding"
             android:fontFamily="sans-serif"
-            android:textSize="18sp"
-            android:text="touch"/>
+            android:textSize="@dimen/test_all_indicator_text_size"
+            android:text="@string/touch"/>
     </LinearLayout>
 
     <android.support.v7.widget.GridLayout

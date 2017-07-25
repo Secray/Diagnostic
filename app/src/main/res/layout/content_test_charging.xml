@@ -12,7 +12,7 @@
         style="@style/AppTheme.Test.Text.Testing"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="If not charging, please tap fail."/>
+        android:text="@string/if_not_charging_please_tap_fail"/>
 
     <View android:layout_width="match_parent"
         android:layout_height="@dimen/list_divider"
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/test_checkbox_title_color"
-            android:text="Charging"/>
+            android:text="@string/charging"/>
     </LinearLayout>
 
     <RelativeLayout

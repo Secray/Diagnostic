@@ -2,49 +2,45 @@ package com.wingtech.diagnostic.activity;
 
 import android.content.Intent;
 import android.content.res.TypedArray;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.widget.TextView;
+import android.view.View;
 
-import com.wingtech.diagnostic.R;
-import com.wingtech.diagnostic.activity.BaseActivity;
-import com.wingtech.diagnostic.activity.HelpActivity;
-import com.wingtech.diagnostic.activity.RepairActivity;
 import com.wingtech.diagnostic.adapter.TestResultAdapter;
 import com.wingtech.diagnostic.bean.TestCaseResult;
-
+import com.asus.atd.smmitest.R;
 import java.util.ArrayList;
-
-import butterknife.BindArray;
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * @author xiekui
  * @date 2017-7-18
  */
 
-public class TestResultActivity extends BaseActivity {
-    @BindView(R.id.toolbar)
+public class TestResultActivity extends BaseActivity implements View.OnClickListener {
     Toolbar mToolbar;
 
-    @BindView(R.id.result_list)
     RecyclerView mRecyclerView;
 
-    @BindArray(R.array.test_cases)
     String[] mTestCases;
 
-    @BindArray(R.array.test_icons)
     TypedArray mIconArray;
 
 
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_test_result;
+    }
+
+    @Override
+    protected void initViews() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mTestCases = getResources().getStringArray(R.array.test_cases);
+        mRecyclerView = (RecyclerView) findViewById(R.id.result_list);
+        mIconArray = getResources().obtainTypedArray(R.array.test_icons);
+        findViewById(R.id.btn_test_help).setOnClickListener(this);
+        findViewById(R.id.btn_test_repair).setOnClickListener(this);
     }
 
     @Override
@@ -80,9 +76,9 @@ public class TestResultActivity extends BaseActivity {
         return list;
     }
 
-    @OnClick({R.id.btn_test_repair, R.id.btn_test_help})
-    void onClick(TextView textView) {
-        switch (textView.getId()) {
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.btn_test_help:
                 startActivity(new Intent(this, HelpActivity.class));
                 break;

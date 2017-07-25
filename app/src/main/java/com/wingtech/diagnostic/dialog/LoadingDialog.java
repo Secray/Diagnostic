@@ -4,9 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.widget.TextView;
 
-import com.wingtech.diagnostic.R;
-
-import butterknife.BindView;
+import com.asus.atd.smmitest.R;
 
 /**
  * @author xiekui
@@ -14,7 +12,6 @@ import butterknife.BindView;
  */
 
 public class LoadingDialog extends BaseDialog {
-    @BindView(R.id.testing_title)
     TextView mTxtTitle;
 
     private String mTitle;
@@ -26,6 +23,11 @@ public class LoadingDialog extends BaseDialog {
     @Override
     protected int getContentResId() {
         return R.layout.content_testing;
+    }
+
+    @Override
+    protected void initView() {
+        mTxtTitle = (TextView) findViewById(R.id.testing_title);
     }
 
     @Override

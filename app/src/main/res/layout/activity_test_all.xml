@@ -24,7 +24,7 @@
         <RelativeLayout
             android:id="@+id/rl_previous"
             android:clickable="true"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/layout_width_zero"
             android:layout_weight="0.45"
             android:layout_gravity="center_vertical"
             android:layout_height="wrap_content">
@@ -41,32 +41,29 @@
                 style="@style/AppTheme.Test.Text.Indicator"
                 android:id="@+id/text_previous"
                 android:layout_toRightOf="@+id/previous"
-                android:layout_marginLeft="@dimen/bottom_indicator_pic_margin_left"
-                android:text="Main Camera Test"/>
+                android:layout_marginLeft="@dimen/bottom_indicator_pic_margin_left"/>
         </RelativeLayout>
 
         <TextView
             android:id="@+id/text_indicator"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="18sp"
+            android:textSize="@dimen/test_all_indicator_text_size"
             android:textColor="@color/list_item_text_color"
             android:gravity="center|center_vertical"
-            android:text="1/52"
             android:layout_weight="0.1" />
 
         <RelativeLayout
             android:id="@+id/rl_next"
             android:clickable="true"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/layout_width_zero"
             android:layout_weight="0.45"
             android:layout_gravity="center_vertical"
             android:layout_height="wrap_content">
             <TextView
                 style="@style/AppTheme.Test.Text.Indicator"
                 android:id="@+id/text_next"
-                android:layout_toLeftOf="@+id/next"
-                android:text="VGACam Test"/>
+                android:layout_toLeftOf="@+id/next"/>
 
             <ImageView
                 android:id="@+id/next"

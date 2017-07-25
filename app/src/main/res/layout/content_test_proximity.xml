@@ -12,7 +12,7 @@
         style="@style/AppTheme.Test.Text.Testing"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Please move your hand over the top half of your of phone."/>
+        android:text="@string/please_move_your_hand_over_the_top_half_of_your_of_phone"/>
 
     <View android:layout_width="match_parent"
         android:layout_height="@dimen/list_divider"
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/test_checkbox_title_color"
-            android:text="Near"/>
+            android:text="@string/near"/>
     </LinearLayout>
 
     <LinearLayout
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/test_checkbox_title_color"
-            android:text="Away"/>
+            android:text="@string/away"/>
     </LinearLayout>
 
     <LinearLayout
@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/test_checkbox_title_color"
-            android:text="Near"/>
+            android:text="@string/near"/>
     </LinearLayout>
 
     <RelativeLayout

@@ -3,8 +3,6 @@ package com.wingtech.diagnostic.util;
 import android.content.Context;
 import android.util.TypedValue;
 
-import com.secray.percentview.PercentView;
-
 /**
  * Created by xiekui on 17-7-10.
  */

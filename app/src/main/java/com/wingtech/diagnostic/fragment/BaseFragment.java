@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 
 import com.wingtech.diagnostic.activity.BaseActivity;
 
-import butterknife.ButterKnife;
-
 /**
  * @author xiekui
  * @date 2017-7-20
@@ -36,12 +34,12 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getLayoutResId(), container, false);
-        ButterKnife.bind(this, view);
+        initViewEvents(view);
         return view;
     }
 
     protected abstract @LayoutRes int getLayoutResId();
-    protected abstract void initViewEvents();
+    protected abstract void initViewEvents(View view);
 
     public BaseActivity getHoldActivity() {
         return mActivity;

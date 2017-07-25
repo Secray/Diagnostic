@@ -6,20 +6,17 @@ import android.graphics.Matrix;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
 import android.support.v7.widget.AppCompatImageButton;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import com.wingtech.diagnostic.R;
+
+import com.asus.atd.smmitest.R;
 
 import java.io.IOException;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * @author xiekui
@@ -27,13 +24,9 @@ import butterknife.OnClick;
  */
 
 public class CameraTestActivity extends BaseActivity implements SurfaceHolder.Callback {
-    @BindView(R.id.surface)
     SurfaceView mSurface;
-    @BindView(R.id.capture)
     AppCompatImageButton mCapture;
-    @BindView(R.id.preview)
     ImageView mPreview;
-    @BindView(R.id.judgment)
     View mBtnGroup;
 
     private SurfaceHolder mHolder;
@@ -43,6 +36,20 @@ public class CameraTestActivity extends BaseActivity implements SurfaceHolder.Ca
     @Override
     protected int getLayoutResId() {
         return R.layout.content_test_camera;
+    }
+
+    @Override
+    protected void initViews() {
+        mSurface = (SurfaceView) findViewById(R.id.surface);
+        mCapture = (AppCompatImageButton) findViewById(R.id.capture);
+        mPreview = (ImageView) findViewById(R.id.preview);
+        mBtnGroup = findViewById(R.id.judgment);
+        mCapture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCamera.takePicture(null, null, new TakePictureCallback());
+            }
+        });
     }
 
     @Override
@@ -155,12 +162,6 @@ public class CameraTestActivity extends BaseActivity implements SurfaceHolder.Ca
             mCamera.release();
             mCamera = null;
         }
-    }
-
-
-    @OnClick(R.id.capture)
-    void capture() {
-        mCamera.takePicture(null, null, new TakePictureCallback());
     }
 
     private final class TakePictureCallback implements Camera.PictureCallback {

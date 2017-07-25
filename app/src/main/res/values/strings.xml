@@ -84,4 +84,23 @@
     <string name="test_touch_fail">The Touch is not work</string>
     <string name="test_fail_btn">Fail</string>
     <string name="test_pass_btn">Pass</string>
+    <string name="if_not_charging_please_tap_fail">If not charging, please tap fail.</string>
+    <string name="charging">Charging</string>
+    <string name="playing_by_the_left_channel">Playing by the left channel...</string>
+    <string name="please_press_volume_up_button">Please press Volume Up Button.</string>
+    <string name="recent">Recent</string>
+    <string name="home">Home</string>
+    <string name="back">Back</string>
+    <string name="volume_down">Volume Down</string>
+    <string name="volume_up">Volume Up</string>
+    <string name="please_move_your_phone_close_to_a_light">Please move your phone close to a light.</string>
+    <string name="sensor_strong_light_adc_gt_300"><![CDATA[Sensor strong light(ADC>300)]]></string>
+    <string name="sensor_weak_light_adc_lt_5"><![CDATA[Sensor weak light(ADC<5)]]></string>
+    <string name="nfc_card_found">NFC card found</string>
+    <string name="if_not_nfc_card_found_please_tap_the_fail_button">If not NFC card found, please tap the fail button.</string>
+    <string name="please_move_your_hand_over_the_top_half_of_your_of_phone">Please move your hand over the top half of your of phone.</string>
+    <string name="near">Near</string>
+    <string name="away">Away</string>
+    <string name="ten">10</string>
+    <string name="touch">touch</string>
 </resources>

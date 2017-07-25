@@ -83,9 +83,9 @@
         android:id="@+id/chart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="120dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp">
+        android:minHeight="@dimen/line_chart_min_height"
+        android:layout_marginLeft="@dimen/icon_margin_left"
+        android:layout_marginRight="@dimen/icon_margin_left">
     </com.github.mikephil.charting.charts.LineChart>
 
     <GridLayout

@@ -2,24 +2,17 @@ package com.wingtech.diagnostic.activity;
 
 import android.content.Intent;
 import android.content.res.TypedArray;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-
-import com.wingtech.diagnostic.listener.OnItemClickListener;
-import com.wingtech.diagnostic.R;
+import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.adapter.SingleTestAdapter;
 import com.wingtech.diagnostic.bean.SingleTestCase;
+import com.wingtech.diagnostic.listener.OnItemClickListener;
 
 import java.util.ArrayList;
-
-import butterknife.BindArray;
-import butterknife.BindView;
 
 /**
  * @author xiekui
@@ -27,21 +20,25 @@ import butterknife.BindView;
  */
 
 public class SingleTestListActivity extends BaseActivity implements OnItemClickListener {
-    @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
-    @BindView(R.id.single_list)
     RecyclerView mRecyclerView;
 
-    @BindArray(R.array.test_cases)
     String[] mTestCases;
 
-    @BindArray(R.array.test_icons)
     TypedArray mIconArray;
 
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_single_test_list;
+    }
+
+    @Override
+    protected void initViews() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mTestCases = getResources().getStringArray(R.array.test_cases);
+        mRecyclerView = (RecyclerView) findViewById(R.id.single_list);
+        mIconArray = getResources().obtainTypedArray(R.array.test_icons);
     }
 
     @Override

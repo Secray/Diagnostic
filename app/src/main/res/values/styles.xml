@@ -25,12 +25,12 @@
 
     <style name="AppTheme.CustomToolbarTitle" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:fontFamily">sans-serif-light</item>
-        <item name="android:textColor">#fff</item>
-        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/custom_tool_bar_title_size</item>
     </style>
 
     <style name="AppTheme.BottomActionText">
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">@dimen/bottom_action_text_size</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textColor">@color/bottom_action_text_color</item>
         <item name="android:layout_width">wrap_content</item>
@@ -43,7 +43,7 @@
     <style name="AppTheme.BottomAction">
         <item name="android:layout_columnWeight">1</item>
         <item name="android:layout_rowWeight">1</item>
-        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_width">@dimen/layout_width_zero</item>
         <item name="android:background">@drawable/drawable_bottom_button</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center</item>
@@ -51,7 +51,7 @@
     </style>
 
     <style name="AppTheme.LineChartLegendTitle">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/linechart_text_size</item>
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textColor">@color/main_text_color</item>
     </style>
@@ -65,7 +65,7 @@
     </style>
 
     <style name="AppTheme.ListItem.Text">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/test_all_indicator_text_size</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textColor">@color/common_list_item_text_color</item>
         <item name="android:layout_width">match_parent</item>
@@ -96,12 +96,12 @@
     </style>
 
     <style name="AppTheme.About.Text.Title">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/test_all_indicator_text_size</item>
     </style>
 
     <style name="AppTheme.About.Text.Value">
         <item name="android:layout_marginTop">@dimen/about_text_value_padding</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">@dimen/about_text_value_text_size</item>
     </style>
 
 
@@ -120,18 +120,18 @@
     </style>
 
     <style name="AppTheme.SendRepairRequest.Text.Title">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/test_all_indicator_text_size</item>
         <item name="android:paddingBottom">@dimen/txt_send_repair_request_title_padding</item>
     </style>
 
     <style name="AppTheme.SendRepairRequest.Text.SubTitle">
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">@dimen/about_text_value_text_size</item>
         <item name="android:layout_marginTop">@dimen/txt_send_repair_request_subtitle_margin_top</item>
         <item name="android:layout_marginBottom">@dimen/txt_send_repair_request_subtitle_margin_bottom</item>
     </style>
     <style name="AppTheme.SendRepairRequest.EditText">
         <item name="android:textColorHint">@color/list_item_text_color</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">@dimen/about_text_value_text_size</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@android:color/white</item>
@@ -142,10 +142,10 @@
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_width">@dimen/layout_width_zero</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/test_all_indicator_text_size</item>
         <item name="android:clickable">true</item>
         <item name="android:background">@drawable/ripple_bottom_action_button</item>
     </style>
@@ -156,10 +156,10 @@
         <item name="android:fontFamily">sans-serif</item>
     </style>
     <style name="AppTheme.Test.ListItem.Text.Title">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/test_all_indicator_text_size</item>
     </style>
     <style name="AppTheme.Test.ListItem.Text.SubTitle">
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">@dimen/about_text_value_text_size</item>
     </style>
 
     <style name="AppTheme.Test.Text">
@@ -168,18 +168,18 @@
 
     <style name="AppTheme.Test.Text.Description">
         <item name="android:fontFamily">sans-serif-light</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">@dimen/about_text_value_text_size</item>
     </style>
 
     <style name="AppTheme.Test.Text.Result">
         <item name="android:fontFamily">sans-serif</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">@dimen/bottom_action_text_size</item>
         <item name="android:textColor">@color/test_result_pass</item>
     </style>
 
     <style name="AppTheme.Test.Text.Testing">
         <item name="android:fontFamily">sans-serif</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/test_all_indicator_text_size</item>
         <item name="android:textColor">@color/test_testing_text_color</item>
     </style>
 
@@ -197,8 +197,8 @@
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:textColor">@color/list_item_text_color</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/test_all_indicator_text_size</item>
         <item name="android:layout_gravity">center</item>
-        <item name="android:maxWidth">112dp</item>
+        <item name="android:maxWidth">@dimen/indicator_max_height</item>
     </style>
 </resources>

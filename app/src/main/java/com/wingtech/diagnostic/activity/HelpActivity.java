@@ -1,28 +1,29 @@
 package com.wingtech.diagnostic.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
-import android.widget.TextView;
+import android.view.View;
 
-import com.wingtech.diagnostic.R;
-
-import butterknife.BindView;
-import butterknife.OnClick;
+import com.asus.atd.smmitest.R;
 
 /**
  * @author xiekui
  -* @date 2017-7-12
  */
 
-public class HelpActivity extends BaseActivity {
-    @BindView(R.id.toolbar)
+public class HelpActivity extends BaseActivity implements View.OnClickListener {
     Toolbar mToolbar;
 
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_help;
+    }
+
+    @Override
+    protected void initViews() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        findViewById(R.id.txt_hotline_service).setOnClickListener(this);
+        findViewById(R.id.txt_send_repair_request).setOnClickListener(this);
     }
 
     @Override
@@ -36,9 +37,9 @@ public class HelpActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.txt_hotline_service, R.id.txt_send_repair_request})
-    void click(TextView textView) {
-        switch (textView.getId()) {
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.txt_hotline_service:
                 startActivity(new Intent(this, HotlineServiceActivity.class));
                 break;

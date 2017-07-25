@@ -1,9 +1,9 @@
 package com.wingtech.diagnostic.fragment;
 
 import android.content.Intent;
-import android.widget.Button;
+import android.view.View;
 
-import com.wingtech.diagnostic.R;
+import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.activity.CameraTestActivity;
 import com.wingtech.diagnostic.activity.GSensorTestActivity;
 import com.wingtech.diagnostic.activity.TouchTestActivity;
@@ -11,17 +11,12 @@ import com.wingtech.diagnostic.dialog.BaseDialog;
 import com.wingtech.diagnostic.dialog.LoadingDialog;
 import com.wingtech.diagnostic.listener.OnTitleChangedListener;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 /**
  * @author xiekui
  * @date 2017-7-20
  */
 
-public class CommonSingleTestFragment extends BaseFragment {
-    @BindView(R.id.test_action)
-    Button mBtnAction;
+public class CommonSingleTestFragment extends BaseFragment implements View.OnClickListener {
 
     private OnTitleChangedListener mListener;
 
@@ -35,12 +30,12 @@ public class CommonSingleTestFragment extends BaseFragment {
     }
 
     @Override
-    protected void initViewEvents() {
-
+    protected void initViewEvents(View view) {
+        view.findViewById(R.id.test_action).setOnClickListener(this);
     }
 
-    @OnClick(R.id.test_action)
-    void action() {
+    @Override
+    public void onClick(View v) {
         switch (mListener.getChangedTitle()) {
             case "G-Sensor Test":
                 startActivity(new Intent(mActivity, GSensorTestActivity.class));

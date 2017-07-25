@@ -2,9 +2,8 @@ package com.wingtech.diagnostic.activity;
 
 import android.support.v7.widget.Toolbar;
 
-import com.wingtech.diagnostic.R;
+import com.asus.atd.smmitest.R;
 
-import butterknife.BindView;
 
 /**
  * @author xiekui
@@ -12,11 +11,15 @@ import butterknife.BindView;
  */
 
 public class AboutActivity extends BaseActivity {
-    @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_about;
+    }
+
+    @Override
+    protected void initViews() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
     }
 
     @Override

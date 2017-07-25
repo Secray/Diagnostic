@@ -68,4 +68,15 @@
     <dimen name="bottom_indicator_pic_margin_left">5dp</dimen>
     <dimen name="bottom_indicator_margin_top">8dp</dimen>
     <dimen name="bottom_indicator_height">48dp</dimen>
+    <dimen name="send_repair_text_margin_top">30dp</dimen>
+    <dimen name="layout_width_zero">0dp</dimen>
+    <dimen name="test_all_indicator_text_size">18sp</dimen>
+    <dimen name="line_chart_min_height">120dp</dimen>
+    <dimen name="touch_test_title_height">80dp</dimen>
+    <dimen name="touch_test_title_size">40sp</dimen>
+    <dimen name="custom_tool_bar_title_size">25sp</dimen>
+    <dimen name="bottom_action_text_size">16sp</dimen>
+    <dimen name="linechart_text_size">14sp</dimen>
+    <dimen name="about_text_value_text_size">15sp</dimen>
+    <dimen name="indicator_max_height">112dp</dimen>
 </resources>

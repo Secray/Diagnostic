@@ -12,7 +12,7 @@
         style="@style/AppTheme.Test.Text.Testing"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Please press Volume Up Button."/>
+        android:text="@string/please_press_volume_up_button"/>
 
     <View android:layout_width="match_parent"
         android:layout_height="@dimen/list_divider"
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/test_checkbox_title_color"
-            android:text="Volume Up"/>
+            android:text="@string/volume_up"/>
     </LinearLayout>
 
     <LinearLayout
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/test_checkbox_title_color"
-            android:text="Volume Down"/>
+            android:text="@string/volume_down"/>
     </LinearLayout>
 
     <LinearLayout
@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/test_checkbox_title_color"
-            android:text="Back"/>
+            android:text="@string/back"/>
     </LinearLayout>
 
     <LinearLayout
@@ -92,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/test_checkbox_title_color"
-            android:text="Home"/>
+            android:text="@string/home"/>
     </LinearLayout>
 
     <LinearLayout
@@ -111,7 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/test_checkbox_title_color"
-            android:text="Recent"/>
+            android:text="@string/recent"/>
     </LinearLayout>
 
     <RelativeLayout

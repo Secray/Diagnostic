@@ -1,6 +1,6 @@
 package com.wingtech.diagnostic.activity;
 
-import com.wingtech.diagnostic.R;
+import com.asus.atd.smmitest.R;
 
 /**
  * @author xiekui
@@ -11,6 +11,11 @@ public class GSensorTestActivity extends BaseActivity {
     @Override
     protected int getLayoutResId() {
         return R.layout.content_test_gsensor;
+    }
+
+    @Override
+    protected void initViews() {
+
     }
 
     @Override

@@ -8,13 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.wingtech.diagnostic.R;
+import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.bean.TestCaseResult;
 
 import java.util.ArrayList;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @author xiekui
@@ -57,21 +54,21 @@ public class TestResultAdapter extends RecyclerView.Adapter<TestResultAdapter.Te
     }
 
     class TestResultViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.test_icon)
         ImageView mIcon;
-        @BindView(R.id.test_title)
         TextView mTitle;
-        @BindView(R.id.test_passed)
         TextView mPassed;
-        @BindView(R.id.test_failed)
         TextView mFailed;
-        @BindView(R.id.test_indicator)
         ImageView mIndicator;
-        @BindView(R.id.test_result_field)
         View mTextField;
+
         public TestResultViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            mIcon = (ImageView) itemView.findViewById(R.id.test_icon);
+            mTitle = (TextView) itemView.findViewById(R.id.test_title);
+            mPassed = (TextView) itemView.findViewById(R.id.test_passed);
+            mFailed = (TextView) itemView.findViewById(R.id.test_failed);
+            mIndicator = (ImageView) itemView.findViewById(R.id.test_indicator);
+            mTextField = (View) itemView.findViewById(R.id.test_result_field);
             mTextField.setVisibility(View.VISIBLE);
             mIndicator.setVisibility(View.VISIBLE);
         }

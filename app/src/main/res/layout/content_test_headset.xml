@@ -9,5 +9,5 @@
         style="@style/AppTheme.Test.Text.Testing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Playing by the left channel..."/>
+        android:text="@string/playing_by_the_left_channel"/>
 </LinearLayout>

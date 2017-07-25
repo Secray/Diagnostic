@@ -8,15 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.wingtech.diagnostic.listener.OnItemClickListener;
-import com.wingtech.diagnostic.R;
+import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.bean.SingleTestCase;
+import com.wingtech.diagnostic.listener.OnItemClickListener;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * @author xiekui
@@ -58,20 +55,20 @@ public class SingleTestAdapter extends RecyclerView.Adapter<SingleTestAdapter.Si
     }
 
     class SingleTestViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.test_icon)
         ImageView mIcon;
-        @BindView(R.id.test_title)
         TextView mTitle;
-        @BindView(R.id.test_indicator)
         ImageView mIndicator;
         public SingleTestViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
-
-        @OnClick(R.id.root)
-        void onClick(View view) {
-            mOnItemClickListener.onItemClick(view, getAdapterPosition());
+            mIcon = (ImageView) itemView.findViewById(R.id.test_icon);
+            mTitle = (TextView) itemView.findViewById(R.id.test_title);
+            mIndicator = (ImageView) itemView.findViewById(R.id.test_indicator);
+            itemView.findViewById(R.id.root).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnItemClickListener.onItemClick(v, getAdapterPosition());
+                }
+            });
         }
     }
 }

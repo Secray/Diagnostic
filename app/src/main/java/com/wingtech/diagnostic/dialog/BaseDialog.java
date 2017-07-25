@@ -8,9 +8,7 @@ import android.support.annotation.NonNull;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.wingtech.diagnostic.R;
-
-import butterknife.ButterKnife;
+import com.asus.atd.smmitest.R;
 
 /**
  * @author xiekui
@@ -26,7 +24,7 @@ public abstract class BaseDialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentResId());
-        ButterKnife.bind(this);
+        initView();
         doWork();
     }
 
@@ -42,5 +40,6 @@ public abstract class BaseDialog extends Dialog {
     }
 
     protected abstract @LayoutRes int getContentResId();
+    protected abstract void initView();
     protected abstract void doWork();
 }

@@ -2,13 +2,9 @@ package com.wingtech.diagnostic.activity;
 
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
-
-import com.wingtech.diagnostic.R;
+import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.fragment.CommonSingleTestFragment;
 import com.wingtech.diagnostic.listener.OnTitleChangedListener;
-
-import butterknife.BindArray;
-import butterknife.BindView;
 
 /**
  * @author xiekui
@@ -16,9 +12,7 @@ import butterknife.BindView;
  */
 
 public class SingleTestActivity extends BaseActivity implements OnTitleChangedListener {
-    @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    @BindArray(R.array.test_cases)
     String[] mTestCases;
 
     String mTitle;
@@ -26,6 +20,12 @@ public class SingleTestActivity extends BaseActivity implements OnTitleChangedLi
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_test;
+    }
+
+    @Override
+    protected void initViews() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mTestCases = getResources().getStringArray(R.array.test_cases);
     }
 
     @Override

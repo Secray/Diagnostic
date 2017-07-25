@@ -3,34 +3,22 @@ package com.wingtech.diagnostic.activity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
-
-import com.wingtech.diagnostic.R;
+import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.fragment.CommonSingleTestFragment;
 import com.wingtech.diagnostic.listener.OnTitleChangedListener;
-
-import butterknife.BindArray;
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * @author xiekui
  * @date 2017-7-25
  */
 
-public class TestAllActivity extends BaseActivity implements OnTitleChangedListener {
-    @BindView(R.id.toolbar)
+public class TestAllActivity extends BaseActivity implements OnTitleChangedListener, View.OnClickListener {
     Toolbar mToolbar;
-    @BindArray(R.array.test_cases)
     String[] mTestCases;
-    @BindView(R.id.text_previous)
     TextView mPrevious;
-    @BindView(R.id.text_next)
     TextView mNext;
-    @BindView(R.id.rl_previous)
     View mRlPrevious;
-    @BindView(R.id.rl_next)
     View mRlNext;
-    @BindView(R.id.text_indicator)
     TextView mIndicator;
 
     int mCurrent = 0;
@@ -40,6 +28,20 @@ public class TestAllActivity extends BaseActivity implements OnTitleChangedListe
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_test_all;
+    }
+
+    @Override
+    protected void initViews() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mPrevious = (TextView) findViewById(R.id.text_previous);
+        mNext = (TextView) findViewById(R.id.text_next);
+        mRlPrevious = findViewById(R.id.rl_previous);
+        mRlNext = findViewById(R.id.rl_next);
+        mIndicator = (TextView) findViewById(R.id.text_indicator);
+        mTestCases = getResources().getStringArray(R.array.test_cases);
+
+        mRlNext.setOnClickListener(this);
+        mRlPrevious.setOnClickListener(this);
     }
 
     @Override
@@ -58,20 +60,6 @@ public class TestAllActivity extends BaseActivity implements OnTitleChangedListe
                 fragment).commit();
     }
 
-    @OnClick({R.id.rl_previous, R.id.rl_next})
-    void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.rl_previous:
-                mCurrent --;
-                doTest();
-                break;
-            case R.id.rl_next:
-                mCurrent ++;
-                doTest();
-                break;
-        }
-    }
-
     void doTest() {
         mIndicator.setText((mCurrent + 1) + "/" + mLen);
         mTitle = mTestCases[mCurrent];
@@ -85,5 +73,19 @@ public class TestAllActivity extends BaseActivity implements OnTitleChangedListe
     @Override
     public String getChangedTitle() {
         return mTitle;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.rl_previous:
+                mCurrent --;
+                doTest();
+                break;
+            case R.id.rl_next:
+                mCurrent ++;
+                doTest();
+                break;
+        }
     }
 }

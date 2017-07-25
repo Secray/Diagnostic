@@ -12,7 +12,7 @@
         style="@style/AppTheme.Test.Text.Testing"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Please move your phone close to a light."/>
+        android:text="@string/please_move_your_phone_close_to_a_light"/>
 
     <View android:layout_width="match_parent"
         android:layout_height="@dimen/list_divider"
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/test_checkbox_title_color"
-            android:text="Sensor strong light(ADC&gt;300)"/>
+            android:text="@string/sensor_strong_light_adc_gt_300"/>
     </LinearLayout>
 
     <LinearLayout
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/test_checkbox_title_color"
-            android:text="Sensor strong light(ADC&gt;300)"/>
+            android:text="@string/sensor_strong_light_adc_gt_300"/>
     </LinearLayout>
 
     <LinearLayout
@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/test_checkbox_title_color"
-            android:text="Sensor weak light(ADC&lt;5)"/>
+            android:text="@string/sensor_weak_light_adc_lt_5"/>
     </LinearLayout>
 
     <RelativeLayout

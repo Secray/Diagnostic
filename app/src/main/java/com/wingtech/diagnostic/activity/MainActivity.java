@@ -3,11 +3,10 @@ package com.wingtech.diagnostic.activity;
 import android.content.Intent;
 import android.graphics.DashPathEffect;
 import android.graphics.Typeface;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.widget.TextView;
+import android.view.View;
 
+import com.asus.atd.smmitest.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -15,20 +14,14 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.util.TemperatureFormatter;
 import com.wingtech.diagnostic.util.TimeValueFormatter;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
-public class MainActivity extends BaseActivity {
-    @BindView(R.id.chart)
+public class MainActivity extends BaseActivity implements View.OnClickListener {
     LineChart mLineChart;
 
-    @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
     private void buildChart() {
@@ -73,6 +66,16 @@ public class MainActivity extends BaseActivity {
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_main;
+    }
+
+    @Override
+    protected void initViews() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mLineChart = (LineChart) findViewById(R.id.chart);
+        findViewById(R.id.test_all).setOnClickListener(this);
+        findViewById(R.id.single_test).setOnClickListener(this);
+        findViewById(R.id.repair).setOnClickListener(this);
+        findViewById(R.id.help).setOnClickListener(this);
     }
 
     @Override
@@ -140,9 +143,9 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.test_all, R.id.single_test, R.id.repair, R.id.help})
-    void actionClick(TextView txt) {
-        switch (txt.getId()) {
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.test_all:
                 startActivity(new Intent(MainActivity.this, TestAllActivity.class));
                 break;
