@@ -6,4 +6,36 @@
         <attr name="color"/>
         <attr name="radius"/>
     </declare-styleable>
+
+    <attr name="text" format="string"/>
+    <attr name="textSize" format="dimension"/>
+    <attr name="titleSize" format="dimension"/>
+    <attr name="firstColor" format="color"/>
+    <attr name="secondColor" format="color"/>
+    <attr name="typeface">
+        <enum name="normal" value="0" />
+        <enum name="sans" value="1" />
+        <enum name="serif" value="2" />
+        <enum name="monospace" value="3" />
+    </attr>
+    <attr name="direction">
+        <enum name="top" value="1"/>
+        <enum name="bottom" value="0"/>
+    </attr>
+
+    <attr name="gravity">
+        <enum name="top" value="0"/>
+        <enum name="bottom" value="1"/>
+        <enum name="center" value="2"/>
+    </attr>
+
+    <declare-styleable name="PercentView">
+        <attr name="text"/>
+        <attr name="textSize"/>
+        <attr name="firstColor"/>
+        <attr name="secondColor"/>
+        <attr name="direction"/>
+        <attr name="typeface"/>
+        <attr name="gravity"/>
+    </declare-styleable>
 </resources>

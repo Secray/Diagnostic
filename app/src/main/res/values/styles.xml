@@ -29,6 +29,16 @@
         <item name="android:textSize">@dimen/custom_tool_bar_title_size</item>
     </style>
 
+    <style name="AppTheme.PercentTitle">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textColor">@color/list_item_text_color</item>
+        <item name="android:textSize">@dimen/linechart_text_size</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">@dimen/layout_width_zero</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+    </style>
+
     <style name="AppTheme.BottomActionText">
         <item name="android:textSize">@dimen/bottom_action_text_size</item>
         <item name="android:fontFamily">sans-serif</item>

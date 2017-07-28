@@ -12,32 +12,46 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/percent_margin_top"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/percent_height"
         android:orientation="horizontal">
 
-        <com.secray.percentview.PercentView
-            android:id="@+id/percent"
-            android:layout_width="wrap_content"
+        <com.wingtech.diagnostic.widget.PercentView
+            android:id="@+id/cpu_percent"
+            android:layout_width="@dimen/layout_width_zero"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="bottom"
-            app:direction="top"
-            app:firstColor="@color/cpu_0_50_bg"
-            app:secondColor="@color/cpu_0_50"
+            app:gravity="bottom"
+            app:direction="bottom"
+            app:firstColor="@color/cpu_0_50"
+            app:secondColor="@color/cpu_0_50_bg"
             app:text="@string/default_cpu_percent"
-            app:title="@string/main_cpu_title"
             />
 
-        <com.secray.percentview.PercentView
-            android:layout_width="wrap_content"
+        <com.wingtech.diagnostic.widget.PercentView
+            android:id="@+id/battery_percent"
+            android:layout_width="@dimen/layout_width_zero"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="bottom"
-            app:direction="top"
+            app:gravity="bottom"
+            app:direction="bottom"
             app:firstColor="@color/batter_50_100_bg"
             app:secondColor="@color/batter_50_100"
-            app:title="@string/main_battery_title"
             app:text="@string/default_battery_percent"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            style="@style/AppTheme.PercentTitle"
+            android:text="@string/main_cpu_title"/>
+
+        <TextView
+            style="@style/AppTheme.PercentTitle"
+            android:text="@string/main_battery_title"/>
     </LinearLayout>
 
     <LinearLayout

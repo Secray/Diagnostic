@@ -3,7 +3,8 @@ package com.wingtech.diagnostic.activity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
-import com.asus.atd.smmitest.R;
+
+import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.fragment.CommonSingleTestFragment;
 import com.wingtech.diagnostic.listener.OnTitleChangedListener;
 

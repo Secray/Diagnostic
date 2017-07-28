@@ -1,6 +1,7 @@
 <resources>
     <!-- MainActivity dimens -->
     <dimen name="percent_margin_top">8dp</dimen>
+    <dimen name="percent_height">120dp</dimen>
     <dimen name="chart_legend_margin_top">30dp</dimen>
     <dimen name="chart_legend_padding_title">10dp</dimen>
     <dimen name="chart_legend_padding_cpu">4dp</dimen>

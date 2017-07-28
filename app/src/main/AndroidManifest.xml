@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.asus.atd.smmitest">
+    package="com.wingtech.diagnostic">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camera" />
@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name="com.wingtech.diagnostic.activity.MainActivity">
+        <activity android:name="com.wingtech.diagnostic.activity.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,48 +25,61 @@
 
         <activity
             android:label="@string/main_bottom_button_repair"
+            android:screenOrientation="portrait"
             android:name="com.wingtech.diagnostic.activity.RepairActivity"
             android:launchMode="singleTask"/>
 
         <activity
             android:label="@string/main_bottom_button_help"
+            android:screenOrientation="portrait"
             android:name="com.wingtech.diagnostic.activity.HelpActivity"
             android:launchMode="singleTask"/>
 
         <activity android:name="com.wingtech.diagnostic.activity.AboutActivity"
             android:label="@string/menu_test_about"
+            android:screenOrientation="portrait"
             android:launchMode="singleTask"/>
 
         <activity android:name="com.wingtech.diagnostic.activity.HotlineServiceActivity"
             android:label="@string/help_list_item_hotline_service"
+            android:screenOrientation="portrait"
             android:launchMode="singleTask"/>
 
         <activity android:name="com.wingtech.diagnostic.activity.SendRepairRequestActivity"
             android:windowSoftInputMode="adjustResize"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:label="@string/repair_request_name"/>
 
         <activity android:name="com.wingtech.diagnostic.activity.TestResultActivity"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:label="@string/menu_test_result"/>
 
         <activity android:name="com.wingtech.diagnostic.activity.TouchActivity"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:label="@string/touch_title"/>
 
         <activity android:name="com.wingtech.diagnostic.activity.SingleTestListActivity"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:label="@string/main_bottom_button_single_test"/>
 
-        <activity android:name="com.wingtech.diagnostic.activity.SingleTestActivity"/>
+        <activity android:name="com.wingtech.diagnostic.activity.SingleTestActivity"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name="com.wingtech.diagnostic.activity.TouchTestActivity"/>
+        <activity android:name="com.wingtech.diagnostic.activity.TouchTestActivity"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name="com.wingtech.diagnostic.activity.GSensorTestActivity"/>
+        <activity android:name="com.wingtech.diagnostic.activity.GSensorTestActivity"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name="com.wingtech.diagnostic.activity.CameraTestActivity"/>
+        <activity android:name="com.wingtech.diagnostic.activity.CameraTestActivity"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name="com.wingtech.diagnostic.activity.TestAllActivity"/>
+        <activity android:name="com.wingtech.diagnostic.activity.TestAllActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

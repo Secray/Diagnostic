@@ -8,7 +8,8 @@ import android.support.annotation.NonNull;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.asus.atd.smmitest.R;
+import com.wingtech.diagnostic.R;
+
 
 /**
  * @author xiekui

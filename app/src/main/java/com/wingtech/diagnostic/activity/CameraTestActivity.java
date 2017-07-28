@@ -13,7 +13,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 
-import com.asus.atd.smmitest.R;
+import com.wingtech.diagnostic.R;
 
 import java.io.IOException;
 import java.util.List;

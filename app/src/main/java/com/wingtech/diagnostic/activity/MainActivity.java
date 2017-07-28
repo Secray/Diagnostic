@@ -1,12 +1,15 @@
 package com.wingtech.diagnostic.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.DashPathEffect;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.asus.atd.smmitest.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -14,15 +17,21 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.util.TemperatureFormatter;
 import com.wingtech.diagnostic.util.TimeValueFormatter;
+import com.wingtech.diagnostic.widget.PercentView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
     LineChart mLineChart;
-
     Toolbar mToolbar;
+    PercentView mCPUPercent;
+    PercentView mBatteryPercent;
 
     private void buildChart() {
         mLineChart.setDrawGridBackground(false);
@@ -72,6 +81,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void initViews() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mLineChart = (LineChart) findViewById(R.id.chart);
+        mCPUPercent = (PercentView) findViewById(R.id.cpu_percent);
+        mBatteryPercent = (PercentView) findViewById(R.id.battery_percent);
         findViewById(R.id.test_all).setOnClickListener(this);
         findViewById(R.id.single_test).setOnClickListener(this);
         findViewById(R.id.repair).setOnClickListener(this);
@@ -85,7 +96,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void onWork() {
+        IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        registerReceiver(mBatteryReceiver, filter);
         buildChart();
+        mCPUAsyncTask.execute();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mBatteryReceiver);
+        mCPUAsyncTask.cancel(true);
     }
 
     private void setData(int count, float range) {
@@ -160,4 +181,83 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
         }
     }
+
+    private BroadcastReceiver mBatteryReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int level = intent.getIntExtra("level", 0);
+            int scale = intent.getIntExtra("scale", 0);
+            int color;
+            int bgColor;
+            if (level >= 50 && level <= 100) {
+                color = getColor(R.color.batter_50_100);
+                bgColor = getColor(R.color.batter_50_100_bg);
+            } else if (level < 50 && level >=20) {
+                color = getColor(R.color.battery_20_50);
+                bgColor = getColor(R.color.battery_20_50_bg);
+            } else {
+                color = getColor(R.color.battery_10_20);
+                bgColor = getColor(R.color.battery_10_20_bg);
+            }
+            mBatteryPercent.setFirstColor(color);
+            mBatteryPercent.setSecondColor(bgColor);
+            mBatteryPercent.setPercent((float) level / scale);
+        }
+    };
+
+
+    private int getProcessCpuRate() {
+        int rate = 0;
+
+        try {
+            String Result;
+            Process p;
+            p = Runtime.getRuntime().exec("top -n 1");
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            while ((Result = br.readLine()) != null) {
+                if (Result.trim().length() < 1) {
+                    continue;
+                } else {
+                    String[] CPUUsr = Result.split("%");
+                    String[] CPUUsage = CPUUsr[0].split("User");
+                    String[] SYSUsage = CPUUsr[1].split("System");
+
+                    rate = Integer.parseInt(CPUUsage[1].trim()) + Integer.parseInt(SYSUsage[1].trim());
+                    break;
+                }
+            }
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return rate;
+    }
+
+    AsyncTask<Void, Void, Integer> mCPUAsyncTask = new AsyncTask<Void, Void, Integer>() {
+        @Override
+        protected Integer doInBackground(Void... params) {
+            return getProcessCpuRate();
+        }
+
+        @Override
+        protected void onPostExecute(Integer value) {
+            int color;
+            int bgColor;
+            if (value >= 80 && value <= 100) {
+                color = getColor(R.color.cpu_80_100);
+                bgColor = getColor(R.color.cpu_80_100_bg);
+            } else if (value < 80 && value >= 50) {
+                color = getColor(R.color.cpu_50_80);
+                bgColor = getColor(R.color.cpu_50_80_bg);
+            } else {
+                color = getColor(R.color.cpu_0_50);
+                bgColor = getColor(R.color.cpu_0_50_bg);
+            }
+            mCPUPercent.setFirstColor(bgColor);
+            mCPUPercent.setSecondColor(color);
+            mCPUPercent.setPercent((float) value / 100);
+        }
+    };
 }

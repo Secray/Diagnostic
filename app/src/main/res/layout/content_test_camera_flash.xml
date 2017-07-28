@@ -11,7 +11,7 @@
         style="@style/AppTheme.Test.Text.Testing"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Please check whether the camera flash light on or not and make a judge."/>
+        android:text="@string/camera_flash_description"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

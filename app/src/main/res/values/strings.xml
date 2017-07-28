@@ -103,4 +103,6 @@
     <string name="away">Away</string>
     <string name="ten">10</string>
     <string name="touch">touch</string>
+    <string name="camera_flash_description">Please check whether the camera flash light on or not and make a judge.</string>
+    <string name="vibrator">Vibrator</string>
 </resources>

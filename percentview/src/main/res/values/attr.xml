@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <attr name="text" format="string"/>
-    <attr name="title" format="string"/>
     <attr name="textSize" format="dimension"/>
     <attr name="titleSize" format="dimension"/>
     <attr name="firstColor" format="color"/>
     <attr name="secondColor" format="color"/>
-    <attr name="titleColor" format="color"/>
     <attr name="typeface">
         <enum name="normal" value="0" />
         <enum name="sans" value="1" />
@@ -17,16 +15,20 @@
         <enum name="top" value="1"/>
         <enum name="bottom" value="0"/>
     </attr>
+
+    <attr name="gravity">
+        <enum name="top" value="0"/>
+        <enum name="bottom" value="1"/>
+        <enum name="center" value="2"/>
+    </attr>
     
     <declare-styleable name="PercentView">
         <attr name="text"/>
-        <attr name="title"/>
         <attr name="textSize"/>
-        <attr name="titleSize"/>
-        <attr name="titleColor"/>
         <attr name="firstColor"/>
         <attr name="secondColor"/>
         <attr name="direction"/>
         <attr name="typeface"/>
+        <attr name="gravity"/>
     </declare-styleable>
 </resources>

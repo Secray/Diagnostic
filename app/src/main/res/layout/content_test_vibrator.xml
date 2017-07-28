@@ -16,7 +16,7 @@
             style="@style/AppTheme.Test.Text.Testing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Vibrator"/>
+            android:text="@string/vibrator"/>
 
         <Switch
             android:layout_marginLeft="@dimen/test_text_switch_margin_left"

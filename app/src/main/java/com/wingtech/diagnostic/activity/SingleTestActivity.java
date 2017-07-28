@@ -2,7 +2,8 @@ package com.wingtech.diagnostic.activity;
 
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
-import com.asus.atd.smmitest.R;
+
+import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.fragment.CommonSingleTestFragment;
 import com.wingtech.diagnostic.listener.OnTitleChangedListener;
 

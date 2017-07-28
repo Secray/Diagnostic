@@ -6,7 +6,8 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.asus.atd.smmitest.R;
+import com.wingtech.diagnostic.R;
+
 
 /**
  * @author xiekui

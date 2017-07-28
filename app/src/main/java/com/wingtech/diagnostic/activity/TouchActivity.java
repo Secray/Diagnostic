@@ -2,8 +2,9 @@ package com.wingtech.diagnostic.activity;
 
 import android.support.v7.widget.Toolbar;
 
+import com.wingtech.diagnostic.R;
 
-import com.asus.atd.smmitest.R;
+
 /**
  * @author xiekui
  * @date 2017-7-18

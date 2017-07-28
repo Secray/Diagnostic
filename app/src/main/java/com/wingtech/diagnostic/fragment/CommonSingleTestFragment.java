@@ -3,7 +3,7 @@ package com.wingtech.diagnostic.fragment;
 import android.content.Intent;
 import android.view.View;
 
-import com.asus.atd.smmitest.R;
+import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.activity.CameraTestActivity;
 import com.wingtech.diagnostic.activity.GSensorTestActivity;
 import com.wingtech.diagnostic.activity.TouchTestActivity;

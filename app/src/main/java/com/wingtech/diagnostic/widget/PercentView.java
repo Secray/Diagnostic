@@ -1,4 +1,4 @@
-package com.secray.percentview;
+package com.wingtech.diagnostic.widget;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -15,6 +15,9 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+
+import com.wingtech.diagnostic.R;
+
 
 /**
  * @author secray
@@ -129,9 +132,9 @@ public class PercentView extends View {
                 break;
         }
 
-        float clipStartY = getHeight() / 2 - mBound.height() / 2 - value2px(2.5f, VALUE.DP);
+        float clipStartY = startY - mBound.height();
         float clipEndY;
-        float height = startY - clipStartY + value2px(1, VALUE.DP);
+        float height = mBound.height() + value2px(1, VALUE.DP);
 
         if (mDirection == TOP) {
             clipEndY = clipStartY + height * mPercent;

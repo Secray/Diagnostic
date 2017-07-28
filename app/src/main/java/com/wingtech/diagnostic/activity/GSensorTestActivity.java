@@ -1,6 +1,7 @@
 package com.wingtech.diagnostic.activity;
 
-import com.asus.atd.smmitest.R;
+
+import com.wingtech.diagnostic.R;
 
 /**
  * @author xiekui
