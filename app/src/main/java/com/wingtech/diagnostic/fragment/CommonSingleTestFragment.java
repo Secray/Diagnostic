@@ -6,9 +6,8 @@ import android.view.View;
 import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.activity.CameraTestActivity;
 import com.wingtech.diagnostic.activity.GSensorTestActivity;
+import com.wingtech.diagnostic.activity.TestingActivity;
 import com.wingtech.diagnostic.activity.TouchTestActivity;
-import com.wingtech.diagnostic.dialog.BaseDialog;
-import com.wingtech.diagnostic.dialog.LoadingDialog;
 import com.wingtech.diagnostic.listener.OnTitleChangedListener;
 
 /**
@@ -56,8 +55,9 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 startActivity(i);
                 break;
             default:
-                BaseDialog dialog = new LoadingDialog(mActivity, mListener.getChangedTitle());
-                dialog.show();
+                i = new Intent(mActivity, TestingActivity.class);
+                i.putExtra("title", mListener.getChangedTitle());
+                startActivity(i);
                 break;
         }
     }

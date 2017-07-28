@@ -80,6 +80,7 @@
 
         <activity android:name="com.wingtech.diagnostic.activity.TestAllActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activity.TestingActivity" />
     </application>
 
 </manifest>
