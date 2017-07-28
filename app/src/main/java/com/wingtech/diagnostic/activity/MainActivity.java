@@ -8,6 +8,7 @@ import android.graphics.DashPathEffect;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -212,17 +213,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         try {
             String Result;
             Process p;
-            p = Runtime.getRuntime().exec("top -n 1");
+            p = Runtime.getRuntime().exec("/system/bin/top -n 1");
 
             BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
             while ((Result = br.readLine()) != null) {
+                Log.i("xk", Result);
                 if (Result.trim().length() < 1) {
                     continue;
                 } else {
                     String[] CPUUsr = Result.split("%");
                     String[] CPUUsage = CPUUsr[0].split("User");
                     String[] SYSUsage = CPUUsr[1].split("System");
-
                     rate = Integer.parseInt(CPUUsage[1].trim()) + Integer.parseInt(SYSUsage[1].trim());
                     break;
                 }
