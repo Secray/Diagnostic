@@ -4,7 +4,8 @@ import android.content.Context;
 import android.util.TypedValue;
 
 /**
- * Created by xiekui on 17-7-10.
+ * @author xiekui
+ * @date 2017-7-28
  */
 
 public class Utils {
