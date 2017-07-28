@@ -27,6 +27,42 @@
     <string name="main_bottom_button_repair">Repair</string>
     <string name="main_bottom_button_help">Help</string>
 
+    <string name="test_case_bluetooth">Bluetooth Test</string>
+    <string name="test_case_wifi">Wi-Fi Test</string>
+    <string name="test_case_battery">Battery Test</string>
+    <string name="test_case_e_compass">E-Compass Test</string>
+    <string name="test_case_gyroscope">Gyroscope Test</string>
+    <string name="test_case_mode">Modem Test</string>
+    <string name="test_case_touch">Touch Test</string>
+    <string name="test_case_g_sensor">G-Sensor Test</string>
+    <string name="test_case_wireless_charging">Wireless Charging Test</string>
+    <string name="test_case_keypad">Keypad Test</string>
+    <string name="test_case_multi_touch">MultiTouch Test</string>
+    <string name="test_case_vibrator">Vibrator Test</string>
+    <string name="test_case_receiver">Receiver Test</string>
+    <string name="test_case_speaker">Speaker Test</string>
+    <string name="test_case_board_mic">BoardMic Test</string>
+    <string name="test_case_main_cam">MainCam Test</string>
+    <string name="test_case_VGA_cam">VGACam Test</string>
+    <string name="test_case_camera_flash">Camera Flash Test</string>
+    <string name="test_case_display">Display Test</string>
+    <string name="test_case_headset">Headset Test</string>
+    <string name="test_case_headset_mic">HeadsetMic Test</string>
+    <string name="test_case_headset_key">HeadsetKey Test</string>
+    <string name="test_case_proximity">Proximity Test</string>
+    <string name="test_case_light_sensor">LightSensor Test</string>
+    <string name="test_case_cmd_mouse">CMD Mouse Test</string>
+    <string name="test_case_sd_card">SD Card Test</string>
+    <string name="test_case_sim_card">SIM Card Test</string>
+    <string name="test_case_nfc">NFC Test</string>
+    <string name="test_case_hdmi">HDMI Test</string>
+    <string name="test_case_fingerprint">Fingerprint Test</string>
+    <string name="test_case_sim2">SIM2 Test</string>
+    <string name="test_case_secondary_mic">SecondaryMic Test</string>
+
+
+
+
 
     <!-- RepairActivity -->
     <string name="repair_list_item_software_update">Software Update</string>

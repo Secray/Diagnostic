@@ -10,7 +10,7 @@
         android:layout_height="@dimen/main_test_pic_height"
         android:scaleType="fitXY"
         android:src="@mipmap/touch"
-        android:id="@+id/imageView"
+        android:id="@+id/img_test"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -23,7 +23,7 @@
         android:paddingRight="@dimen/list_margin"
         android:text="@string/test_description"
         android:id="@+id/test_description"
-        android:layout_below="@+id/imageView"
+        android:layout_below="@+id/img_test"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -40,11 +40,13 @@
         android:id="@+id/result_field">
 
         <ImageView
+            android:id="@+id/ic_test_result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_test_pass" />
 
         <TextView
+            android:id="@+id/txt_test_result"
             style="@style/AppTheme.Test.Text.Result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="test_cases">
-        <item>Bluetooth Test</item>
-        <item>Wi-Fi Test</item>
-        <item>Battery Test</item>
-        <item>E-Compass Test</item>
-        <item>Gyroscope Test</item>
-        <item>Modem Test</item>
-        <item>Touch Test</item>
-        <item>G-Sensor Test</item>
-        <item>Wireless Charging Test</item>
-        <item>Keypad Test</item>
-        <item>MultiTouch Test</item>
-        <item>Vibrator Test</item>
-        <item>Receiver Test</item>
-        <item>Speaker Test</item>
-        <item>BoardMic Test</item>
-        <item>MainCam Test</item>
-        <item>VGACam Test</item>
-        <item>Camera Flash Test</item>
-        <item>Display Test</item>
-        <item>Headset Test</item>
-        <item>HeadsetMic Test</item>
-        <item>HeadsetKey Test</item>
-        <item>Proximity Test</item>
-        <item>LightSensor Test</item>
-        <item>CMD Mouse Test</item>
-        <item>SD Card Test</item>
-        <item>SIM Card Test</item>
-        <item>NFC Test</item>
-        <item>HDMI Test</item>
-        <item>Fingerprint Test</item>
-        <item>SIM2 Test</item>
-        <item>SecondaryMic Test</item>
+        <item>@string/test_case_bluetooth</item>
+        <item>@string/test_case_wifi</item>
+        <item>@string/test_case_battery</item>
+        <item>@string/test_case_e_compass</item>
+        <item>@string/test_case_gyroscope</item>
+        <item>@string/test_case_mode</item>
+        <item>@string/test_case_touch</item>
+        <item>@string/test_case_g_sensor</item>
+        <item>@string/test_case_wireless_charging</item>
+        <item>@string/test_case_keypad</item>
+        <item>@string/test_case_multi_touch</item>
+        <item>@string/test_case_vibrator</item>
+        <item>@string/test_case_receiver</item>
+        <item>@string/test_case_speaker</item>
+        <item>@string/test_case_board_mic</item>
+        <item>@string/test_case_main_cam</item>
+        <item>@string/test_case_VGA_cam</item>
+        <item>@string/test_case_camera_flash</item>
+        <item>@string/test_case_display</item>
+        <item>@string/test_case_headset</item>
+        <item>@string/test_case_headset_mic</item>
+        <item>@string/test_case_headset_key</item>
+        <item>@string/test_case_proximity</item>
+        <item>@string/test_case_light_sensor</item>
+        <item>@string/test_case_cmd_mouse</item>
+        <item>@string/test_case_sd_card</item>
+        <item>@string/test_case_sim_card</item>
+        <item>@string/test_case_nfc</item>
+        <item>@string/test_case_hdmi</item>
+        <item>@string/test_case_fingerprint</item>
+        <item>@string/test_case_sim2</item>
+        <item>@string/test_case_secondary_mic</item>
     </string-array>
 
     <integer-array name="test_icons">
