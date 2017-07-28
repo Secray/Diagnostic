@@ -7,14 +7,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wingtech.diagnostic.R;
+import com.wingtech.diagnostic.activity.BluetoothTestingActivity;
 import com.wingtech.diagnostic.activity.CameraTestActivity;
 import com.wingtech.diagnostic.activity.GSensorTestActivity;
-import com.wingtech.diagnostic.activity.TestingActivity;
 import com.wingtech.diagnostic.activity.TouchTestActivity;
+import com.wingtech.diagnostic.activity.WiFiTestingActivity;
 import com.wingtech.diagnostic.listener.OnTitleChangedListener;
-import com.wingtech.diagnostic.util.Log;
 
 import static com.wingtech.diagnostic.util.Constants.BLUETOOTH_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.WIFI_REQUEST_CODE;
 
 /**
  * @author xiekui
@@ -28,6 +29,8 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
     private TextView mTestResult;
     AppCompatButton mTestBtn;
     private OnTitleChangedListener mListener;
+
+    private String mTitle;
 
 
     public void setTitleChangedListener(OnTitleChangedListener listener) {
@@ -50,16 +53,23 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        mTitle = mListener.getChangedTitle();
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (resultCode) {
             case BLUETOOTH_REQUEST_CODE:
+            case WIFI_REQUEST_CODE:
                 boolean result = data.getBooleanExtra("result", false);
                 mTestResultField.setVisibility(View.VISIBLE);
                 if (result) {
-                    mTestResult.setText(getResources().getString(R.string.test_pass, "bluetooth"));
+                    mTestResult.setText(getResources().getString(R.string.test_pass, mTitle));
                     mTestResultImg.setImageResource(R.drawable.ic_test_pass);
                 } else {
-                    mTestResult.setText(getResources().getString(R.string.test_fail, "bluetooth"));
+                    mTestResult.setText(getResources().getString(R.string.test_fail, mTitle));
                     mTestResultImg.setImageResource(R.drawable.ic_test_fail);
                 }
                 mTestBtn.setText(R.string.btn_test_again);
@@ -69,7 +79,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        switch (mListener.getChangedTitle()) {
+        switch (mTitle) {
             case "G-Sensor Test":
                 startActivity(new Intent(mActivity, GSensorTestActivity.class));
                 break;
@@ -88,10 +98,16 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 i.putExtra("camId", camId);
                 startActivity(i);
                 break;
-            default:
-                i = new Intent(mActivity, TestingActivity.class);
+            case "Bluetooth Test":
+                i = new Intent(mActivity, BluetoothTestingActivity.class);
                 i.putExtra("title", mListener.getChangedTitle());
                 startActivityForResult(i, BLUETOOTH_REQUEST_CODE);
+                break;
+
+            case "Wi-Fi Test":
+                i = new Intent(mActivity, WiFiTestingActivity.class);
+                i.putExtra("title", mListener.getChangedTitle());
+                startActivityForResult(i, WIFI_REQUEST_CODE);
                 break;
         }
     }
