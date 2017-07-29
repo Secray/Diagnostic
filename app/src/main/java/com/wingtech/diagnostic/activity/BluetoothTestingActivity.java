@@ -74,30 +74,19 @@ public class BluetoothTestingActivity extends TestingActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        sendResult();
-    }
-
-    @Override
     protected void onWork() {
-        mTitle = getIntent().getStringExtra("title");
-        mTxtTitle.setText(mTitle + "ing...");
-
-        switch (mTitle) {
-            case "Bluetooth Test":
-                IntentFilter intentFilter = new IntentFilter();
-                intentFilter.addAction(BLUETOOTH_STATE_CHANGED);
-                intentFilter.addAction(BLUETOOTH_DISCOVERY_STARTED);
-                intentFilter.addAction(BLUETOOTH_DEVICE_FOUND);
-                intentFilter.addAction(BLUETOOTH_DISCOVERY_FINISHED);
-                mBluetoothReceiver = new BluetoothReceiver(mBluetoothAdapter, mHandler);
-                registerReceiver(mBluetoothReceiver, intentFilter);
-                if (mBluetoothAdapter.isEnabled()) {
-                    mBluetoothAdapter.startDiscovery();
-                } else {
-                    mBluetoothAdapter.enable();
-                }
-                break;
+        super.onWork();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(BLUETOOTH_STATE_CHANGED);
+        intentFilter.addAction(BLUETOOTH_DISCOVERY_STARTED);
+        intentFilter.addAction(BLUETOOTH_DEVICE_FOUND);
+        intentFilter.addAction(BLUETOOTH_DISCOVERY_FINISHED);
+        mBluetoothReceiver = new BluetoothReceiver(mBluetoothAdapter, mHandler);
+        registerReceiver(mBluetoothReceiver, intentFilter);
+        if (mBluetoothAdapter.isEnabled()) {
+            mBluetoothAdapter.startDiscovery();
+        } else {
+            mBluetoothAdapter.enable();
         }
     }
 }

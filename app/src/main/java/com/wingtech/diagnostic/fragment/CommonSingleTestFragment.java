@@ -7,14 +7,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wingtech.diagnostic.R;
+import com.wingtech.diagnostic.activity.BatteryTestingActivity;
 import com.wingtech.diagnostic.activity.BluetoothTestingActivity;
 import com.wingtech.diagnostic.activity.CameraTestActivity;
 import com.wingtech.diagnostic.activity.GSensorTestActivity;
+import com.wingtech.diagnostic.activity.GyroscopeTestingActivity;
+import com.wingtech.diagnostic.activity.MagneticTestingActivity;
 import com.wingtech.diagnostic.activity.TouchTestActivity;
 import com.wingtech.diagnostic.activity.WiFiTestingActivity;
 import com.wingtech.diagnostic.listener.OnTitleChangedListener;
 
+import static com.wingtech.diagnostic.util.Constants.BATTERY_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.BLUETOOTH_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.E_COMPASS_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.GYROSCOPE_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.WIFI_REQUEST_CODE;
 
 /**
@@ -62,6 +68,9 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (resultCode) {
             case BLUETOOTH_REQUEST_CODE:
+            case BATTERY_REQUEST_CODE:
+            case E_COMPASS_REQUEST_CODE:
+            case GYROSCOPE_REQUEST_CODE:
             case WIFI_REQUEST_CODE:
                 boolean result = data.getBooleanExtra("result", false);
                 mTestResultField.setVisibility(View.VISIBLE);
@@ -100,14 +109,29 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 break;
             case "Bluetooth Test":
                 i = new Intent(mActivity, BluetoothTestingActivity.class);
-                i.putExtra("title", mListener.getChangedTitle());
+                i.putExtra("title", mTitle);
                 startActivityForResult(i, BLUETOOTH_REQUEST_CODE);
                 break;
 
             case "Wi-Fi Test":
                 i = new Intent(mActivity, WiFiTestingActivity.class);
-                i.putExtra("title", mListener.getChangedTitle());
+                i.putExtra("title", mTitle);
                 startActivityForResult(i, WIFI_REQUEST_CODE);
+                break;
+            case "Battery Test":
+                i = new Intent(mActivity, BatteryTestingActivity.class);
+                i.putExtra("title", mTitle);
+                startActivityForResult(i, BATTERY_REQUEST_CODE);
+                break;
+            case "E-Compass Test":
+                i = new Intent(mActivity, MagneticTestingActivity.class);
+                i.putExtra("title", mTitle);
+                startActivityForResult(i, E_COMPASS_REQUEST_CODE);
+                break;
+            case "Gyroscope Test":
+                i = new Intent(mActivity, GyroscopeTestingActivity.class);
+                i.putExtra("title", mTitle);
+                startActivityForResult(i, GYROSCOPE_REQUEST_CODE);
                 break;
         }
     }

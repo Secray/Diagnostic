@@ -26,6 +26,12 @@ public abstract class TestingActivity extends BaseActivity {
     }
 
     @Override
+    protected void onWork() {
+        mTitle = getIntent().getStringExtra("title");
+        mTxtTitle.setText(mTitle + "ing...");
+    }
+
+    @Override
     public void onBackPressed() {
         sendResult();
     }

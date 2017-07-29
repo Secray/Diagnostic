@@ -14,4 +14,7 @@ public class Constants {
 
     public static final int BLUETOOTH_REQUEST_CODE = 0;
     public static final int WIFI_REQUEST_CODE = 1;
+    public static final int BATTERY_REQUEST_CODE = 2;
+    public static final int E_COMPASS_REQUEST_CODE = 3;
+    public static final int GYROSCOPE_REQUEST_CODE = 4;
 }
