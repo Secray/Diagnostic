@@ -9,6 +9,7 @@ import com.wingtech.diagnostic.receiver.BatteryBroadcastReceiver;
 
 import static com.wingtech.diagnostic.receiver.BatteryBroadcastReceiver.BATTERY_FAILED;
 import static com.wingtech.diagnostic.receiver.BatteryBroadcastReceiver.BATTERY_PASSED;
+import static com.wingtech.diagnostic.util.Constants.BATTERY_REQUEST_CODE;
 
 /**
  * @author xiekui
@@ -37,6 +38,7 @@ public class BatteryTestingActivity extends TestingActivity {
     @Override
     protected void onWork() {
         super.onWork();
+        mRequestCode = BATTERY_REQUEST_CODE;
         mBatteryBroadcastReceiver = new BatteryBroadcastReceiver(mHandler);
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_BATTERY_CHANGED);

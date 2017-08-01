@@ -1,12 +1,13 @@
 package com.wingtech.diagnostic.activity;
 
-import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
 import com.wingtech.diagnostic.util.Log;
+
+import static com.wingtech.diagnostic.util.Constants.GYROSCOPE_REQUEST_CODE;
 
 /**
  * @author xiekui
@@ -21,6 +22,7 @@ public class GyroscopeTestingActivity extends TestingActivity implements SensorE
     @Override
     protected void onWork() {
         super.onWork();
+        mRequestCode = GYROSCOPE_REQUEST_CODE;
         mSensorManager = (SensorManager) getApplicationContext().getSystemService(SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
         Log.i("mSensor = " + mSensor);

@@ -19,6 +19,7 @@
             android:text="@string/vibrator"/>
 
         <Switch
+            android:id="@+id/vibrator_switch"
             android:layout_marginLeft="@dimen/test_text_switch_margin_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -31,6 +32,7 @@
         android:gravity="bottom">
 
         <android.support.v7.widget.AppCompatButton
+            android:id="@+id/fail_btn"
             android:layout_width="@dimen/test_action_button_width"
             android:layout_height="@dimen/test_action_button_height"
             android:layout_alignParentLeft="true"
@@ -41,6 +43,7 @@
 
 
         <android.support.v7.widget.AppCompatButton
+            android:id="@+id/pass_btn"
             android:layout_width="@dimen/test_action_button_width"
             android:layout_height="@dimen/test_action_button_height"
             android:layout_alignParentRight="true"

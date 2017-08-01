@@ -5,6 +5,8 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
+import static com.wingtech.diagnostic.util.Constants.E_COMPASS_REQUEST_CODE;
+
 /**
  * @author xiekui
  * @date 2017-7-29
@@ -18,6 +20,7 @@ public class MagneticTestingActivity extends TestingActivity implements SensorEv
     @Override
     protected void onWork() {
         super.onWork();
+        mRequestCode = E_COMPASS_REQUEST_CODE;
         mSensorManager = (SensorManager) getApplicationContext().getSystemService(SENSOR_SERVICE);
         mMagnetic = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
     }

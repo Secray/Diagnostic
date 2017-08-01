@@ -13,7 +13,11 @@ import com.wingtech.diagnostic.activity.CameraTestActivity;
 import com.wingtech.diagnostic.activity.GSensorTestActivity;
 import com.wingtech.diagnostic.activity.GyroscopeTestingActivity;
 import com.wingtech.diagnostic.activity.MagneticTestingActivity;
+import com.wingtech.diagnostic.activity.MultiTouchTestingActivity;
+import com.wingtech.diagnostic.activity.SDCardTestingActivity;
+import com.wingtech.diagnostic.activity.SIMCardTestingActivity;
 import com.wingtech.diagnostic.activity.TouchTestActivity;
+import com.wingtech.diagnostic.activity.VibratorTestingActivity;
 import com.wingtech.diagnostic.activity.WiFiTestingActivity;
 import com.wingtech.diagnostic.listener.OnTitleChangedListener;
 
@@ -21,6 +25,12 @@ import static com.wingtech.diagnostic.util.Constants.BATTERY_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.BLUETOOTH_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.E_COMPASS_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.GYROSCOPE_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.G_SENSOR_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.MULTI_TOUCH_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.SDCARD_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.SIM2_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.SIMCARD_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.VIBRATOR_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.WIFI_REQUEST_CODE;
 
 /**
@@ -72,6 +82,12 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
             case E_COMPASS_REQUEST_CODE:
             case GYROSCOPE_REQUEST_CODE:
             case WIFI_REQUEST_CODE:
+            case SDCARD_REQUEST_CODE:
+            case SIMCARD_REQUEST_CODE:
+            case SIM2_REQUEST_CODE:
+            case G_SENSOR_REQUEST_CODE:
+            case MULTI_TOUCH_REQUEST_CODE:
+            case VIBRATOR_REQUEST_CODE:
                 boolean result = data.getBooleanExtra("result", false);
                 mTestResultField.setVisibility(View.VISIBLE);
                 if (result) {
@@ -90,14 +106,15 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
     public void onClick(View v) {
         switch (mTitle) {
             case "G-Sensor Test":
-                startActivity(new Intent(mActivity, GSensorTestActivity.class));
+                Intent i = new Intent(mActivity, GSensorTestActivity.class);
+                startActivityForResult(i, G_SENSOR_REQUEST_CODE);
                 break;
             case "Touch Test":
                 startActivity(new Intent(mActivity, TouchTestActivity.class));
                 break;
             case "MainCam Test":
                 int camId = 0;
-                Intent i = new Intent(mActivity, CameraTestActivity.class);
+                i = new Intent(mActivity, CameraTestActivity.class);
                 i.putExtra("camId", camId);
                 startActivity(i);
                 break;
@@ -132,6 +149,31 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 i = new Intent(mActivity, GyroscopeTestingActivity.class);
                 i.putExtra("title", mTitle);
                 startActivityForResult(i, GYROSCOPE_REQUEST_CODE);
+                break;
+            case "SD Card Test":
+                i = new Intent(mActivity, SDCardTestingActivity.class);
+                i.putExtra("title", mTitle);
+                startActivityForResult(i, SDCARD_REQUEST_CODE);
+                break;
+            case "SIM Card Test":
+                i = new Intent(mActivity, SIMCardTestingActivity.class);
+                i.putExtra("title", mTitle);
+                i.putExtra("index", 1);
+                startActivityForResult(i, SIMCARD_REQUEST_CODE);
+                break;
+            case "SIM2 Test":
+                i = new Intent(mActivity, SIMCardTestingActivity.class);
+                i.putExtra("title", mTitle);
+                i.putExtra("index", 2);
+                startActivityForResult(i, SIM2_REQUEST_CODE);
+                break;
+            case "MultiTouch Test":
+                i = new Intent(mActivity, MultiTouchTestingActivity.class);
+                startActivityForResult(i, MULTI_TOUCH_REQUEST_CODE);
+                break;
+            case "Vibrator Test":
+                i = new Intent(mActivity, VibratorTestingActivity.class);
+                startActivityForResult(i, VIBRATOR_REQUEST_CODE);
                 break;
         }
     }

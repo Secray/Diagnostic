@@ -17,11 +17,12 @@ public abstract class TestingActivity extends BaseActivity {
     protected boolean mResult;
     protected TextView mTxtTitle;
     protected String mTitle;
+    protected int mRequestCode;
 
     protected void sendResult() {
         Intent intent = new Intent(this, SingleTestActivity.class);
         intent.putExtra("result", mResult);
-        setResult(BLUETOOTH_REQUEST_CODE, intent);
+        setResult(mRequestCode, intent);
         finish();
     }
 

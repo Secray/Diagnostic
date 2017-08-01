@@ -13,6 +13,7 @@ import com.wingtech.diagnostic.util.Log;
 
 import java.util.List;
 
+import static com.wingtech.diagnostic.util.Constants.WIFI_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.WIFI_STATE_CHANGED;
 
 /**
@@ -28,6 +29,7 @@ public class WiFiTestingActivity extends TestingActivity {
 
     @Override
     protected void onWork() {
+        mRequestCode = WIFI_REQUEST_CODE;
         mWiFiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         IntentFilter filter = new IntentFilter();
         filter.addAction(WIFI_STATE_CHANGED);

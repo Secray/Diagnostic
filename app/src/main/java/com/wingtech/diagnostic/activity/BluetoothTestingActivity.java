@@ -12,6 +12,7 @@ import com.wingtech.diagnostic.util.Log;
 import static com.wingtech.diagnostic.util.Constants.BLUETOOTH_DEVICE_FOUND;
 import static com.wingtech.diagnostic.util.Constants.BLUETOOTH_DISCOVERY_FINISHED;
 import static com.wingtech.diagnostic.util.Constants.BLUETOOTH_DISCOVERY_STARTED;
+import static com.wingtech.diagnostic.util.Constants.BLUETOOTH_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.BLUETOOTH_STATE_CHANGED;
 
 /**
@@ -76,6 +77,7 @@ public class BluetoothTestingActivity extends TestingActivity {
     @Override
     protected void onWork() {
         super.onWork();
+        mRequestCode = BLUETOOTH_REQUEST_CODE;
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(BLUETOOTH_STATE_CHANGED);
         intentFilter.addAction(BLUETOOTH_DISCOVERY_STARTED);

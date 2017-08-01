@@ -17,4 +17,10 @@ public class Constants {
     public static final int BATTERY_REQUEST_CODE = 2;
     public static final int E_COMPASS_REQUEST_CODE = 3;
     public static final int GYROSCOPE_REQUEST_CODE = 4;
+    public static final int SDCARD_REQUEST_CODE = 5;
+    public static final int SIMCARD_REQUEST_CODE = 6;
+    public static final int SIM2_REQUEST_CODE = 7;
+    public static final int G_SENSOR_REQUEST_CODE = 8;
+    public static final int MULTI_TOUCH_REQUEST_CODE = 9;
+    public static final int VIBRATOR_REQUEST_CODE = 10;
 }

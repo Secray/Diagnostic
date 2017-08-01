@@ -4,26 +4,30 @@
     android:layout_height="match_parent"
     android:background="@color/main_bg_color">
 
-    <com.wingtech.diagnostic.widget.GSensorView
-        android:id="@+id/gsensor_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/gsensor_fail"
-         />
+    <FrameLayout
+        android:id="@+id/touch_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.wingtech.diagnostic.widget.MultiTouchView
+            android:id="@+id/multi_touch_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
 
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/gsensor_fail"
+        android:id="@+id/touch_fail_btn"
         android:textAllCaps="false"
         android:layout_width="match_parent"
         android:layout_height="@dimen/test_action_button_height"
         android:textColor="@android:color/white"
         android:background="@drawable/ripple_test_fail_btn_bg"
         android:text="@string/test_fail_btn"
-        android:layout_marginLeft="@dimen/fail_btn_margin_left_right"
-        android:layout_marginRight="@dimen/fail_btn_margin_left_right"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_marginLeft="@dimen/fail_btn_margin_left_right"
+        android:layout_marginRight="@dimen/fail_btn_margin_left_right"
         android:layout_marginBottom="@dimen/fail_btn_margin_bottom"
         android:layout_marginTop="@dimen/fail_btn_margin_top" />
 </RelativeLayout>
