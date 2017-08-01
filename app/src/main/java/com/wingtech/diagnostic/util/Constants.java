@@ -23,4 +23,17 @@ public class Constants {
     public static final int G_SENSOR_REQUEST_CODE = 8;
     public static final int MULTI_TOUCH_REQUEST_CODE = 9;
     public static final int VIBRATOR_REQUEST_CODE = 10;
+    public static final int PROXIMITY_REQUEST_CODE = 0;
+    public static final int DISPLAY_REQUEST_CODE = 0;
+    public static final int HEADSETKEY_REQUEST_CODE = 0;
+    public static final int LIGHTSENSOR_REQUEST_CODE = 0;
+    public static final int NFC_REQUEST_CODE = 0;
+    public static final int WIRECHARGKEY_REQUEST_CODE = 0;
+    public static final int CAMERA_REQUEST_CODE = 0;
+    public static final int CAMERAFLASH_REQUEST_CODE = 0;
+    public static final int RECIEVER_REQUEST_CODE = 0;
+    public static final int HEADSET_REQUEST_CODE = 0;
+    public static final int SPEAK_REQUEST_CODE = 0;
+
+
 }

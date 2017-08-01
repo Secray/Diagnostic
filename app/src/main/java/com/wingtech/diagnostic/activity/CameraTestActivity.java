@@ -1,184 +1,314 @@
 package com.wingtech.diagnostic.activity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
+import android.net.Uri;
+import android.os.Environment;
+import android.os.StatFs;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageButton;
+import android.support.v7.widget.AppCompatImageView;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 
 import com.wingtech.diagnostic.R;
+import com.wingtech.diagnostic.listener.OnTitleChangedListener;
+import com.wingtech.diagnostic.util.Log;
+import com.wingtech.diagnostic.widget.CameraPreview;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Locale;
+
+import static com.wingtech.diagnostic.util.Constants.CAMERA_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.HEADSETKEY_REQUEST_CODE;
 
 /**
- * @author xiekui
+ * @author gaoweili
  * @date 2017-7-24
  */
 
-public class CameraTestActivity extends BaseActivity implements SurfaceHolder.Callback {
-    SurfaceView mSurface;
-    AppCompatImageButton mCapture;
-    ImageView mPreview;
-    View mBtnGroup;
+public class CameraTestActivity extends BaseActivity {
+    private AppCompatImageButton mCapture = null;
+    private AppCompatImageView mPng = null;
+    private AppCompatButton mPass = null;
+    private AppCompatButton mFail = null;
 
-    private SurfaceHolder mHolder;
-    private Camera mCamera;
-    int mCameraId;
+    public static final String TAG = "CameraActivity";
+    //private Camera mCamera;
+    private CameraPreview mPreview  = null;
+    private FrameLayout mCameralayout  = null;
+    private int mCameraId = 0;
+    public static int cancelPreviewType = 0;
+    private Camera.AutoFocusCallback mAutoFocusCallback = null;
+    private ToneGenerator tone;
+    private android.hardware.Camera mCamera;
+    //HAL1 version code
+    private static final int CAMERA_HAL_API_VERSION_1_0 = 0x100;
+
+    private int cWidth = 0;
+    private int cHeight = 0;
+    private int tagResult = 0;
+    private int tag = 0;
 
     @Override
     protected int getLayoutResId() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         return R.layout.content_test_camera;
     }
 
     @Override
     protected void initViews() {
-        mSurface = (SurfaceView) findViewById(R.id.surface);
         mCapture = (AppCompatImageButton) findViewById(R.id.capture);
-        mPreview = (ImageView) findViewById(R.id.preview);
-        mBtnGroup = findViewById(R.id.judgment);
-        mCapture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mCamera.takePicture(null, null, new TakePictureCallback());
-            }
-        });
+        mPng = (AppCompatImageView) findViewById(R.id.png);
+        mPass = (AppCompatButton) findViewById(R.id.pass);
+        mFail = (AppCompatButton) findViewById(R.id.fail);
+
     }
 
     @Override
     protected void initToolbar() {
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-    }
-
-    @Override
-    protected void onWork() {
-        mHolder = mSurface.getHolder();
-        mHolder.setFixedSize(176, 155);
-        mHolder.setKeepScreenOn(true);
-        mHolder.addCallback(this);
         mCameraId = getIntent().getIntExtra("camId", 0);
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        prepareCamera();
+    protected void onWork() {
+        if (!checkCameraHardware(CameraTestActivity.this)) {
+            Toast.makeText(CameraTestActivity.this, "相机不支持", Toast.LENGTH_SHORT)
+                    .show();
+        } else {
+            openCamera(mCameraId);
+            setCameraDisplayOrientation(CameraTestActivity.this, mCameraId, mCamera);
+
+        }
+
+        mCapture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //mCamera.autoFocus(null);
+                mAutoFocusCallback = new Camera.AutoFocusCallback() {
+
+                    public void onAutoFocus(boolean success, Camera camera) {
+                        // TODO Auto-generated method stub
+                        if(success){
+                            //mCamera.setOneShotPreviewCallback(null);
+
+                        }
+                    }
+                };
+                mCamera.autoFocus(mAutoFocusCallback);
+                mCamera.takePicture(shutterCallback, null, jpegCallback);
+                mCapture.setVisibility(View.GONE);
+                mPass.setVisibility(View.VISIBLE);
+                mFail.setVisibility(View.VISIBLE);
+            }
+        });
+
+        mPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendResult(true);
+            }
+        });
+        mFail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendResult(false);
+            }
+        });
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        destroyCamera();
+    public void onPictureTakenThis(byte[] data) {
+        File images=new File("/sdcard");
+        FileOutputStream out=null;
+        if(!images.exists())
+            images.mkdirs();
+        String filename =  "asus_diagnostic_btn_take_photo.png";
+        File image=new File(images,filename);
+        try {
+            out=new FileOutputStream(image);
+            out.write(data);
+            out.flush();
+            out.close();
+
+            File png=new File("/sdcard/asus_diagnostic_btn_take_photo");
+            if(png.exists()){
+                mPng.setVisibility(View.VISIBLE);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "保存照片失败！", Toast.LENGTH_LONG).show();
+        }
+        finally
+        {
+           // camera.startPreview();
+
+        }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mHolder.removeCallback(this);
-    }
+    private Camera.PictureCallback jpegCallback = new Camera.PictureCallback(){
+        @Override
+        public void onPictureTaken(byte[] data, Camera camera) {
+            Log.i(TAG,"jpegCallback");
+            // TODO Auto-generated method stub
+            Camera.Parameters ps = camera.getParameters();
+            if(ps.getPictureFormat() == PixelFormat.JPEG){
+                //存储拍照获得的图片
+                onPictureTakenThis(data);
 
-    @Override
-    public void surfaceCreated(SurfaceHolder holder) {
+            }
+        }
+    };
+
+    private Camera.ShutterCallback shutterCallback = new Camera.ShutterCallback(){
+
+        @Override
+        public void onShutter() {
+            Log.i(TAG,"shutterCallback");
+            // TODO Auto-generated method stub
+            if(tone == null)
+                //发出提示用户的声音
+                tone = new ToneGenerator(AudioManager.STREAM_MUSIC,ToneGenerator.MAX_VOLUME);
+            tone.startTone(ToneGenerator.TONE_PROP_BEEP2);
+        }
+    };
+
+
+
+    public void releaseCamera() {
+        Log.v(TAG, "start releaseCamera");
         if (mCamera != null) {
-            try {
-                mCamera.setPreviewDisplay(mHolder);
-                Camera.Parameters params = mCamera.getParameters();
-                Camera.Size largestSize = getBestSupportedSize(params
-                        .getSupportedPreviewSizes());
-                params.setPreviewSize(largestSize.width, largestSize.height);
-                params.setPictureSize(largestSize.width, largestSize.height);
-                params.setPictureFormat(PixelFormat.JPEG);
-                params.setJpegQuality(80);
-                params.setPreviewFrameRate(5);
-                params.setRotation(90);
-                params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-                mCamera.setDisplayOrientation(90);
-                mCamera.startPreview();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
-    }
-
-    private Camera.Size getBestSupportedSize(List<Camera.Size> sizes) {
-        Camera.Size largestSize = sizes.get(0);
-        int largestArea = sizes.get(0).height * sizes.get(0).width;
-        for (Camera.Size s : sizes) {
-            int area = s.width * s.height;
-            if (area > largestArea) {
-                largestArea = area;
-                largestSize = s;
-            }
-        }
-        return largestSize;
-    }
-
-    @Override
-    public void surfaceDestroyed(SurfaceHolder holder) {
-        if (mCamera != null) {
-            mCamera.stopPreview();
-            mCamera.release();
-            mCamera = null;
-        }
-    }
-
-    private void prepareCamera() {
-        if (mCamera == null) {
-            int num = Camera.getNumberOfCameras();
-            int defaultCameraId = 0;
-            int frontCameraId = 0;
-            Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
-            for (int i = 0; i < num; i++) {
-                Camera.getCameraInfo(i, cameraInfo);
-                if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {
-                    defaultCameraId = i;
-                }
-
-                if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
-                    frontCameraId = i;
-                }
-            }
-            mCamera = Camera.open(mCameraId == 0 ? defaultCameraId : frontCameraId);
-        }
-    }
-
-    private void destroyCamera() {
-        if (null != mCamera) {
             mCamera.setPreviewCallback(null);
             mCamera.stopPreview();
             mCamera.release();
             mCamera = null;
         }
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 
-    private final class TakePictureCallback implements Camera.PictureCallback {
+    @Override
+    protected void onPause() {
+        super.onPause();
+        releaseCamera();
+        Log.v(TAG, "onPause finish activity");
+        finish();
+    }
 
-        @Override
-        public void onPictureTaken(byte[] data, Camera camera) {
-            if (data != null && data.length > 0) {
-                Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-                Matrix matrix = new Matrix();
-                matrix.postRotate(90);
-                Bitmap newBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-                mPreview.setVisibility(View.VISIBLE);
-                mSurface.setVisibility(View.GONE);
-                mCapture.setVisibility(View.GONE);
-                mBtnGroup.setVisibility(View.VISIBLE);
-                mPreview.setImageBitmap(newBitmap);
-            }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    // 判断相机是否支持
+    private boolean checkCameraHardware(Context context) {
+        if (context.getPackageManager().hasSystemFeature(
+                PackageManager.FEATURE_CAMERA)) {
+            return true;
+        } else {
+            return false;
         }
+    }
+
+    // 获取相机实例
+    public android.hardware.Camera getCameraInstance(int id) {
+        try {
+            Log.v(TAG, "getCameraInstance");
+            Method openMethod = Class.forName("android.hardware.Camera").getMethod(
+                    "openLegacy", int.class, int.class);
+            mCamera = (android.hardware.Camera) openMethod.invoke(
+                    null, id, CAMERA_HAL_API_VERSION_1_0);
+            Log.v(TAG, "getCameraInstance");
+        } catch (Exception e) {
+			/* Retry with open if openLegacy doesn't exist/fails */
+            Log.v(TAG, "openLegacy failed due to " + e.getMessage()
+                    + ", using open instead");
+
+            mCamera = android.hardware.Camera.open(id);
+
+        }
+        return mCamera;
+    }
+
+    // 开始预览相机
+    public void openCamera(int id) {
+        Log.v(TAG, "openCamera id = " + id);
+        if (mCamera == null) {
+            mCamera = getCameraInstance(id);
+
+            //add by gaoweili start
+            Camera.Parameters p = mCamera.getParameters();
+            List<Camera.Size> li = p.getSupportedPictureSizes();
+            for (int i = 0; i < li.size() ; i++){
+                tag = (li.get(i).width ) * (li.get(i).height);
+                Log.v(TAG, "li.get(i).width =" + li.get(i).width + "li.get(i).height =" + li.get(i).height);
+                if(tag > tagResult){
+                    tagResult = tag;
+                    cWidth = li.get(i).width;
+                    cHeight = li.get(i).height;
+                }
+            }
+            List<Camera.Size> lp = p.getSupportedPreviewSizes();
+            for (int i = 0; i < lp.size() ; i++){
+                Log.v(TAG, "cwWidth =" + lp.get(i).width + "cwHeight =" + lp.get(i).height);
+            }
+            Log.v(TAG, "cWidth =" + cWidth + "cHeight =" + cHeight);
+            p.setPictureSize(cWidth, cHeight);
+            p.setPreviewSize(1920,1080);
+            p.set("zsl","on");
+            //频闪问题，设置为50HZ
+           // p.set("zsl","Parameters.ANTIBANDING_50HZ = " + Camera.Parameters.ANTIBANDING_50HZ);
+            //p.setAntibanding(Camera.Parameters.ANTIBANDING_50HZ);
+            mCamera.setParameters(p);
+            //add by gaoweili end
+            mPreview = new CameraPreview(CameraTestActivity.this, mCamera);
+            mCameralayout = (FrameLayout) findViewById(R.id.camera_preview);
+            mCameralayout.addView(mPreview);
+            mCamera.startPreview();
+        }
+    }
+
+    public static void setCameraDisplayOrientation (BaseActivity activity, int cameraId, android.hardware.Camera camera) {
+        Log.v(TAG, "start setCameraDisplayOrientation" );
+        int result = 90;
+        camera.setDisplayOrientation(result);
+
+    }
+
+    private void sendResult(boolean mResult) {
+        Intent intent = new Intent(this, SingleTestActivity.class);
+        intent.putExtra("result", mResult);
+        setResult(CAMERA_REQUEST_CODE, intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        sendResult(false);
     }
 }

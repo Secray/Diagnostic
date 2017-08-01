@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/main_bg_color"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/dialog_txt"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center_vertical"
+        android:layout_centerInParent="true"
+        style="@style/AppTheme.About.Text.Title"
+        android:textColor="@color/test_testing_text_color"
+        android:text="@string/app_name" />
+
+
+</RelativeLayout>

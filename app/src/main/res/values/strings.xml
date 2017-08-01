@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- App name -->
     <string name="app_name">Self Diagnostic</string>
     <!-- BaseActivity -->
@@ -141,4 +141,46 @@
     <string name="touch">touch</string>
     <string name="camera_flash_description">Please check whether the camera flash light on or not and make a judge.</string>
     <string name="vibrator">Vibrator</string>
+
+    <!-- Keypad Activity-->
+    <string name="pad_up">Volume Up</string>
+    <string name="pad_dowm">Volume Down</string>
+    <string name="pad_home">Home</string>
+    <string name="pad_back">Back</string>
+    <string name="pad_recent">Recent</string>
+    <string name="pad_title">Please press <xliff:g id="btn">%s</xliff:g> button.</string>
+
+    <!-- Proximity Activity-->
+    <string name="proximity_title">Please move your hand over the top half of your phone.</string>
+    <string name="proximity_title_away">Please move your hand away from the top half of your phone.</string>
+    <string name="proximity_txt_near">Near</string>
+    <string name="proximity_txt_far">Away</string>
+
+    <!-- HeadsetKey Activity-->
+    <string name="headsetkey_title">Please press headset key.</string>
+    <string name="headsetkey_txt">Headset Key</string>
+    <!-- NFC Activity-->
+    <string name="nfc_title">If no NFC card found, please tap the fail button.</string>
+    <string name="nfc_txt">NFC card found</string>
+    <!-- WireCharg Activity-->
+    <string name="wirechargkey_title">If no charging, please tap the fail.</string>
+    <string name="wirechargkey_txt">Charging</string>
+
+    <!-- LightSensor Activity-->
+    <string name="lightsensor_title">Please move your phone close to a light</string>
+    <string name="lightsensor_title_weak">Please move your phone away from light and cover the top half of it using a hand</string>
+    <string name="lightsensor_txt_strong">Sensor strong light(ADC>300)</string>
+    <string name="lightsensor_txt_weak">Sensor weak light(ADC&lt;5)</string>
+
+    <!-- Diaplay Activity-->
+    <string name="dialog_title">Test finished</string>
+    <string name="dialog_context"><xliff:g id="btn">%s</xliff:g> test finished. Please make a judgement!</string>
+    <string name="headset_context_left">Playing by the left channel...</string>
+    <string name="headset_context_right">Playing by the right channel...</string>
+    <string name="headset_context_dialog_title">No headset found</string>
+    <string name="speak_context_dialog_title">headset found</string>
+    <string name="headset_context_dialog_conteent">Please plug in the headset and continue to test again</string>
+    <string name="speak_context_dialog_conteent">Please remove the headset and continue to test again</string>
+    <string name="headset_context_dialog_btn">OK</string>
+
 </resources>

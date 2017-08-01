@@ -9,7 +9,9 @@ import android.widget.TextView;
 import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.activity.BatteryTestingActivity;
 import com.wingtech.diagnostic.activity.BluetoothTestingActivity;
+import com.wingtech.diagnostic.activity.CameraFlashActivity;
 import com.wingtech.diagnostic.activity.CameraTestActivity;
+import com.wingtech.diagnostic.activity.DisplayActivity;
 import com.wingtech.diagnostic.activity.GSensorTestActivity;
 import com.wingtech.diagnostic.activity.GyroscopeTestingActivity;
 import com.wingtech.diagnostic.activity.MagneticTestingActivity;
@@ -19,6 +21,17 @@ import com.wingtech.diagnostic.activity.SIMCardTestingActivity;
 import com.wingtech.diagnostic.activity.TouchTestActivity;
 import com.wingtech.diagnostic.activity.VibratorTestingActivity;
 import com.wingtech.diagnostic.activity.WiFiTestingActivity;
+import com.wingtech.diagnostic.activity.HeadsetActivity;
+import com.wingtech.diagnostic.activity.HeadsetKeyActivity;
+import com.wingtech.diagnostic.activity.KeypadActivity;
+import com.wingtech.diagnostic.activity.LightSensorActivity;
+import com.wingtech.diagnostic.activity.NfcActivity;
+import com.wingtech.diagnostic.activity.ProximityActivity;
+import com.wingtech.diagnostic.activity.RecieverActivity;
+import com.wingtech.diagnostic.activity.SpeakerActivity;
+import com.wingtech.diagnostic.activity.TestingActivity;
+import com.wingtech.diagnostic.activity.TouchTestActivity;
+import com.wingtech.diagnostic.activity.WireChargActivity;
 import com.wingtech.diagnostic.listener.OnTitleChangedListener;
 
 import static com.wingtech.diagnostic.util.Constants.BATTERY_REQUEST_CODE;
@@ -32,6 +45,17 @@ import static com.wingtech.diagnostic.util.Constants.SIM2_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.SIMCARD_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.VIBRATOR_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.WIFI_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.CAMERAFLASH_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.CAMERA_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.DISPLAY_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.HEADSETKEY_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.HEADSET_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.LIGHTSENSOR_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.NFC_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.PROXIMITY_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.RECIEVER_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.SPEAK_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.WIRECHARGKEY_REQUEST_CODE;
 
 /**
  * @author xiekui
@@ -122,7 +146,65 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 camId = 1;
                 i = new Intent(mActivity, CameraTestActivity.class);
                 i.putExtra("camId", camId);
-                startActivity(i);
+                startActivityForResult(i, CAMERA_REQUEST_CODE);
+                break;
+            case "Camera Flash Test":
+                camId = 1;
+                i = new Intent(mActivity, CameraFlashActivity.class);
+                startActivityForResult(i, CAMERAFLASH_REQUEST_CODE);
+                break;
+            case "Display Test":
+                i = new Intent(mActivity, DisplayActivity.class);
+                i.putExtra("title", mListener.getChangedTitle());
+                i.putExtra("title_dialog","Display");
+                startActivityForResult(i, DISPLAY_REQUEST_CODE);
+                break;
+            case "Proximity Test":
+                i = new Intent(mActivity, ProximityActivity.class);
+                i.putExtra("title", mListener.getChangedTitle());
+                startActivityForResult(i, PROXIMITY_REQUEST_CODE);
+                break;
+            case "HeadsetKey Test":
+                i = new Intent(mActivity, HeadsetKeyActivity.class);
+                i.putExtra("title", mListener.getChangedTitle());
+                startActivityForResult(i, HEADSETKEY_REQUEST_CODE);
+                break;
+            case "LightSensor Test":
+                i = new Intent(mActivity, LightSensorActivity.class);
+                i.putExtra("title", mListener.getChangedTitle());
+                startActivityForResult(i, LIGHTSENSOR_REQUEST_CODE);
+                break;
+            case "Keypad Test":
+                startActivity(new Intent(mActivity, KeypadActivity.class));
+                break;
+            case "NFC Test":
+                i = new Intent(mActivity, NfcActivity.class);
+                i.putExtra("title", mListener.getChangedTitle());
+                startActivityForResult(i, NFC_REQUEST_CODE);
+                break;
+            case "Wireless Charging Test":
+                i = new Intent(mActivity, WireChargActivity.class);
+                i.putExtra("title", mListener.getChangedTitle());
+                startActivityForResult(i, WIRECHARGKEY_REQUEST_CODE);
+                break;
+            case "Receiver Test":
+                i = new Intent(mActivity, RecieverActivity.class);
+                i.putExtra("title", mListener.getChangedTitle());
+                i.putExtra("title_dialog","Receiver");
+                i.putExtra("context","Playing");
+                startActivityForResult(i, RECIEVER_REQUEST_CODE);
+                break;
+            case "Headset Test":
+                i = new Intent(mActivity, HeadsetActivity.class);
+                i.putExtra("title", mListener.getChangedTitle());
+                i.putExtra("title_dialog","Headset");
+                startActivityForResult(i, HEADSET_REQUEST_CODE);
+                break;
+            case "Speaker Test":
+                i = new Intent(mActivity, SpeakerActivity.class);
+                i.putExtra("title", mListener.getChangedTitle());
+                i.putExtra("title_dialog","Speaker");
+                startActivityForResult(i, SPEAK_REQUEST_CODE);
                 break;
             case "Bluetooth Test":
                 i = new Intent(mActivity, BluetoothTestingActivity.class);

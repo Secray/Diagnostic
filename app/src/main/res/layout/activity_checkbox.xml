@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/main_bg_color"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/touch_test_title_height"
+        style="@style/AppTheme.About.Item">
+        <TextView
+            android:id="@+id/activity_checkbox_title"
+            style="@style/AppTheme.About.Text.Title"
+            android:text="@string/about_legal_info"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="24dp"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+            <CheckBox
+                android:id="@+id/box_txt_1"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/txt_box_1"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                style="@style/AppTheme.About.Text.Title"
+                android:text="@string/about_legal_info"
+                android:visibility="gone"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal" >
+            <CheckBox
+                android:id="@+id/box_txt_2"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/txt_box_2"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                style="@style/AppTheme.About.Text.Title"
+                android:text="@string/about_legal_info"
+                android:visibility="gone"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal" >
+            <CheckBox
+                android:id="@+id/box_txt_3"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/txt_box_3"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                style="@style/AppTheme.About.Text.Title"
+                android:text="@string/about_legal_info"
+                android:visibility="gone"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal" >
+            <CheckBox
+                android:id="@+id/box_txt_4"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/txt_box_4"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                style="@style/AppTheme.About.Text.Title"
+                android:text="@string/about_legal_info"
+                android:visibility="gone"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal" >
+            <CheckBox
+                android:id="@+id/box_txt_5"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/txt_box_5"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                style="@style/AppTheme.About.Text.Title"
+                android:text="@string/about_legal_info"
+                android:visibility="gone"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/touch_fail_btn"
+        android:textAllCaps="false"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/test_action_button_height"
+        android:textColor="@android:color/white"
+        android:background="@drawable/ripple_test_fail_btn_bg"
+        android:text="@string/test_fail_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/fail_btn_margin_left_right"
+        android:layout_marginRight="@dimen/fail_btn_margin_left_right"
+        android:layout_marginBottom="@dimen/fail_btn_margin_bottom"
+        android:layout_marginTop="@dimen/fail_btn_margin_top" />
+
+</LinearLayout>

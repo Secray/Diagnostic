@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:gravity="center_vertical"
+        android:text="@string/dialog_title"
+        android:textSize="18sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/main_text_color"/>
+
+    <TextView
+        android:id="@+id/dialog_context"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="30dp"
+        android:text="@string/dialog_context"
+        android:textSize="15sp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/main_text_color"/>
+    <LinearLayout
+        android:id="@+id/result"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/fail"
+            android:layout_width="0dp"
+            android:text="@string/test_fail_btn"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:textColor="@color/main_bottom_button_text_color_pressed"
+            android:layout_weight="1"/>
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/main_text_color"/>
+        <Button
+            android:id="@+id/pass"
+            android:layout_width="0dp"
+            android:background="@null"
+            android:textColor="@color/main_bottom_button_text_color_pressed"
+            android:text="@string/test_pass_btn"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/ok"
+        android:layout_width="match_parent"
+        android:background="@null"
+        android:visibility="gone"
+        android:textColor="@color/main_bottom_button_text_color_pressed"
+        android:text="@string/headset_context_dialog_btn"
+        android:layout_height="40dp"
+        />
+</LinearLayout>
