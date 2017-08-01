@@ -9,11 +9,13 @@ import android.widget.TextView;
 import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.activity.BatteryTestingActivity;
 import com.wingtech.diagnostic.activity.BluetoothTestingActivity;
+import com.wingtech.diagnostic.activity.BoardMicActivity;
 import com.wingtech.diagnostic.activity.CameraFlashActivity;
 import com.wingtech.diagnostic.activity.CameraTestActivity;
 import com.wingtech.diagnostic.activity.DisplayActivity;
 import com.wingtech.diagnostic.activity.GSensorTestActivity;
 import com.wingtech.diagnostic.activity.GyroscopeTestingActivity;
+import com.wingtech.diagnostic.activity.HeadsetMicActivity;
 import com.wingtech.diagnostic.activity.MagneticTestingActivity;
 import com.wingtech.diagnostic.activity.MultiTouchTestingActivity;
 import com.wingtech.diagnostic.activity.SDCardTestingActivity;
@@ -39,10 +41,13 @@ import static com.wingtech.diagnostic.util.Constants.BLUETOOTH_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.E_COMPASS_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.GYROSCOPE_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.G_SENSOR_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.HEADSETMIC_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.MIC_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.MULTI_TOUCH_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.SDCARD_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.SIM2_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.SIMCARD_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.VGACAMERA_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.VIBRATOR_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.WIFI_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.CAMERAFLASH_REQUEST_CODE;
@@ -140,16 +145,15 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 int camId = 0;
                 i = new Intent(mActivity, CameraTestActivity.class);
                 i.putExtra("camId", camId);
-                startActivity(i);
+                startActivityForResult(i, CAMERA_REQUEST_CODE);
                 break;
             case "VGACam Test":
                 camId = 1;
                 i = new Intent(mActivity, CameraTestActivity.class);
                 i.putExtra("camId", camId);
-                startActivityForResult(i, CAMERA_REQUEST_CODE);
+                startActivityForResult(i, VGACAMERA_REQUEST_CODE);
                 break;
             case "Camera Flash Test":
-                camId = 1;
                 i = new Intent(mActivity, CameraFlashActivity.class);
                 startActivityForResult(i, CAMERAFLASH_REQUEST_CODE);
                 break;
@@ -205,6 +209,18 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 i.putExtra("title", mListener.getChangedTitle());
                 i.putExtra("title_dialog","Speaker");
                 startActivityForResult(i, SPEAK_REQUEST_CODE);
+                break;
+            case "BoardMic Test":
+                i = new Intent(mActivity, BoardMicActivity.class);
+                i.putExtra("title", mListener.getChangedTitle());
+                i.putExtra("title_dialog","BoardMic");
+                startActivityForResult(i, MIC_REQUEST_CODE);
+                break;
+            case "HeadsetMic Test":
+                i = new Intent(mActivity, HeadsetMicActivity.class);
+                i.putExtra("title", mListener.getChangedTitle());
+                i.putExtra("title_dialog","HeadsetMic");
+                startActivityForResult(i, HEADSETMIC_REQUEST_CODE);
                 break;
             case "Bluetooth Test":
                 i = new Intent(mActivity, BluetoothTestingActivity.class);

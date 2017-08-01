@@ -191,10 +191,10 @@ public class SpeakerActivity extends BaseActivity {
                 {
                     //plug out
                     isPlug = false;
-                    showTheDialog(false);
                     if(player != null){
                        player.release();
                     }
+                    showTheDialog(false);
 
                 }
                 else if (intent.getIntExtra("state", 0) == 0) {

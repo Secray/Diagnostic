@@ -30,10 +30,13 @@ public class Constants {
     public static final int NFC_REQUEST_CODE = 0;
     public static final int WIRECHARGKEY_REQUEST_CODE = 0;
     public static final int CAMERA_REQUEST_CODE = 0;
+    public static final int VGACAMERA_REQUEST_CODE = 0;
     public static final int CAMERAFLASH_REQUEST_CODE = 0;
     public static final int RECIEVER_REQUEST_CODE = 0;
     public static final int HEADSET_REQUEST_CODE = 0;
     public static final int SPEAK_REQUEST_CODE = 0;
+    public static final int MIC_REQUEST_CODE = 0;
+    public static final int HEADSETMIC_REQUEST_CODE = 0;
 
 
 }

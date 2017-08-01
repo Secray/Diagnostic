@@ -4,15 +4,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.AssetFileDescriptor;
-import android.content.res.Resources;
-import android.media.AudioFormat;
-import android.media.AudioManager;
-import android.media.AudioTrack;
 import android.media.MediaPlayer;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
+import android.media.MediaRecorder;
+import android.os.CountDownTimer;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,27 +18,27 @@ import android.widget.TextView;
 import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.util.Log;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
-import static com.wingtech.diagnostic.util.Constants.HEADSET_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.HEADSETMIC_REQUEST_CODE;
 
 
 /**
  * Created by gaoweili on 17-7-28.
  */
 
-public class HeadsetActivity extends BaseActivity {
+public class HeadsetMicActivity extends BaseActivity {
 
     private String mContentDialog;
-    private MediaPlayer player = null;
-    private AudioManager localAudioManager = null;
-    public static final String TAG = "HeadsetActivity";
+    public static final String TAG = "HeadsetMicActivity";
     private TextView mTxt = null;
     private boolean isPlug = false;
     private HeadsetPlugReceiver mHPReceiver;
     AlertDialog dlg;
+
+    private String path = null;
+    CountDownTimer mTimer;
+    CountDownTimer mtimer;
     @Override
     protected int getLayoutResId() {
         return R.layout.content_dialog_test;
@@ -53,6 +48,7 @@ public class HeadsetActivity extends BaseActivity {
     protected void initViews() {
         mTxt = (TextView) findViewById(R.id.dialog_txt);
         mContentDialog = getIntent().getStringExtra("title_dialog");
+        path = Environment.getExternalStorageDirectory().getAbsolutePath()+"/heassettest.pcm";
     }
 
     @Override
@@ -72,13 +68,6 @@ public class HeadsetActivity extends BaseActivity {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        prepareExit();
-        sendResult(false);
-    }
-
-    @Override
     protected void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
@@ -92,7 +81,7 @@ public class HeadsetActivity extends BaseActivity {
     private void sendResult(boolean mResult) {
         Intent intent = new Intent(this, SingleTestActivity.class);
         intent.putExtra("result", mResult);
-        setResult(HEADSET_REQUEST_CODE, intent);
+        setResult(HEADSETMIC_REQUEST_CODE, intent);
         finish();
     }
 
@@ -153,37 +142,23 @@ public class HeadsetActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        prepareExit();
         sendResult(false);
     }
 
-    private void prepareExit() {
-
-        if(player != null) {
-            player.release();
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mTimer != null){
+            mTimer.cancel();
+            mTimer=null;
         }
-        try{
-            unregisterReceiver(mHPReceiver);
-        }catch ( Exception e ) {
-            Log.e(TAG, "unregister failed "+ e );
+        if (mtimer != null){
+            mtimer.cancel();
+            mtimer=null;
         }
-    }
-
-    private void playMelody(Resources resources, int res) {
-        AssetFileDescriptor afd = resources.openRawResourceFd(res);
-        try {
-
-            if (afd != null) {
-                player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),
-                        afd.getLength());
-                afd.close();
-            }
-            //player.setLooping(true);
-            player.prepare();
-            player.start();
-        } catch (IOException e) {
-            Log.e(TAG,"can't play melody cause:"+e);
-        }
+        stopPlayer();
+        stopRecorder();
+        sendResult(false);
     }
 
     private class HeadsetPlugReceiver extends BroadcastReceiver
@@ -198,9 +173,6 @@ public class HeadsetActivity extends BaseActivity {
                 {
                     //plug out
                     isPlug = false;
-                    if(player != null){
-                        player.release();
-                    }
                     showTheDialog(false);
                 }
                 else if (intent.getIntExtra("state", 0) == 1) {
@@ -208,47 +180,101 @@ public class HeadsetActivity extends BaseActivity {
                         dlg.dismiss();
                     }
                     isPlug = true;
-                    mTxt.setText(R.string.headset_context_left);
-                    localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-                    player = new MediaPlayer();
-                    player.reset();
-                    localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,15,0);
-                    localAudioManager.setStreamVolume(AudioManager.STREAM_RING,15,0);
-                    if(localAudioManager.isSpeakerphoneOn()){
-                        localAudioManager.setSpeakerphoneOn(false);
-                    }
-                    player.setVolume(1.0f,0.000f);/* ajayet invert to match headset */
-                    playMelody(getResources(), R.raw.bootaudio);
-                    player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    mTxt.setText(R.string.mic_context_dialog_record);
+                    startRecorder(path);
+                    mTimer = new CountDownTimer(5000, 1000) {
+
                         @Override
-                        public void onCompletion(MediaPlayer mp) {
-                            if(isPlug){
-                                mTxt.setText(R.string.headset_context_right);
-                                localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-                                player = new MediaPlayer();
-                                player.reset();
-                                localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,15,0);
-                                localAudioManager.setStreamVolume(AudioManager.STREAM_RING,15,0);
-                                if(localAudioManager.isSpeakerphoneOn()){
-                                    localAudioManager.setSpeakerphoneOn(false);
-                                }
-                                player.setVolume(0.000f,1.0f);/* ajayet invert to match headset */
-                                playMelody(getResources(), R.raw.bootaudio);
-                                player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        public void onTick(long millisUntilFinished) {
+                            // TODO Auto-generated method stub
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            mTxt.setText(R.string.mic_context_dialog_play);
+                            stopRecorder();
+                            if(isPlug) {
+                                startPlayer(path);
+                                mtimer = new CountDownTimer(5000, 1000) {
+
                                     @Override
-                                    public void onCompletion(MediaPlayer mp) {
-                                        if (isPlug) {
+                                    public void onTick(long millisUntilFinished) {
+                                        // TODO Auto-generated method stub
+                                    }
+
+                                    @Override
+                                    public void onFinish() {
+                                        stopPlayer();
+                                        if(isPlug){
                                             showTheDialog(true);
                                         }
                                     }
-                                });
+                                }.start();
                             }
                         }
-                    });
+                    }.start();
+
                 }
 
             }
         }
+    }
+
+    private MediaRecorder mRecorder;
+    public boolean startRecorder(String path) {
+        //设置音源为Micphone
+
+        mRecorder = new MediaRecorder();
+        mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        //设置封装格式
+        mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        mRecorder.setOutputFile(path);
+        //设置编码格式
+        mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+
+        try {
+            mRecorder.prepare();
+        } catch (IOException e) {
+            Log.e(TAG, "prepare() failed");
+        }
+        //录音
+        mRecorder.start();
+        return false;
+    }
+
+    public boolean stopRecorder() {
+        if (mRecorder != null) {
+            mRecorder.stop();
+            mRecorder.release();
+            mRecorder = null;
+        }
+        return false;
+
+    }
+
+    private MediaPlayer mPlayer;
+    public boolean startPlayer(String path) {
+        try {
+            //设置要播放的文件
+            mPlayer = new MediaPlayer();
+            mPlayer.setDataSource(path);
+            mPlayer.prepare();
+            //播放
+            mPlayer.start();
+        }catch(Exception e){
+            Log.e(TAG, "prepare() failed");
+        }
+
+        return false;
+    }
+
+    public boolean stopPlayer() {
+        if (mPlayer != null) {
+            mPlayer.stop();
+            mPlayer.release();
+            mPlayer = null;
+        }
+        return false;
     }
 
 }

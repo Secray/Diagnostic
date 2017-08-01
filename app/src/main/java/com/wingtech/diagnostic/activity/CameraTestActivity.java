@@ -3,45 +3,31 @@ package com.wingtech.diagnostic.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
-import android.net.Uri;
-import android.os.Environment;
-import android.os.StatFs;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatImageView;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
 import com.wingtech.diagnostic.R;
-import com.wingtech.diagnostic.listener.OnTitleChangedListener;
 import com.wingtech.diagnostic.util.Log;
 import com.wingtech.diagnostic.widget.CameraPreview;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.List;
-import java.util.Locale;
 
 import static com.wingtech.diagnostic.util.Constants.CAMERA_REQUEST_CODE;
-import static com.wingtech.diagnostic.util.Constants.HEADSETKEY_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.VGACAMERA_REQUEST_CODE;
 
 /**
  * @author gaoweili
@@ -303,7 +289,11 @@ public class CameraTestActivity extends BaseActivity {
     private void sendResult(boolean mResult) {
         Intent intent = new Intent(this, SingleTestActivity.class);
         intent.putExtra("result", mResult);
-        setResult(CAMERA_REQUEST_CODE, intent);
+        if (mCameraId == 0){
+            setResult(CAMERA_REQUEST_CODE, intent);
+        }else if(mCameraId == 1){
+            setResult(VGACAMERA_REQUEST_CODE, intent);
+        }
         finish();
     }
 

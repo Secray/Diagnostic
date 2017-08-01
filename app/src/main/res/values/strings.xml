@@ -182,5 +182,7 @@
     <string name="headset_context_dialog_conteent">Please plug in the headset and continue to test again</string>
     <string name="speak_context_dialog_conteent">Please remove the headset and continue to test again</string>
     <string name="headset_context_dialog_btn">OK</string>
+    <string name="mic_context_dialog_record">Recording...</string>
+    <string name="mic_context_dialog_play">Playing...</string>
 
 </resources>
