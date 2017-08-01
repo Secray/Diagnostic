@@ -8,7 +8,6 @@ import android.graphics.DashPathEffect;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -19,14 +18,20 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.wingtech.diagnostic.R;
+import com.wingtech.diagnostic.util.Log;
 import com.wingtech.diagnostic.util.TemperatureFormatter;
 import com.wingtech.diagnostic.util.TimeValueFormatter;
 import com.wingtech.diagnostic.widget.PercentView;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static java.lang.String.format;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
     LineChart mLineChart;
@@ -193,7 +198,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             if (level >= 50 && level <= 100) {
                 color = getColor(R.color.batter_50_100);
                 bgColor = getColor(R.color.batter_50_100_bg);
-            } else if (level < 50 && level >=20) {
+            } else if (level < 50 && level >= 20) {
                 color = getColor(R.color.battery_20_50);
                 bgColor = getColor(R.color.battery_20_50_bg);
             } else {
@@ -206,40 +211,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
     };
 
-
-    private int getProcessCpuRate() {
-        int rate = 0;
-
-        try {
-            String Result;
-            Process p;
-            p = Runtime.getRuntime().exec("/system/bin/top -n 1");
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            while ((Result = br.readLine()) != null) {
-                Log.i("xk", Result);
-                if (Result.trim().length() < 1) {
-                    continue;
-                } else {
-                    String[] CPUUsr = Result.split("%");
-                    String[] CPUUsage = CPUUsr[0].split("User");
-                    String[] SYSUsage = CPUUsr[1].split("System");
-                    rate = Integer.parseInt(CPUUsage[1].trim()) + Integer.parseInt(SYSUsage[1].trim());
-                    break;
-                }
-            }
-
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return rate;
-    }
-
     AsyncTask<Void, Void, Integer> mCPUAsyncTask = new AsyncTask<Void, Void, Integer>() {
         @Override
         protected Integer doInBackground(Void... params) {
-            return getProcessCpuRate();
+            return getCPURateDesc();
         }
 
         @Override
@@ -261,4 +236,70 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             mCPUPercent.setPercent((float) value / 100);
         }
     };
+
+    public static int getCPURateDesc() {
+        String path = "/proc/stat";
+        long totalJiffies[] = new long[2];
+        long totalIdle[] = new long[2];
+        int firstCPUNum = 0;
+        FileReader fileReader;
+        BufferedReader bufferedReader = null;
+        Pattern pattern = Pattern.compile(" [0-9]+");
+        for (int i = 0; i < 2; i++) {
+            totalJiffies[i] = 0;
+            totalIdle[i] = 0;
+            try {
+                fileReader = new FileReader(path);
+                bufferedReader = new BufferedReader(fileReader, 8192);
+                int currentCPUNum = 0;
+                String str;
+                while ((str = bufferedReader.readLine()) != null
+                        && (i == 0 || currentCPUNum < firstCPUNum)) {
+                    if (str.toLowerCase().startsWith("cpu")) {
+                        currentCPUNum++;
+                        int index = 0;
+                        Matcher matcher = pattern.matcher(str);
+                        while (matcher.find()) {
+                            try {
+                                long tempJiffies = Long.parseLong(matcher.group(0).trim());
+                                totalJiffies[i] += tempJiffies;
+                                if (index == 3) {
+                                    totalIdle[i] += tempJiffies;
+                                }
+                                index++;
+                            } catch (NumberFormatException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                    if (i == 0) {
+                        firstCPUNum = currentCPUNum;
+                        try {//暂停50毫秒，等待系统更新信息。
+                            Thread.sleep(50);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } finally {
+                if (bufferedReader != null) {
+                    try {
+                        bufferedReader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        double rate = -1;
+        if (totalJiffies[0] > 0 && totalJiffies[1] > 0 && totalJiffies[0] != totalJiffies[1]) {
+            rate = 1.0 * ((totalJiffies[1] - totalIdle[1]) -
+                    (totalJiffies[0] - totalIdle[0])) / (totalJiffies[1] - totalJiffies[0]);
+        }
+
+        return (int) (rate * 100);
+    }
 }
