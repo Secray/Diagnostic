@@ -5,12 +5,12 @@ package com.wingtech.diagnostic.widget;
  */
 
 
-import java.io.IOException;
-
 import android.content.Context;
 import android.hardware.Camera;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import java.io.IOException;
 
 public class CameraPreview extends SurfaceView implements
         SurfaceHolder.Callback {

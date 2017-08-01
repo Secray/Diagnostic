@@ -6,7 +6,6 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,9 +13,7 @@ import android.widget.TextView;
 import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.util.Log;
 
-import java.io.IOException;
 
-import static com.wingtech.diagnostic.util.Constants.DISPLAY_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.RECIEVER_REQUEST_CODE;
 
 /**

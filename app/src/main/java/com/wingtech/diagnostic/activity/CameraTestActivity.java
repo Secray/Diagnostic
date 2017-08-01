@@ -16,7 +16,6 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-
 import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.util.Log;
 import com.wingtech.diagnostic.widget.CameraPreview;
@@ -28,6 +27,7 @@ import java.util.List;
 
 import static com.wingtech.diagnostic.util.Constants.CAMERA_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.VGACAMERA_REQUEST_CODE;
+
 
 /**
  * @author gaoweili

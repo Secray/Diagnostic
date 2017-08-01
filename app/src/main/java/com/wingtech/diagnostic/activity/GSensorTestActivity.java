@@ -11,6 +11,12 @@ import android.hardware.SensorManager;
 import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.widget.GSensorView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import static com.wingtech.diagnostic.util.Constants.G_SENSOR_REQUEST_CODE;
 
 /**

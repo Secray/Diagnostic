@@ -10,8 +10,6 @@ import android.widget.TextView;
 import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.util.Log;
 
-import static com.wingtech.diagnostic.util.Constants.BLUETOOTH_REQUEST_CODE;
-import static com.wingtech.diagnostic.util.Constants.DISPLAY_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.HEADSETKEY_REQUEST_CODE;
 
 /**

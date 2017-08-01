@@ -12,16 +12,10 @@ import android.support.v7.widget.AppCompatButton;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import com.wingtech.diagnostic.R;
-import com.wingtech.diagnostic.widget.CameraPreview;
-
-import java.lang.reflect.Method;
-import java.util.List;
 
 import static com.wingtech.diagnostic.util.Constants.CAMERAFLASH_REQUEST_CODE;
-import static com.wingtech.diagnostic.util.Constants.CAMERA_REQUEST_CODE;
 
 /**
  * Created by gaoweili on 17-7-28.

@@ -1,5 +1,6 @@
 package com.wingtech.diagnostic.fragment;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
@@ -27,13 +28,20 @@ import com.wingtech.diagnostic.activity.HeadsetActivity;
 import com.wingtech.diagnostic.activity.HeadsetKeyActivity;
 import com.wingtech.diagnostic.activity.KeypadActivity;
 import com.wingtech.diagnostic.activity.LightSensorActivity;
+import com.wingtech.diagnostic.activity.MagneticTestingActivity;
+import com.wingtech.diagnostic.activity.MouseTestingActivity;
+import com.wingtech.diagnostic.activity.MultiTouchTestingActivity;
 import com.wingtech.diagnostic.activity.NfcActivity;
 import com.wingtech.diagnostic.activity.ProximityActivity;
 import com.wingtech.diagnostic.activity.RecieverActivity;
+import com.wingtech.diagnostic.activity.SDCardTestingActivity;
+import com.wingtech.diagnostic.activity.SIMCardTestingActivity;
 import com.wingtech.diagnostic.activity.SpeakerActivity;
-import com.wingtech.diagnostic.activity.TestingActivity;
 import com.wingtech.diagnostic.activity.TouchTestActivity;
+import com.wingtech.diagnostic.activity.VibratorTestingActivity;
+import com.wingtech.diagnostic.activity.WiFiTestingActivity;
 import com.wingtech.diagnostic.activity.WireChargActivity;
+import com.wingtech.diagnostic.dialog.LoadingDialog;
 import com.wingtech.diagnostic.listener.OnTitleChangedListener;
 
 import static com.wingtech.diagnostic.util.Constants.BATTERY_REQUEST_CODE;
@@ -53,13 +61,23 @@ import static com.wingtech.diagnostic.util.Constants.WIFI_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.CAMERAFLASH_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.CAMERA_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.DISPLAY_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.E_COMPASS_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.GYROSCOPE_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.G_SENSOR_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.HEADSETKEY_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.HEADSET_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.LIGHTSENSOR_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.MOUSE_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.MULTI_TOUCH_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.NFC_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.PROXIMITY_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.RECIEVER_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.SDCARD_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.SIM2_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.SIMCARD_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.SPEAK_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.VIBRATOR_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.WIFI_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.WIRECHARGKEY_REQUEST_CODE;
 
 /**
@@ -117,6 +135,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
             case G_SENSOR_REQUEST_CODE:
             case MULTI_TOUCH_REQUEST_CODE:
             case VIBRATOR_REQUEST_CODE:
+            case MOUSE_REQUEST_CODE:
                 boolean result = data.getBooleanExtra("result", false);
                 mTestResultField.setVisibility(View.VISIBLE);
                 if (result) {
@@ -272,6 +291,15 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
             case "Vibrator Test":
                 i = new Intent(mActivity, VibratorTestingActivity.class);
                 startActivityForResult(i, VIBRATOR_REQUEST_CODE);
+                break;
+            case "CMD Mouse Test":
+                i = new Intent(mActivity, MouseTestingActivity.class);
+                i.putExtra("title", mTitle);
+                startActivityForResult(i, MOUSE_REQUEST_CODE);
+                break;
+            default:
+                Dialog dialog = new LoadingDialog(mActivity, mTitle);
+                dialog.show();
                 break;
         }
     }

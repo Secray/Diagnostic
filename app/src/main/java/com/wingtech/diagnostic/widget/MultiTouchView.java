@@ -11,7 +11,6 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.wingtech.diagnostic.listener.OnPointsChangedListener;
-import com.wingtech.diagnostic.util.Log;
 
 /**
  * @author xiekui

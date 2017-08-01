@@ -1,10 +1,6 @@
 package com.wingtech.diagnostic.activity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -17,8 +13,12 @@ import android.widget.TextView;
 
 import com.wingtech.diagnostic.R;
 
-import static android.graphics.Color.*;
-import static com.wingtech.diagnostic.util.Constants.BLUETOOTH_REQUEST_CODE;
+import static android.graphics.Color.BLACK;
+import static android.graphics.Color.BLUE;
+import static android.graphics.Color.GREEN;
+import static android.graphics.Color.RED;
+import static android.graphics.Color.WHITE;
+import static android.graphics.Color.YELLOW;
 import static com.wingtech.diagnostic.util.Constants.DISPLAY_REQUEST_CODE;
 
 /**

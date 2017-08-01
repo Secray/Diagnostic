@@ -6,8 +6,6 @@ import android.widget.TextView;
 
 import com.wingtech.diagnostic.R;
 
-import static com.wingtech.diagnostic.util.Constants.BLUETOOTH_REQUEST_CODE;
-
 /**
  * @author xiekui
  * @date 2017-7-28

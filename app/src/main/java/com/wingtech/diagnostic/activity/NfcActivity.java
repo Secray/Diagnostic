@@ -1,14 +1,12 @@
 package com.wingtech.diagnostic.activity;
 
 import android.content.Intent;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.wingtech.diagnostic.R;
-import com.wingtech.diagnostic.util.Log;
 
 import static com.wingtech.diagnostic.util.Constants.NFC_REQUEST_CODE;
 

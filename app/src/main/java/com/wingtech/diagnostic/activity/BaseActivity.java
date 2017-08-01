@@ -46,18 +46,11 @@ public abstract class BaseActivity extends AppCompatActivity {
             case R.id.reset:
                 new AlertDialog.Builder(this).setTitle(getString(R.string.reset_dialog_title))
                         .setMessage(getString(R.string.reset_dialog_content))
-                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        .setPositiveButton(android.R.string.ok, (dialog, which) -> {
 
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
                         })
-                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                        .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
 
-                            }
                         }).create().show();
                 break;
             case R.id.about:

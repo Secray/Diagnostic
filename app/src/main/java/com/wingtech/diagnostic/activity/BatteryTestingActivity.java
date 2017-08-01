@@ -7,6 +7,8 @@ import android.os.Message;
 
 import com.wingtech.diagnostic.receiver.BatteryBroadcastReceiver;
 
+import java.util.function.Function;
+
 import static com.wingtech.diagnostic.receiver.BatteryBroadcastReceiver.BATTERY_FAILED;
 import static com.wingtech.diagnostic.receiver.BatteryBroadcastReceiver.BATTERY_PASSED;
 import static com.wingtech.diagnostic.util.Constants.BATTERY_REQUEST_CODE;

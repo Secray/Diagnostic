@@ -5,11 +5,9 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wingtech.diagnostic.R;
-import android.provider.Settings;
-import android.provider.Settings.SettingNotFoundException;
-import android.widget.Toast;
 
 /**
  * Created by gaoweili on 17-7-28.

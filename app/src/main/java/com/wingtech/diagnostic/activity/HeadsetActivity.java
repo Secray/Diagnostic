@@ -6,13 +6,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.Resources;
-import android.media.AudioFormat;
 import android.media.AudioManager;
-import android.media.AudioTrack;
 import android.media.MediaPlayer;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,9 +18,7 @@ import android.widget.TextView;
 import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.util.Log;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 import static com.wingtech.diagnostic.util.Constants.HEADSET_REQUEST_CODE;
 
