@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.bean.TestCaseResult;
+import com.wingtech.diagnostic.util.SharedPreferencesUtils;
 
 import java.util.ArrayList;
 
@@ -38,6 +39,23 @@ public class TestResultAdapter extends RecyclerView.Adapter<TestResultAdapter.Te
         TestCaseResult t = mDatas.get(position);
         holder.mIcon.setImageDrawable(t.getIcon());
         holder.mTitle.setText(t.getTitle());
+        int result = (int) SharedPreferencesUtils.getParam(mContext,t.getTitle(),SharedPreferencesUtils.NOT_TEST);
+        if (result == 0){
+            holder.mIndicator.setVisibility(View.GONE);
+            holder.mFailed.setText(mContext.getString(R.string.list_item_result_failed, 0));
+            holder.mPassed.setText(mContext.getString(R.string.list_item_result_passed, 0));
+        }else if(result == 1){
+            holder.mIndicator.setImageResource(R.drawable.ic_fail);
+            holder.mIndicator.setVisibility(View.VISIBLE);
+            holder.mFailed.setText(mContext.getString(R.string.list_item_result_failed, 1));
+            holder.mPassed.setText(mContext.getString(R.string.list_item_result_passed, 0));
+        }else if(result == 2){
+            holder.mIndicator.setImageResource(R.drawable.ic_pass);
+            holder.mIndicator.setVisibility(View.VISIBLE);
+            holder.mFailed.setText(mContext.getString(R.string.list_item_result_failed, 0));
+            holder.mPassed.setText(mContext.getString(R.string.list_item_result_passed, 1));
+        }
+        /*
         holder.mIndicator.setImageResource(t.isResult() ? R.drawable.ic_pass : R.drawable.ic_fail);
         holder.mFailed.setText(t.isResult() ?
                 mContext.getString(R.string.list_item_result_failed, 0)
@@ -46,6 +64,7 @@ public class TestResultAdapter extends RecyclerView.Adapter<TestResultAdapter.Te
         holder.mPassed.setText(t.isResult() ?
                 mContext.getString(R.string.list_item_result_passed, 1)
                 : mContext.getString(R.string.list_item_result_passed, 0));
+                */
     }
 
     @Override

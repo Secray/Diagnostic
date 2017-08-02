@@ -26,7 +26,7 @@ public class TestResultActivity extends BaseActivity implements View.OnClickList
     String[] mTestCases;
 
     TypedArray mIconArray;
-
+    public static TestResultAdapter adapter;
 
     @Override
     protected int getLayoutResId() {
@@ -56,7 +56,8 @@ public class TestResultActivity extends BaseActivity implements View.OnClickList
                 new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         itemDecoration.setDrawable(getDrawable(R.drawable.test_item_divider));
         mRecyclerView.addItemDecoration(itemDecoration);
-        mRecyclerView.setAdapter(new TestResultAdapter(this, initList()));
+        adapter = new TestResultAdapter(this, initList());
+        mRecyclerView.setAdapter(adapter);
     }
 
     ArrayList<TestCaseResult> initList() {

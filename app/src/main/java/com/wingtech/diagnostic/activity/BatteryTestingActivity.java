@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.wingtech.diagnostic.receiver.BatteryBroadcastReceiver;
+import com.wingtech.diagnostic.util.SharedPreferencesUtils;
 
 import java.util.function.Function;
 

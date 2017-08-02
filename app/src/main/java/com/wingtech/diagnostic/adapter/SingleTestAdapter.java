@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.bean.SingleTestCase;
 import com.wingtech.diagnostic.listener.OnItemClickListener;
+import com.wingtech.diagnostic.util.SharedPreferencesUtils;
 
 import java.util.ArrayList;
 
@@ -41,8 +42,18 @@ public class SingleTestAdapter extends RecyclerView.Adapter<SingleTestAdapter.Si
         SingleTestCase t = mSingleTestCases.get(position);
         holder.mIcon.setImageDrawable(t.getIcon());
         holder.mTitle.setText(t.getTitle());
-        holder.mIndicator.setImageResource(t.isPassed() ? R.drawable.ic_pass : R.drawable.ic_fail);
-        holder.mIndicator.setVisibility(t.isShowResult() ? View.VISIBLE : View.GONE);
+        int result = (int) SharedPreferencesUtils.getParam(mContext,t.getTitle(),SharedPreferencesUtils.NOT_TEST);
+        if (result == 0){
+            holder.mIndicator.setVisibility(View.GONE);
+        }else if(result == 1){
+            holder.mIndicator.setImageResource(R.drawable.ic_fail);
+            holder.mIndicator.setVisibility(View.VISIBLE);
+        }else if(result == 2){
+            holder.mIndicator.setImageResource(R.drawable.ic_pass);
+            holder.mIndicator.setVisibility(View.VISIBLE);
+        }
+        //holder.mIndicator.setImageResource(t.isPassed() ? R.drawable.ic_pass : R.drawable.ic_fail);
+        //holder.mIndicator.setVisibility(t.isShowResult() ? View.VISIBLE : View.GONE);
     }
 
     @Override

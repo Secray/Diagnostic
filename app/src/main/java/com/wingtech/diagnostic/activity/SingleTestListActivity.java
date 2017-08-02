@@ -29,6 +29,7 @@ public class SingleTestListActivity extends BaseActivity implements OnItemClickL
 
     TypedArray mIconArray;
 
+    public static SingleTestAdapter adapter;
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_single_test_list;
@@ -55,7 +56,7 @@ public class SingleTestListActivity extends BaseActivity implements OnItemClickL
                 new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         itemDecoration.setDrawable(getDrawable(R.drawable.test_item_divider));
         mRecyclerView.addItemDecoration(itemDecoration);
-        SingleTestAdapter adapter = new SingleTestAdapter(this, initList());
+        adapter = new SingleTestAdapter(this, initList());
         adapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(adapter);
     }
@@ -82,5 +83,12 @@ public class SingleTestListActivity extends BaseActivity implements OnItemClickL
         Intent intent = new Intent(this, SingleTestActivity.class);
         intent.putExtra("position", position);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
+
     }
 }

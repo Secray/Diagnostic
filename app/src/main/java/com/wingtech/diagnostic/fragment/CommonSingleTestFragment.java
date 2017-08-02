@@ -1,6 +1,8 @@
 package com.wingtech.diagnostic.fragment;
 
 import android.app.Dialog;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
@@ -43,6 +45,7 @@ import com.wingtech.diagnostic.activity.WiFiTestingActivity;
 import com.wingtech.diagnostic.activity.WireChargActivity;
 import com.wingtech.diagnostic.dialog.LoadingDialog;
 import com.wingtech.diagnostic.listener.OnTitleChangedListener;
+import com.wingtech.diagnostic.util.SharedPreferencesUtils;
 
 import static com.wingtech.diagnostic.util.Constants.BATTERY_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.BLUETOOTH_REQUEST_CODE;
@@ -92,7 +95,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
     private TextView mTestResult;
     AppCompatButton mTestBtn;
     private OnTitleChangedListener mListener;
-
+    private Activity activity;
     private String mTitle;
 
 
@@ -102,6 +105,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
 
     @Override
     protected int getLayoutResId() {
+        activity  = getActivity();
         return R.layout.fragment_test;
     }
 
@@ -136,14 +140,30 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
             case MULTI_TOUCH_REQUEST_CODE:
             case VIBRATOR_REQUEST_CODE:
             case MOUSE_REQUEST_CODE:
+            case PROXIMITY_REQUEST_CODE:
+            case DISPLAY_REQUEST_CODE:
+            case HEADSETKEY_REQUEST_CODE:
+            case LIGHTSENSOR_REQUEST_CODE:
+            case NFC_REQUEST_CODE:
+            case WIRECHARGKEY_REQUEST_CODE:
+            case CAMERA_REQUEST_CODE:
+            case VGACAMERA_REQUEST_CODE:
+            case CAMERAFLASH_REQUEST_CODE:
+            case RECIEVER_REQUEST_CODE:
+            case HEADSET_REQUEST_CODE:
+            case SPEAK_REQUEST_CODE:
+            case MIC_REQUEST_CODE:
+            case HEADSETMIC_REQUEST_CODE:
                 boolean result = data.getBooleanExtra("result", false);
                 mTestResultField.setVisibility(View.VISIBLE);
                 if (result) {
                     mTestResult.setText(getResources().getString(R.string.test_pass, mTitle));
                     mTestResultImg.setImageResource(R.drawable.ic_test_pass);
+                    SharedPreferencesUtils.setParam(activity,mTitle,SharedPreferencesUtils.PASS);
                 } else {
                     mTestResult.setText(getResources().getString(R.string.test_fail, mTitle));
                     mTestResultImg.setImageResource(R.drawable.ic_test_fail);
+                    SharedPreferencesUtils.setParam(activity,mTitle,SharedPreferencesUtils.FAIL);
                 }
                 mTestBtn.setText(R.string.btn_test_again);
                 break;
