@@ -6,8 +6,11 @@ import android.widget.TextView;
 
 import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.fragment.CommonSingleTestFragment;
+import com.wingtech.diagnostic.fragment.TestFragment;
+import com.wingtech.diagnostic.listener.OnResultChangedCallback;
 import com.wingtech.diagnostic.listener.OnTitleChangedListener;
 import com.wingtech.diagnostic.util.Log;
+import com.wingtech.diagnostic.util.SharedPreferencesUtils;
 import com.wingtech.diagnostic.util.Utils;
 
 import java.util.ArrayList;
@@ -22,7 +25,8 @@ import java.util.function.Consumer;
  * @date 2017-7-25
  */
 
-public class TestAllActivity extends BaseActivity implements OnTitleChangedListener {
+public class TestAllActivity extends BaseActivity
+        implements OnTitleChangedListener, OnResultChangedCallback {
     Toolbar mToolbar;
     TextView mPrevious;
     TextView mNext;
@@ -48,7 +52,7 @@ public class TestAllActivity extends BaseActivity implements OnTitleChangedListe
         mRlPrevious = findViewById(R.id.rl_previous);
         mRlNext = findViewById(R.id.rl_next);
         mIndicator = (TextView) findViewById(R.id.text_indicator);
-        String []testCases = getResources().getStringArray(R.array.test_cases);
+        String[] testCases = getResources().getStringArray(R.array.test_cases);
         mCaseList = Utils.getTestAllCases(testCases);
     }
 
@@ -62,24 +66,46 @@ public class TestAllActivity extends BaseActivity implements OnTitleChangedListe
     protected void onWork() {
         mLen = mCaseList.size();
         doTest();
-        CommonSingleTestFragment fragment = new CommonSingleTestFragment();
+        /*CommonSingleTestFragment fragment = new CommonSingleTestFragment();
         fragment.setTitleChangedListener(this);
         getSupportFragmentManager().beginTransaction().replace(R.id.test_content,
-                fragment).commit();
+                fragment).commit();*/
     }
 
     void doTest() {
         mIndicator.setText((mCurrent + 1) + "/" + mLen);
         mTitle = mCaseList.get(mCurrent);
         getSupportActionBar().setTitle(mTitle);
-        mPrevious.setText(mCurrent == 0 ? "": mCaseList.get(mCurrent - 1));
+        mPrevious.setText(mCurrent == 0 ? "" : mCaseList.get(mCurrent - 1));
         mRlPrevious.setVisibility(mCurrent == 0 ? View.INVISIBLE : View.VISIBLE);
-        mNext.setText(mCurrent == mLen - 1 ? "": mCaseList.get(mCurrent + 1));
+        mNext.setText(mCurrent == mLen - 1 ? "" : mCaseList.get(mCurrent + 1));
         mRlNext.setVisibility(mCurrent == mLen - 1 ? View.INVISIBLE : View.VISIBLE);
+
+        TestFragment fragment = Utils.getFragment(mTitle);
+        if (fragment != null) {
+            fragment.setOnResultChangedCallback(this);
+            fragment.setTitle(mTitle);
+            getSupportFragmentManager().beginTransaction().replace(R.id.test_content,
+                    fragment).commit();
+        }
+
+        /*CommonSingleTestFragment fragment1 = new CommonSingleTestFragment();
+        fragment1.setTitleChangedListener(this);
+        getSupportFragmentManager().beginTransaction().replace(R.id.test_content,
+                fragment1).commit();*/
+
     }
 
     @Override
     public String getChangedTitle() {
         return mTitle;
+    }
+
+    @Override
+    public void onChange(boolean result) {
+        SharedPreferencesUtils.setParam(this, mTitle,
+                result ? SharedPreferencesUtils.PASS : SharedPreferencesUtils.FAIL);
+        mCurrent++;
+        doTest();
     }
 }

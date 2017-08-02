@@ -42,6 +42,7 @@ import static com.wingtech.diagnostic.util.Constants.HEADSETMIC_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.HEADSET_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.LIGHTSENSOR_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.MIC_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.MODEM_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.MOUSE_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.MULTI_TOUCH_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.NFC_REQUEST_CODE;
@@ -126,6 +127,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
             case HEADSET_REQUEST_CODE:
             case SPEAK_REQUEST_CODE:
             case MIC_REQUEST_CODE:
+            case MODEM_REQUEST_CODE:
             case HEADSETMIC_REQUEST_CODE:
                 boolean result = data.getBooleanExtra("result", false);
                 mTestResultField.setVisibility(View.VISIBLE);
@@ -150,6 +152,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
         switch (mTitle) {
             case "G-Sensor Test":
             case "Bluetooth Test":
+            case "Modem Test":
             case "Wi-Fi Test":
             case "Battery Test":
             case "E-Compass Test":

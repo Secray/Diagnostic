@@ -46,13 +46,13 @@ public class SharedPreferencesUtils {
             editor.putLong(key, (Long)object);
         }
 
-        editor.commit();
+        editor.apply();
     }
     public static void setNull(Context context){
         SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.clear();
-        editor.commit();
+        editor.apply();
     }
 
 
