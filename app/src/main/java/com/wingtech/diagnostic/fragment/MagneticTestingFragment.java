@@ -1,18 +1,17 @@
-package com.wingtech.diagnostic.activity;
+package com.wingtech.diagnostic.fragment;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-import static com.wingtech.diagnostic.util.Constants.E_COMPASS_REQUEST_CODE;
+import static android.content.Context.SENSOR_SERVICE;
 
 /**
- * @author xiekui
- * @date 2017-7-29
+ * Created by xiekui on 17-8-2.
  */
 
-public class MagneticTestingActivity extends TestingActivity implements SensorEventListener {
+public class MagneticTestingFragment extends TestFragment implements SensorEventListener {
     private SensorManager mSensorManager;
     private Sensor mMagnetic;
     private boolean mX, mY, mZ;
@@ -20,19 +19,13 @@ public class MagneticTestingActivity extends TestingActivity implements SensorEv
     @Override
     protected void onWork() {
         super.onWork();
-        mRequestCode = E_COMPASS_REQUEST_CODE;
-        mSensorManager = (SensorManager) getApplicationContext().getSystemService(SENSOR_SERVICE);
+        mSensorManager = (SensorManager) mActivity.getApplicationContext().getSystemService(SENSOR_SERVICE);
         mMagnetic = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         mSensorManager.registerListener(this, mMagnetic, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         mSensorManager.unregisterListener(this);
     }
@@ -54,7 +47,7 @@ public class MagneticTestingActivity extends TestingActivity implements SensorEv
         } else {
             mResult = false;
         }
-        sendResult();
+        mCallback.onChange(mResult);
     }
 
     @Override

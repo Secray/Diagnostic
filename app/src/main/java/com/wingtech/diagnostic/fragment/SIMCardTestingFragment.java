@@ -1,4 +1,4 @@
-package com.wingtech.diagnostic.activity;
+package com.wingtech.diagnostic.fragment;
 
 import android.app.Service;
 import android.telephony.TelephonyManager;
@@ -6,25 +6,20 @@ import android.telephony.TelephonyManager;
 import com.android.helper.Helper;
 import com.wingtech.diagnostic.util.Log;
 
-import static com.wingtech.diagnostic.util.Constants.SIMCARD_REQUEST_CODE;
-
 /**
- * @author xiekui
- * @date 2017-7-31
+ * Created by xiekui on 17-8-2.
  */
 
-public class SIMCardTestingActivity extends TestingActivity {
+public class SIMCardTestingFragment extends TestFragment {
     private int mCurrentIndex;
-    @Override
-    protected void onWork() {
-        super.onWork();
-        mRequestCode = SIMCARD_REQUEST_CODE;
-        mCurrentIndex = getIntent().getIntExtra("index", 0);
+
+    public SIMCardTestingFragment(int index) {
+        mCurrentIndex = index;
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onWork() {
+        super.onWork();
         getSimNum();
         getSimStatus(mCurrentIndex);
     }
@@ -50,10 +45,10 @@ public class SIMCardTestingActivity extends TestingActivity {
     }
 
     private void getSimStatus(int index){
-        TelephonyManager mTelephonyManager = (TelephonyManager)getSystemService(Service.TELEPHONY_SERVICE);
+        TelephonyManager mTelephonyManager =
+                (TelephonyManager) mActivity.getSystemService(Service.TELEPHONY_SERVICE);
         if (mTelephonyManager == null) {
-            finish();
-            return;
+            mResult = false;
         }
 
         if(mCurrentIndex == 1){
@@ -69,6 +64,6 @@ public class SIMCardTestingActivity extends TestingActivity {
                 mResult = true;
             }
         }
-        sendResult();
+        mCallback.onChange(mResult);
     }
 }

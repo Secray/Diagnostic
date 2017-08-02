@@ -1,4 +1,4 @@
-package com.wingtech.diagnostic.activity;
+package com.wingtech.diagnostic.fragment;
 
 import android.content.Context;
 import android.os.Vibrator;
@@ -9,41 +9,44 @@ import android.widget.Switch;
 
 import com.wingtech.diagnostic.R;
 
-import static com.wingtech.diagnostic.util.Constants.VIBRATOR_REQUEST_CODE;
-
 /**
- * @author xiekui
- * @date 2017-8-1
+ * Created by xiekui on 17-8-2.
  */
 
-public class VibratorTestingActivity extends TestingActivity implements View.OnClickListener,
+public class VibratorTestingFragment extends TestFragment implements View.OnClickListener,
         CompoundButton.OnCheckedChangeListener {
+
     private static final long[] VIBRATE_PATTERN = new long[] {1000, 2000};
     private Switch mVibratorSwitch;
 
     private Vibrator mVibrator;
 
     @Override
-    protected void onWork() {
-        mRequestCode = VIBRATOR_REQUEST_CODE;
-        if (mVibrator == null) {
-            mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        }
+    protected int getLayoutResId() {
+        return R.layout.content_test_vibrator;
     }
 
     @Override
-    protected void initViews() {
-        mVibratorSwitch = (Switch) findViewById(R.id.vibrator_switch);
-        AppCompatButton failButton = (AppCompatButton) findViewById(R.id.fail_btn);
-        AppCompatButton passButton = (AppCompatButton) findViewById(R.id.pass_btn);
+    protected void initViewEvents(View view) {
+        mVibratorSwitch = (Switch) view.findViewById(R.id.vibrator_switch);
+        AppCompatButton failButton = (AppCompatButton) view.findViewById(R.id.fail_btn);
+        AppCompatButton passButton = (AppCompatButton) view.findViewById(R.id.pass_btn);
         failButton.setOnClickListener(this);
         passButton.setOnClickListener(this);
         mVibratorSwitch.setOnCheckedChangeListener(this);
     }
 
     @Override
-    protected int getLayoutResId() {
-        return R.layout.content_test_vibrator;
+    protected void onWork() {
+        if (mVibrator == null) {
+            mVibrator = (Vibrator) mActivity.getSystemService(Context.VIBRATOR_SERVICE);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mVibratorSwitch.setChecked(false);
     }
 
     @Override
@@ -57,13 +60,7 @@ public class VibratorTestingActivity extends TestingActivity implements View.OnC
                 break;
         }
         mVibrator.cancel();
-        sendResult();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mVibratorSwitch.setChecked(false);
+        mCallback.onChange(mResult);
     }
 
     @Override

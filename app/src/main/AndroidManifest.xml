@@ -92,9 +92,6 @@
         <activity android:name="com.wingtech.diagnostic.activity.TouchTestActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name="com.wingtech.diagnostic.activity.GSensorTestActivity"
-            android:screenOrientation="portrait"/>
-
         <activity android:name="com.wingtech.diagnostic.activity.CameraTestActivity"
             android:screenOrientation="portrait"/>
         <activity android:name="com.wingtech.diagnostic.activity.DisplayActivity"
@@ -125,23 +122,8 @@
         <activity android:name="com.wingtech.diagnostic.activity.TestAllActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".activity.BluetoothTestingActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.WiFiTestingActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.BatteryTestingActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.MagneticTestingActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.GyroscopeTestingActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.SDCardTestingActivity" />
-        <activity android:name=".activity.SIMCardTestingActivity" />
-        <activity android:name=".activity.MultiTouchTestingActivity" />
-        <activity android:name=".activity.VibratorTestingActivity" />
-
         <activity android:name=".activity.CameraFlashActivity" />
-        <activity android:name=".activity.MouseTestingActivity" />
+        <activity android:name=".activity.SingleTestingActivity" />
 
     </application>
 

@@ -1,25 +1,22 @@
-package com.wingtech.diagnostic.activity;
+package com.wingtech.diagnostic.fragment;
 
 import android.hardware.input.InputManager;
 import android.view.InputDevice;
 
 import com.wingtech.diagnostic.util.Log;
 
-import static com.wingtech.diagnostic.util.Constants.MOUSE_REQUEST_CODE;
+import static android.content.Context.INPUT_SERVICE;
 
 /**
- * @author xiekui
- * @date 2017-8-1
+ * Created by xiekui on 17-8-2.
  */
 
-public class MouseTestingActivity extends TestingActivity
+public class CMDMouseTestingFragment extends TestFragment
         implements InputManager.InputDeviceListener {
-
     @Override
     protected void onWork() {
         super.onWork();
-        mRequestCode = MOUSE_REQUEST_CODE;
-        InputManager im = (InputManager) getSystemService(INPUT_SERVICE);
+        InputManager im = (InputManager) mActivity.getSystemService(INPUT_SERVICE);
         im.registerInputDeviceListener(this, null);
         final int[] devices = InputDevice.getDeviceIds();
         for (int deviceId : devices) {
@@ -33,7 +30,7 @@ public class MouseTestingActivity extends TestingActivity
                 }
             }
         }
-        sendResult();
+        mCallback.onChange(mResult);
     }
 
     @Override
@@ -45,7 +42,7 @@ public class MouseTestingActivity extends TestingActivity
                 Log.d("device.getName()=" + device.getName()
                         + " device.getId() " + device.getId()
                         + " getDescriptor " + device.getDescriptor());
-                sendResult();
+                mCallback.onChange(mResult);
             }
         }
     }

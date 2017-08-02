@@ -1,32 +1,23 @@
-package com.wingtech.diagnostic.activity;
-
+package com.wingtech.diagnostic.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.support.v7.widget.AppCompatButton;
+import android.view.View;
 
 import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.widget.GSensorView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import static com.wingtech.diagnostic.util.Constants.G_SENSOR_REQUEST_CODE;
-
 /**
- * @author xiekui
- * @date 2017-7-24
+ * Created by xiekui on 17-8-2.
  */
 
-public class GSensorTestActivity extends TestingActivity implements SensorEventListener {
+public class GSensorFragment extends TestFragment implements SensorEventListener, View.OnClickListener {
     GSensorView mGSensorView;
-
+    AppCompatButton mBtn;
     private SensorManager mSensorManager;
     private Sensor mSensor;
     private int mSum = 0;
@@ -38,25 +29,27 @@ public class GSensorTestActivity extends TestingActivity implements SensorEventL
     }
 
     @Override
-    protected void initViews() {
-        mGSensorView = (GSensorView) findViewById(R.id.gsensor_view);
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+    protected void initViewEvents(View view) {
+        mGSensorView = (GSensorView) view.findViewById(R.id.gsensor_view);
+        mBtn = (AppCompatButton) view.findViewById(R.id.gsensor_fail);
+        mBtn.setOnClickListener(this);
+        mSensorManager = (SensorManager) mActivity.getSystemService(Context.SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     }
 
     @Override
     protected void onWork() {
-        mRequestCode = G_SENSOR_REQUEST_CODE;
+        // cancel title
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         mSensorManager.unregisterListener(this);
         mSum = 0;
@@ -102,12 +95,18 @@ public class GSensorTestActivity extends TestingActivity implements SensorEventL
 
         if (mSum == 6) {
             mResult = true;
-            sendResult();
+            mCallback.onChange(mResult);
         }
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        mResult = false;
+        mCallback.onChange(mResult);
     }
 }

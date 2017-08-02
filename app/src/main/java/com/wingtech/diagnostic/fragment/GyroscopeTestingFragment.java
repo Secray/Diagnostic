@@ -1,4 +1,4 @@
-package com.wingtech.diagnostic.activity;
+package com.wingtech.diagnostic.fragment;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -7,14 +7,13 @@ import android.hardware.SensorManager;
 
 import com.wingtech.diagnostic.util.Log;
 
-import static com.wingtech.diagnostic.util.Constants.GYROSCOPE_REQUEST_CODE;
+import static android.content.Context.SENSOR_SERVICE;
 
 /**
- * @author xiekui
- * @date 2017-7-29
+ * Created by xiekui on 17-8-2.
  */
 
-public class GyroscopeTestingActivity extends TestingActivity implements SensorEventListener {
+public class GyroscopeTestingFragment extends TestFragment implements SensorEventListener {
     private SensorManager mSensorManager = null;
     private Sensor mSensor = null;
     private boolean mX, mY, mZ;
@@ -22,20 +21,14 @@ public class GyroscopeTestingActivity extends TestingActivity implements SensorE
     @Override
     protected void onWork() {
         super.onWork();
-        mRequestCode = GYROSCOPE_REQUEST_CODE;
-        mSensorManager = (SensorManager) getApplicationContext().getSystemService(SENSOR_SERVICE);
+        mSensorManager = (SensorManager) mActivity.getApplicationContext().getSystemService(SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_UI);
         Log.i("mSensor = " + mSensor);
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_UI);
-    }
-
-    @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         mSensorManager.unregisterListener(this);
     }
@@ -55,10 +48,10 @@ public class GyroscopeTestingActivity extends TestingActivity implements SensorE
 
         if (mX && mY && mZ) {
             mResult = true;
+            mCallback.onChange(mResult);
         } else {
             mResult = false;
         }
-        sendResult();
     }
 
     @Override

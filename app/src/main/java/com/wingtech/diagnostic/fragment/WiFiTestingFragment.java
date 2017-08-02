@@ -1,4 +1,4 @@
-package com.wingtech.diagnostic.activity;
+package com.wingtech.diagnostic.fragment;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -13,15 +13,13 @@ import com.wingtech.diagnostic.util.Log;
 
 import java.util.List;
 
-import static com.wingtech.diagnostic.util.Constants.WIFI_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.WIFI_STATE_CHANGED;
 
 /**
- * @author xiekui
- * @date 2017-7-28
+ * Created by xiekui on 17-8-2.
  */
 
-public class WiFiTestingActivity extends TestingActivity {
+public class WiFiTestingFragment extends TestFragment {
     private WifiManager mWiFiManager;
     private int mWiFiState;
     private boolean mWiFiEnable;
@@ -29,21 +27,21 @@ public class WiFiTestingActivity extends TestingActivity {
 
     @Override
     protected void onWork() {
-        mRequestCode = WIFI_REQUEST_CODE;
-        mWiFiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        super.onWork();
+        mWiFiManager = (WifiManager) mActivity.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         IntentFilter filter = new IntentFilter();
         filter.addAction(WIFI_STATE_CHANGED);
-        registerReceiver(mWiFiReceiver, filter);
+        mActivity.registerReceiver(mWiFiReceiver, filter);
         enableWiFi();
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    public void onPause() {
+        super.onPause();
         if (mWiFiEnable) {
             mWiFiManager.setWifiEnabled(false);
         }
-        unregisterReceiver(mWiFiReceiver);
+        mActivity.unregisterReceiver(mWiFiReceiver);
     }
 
     private boolean isWiFi(Context context) {
@@ -89,7 +87,7 @@ public class WiFiTestingActivity extends TestingActivity {
         }
         if (mWiFiState != WifiManager.WIFI_STATE_ENABLED) {
             mResult = false;
-            sendResult();
+            mCallback.onChange(mResult);
         }
         mWiFiManager.startScan();
 
@@ -102,7 +100,7 @@ public class WiFiTestingActivity extends TestingActivity {
         } while (mScanResults == null || size == 0);
 
         Log.i("WiFi Scan results = " + mScanResults.size());
-        if (isWiFi(this)) {
+        if (isWiFi(mActivity)) {
             Log.e("It's not WiFi");
         }
 
@@ -111,7 +109,7 @@ public class WiFiTestingActivity extends TestingActivity {
         } else {
             mResult = false;
         }
-        sendResult();
+        mCallback.onChange(mResult);
     }
 
     BroadcastReceiver mWiFiReceiver = new BroadcastReceiver() {

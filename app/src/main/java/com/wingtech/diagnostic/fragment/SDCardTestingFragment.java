@@ -1,4 +1,4 @@
-package com.wingtech.diagnostic.activity;
+package com.wingtech.diagnostic.fragment;
 
 import android.content.Context;
 import android.os.Environment;
@@ -9,50 +9,34 @@ import com.wingtech.diagnostic.util.Log;
 
 import java.util.List;
 
-import static com.wingtech.diagnostic.util.Constants.SDCARD_REQUEST_CODE;
-
 /**
- * @author xiekui
- * @date 2017-7-31
+ * Created by xiekui on 17-8-2.
  */
 
-public class SDCardTestingActivity extends TestingActivity {
+public class SDCardTestingFragment extends TestFragment {
     private MountPoint mMountPoint = new MountPoint();
-
     @Override
     protected void onWork() {
         super.onWork();
-        mRequestCode = SDCARD_REQUEST_CODE;
         InitStoragePath();
-    }
-
-    private static class MountPoint {
-        String mDescription;
-        String mState;
-        boolean mIsExternal;
-        boolean mIsMounted;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         ExternalStorageState();
     }
 
     void ExternalStorageState() {
         mResult = mMountPoint.mIsMounted;
-        sendResult();
+        mCallback.onChange(mResult);
     }
 
     private void InitStoragePath() {
-        StorageManager mStorageManager = (StorageManager) getSystemService(Context.STORAGE_SERVICE);
+        StorageManager mStorageManager =
+                (StorageManager) mActivity.getSystemService(Context.STORAGE_SERVICE);
         // check media availability to init mMountPathList
         List<StorageVolume> storageVolumeList = mStorageManager.getStorageVolumes();
         Log.i("StorageVolume size = " + storageVolumeList.size());
         for (StorageVolume volume : storageVolumeList) {
-            Log.i(" " + volume.getDescription(this));
+            Log.i(" " + volume.getDescription(mActivity));
             if (volume.isRemovable()) {
-                mMountPoint.mDescription = volume.getDescription(this);
+                mMountPoint.mDescription = volume.getDescription(mActivity);
                 String state = volume.getState();
                 Log.d("state = " + state);
                 mMountPoint.mIsMounted = Environment.MEDIA_MOUNTED.equals(state);
@@ -63,5 +47,12 @@ public class SDCardTestingActivity extends TestingActivity {
                 return;
             }
         }
+    }
+
+    private static class MountPoint {
+        String mDescription;
+        String mState;
+        boolean mIsExternal;
+        boolean mIsMounted;
     }
 }

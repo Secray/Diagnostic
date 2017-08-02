@@ -1,8 +1,7 @@
 package com.wingtech.diagnostic.fragment;
 
-import android.app.Dialog;
 import android.app.Activity;
-import android.content.Context;
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
@@ -10,38 +9,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wingtech.diagnostic.R;
-import com.wingtech.diagnostic.activity.BatteryTestingActivity;
-import com.wingtech.diagnostic.activity.BluetoothTestingActivity;
 import com.wingtech.diagnostic.activity.BoardMicActivity;
 import com.wingtech.diagnostic.activity.CameraFlashActivity;
 import com.wingtech.diagnostic.activity.CameraTestActivity;
 import com.wingtech.diagnostic.activity.DisplayActivity;
-import com.wingtech.diagnostic.activity.GSensorTestActivity;
-import com.wingtech.diagnostic.activity.GyroscopeTestingActivity;
-import com.wingtech.diagnostic.activity.HeadsetMicActivity;
-import com.wingtech.diagnostic.activity.MagneticTestingActivity;
-import com.wingtech.diagnostic.activity.MultiTouchTestingActivity;
-import com.wingtech.diagnostic.activity.SDCardTestingActivity;
-import com.wingtech.diagnostic.activity.SIMCardTestingActivity;
-import com.wingtech.diagnostic.activity.TouchTestActivity;
-import com.wingtech.diagnostic.activity.VibratorTestingActivity;
-import com.wingtech.diagnostic.activity.WiFiTestingActivity;
 import com.wingtech.diagnostic.activity.HeadsetActivity;
 import com.wingtech.diagnostic.activity.HeadsetKeyActivity;
+import com.wingtech.diagnostic.activity.HeadsetMicActivity;
 import com.wingtech.diagnostic.activity.KeypadActivity;
 import com.wingtech.diagnostic.activity.LightSensorActivity;
-import com.wingtech.diagnostic.activity.MagneticTestingActivity;
-import com.wingtech.diagnostic.activity.MouseTestingActivity;
-import com.wingtech.diagnostic.activity.MultiTouchTestingActivity;
 import com.wingtech.diagnostic.activity.NfcActivity;
 import com.wingtech.diagnostic.activity.ProximityActivity;
 import com.wingtech.diagnostic.activity.RecieverActivity;
-import com.wingtech.diagnostic.activity.SDCardTestingActivity;
-import com.wingtech.diagnostic.activity.SIMCardTestingActivity;
+import com.wingtech.diagnostic.activity.SingleTestingActivity;
 import com.wingtech.diagnostic.activity.SpeakerActivity;
 import com.wingtech.diagnostic.activity.TouchTestActivity;
-import com.wingtech.diagnostic.activity.VibratorTestingActivity;
-import com.wingtech.diagnostic.activity.WiFiTestingActivity;
 import com.wingtech.diagnostic.activity.WireChargActivity;
 import com.wingtech.diagnostic.dialog.LoadingDialog;
 import com.wingtech.diagnostic.listener.OnTitleChangedListener;
@@ -49,18 +31,6 @@ import com.wingtech.diagnostic.util.SharedPreferencesUtils;
 
 import static com.wingtech.diagnostic.util.Constants.BATTERY_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.BLUETOOTH_REQUEST_CODE;
-import static com.wingtech.diagnostic.util.Constants.E_COMPASS_REQUEST_CODE;
-import static com.wingtech.diagnostic.util.Constants.GYROSCOPE_REQUEST_CODE;
-import static com.wingtech.diagnostic.util.Constants.G_SENSOR_REQUEST_CODE;
-import static com.wingtech.diagnostic.util.Constants.HEADSETMIC_REQUEST_CODE;
-import static com.wingtech.diagnostic.util.Constants.MIC_REQUEST_CODE;
-import static com.wingtech.diagnostic.util.Constants.MULTI_TOUCH_REQUEST_CODE;
-import static com.wingtech.diagnostic.util.Constants.SDCARD_REQUEST_CODE;
-import static com.wingtech.diagnostic.util.Constants.SIM2_REQUEST_CODE;
-import static com.wingtech.diagnostic.util.Constants.SIMCARD_REQUEST_CODE;
-import static com.wingtech.diagnostic.util.Constants.VGACAMERA_REQUEST_CODE;
-import static com.wingtech.diagnostic.util.Constants.VIBRATOR_REQUEST_CODE;
-import static com.wingtech.diagnostic.util.Constants.WIFI_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.CAMERAFLASH_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.CAMERA_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.DISPLAY_REQUEST_CODE;
@@ -68,8 +38,10 @@ import static com.wingtech.diagnostic.util.Constants.E_COMPASS_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.GYROSCOPE_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.G_SENSOR_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.HEADSETKEY_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.HEADSETMIC_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.HEADSET_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.LIGHTSENSOR_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.MIC_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.MOUSE_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.MULTI_TOUCH_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.NFC_REQUEST_CODE;
@@ -79,6 +51,7 @@ import static com.wingtech.diagnostic.util.Constants.SDCARD_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.SIM2_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.SIMCARD_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.SPEAK_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.VGACAMERA_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.VIBRATOR_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.WIFI_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.WIRECHARGKEY_REQUEST_CODE;
@@ -158,10 +131,12 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 mTestResultField.setVisibility(View.VISIBLE);
                 if (result) {
                     mTestResult.setText(getResources().getString(R.string.test_pass, mTitle));
+                    mTestResult.setTextColor(getResources().getColor(R.color.test_result_pass));
                     mTestResultImg.setImageResource(R.drawable.ic_test_pass);
                     SharedPreferencesUtils.setParam(activity,mTitle,SharedPreferencesUtils.PASS);
                 } else {
                     mTestResult.setText(getResources().getString(R.string.test_fail, mTitle));
+                    mTestResult.setTextColor(getResources().getColor(R.color.test_result_fail));
                     mTestResultImg.setImageResource(R.drawable.ic_test_fail);
                     SharedPreferencesUtils.setParam(activity,mTitle,SharedPreferencesUtils.FAIL);
                 }
@@ -174,9 +149,22 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
     public void onClick(View v) {
         switch (mTitle) {
             case "G-Sensor Test":
-                Intent i = new Intent(mActivity, GSensorTestActivity.class);
-                startActivityForResult(i, G_SENSOR_REQUEST_CODE);
+            case "Bluetooth Test":
+            case "Wi-Fi Test":
+            case "Battery Test":
+            case "E-Compass Test":
+            case "Gyroscope Test":
+            case "SD Card Test":
+            case "SIM Card Test":
+            case "SIM2 Test":
+            case "MultiTouch Test":
+            case "Vibrator Test":
+            case "CMD Mouse Test":
+                Intent i = new Intent(mActivity, SingleTestingActivity.class);
+                i.putExtra("title", mTitle);
+                startActivityForResult(i, MOUSE_REQUEST_CODE);
                 break;
+
             case "Touch Test":
                 startActivity(new Intent(mActivity, TouchTestActivity.class));
                 break;
@@ -260,62 +248,6 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 i.putExtra("title", mListener.getChangedTitle());
                 i.putExtra("title_dialog","HeadsetMic");
                 startActivityForResult(i, HEADSETMIC_REQUEST_CODE);
-                break;
-            case "Bluetooth Test":
-                i = new Intent(mActivity, BluetoothTestingActivity.class);
-                i.putExtra("title", mTitle);
-                startActivityForResult(i, BLUETOOTH_REQUEST_CODE);
-                break;
-
-            case "Wi-Fi Test":
-                i = new Intent(mActivity, WiFiTestingActivity.class);
-                i.putExtra("title", mTitle);
-                startActivityForResult(i, WIFI_REQUEST_CODE);
-                break;
-            case "Battery Test":
-                i = new Intent(mActivity, BatteryTestingActivity.class);
-                i.putExtra("title", mTitle);
-                startActivityForResult(i, BATTERY_REQUEST_CODE);
-                break;
-            case "E-Compass Test":
-                i = new Intent(mActivity, MagneticTestingActivity.class);
-                i.putExtra("title", mTitle);
-                startActivityForResult(i, E_COMPASS_REQUEST_CODE);
-                break;
-            case "Gyroscope Test":
-                i = new Intent(mActivity, GyroscopeTestingActivity.class);
-                i.putExtra("title", mTitle);
-                startActivityForResult(i, GYROSCOPE_REQUEST_CODE);
-                break;
-            case "SD Card Test":
-                i = new Intent(mActivity, SDCardTestingActivity.class);
-                i.putExtra("title", mTitle);
-                startActivityForResult(i, SDCARD_REQUEST_CODE);
-                break;
-            case "SIM Card Test":
-                i = new Intent(mActivity, SIMCardTestingActivity.class);
-                i.putExtra("title", mTitle);
-                i.putExtra("index", 1);
-                startActivityForResult(i, SIMCARD_REQUEST_CODE);
-                break;
-            case "SIM2 Test":
-                i = new Intent(mActivity, SIMCardTestingActivity.class);
-                i.putExtra("title", mTitle);
-                i.putExtra("index", 2);
-                startActivityForResult(i, SIM2_REQUEST_CODE);
-                break;
-            case "MultiTouch Test":
-                i = new Intent(mActivity, MultiTouchTestingActivity.class);
-                startActivityForResult(i, MULTI_TOUCH_REQUEST_CODE);
-                break;
-            case "Vibrator Test":
-                i = new Intent(mActivity, VibratorTestingActivity.class);
-                startActivityForResult(i, VIBRATOR_REQUEST_CODE);
-                break;
-            case "CMD Mouse Test":
-                i = new Intent(mActivity, MouseTestingActivity.class);
-                i.putExtra("title", mTitle);
-                startActivityForResult(i, MOUSE_REQUEST_CODE);
                 break;
             default:
                 Dialog dialog = new LoadingDialog(mActivity, mTitle);
