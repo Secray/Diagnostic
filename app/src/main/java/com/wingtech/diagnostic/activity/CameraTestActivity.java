@@ -3,10 +3,14 @@ package com.wingtech.diagnostic.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
+import android.net.Uri;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatImageView;
@@ -20,7 +24,10 @@ import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.util.Log;
 import com.wingtech.diagnostic.widget.CameraPreview;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -139,20 +146,52 @@ public class CameraTestActivity extends BaseActivity {
             out.flush();
             out.close();
 
-            File png=new File("/sdcard/asus_diagnostic_btn_take_photo");
-            if(png.exists()){
-                mPng.setVisibility(View.VISIBLE);
-
-            }
+            FileInputStream f = new FileInputStream(image);
+            Bitmap bm = null;
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inSampleSize = 8;//图片的长宽都是原来的1/8
+            BufferedInputStream bis = new BufferedInputStream(f);
+            bm = BitmapFactory.decodeStream(bis, null, options);
+            mCameralayout.setVisibility(View.GONE);
+            mPng.setVisibility(View.VISIBLE);
+            mPng.setImageBitmap(rotateBitmapByDegree(bm, 90));
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "保存照片失败！", Toast.LENGTH_LONG).show();
         }
         finally
         {
-           // camera.startPreview();
+            // camera.startPreview();
 
         }
+    }
+
+    public static Bitmap recyleBitmap(Bitmap bm) {
+        if(!bm.isRecycled()){
+            bm.recycle();
+            bm = null;
+        }
+        return null;
+    }
+    public static Bitmap rotateBitmapByDegree(Bitmap bm, int degree) {
+        Bitmap returnBm = null;
+
+        // 根据旋转角度，生成旋转矩阵
+        Matrix matrix = new Matrix();
+        matrix.postRotate(degree);
+        try {
+            // 将原始图片按照旋转矩阵进行旋转，并得到新的图片
+            returnBm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
+        } catch (OutOfMemoryError e) {
+        }
+        if (returnBm == null) {
+            returnBm = bm;
+        }
+
+        if (bm != returnBm) {
+            bm.recycle();
+        }
+        return returnBm;
     }
 
     private Camera.PictureCallback jpegCallback = new Camera.PictureCallback(){
