@@ -29,7 +29,6 @@
         <item>@string/test_case_sd_card</item>
         <item>@string/test_case_sim_card</item>
         <item>@string/test_case_nfc</item>
-        <item>@string/test_case_hdmi</item>
         <item>@string/test_case_fingerprint</item>
         <item>@string/test_case_sim2</item>
         <item>@string/test_case_secondary_mic</item>
@@ -64,7 +63,6 @@
         <item>@drawable/ic_sd_card</item>
         <item>@drawable/ic_sim_card</item>
         <item>@drawable/ic_nfc</item>
-        <item>@drawable/ic_hdmi</item>
         <item>@drawable/ic_fingerprint</item>
         <item>@drawable/ic_sim_card</item>
         <item>@drawable/ic_mic</item>

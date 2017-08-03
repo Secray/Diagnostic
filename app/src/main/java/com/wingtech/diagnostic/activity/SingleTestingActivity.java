@@ -7,29 +7,25 @@ import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.fragment.BatteryTestingFragment;
 import com.wingtech.diagnostic.fragment.BlueToothFragment;
 import com.wingtech.diagnostic.fragment.CMDMouseTestingFragment;
-import com.wingtech.diagnostic.fragment.GSensorFragment;
+import com.wingtech.diagnostic.fragment.FingerprintFragment;
 import com.wingtech.diagnostic.fragment.GyroscopeTestingFragment;
 import com.wingtech.diagnostic.fragment.MagneticTestingFragment;
 import com.wingtech.diagnostic.fragment.ModemTestingFragment;
-import com.wingtech.diagnostic.fragment.MultiTouchTestingFragment;
 import com.wingtech.diagnostic.fragment.SDCardTestingFragment;
 import com.wingtech.diagnostic.fragment.SIMCardTestingFragment;
 import com.wingtech.diagnostic.fragment.TestFragment;
-import com.wingtech.diagnostic.fragment.VibratorTestingFragment;
 import com.wingtech.diagnostic.fragment.WiFiTestingFragment;
 import com.wingtech.diagnostic.listener.OnResultChangedCallback;
 
 import static com.wingtech.diagnostic.util.Constants.BATTERY_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.BLUETOOTH_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.E_COMPASS_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.FINGERPRINT_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.GYROSCOPE_REQUEST_CODE;
-import static com.wingtech.diagnostic.util.Constants.G_SENSOR_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.MODEM_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.MOUSE_REQUEST_CODE;
-import static com.wingtech.diagnostic.util.Constants.MULTI_TOUCH_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.SDCARD_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.SIMCARD_REQUEST_CODE;
-import static com.wingtech.diagnostic.util.Constants.VIBRATOR_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.WIFI_REQUEST_CODE;
 
 /**
@@ -78,10 +74,6 @@ public class SingleTestingActivity extends BaseActivity implements OnResultChang
                 mRequestCode = BLUETOOTH_REQUEST_CODE;
                 mFragment = new BlueToothFragment();
                 break;
-            case "G-Sensor Test":
-                mRequestCode = G_SENSOR_REQUEST_CODE;
-                mFragment = new GSensorFragment();
-                break;
             case "Battery Test":
                 mRequestCode = BATTERY_REQUEST_CODE;
                 mFragment = new BatteryTestingFragment();
@@ -118,13 +110,9 @@ public class SingleTestingActivity extends BaseActivity implements OnResultChang
                 mRequestCode = MOUSE_REQUEST_CODE;
                 mFragment = new CMDMouseTestingFragment();
                 break;
-            case "MultiTouch Test":
-                mRequestCode = MULTI_TOUCH_REQUEST_CODE;
-                mFragment = new MultiTouchTestingFragment();
-                break;
-            case "Vibrator Test":
-                mRequestCode = VIBRATOR_REQUEST_CODE;
-                mFragment = new VibratorTestingFragment();
+            case "Fingerprint Test":
+                mRequestCode = FINGERPRINT_REQUEST_CODE;
+                mFragment = new FingerprintFragment();
                 break;
             default:
                 mFragment = new BlueToothFragment();
