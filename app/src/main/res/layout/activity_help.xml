@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_hotline"/>
+            android:src="@drawable/asus_diagnostic_ic_hotline_service"/>
 
         <TextView
             android:id="@+id/txt_hotline_service"
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_send_repair_request"/>
+            android:src="@drawable/asus_diagnostic_ic_request"/>
 
         <TextView
             android:id="@+id/txt_send_repair_request"

@@ -89,7 +89,7 @@ public class TestAllActivity extends BaseActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.test_content,
                     fragment).commit();
         } else {
-            CommonSingleTestFragment commonFragment = new CommonSingleTestFragment();
+            CommonSingleTestFragment commonFragment = new CommonSingleTestFragment(mCurrent);
             commonFragment.setOnResultChangedCallback(this);
             commonFragment.setTitleChangedListener(this);
             getSupportFragmentManager().beginTransaction().replace(R.id.test_content,

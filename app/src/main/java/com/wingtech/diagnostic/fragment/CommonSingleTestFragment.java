@@ -3,6 +3,7 @@ package com.wingtech.diagnostic.fragment;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.ImageView;
@@ -79,7 +80,12 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
     private OnResultChangedCallback mCallback;
     private Activity activity;
     private String mTitle;
+    private int mPos;
+    TypedArray mImgArray;
 
+    public CommonSingleTestFragment(int pos) {
+        mPos = pos;
+    }
     public void setTitleChangedListener(OnTitleChangedListener listener) {
         this.mListener = listener;
     }
@@ -101,7 +107,10 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
         mTestResultField = view.findViewById(R.id.result_field);
         mTestResultImg = (ImageView) view.findViewById(R.id.ic_test_result);
         mTestResult = (TextView) view.findViewById(R.id.txt_test_result);
+        mImgArray = getResources().obtainTypedArray(R.array.test_imgs);
         mTestBtn.setOnClickListener(this);
+        int id = mImgArray.getResourceId(mPos, 0);
+        mTestImg.setImageResource(id);
     }
 
     @Override
@@ -151,12 +160,12 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                     if (result) {
                         mTestResult.setText(getResources().getString(R.string.test_pass, mTitle));
                         mTestResult.setTextColor(getResources().getColor(R.color.test_result_pass));
-                        mTestResultImg.setImageResource(R.drawable.ic_test_pass);
+                        mTestResultImg.setImageResource(R.drawable.asus_diagnostic_ic_pass);
                         SharedPreferencesUtils.setParam(activity, mTitle, SharedPreferencesUtils.PASS);
                     } else {
                         mTestResult.setText(getResources().getString(R.string.test_fail, mTitle));
                         mTestResult.setTextColor(getResources().getColor(R.color.test_result_fail));
-                        mTestResultImg.setImageResource(R.drawable.ic_test_fail);
+                        mTestResultImg.setImageResource(R.drawable.asus_diagnostic_ic_fail);
                         SharedPreferencesUtils.setParam(activity, mTitle, SharedPreferencesUtils.FAIL);
                     }
                     mTestBtn.setText(R.string.btn_test_again);

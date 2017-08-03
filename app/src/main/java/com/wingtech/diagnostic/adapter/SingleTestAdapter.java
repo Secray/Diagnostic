@@ -46,10 +46,10 @@ public class SingleTestAdapter extends RecyclerView.Adapter<SingleTestAdapter.Si
         if (result == 0){
             holder.mIndicator.setVisibility(View.GONE);
         }else if(result == 1){
-            holder.mIndicator.setImageResource(R.drawable.ic_fail);
+            holder.mIndicator.setImageResource(R.drawable.asus_diagnostic_ic_fail2);
             holder.mIndicator.setVisibility(View.VISIBLE);
         }else if(result == 2){
-            holder.mIndicator.setImageResource(R.drawable.ic_pass);
+            holder.mIndicator.setImageResource(R.drawable.asus_diagnostic_ic_pass2);
             holder.mIndicator.setVisibility(View.VISIBLE);
         }
         //holder.mIndicator.setImageResource(t.isPassed() ? R.drawable.ic_pass : R.drawable.ic_fail);

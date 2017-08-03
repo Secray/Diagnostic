@@ -40,7 +40,7 @@ public class LoadingView extends ImageView {
 
 
     private void init() {
-        setImageResource(R.mipmap.loading);
+        setImageResource(R.drawable.loading);
         mFrameTime = 1000 / 12;
         mUpdateViewRunnable = new Runnable() {
             @Override

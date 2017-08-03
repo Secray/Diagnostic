@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_update"/>
+            android:src="@drawable/asus_diagnostic_ic_software_update"/>
 
         <TextView
             style="@style/AppTheme.ListItem.Text"
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_safe_mode"/>
+            android:src="@drawable/asus_diagnostic_ic_safe_mode"/>
 
         <TextView
             style="@style/AppTheme.ListItem.Text"
@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_factory_reset"/>
+            android:src="@drawable/asus_diagnostic_ic_factory_reset"/>
 
         <TextView
             style="@style/AppTheme.ListItem.Text"

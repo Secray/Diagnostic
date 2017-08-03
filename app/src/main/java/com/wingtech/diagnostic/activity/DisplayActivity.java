@@ -75,7 +75,7 @@ public class DisplayActivity extends TestingActivity {
                 mLayout.setBackgroundColor(GREEN);
                 break;
             case 6:
-                mLayout.setBackgroundResource(R.mipmap.lcd_tiaowen);
+                mLayout.setBackgroundResource(R.drawable.lcd_tiaowen);
                 break;
             default:
                 mLayout.setBackgroundColor(RED);

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/main_test_pic_height"
         android:scaleType="fitXY"
-        android:src="@mipmap/touch"
+        android:src="@drawable/touch"
         android:id="@+id/img_test"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -43,7 +43,7 @@
             android:id="@+id/ic_test_result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_test_pass" />
+            android:src="@drawable/asus_diagnostic_ic_pass" />
 
         <TextView
             android:id="@+id/txt_test_result"

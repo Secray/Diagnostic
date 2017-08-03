@@ -15,7 +15,7 @@ import com.wingtech.diagnostic.listener.OnTitleChangedListener;
 public class SingleTestActivity extends BaseActivity implements OnTitleChangedListener {
     Toolbar mToolbar;
     String[] mTestCases;
-
+    int mPos = -1;
     String mTitle;
 
     @Override
@@ -38,7 +38,7 @@ public class SingleTestActivity extends BaseActivity implements OnTitleChangedLi
 
     @Override
     protected void onWork() {
-        CommonSingleTestFragment fragment = new CommonSingleTestFragment();
+        CommonSingleTestFragment fragment = new CommonSingleTestFragment(mPos);
         fragment.setTitleChangedListener(this);
         getSupportFragmentManager().beginTransaction().replace(R.id.test_content,
                 fragment).commit();
@@ -46,8 +46,8 @@ public class SingleTestActivity extends BaseActivity implements OnTitleChangedLi
 
     @Override
     protected void handleIntent(Intent intent) {
-        int pos = intent.getIntExtra("position", 0);
-        mTitle = mTestCases[pos];
+        mPos = intent.getIntExtra("position", 0);
+        mTitle = mTestCases[mPos];
     }
 
     @Override

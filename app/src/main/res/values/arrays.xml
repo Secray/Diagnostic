@@ -6,10 +6,10 @@
         <item>@string/test_case_battery</item>
         <item>@string/test_case_e_compass</item>
         <item>@string/test_case_gyroscope</item>
+        <item>@string/test_case_wireless_charging</item>
         <item>@string/test_case_mode</item>
         <item>@string/test_case_touch</item>
         <item>@string/test_case_g_sensor</item>
-        <item>@string/test_case_wireless_charging</item>
         <item>@string/test_case_keypad</item>
         <item>@string/test_case_multi_touch</item>
         <item>@string/test_case_vibrator</item>
@@ -35,36 +35,71 @@
     </string-array>
 
     <integer-array name="test_icons">
-        <item>@drawable/ic_bluetooth</item>
-        <item>@drawable/ic_wifi</item>
-        <item>@drawable/ic_battery</item>
-        <item>@drawable/ic_compass</item>
-        <item>@drawable/ic_gyroscope</item>
-        <item>@drawable/ic_modem</item>
-        <item>@drawable/ic_touch</item>
-        <item>@drawable/ic_g_sensor</item>
-        <item>@drawable/ic_wireless_charging</item>
-        <item>@drawable/ic_keypad</item>
-        <item>@drawable/ic_multi_touch</item>
-        <item>@drawable/ic_vibrator</item>
-        <item>@drawable/ic_receiver</item>
-        <item>@drawable/ic_speaker</item>
-        <item>@drawable/ic_mic</item>
-        <item>@drawable/ic_camera</item>
-        <item>@drawable/ic_camera</item>
-        <item>@drawable/ic_flash</item>
-        <item>@drawable/ic_display</item>
-        <item>@drawable/ic_headset</item>
-        <item>@drawable/ic_headset_mic</item>
-        <item>@drawable/ic_headset</item>
-        <item>@drawable/ic_proximity</item>
-        <item>@drawable/ic_light_sensor</item>
-        <item>@drawable/ic_mouse</item>
-        <item>@drawable/ic_sd_card</item>
-        <item>@drawable/ic_sim_card</item>
-        <item>@drawable/ic_nfc</item>
-        <item>@drawable/ic_fingerprint</item>
-        <item>@drawable/ic_sim_card</item>
-        <item>@drawable/ic_mic</item>
+        <item>@drawable/asus_diagnostic_ic_bluetooth</item>
+        <item>@drawable/asus_diagnostic_ic_wifi</item>
+        <item>@drawable/asus_diagnostic_ic_battery</item>
+        <item>@drawable/asus_diagnostic_ic_e_compass</item>
+        <item>@drawable/asus_diagnostic_ic_gyroscope</item>
+        <item>@drawable/asus_diagnostic_ic_wireless_charging</item>
+        <item>@drawable/asus_diagnostic_ic_modembus</item>
+        <item>@drawable/asus_diagnostic_ic_touch</item>
+        <item>@drawable/asus_diagnostic_ic_gsensor</item>
+        <item>@drawable/asus_diagnostic_ic_keypad</item>
+        <item>@drawable/asus_diagnostic_ic_multitouch</item>
+        <item>@drawable/asus_diagnostic_ic_vibrator</item>
+        <item>@drawable/asus_diagnostic_ic_receiver2</item>
+        <item>@drawable/asus_diagnostic_ic_speaker</item>
+        <item>@drawable/asus_diagnostic_ic_boardmic</item>
+        <item>@drawable/asus_diagnostic_ic_maincamcapture</item>
+        <item>@drawable/asus_diagnostic_ic_vgacamcapture</item>
+        <item>@drawable/asus_diagnostic_ic_cameraflash</item>
+        <item>@drawable/asus_diagnostic_ic_display</item>
+        <item>@drawable/asus_diagnostic_ic_headset</item>
+        <item>@drawable/asus_diagnostic_ic_headsetmic</item>
+        <item>@drawable/asus_diagnostic_ic_headsetkey</item>
+        <item>@drawable/asus_diagnostic_ic_proximity</item>
+        <item>@drawable/asus_diagnostic_ic_lightsensor</item>
+        <item>@drawable/asus_diagnostic_ic_cmd_mouse</item>
+        <item>@drawable/asus_diagnostic_ic_sdcard</item>
+        <item>@drawable/asus_diagnostic_ic_simcard</item>
+        <item>@drawable/asus_diagnostic_ic_nfc</item>
+        <item>@drawable/asus_diagnostic_ic_fingerprint</item>
+        <item>@drawable/asus_diagnostic_ic_simcard</item>
+        <item>@drawable/asus_diagnostic_ic_boardmic</item>
+    </integer-array>
+
+
+    <integer-array name="test_imgs">
+        <item>@drawable/asus_diagnostic_img_bluetooth</item>
+        <item>@drawable/asus_diagnostic_img_wifi</item>
+        <item>@drawable/asus_diagnostic_img_battery</item>
+        <item>@drawable/asus_diagnostic_img_e_compass</item>
+        <item>@drawable/asus_diagnostic_img_gyroscope</item>
+        <item>@drawable/asus_diagnostic_img_wireless_charging</item>
+        <item>@drawable/asus_diagnostic_img_modembus</item>
+        <item>@drawable/asus_diagnostic_img_touch</item>
+        <item>@drawable/asus_diagnostic_img_g_sensor</item>
+        <item>@drawable/asus_diagnostic_img_keypad</item>
+        <item>@drawable/asus_diagnostic_img_multitouch</item>
+        <item>@drawable/asus_diagnostic_img_vibrator</item>
+        <item>@drawable/asus_diagnostic_img_receive</item>
+        <item>@drawable/asus_diagnostic_img_speake</item>
+        <item>@drawable/asus_diagnostic_img_boardmic</item>
+        <item>@drawable/asus_diagnostic_img_maincamcapture</item>
+        <item>@drawable/asus_diagnostic_img_vgacamcapture</item>
+        <item>@drawable/asus_diagnostic_img_camera_flash</item>
+        <item>@drawable/asus_diagnostic_img_display</item>
+        <item>@drawable/asus_diagnostic_img_headset</item>
+        <item>@drawable/asus_diagnostic_img_headsetmic</item>
+        <item>@drawable/asus_diagnostic_img_headsetkey</item>
+        <item>@drawable/asus_diagnostic_img_proximity</item>
+        <item>@drawable/asus_diagnostic_img_lightsensor</item>
+        <item>@drawable/asus_diagnostic_img_cmd_mouse</item>
+        <item>@drawable/asus_diagnostic_img_sdcard</item>
+        <item>@drawable/asus_diagnostic_img_simcard</item>
+        <item>@drawable/asus_diagnostic_img_nfc_tagreader</item>
+        <item>@drawable/asus_diagnostic_img_fingerprint</item>
+        <item>@drawable/asus_diagnostic_img_simcard</item>
+        <item>@drawable/asus_diagnostic_img_boardmic</item>
     </integer-array>
 </resources>

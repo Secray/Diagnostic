@@ -45,12 +45,12 @@ public class TestResultAdapter extends RecyclerView.Adapter<TestResultAdapter.Te
             holder.mFailed.setText(mContext.getString(R.string.list_item_result_failed, 0));
             holder.mPassed.setText(mContext.getString(R.string.list_item_result_passed, 0));
         }else if(result == 1){
-            holder.mIndicator.setImageResource(R.drawable.ic_fail);
+            holder.mIndicator.setImageResource(R.drawable.asus_diagnostic_ic_fail2);
             holder.mIndicator.setVisibility(View.VISIBLE);
             holder.mFailed.setText(mContext.getString(R.string.list_item_result_failed, 1));
             holder.mPassed.setText(mContext.getString(R.string.list_item_result_passed, 0));
         }else if(result == 2){
-            holder.mIndicator.setImageResource(R.drawable.ic_pass);
+            holder.mIndicator.setImageResource(R.drawable.asus_diagnostic_ic_pass2);
             holder.mIndicator.setVisibility(View.VISIBLE);
             holder.mFailed.setText(mContext.getString(R.string.list_item_result_failed, 0));
             holder.mPassed.setText(mContext.getString(R.string.list_item_result_passed, 1));
