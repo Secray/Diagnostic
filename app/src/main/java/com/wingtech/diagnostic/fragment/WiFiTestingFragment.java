@@ -90,14 +90,7 @@ public class WiFiTestingFragment extends TestFragment {
             mCallback.onChange(mResult);
         }
         mWiFiManager.startScan();
-
-        int size = 0;
-        do {
-            mScanResults = mWiFiManager.getScanResults();
-            if (mScanResults != null) {
-                size = mScanResults.size();
-            }
-        } while (mScanResults == null || size == 0);
+        mScanResults = mWiFiManager.getScanResults();
 
         Log.i("WiFi Scan results = " + mScanResults.size());
         if (isWiFi(mActivity)) {

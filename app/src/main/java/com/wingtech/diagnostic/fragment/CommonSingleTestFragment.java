@@ -13,17 +13,20 @@ import com.wingtech.diagnostic.activity.BoardMicActivity;
 import com.wingtech.diagnostic.activity.CameraFlashActivity;
 import com.wingtech.diagnostic.activity.CameraTestActivity;
 import com.wingtech.diagnostic.activity.DisplayActivity;
+import com.wingtech.diagnostic.activity.GSensorTestActivity;
 import com.wingtech.diagnostic.activity.HeadsetActivity;
 import com.wingtech.diagnostic.activity.HeadsetKeyActivity;
 import com.wingtech.diagnostic.activity.HeadsetMicActivity;
 import com.wingtech.diagnostic.activity.KeypadActivity;
 import com.wingtech.diagnostic.activity.LightSensorActivity;
+import com.wingtech.diagnostic.activity.MultiTouchTestingActivity;
 import com.wingtech.diagnostic.activity.NfcActivity;
 import com.wingtech.diagnostic.activity.ProximityActivity;
 import com.wingtech.diagnostic.activity.RecieverActivity;
 import com.wingtech.diagnostic.activity.SingleTestingActivity;
 import com.wingtech.diagnostic.activity.SpeakerActivity;
 import com.wingtech.diagnostic.activity.TouchTestActivity;
+import com.wingtech.diagnostic.activity.VibratorTestingActivity;
 import com.wingtech.diagnostic.activity.WireChargActivity;
 import com.wingtech.diagnostic.dialog.LoadingDialog;
 import com.wingtech.diagnostic.listener.OnResultChangedCallback;
@@ -137,6 +140,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
             case MODEM_REQUEST_CODE:
             case HEADSETMIC_REQUEST_CODE:
             case TOUCH_REQUEST_CODE:
+            case KEYPAD_REQUEST_CODE:
                 boolean result = data.getBooleanExtra("result", false);
                 if (mCallback != null) {
                     mCallback.onChange(result);
@@ -162,7 +166,6 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (mTitle) {
-            case "G-Sensor Test":
             case "Bluetooth Test":
             case "Modem Test":
             case "Wi-Fi Test":
@@ -172,12 +175,26 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
             case "SD Card Test":
             case "SIM Card Test":
             case "SIM2 Test":
-            case "MultiTouch Test":
-            case "Vibrator Test":
             case "CMD Mouse Test":
                 Intent i = new Intent(mActivity, SingleTestingActivity.class);
                 i.putExtra("title", mTitle);
                 startActivityForResult(i, MOUSE_REQUEST_CODE);
+                break;
+
+            case "Vibrator Test":
+                i = new Intent(mActivity, VibratorTestingActivity.class);
+                i.putExtra("isTestAll", mCallback != null);
+                startActivityForResult(i, VIBRATOR_REQUEST_CODE);
+                break;
+            case "G-Sensor Test":
+                i = new Intent(mActivity, GSensorTestActivity.class);
+                i.putExtra("isTestAll", mCallback != null);
+                startActivityForResult(i, G_SENSOR_REQUEST_CODE);
+                break;
+            case "MultiTouch Test":
+                i = new Intent(mActivity, MultiTouchTestingActivity.class);
+                i.putExtra("isTestAll", mCallback != null);
+                startActivityForResult(i, MULTI_TOUCH_REQUEST_CODE);
                 break;
 
             case "Touch Test":

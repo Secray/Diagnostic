@@ -93,9 +93,6 @@ public class Utils {
             case "Bluetooth Test":
                 fragment = new BlueToothFragment();
                 break;
-            case "G-Sensor Test":
-                fragment = new GSensorFragment();
-                break;
             case "Battery Test":
                 fragment = new BatteryTestingFragment();
                 break;
@@ -122,12 +119,6 @@ public class Utils {
                 break;
             case "CMD Mouse Test":
                 fragment = new CMDMouseTestingFragment();
-                break;
-            case "MultiTouch Test":
-                fragment = new MultiTouchTestingFragment();
-                break;
-            case "Vibrator Test":
-                fragment = new VibratorTestingFragment();
                 break;
         }
         return fragment;

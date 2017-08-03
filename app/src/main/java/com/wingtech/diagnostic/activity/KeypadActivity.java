@@ -5,7 +5,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.wingtech.diagnostic.R;
 
@@ -66,11 +65,6 @@ public class KeypadActivity extends TestingActivity implements View.OnClickListe
         mBackTxt.setVisibility(View.VISIBLE);
         mRecentTxt.setVisibility(View.VISIBLE);
         findViewById(R.id.fail_btn).setOnClickListener(this);
-    }
-
-    @Override
-    public void onBackPressed() {
-
     }
 
     @Override

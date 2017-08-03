@@ -122,8 +122,15 @@
         <activity android:name="com.wingtech.diagnostic.activity.TestAllActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".activity.CameraFlashActivity" />
+        <activity android:name=".activity.CameraFlashActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".activity.SingleTestingActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.GSensorTestActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.MultiTouchTestingActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.VibratorTestingActivity"
             android:screenOrientation="portrait"/>
 
     </application>
