@@ -205,8 +205,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 color = getColor(R.color.battery_10_20);
                 bgColor = getColor(R.color.battery_10_20_bg);
             }
-            mBatteryPercent.setFirstColor(color);
-            mBatteryPercent.setSecondColor(bgColor);
+            mBatteryPercent.setFirstColor(bgColor);
+            mBatteryPercent.setSecondColor(color);
             mBatteryPercent.setPercent((float) level / scale);
         }
     };
@@ -231,8 +231,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 color = getColor(R.color.cpu_0_50);
                 bgColor = getColor(R.color.cpu_0_50_bg);
             }
-            mCPUPercent.setFirstColor(bgColor);
-            mCPUPercent.setSecondColor(color);
+            mCPUPercent.setFirstColor(color);
+            mCPUPercent.setSecondColor(bgColor);
             mCPUPercent.setPercent((float) value / 100);
         }
     };

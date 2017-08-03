@@ -1,7 +1,6 @@
 package com.wingtech.diagnostic.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -20,7 +19,7 @@ import static com.wingtech.diagnostic.util.Constants.LIGHTSENSOR_REQUEST_CODE;
  * Created by gaoweili on 17-7-28.
  */
 
-public class LightSensorActivity extends BaseActivity implements SensorEventListener {
+public class LightSensorActivity extends TestingActivity implements SensorEventListener {
     private CheckBox mStrongFirst = null;
     private CheckBox mWeak = null;
     private CheckBox mNearSecond = null;
@@ -68,7 +67,7 @@ public class LightSensorActivity extends BaseActivity implements SensorEventList
 
     @Override
     protected void initToolbar() {
-
+        mRequestCode = LIGHTSENSOR_REQUEST_CODE;
     }
 
     @Override
@@ -81,7 +80,8 @@ public class LightSensorActivity extends BaseActivity implements SensorEventList
         mTouchFailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendResult(false);
+                mResult = false;
+                sendResult();
             }
         });
     }
@@ -143,7 +143,8 @@ public class LightSensorActivity extends BaseActivity implements SensorEventList
 
         if(mIsStrong == true && mIsWeak == true &&  mIsStrongSecond == true){
             Log.d(TAG,"finish ");
-            sendResult(true);
+            mResult = true;
+            sendResult();
         }
     }
 
@@ -161,17 +162,5 @@ public class LightSensorActivity extends BaseActivity implements SensorEventList
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
-    }
-
-    private void sendResult(boolean mResult) {
-        Intent intent = new Intent(this, SingleTestActivity.class);
-        intent.putExtra("result", mResult);
-        setResult(LIGHTSENSOR_REQUEST_CODE, intent);
-        finish();
-    }
-
-    @Override
-    public void onBackPressed(){
-        sendResult(false);
     }
 }

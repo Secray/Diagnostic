@@ -1,5 +1,6 @@
 package com.wingtech.diagnostic.activity;
 
+import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
@@ -87,13 +88,13 @@ public class TestAllActivity extends BaseActivity
             fragment.setTitle(mTitle);
             getSupportFragmentManager().beginTransaction().replace(R.id.test_content,
                     fragment).commit();
+        } else {
+            CommonSingleTestFragment commonFragment = new CommonSingleTestFragment();
+            commonFragment.setOnResultChangedCallback(this);
+            commonFragment.setTitleChangedListener(this);
+            getSupportFragmentManager().beginTransaction().replace(R.id.test_content,
+                    commonFragment).commit();
         }
-
-        /*CommonSingleTestFragment fragment1 = new CommonSingleTestFragment();
-        fragment1.setTitleChangedListener(this);
-        getSupportFragmentManager().beginTransaction().replace(R.id.test_content,
-                fragment1).commit();*/
-
     }
 
     @Override
@@ -105,7 +106,11 @@ public class TestAllActivity extends BaseActivity
     public void onChange(boolean result) {
         SharedPreferencesUtils.setParam(this, mTitle,
                 result ? SharedPreferencesUtils.PASS : SharedPreferencesUtils.FAIL);
-        mCurrent++;
+        mCurrent ++;
+        if (mCurrent > mCaseList.size()) {
+            startActivity(new Intent(this, TestResultActivity.class));
+            finish();
+        }
         doTest();
     }
 }

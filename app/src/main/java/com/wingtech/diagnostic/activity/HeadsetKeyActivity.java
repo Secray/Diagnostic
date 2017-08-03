@@ -16,7 +16,7 @@ import static com.wingtech.diagnostic.util.Constants.HEADSETKEY_REQUEST_CODE;
  * Created by gaoweili on 17-7-28.
  */
 
-public class HeadsetKeyActivity extends BaseActivity {
+public class HeadsetKeyActivity extends TestingActivity {
 
     private static final String TAG = "HeadsetKeyActivity";
 
@@ -41,7 +41,7 @@ public class HeadsetKeyActivity extends BaseActivity {
 
     @Override
     protected void initToolbar() {
-
+        mRequestCode = HEADSETKEY_REQUEST_CODE;
     }
 
     @Override
@@ -52,7 +52,8 @@ public class HeadsetKeyActivity extends BaseActivity {
         mTouchFailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendResult(false);
+                mResult = false;
+                sendResult();
             }
         });
     }
@@ -61,7 +62,8 @@ public class HeadsetKeyActivity extends BaseActivity {
         Log.i(TAG,"onKeyDown keyCode: " + keyCode);
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:
-                sendResult(false);
+                mResult = false;
+                sendResult();
                 return true;
             case KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE:
             case KeyEvent.KEYCODE_CALL:
@@ -69,17 +71,11 @@ public class HeadsetKeyActivity extends BaseActivity {
             case KeyEvent.KEYCODE_HEADSETHOOK:
                 Log.i(TAG,"onKeyDown keyCode setChecked: " + keyCode);
                 mHeadsetKey.setChecked(true);
-                sendResult(true);
+                mResult = true;
+                sendResult();
                 return true;
             default:
                 return false;
         }
     }
-    private void sendResult(boolean mResult) {
-        Intent intent = new Intent(this, SingleTestActivity.class);
-        intent.putExtra("result", mResult);
-        setResult(HEADSETKEY_REQUEST_CODE, intent);
-        finish();
-    }
-
 }

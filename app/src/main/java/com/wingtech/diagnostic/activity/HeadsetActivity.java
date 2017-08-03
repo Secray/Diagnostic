@@ -27,7 +27,7 @@ import static com.wingtech.diagnostic.util.Constants.HEADSET_REQUEST_CODE;
  * Created by gaoweili on 17-7-28.
  */
 
-public class HeadsetActivity extends BaseActivity {
+public class HeadsetActivity extends TestingActivity {
 
     private String mContentDialog;
     private MediaPlayer player = null;
@@ -37,6 +37,7 @@ public class HeadsetActivity extends BaseActivity {
     private boolean isPlug = false;
     private HeadsetPlugReceiver mHPReceiver;
     AlertDialog dlg;
+
     @Override
     protected int getLayoutResId() {
         return R.layout.content_dialog_test;
@@ -50,7 +51,7 @@ public class HeadsetActivity extends BaseActivity {
 
     @Override
     protected void initToolbar() {
-
+        mRequestCode = HEADSET_REQUEST_CODE;
     }
 
     @Override
@@ -58,8 +59,7 @@ public class HeadsetActivity extends BaseActivity {
 
     }
 
-    public void onPause()
-    {
+    public void onPause() {
         super.onPause();
 
     }
@@ -68,7 +68,8 @@ public class HeadsetActivity extends BaseActivity {
     protected void onStop() {
         super.onStop();
         prepareExit();
-        sendResult(false);
+        mResult = false;
+        sendResult();
     }
 
     @Override
@@ -82,14 +83,7 @@ public class HeadsetActivity extends BaseActivity {
 
     }
 
-    private void sendResult(boolean mResult) {
-        Intent intent = new Intent(this, SingleTestActivity.class);
-        intent.putExtra("result", mResult);
-        setResult(HEADSET_REQUEST_CODE, intent);
-        finish();
-    }
-
-    public void showTheDialog(boolean flag){
+    public void showTheDialog(boolean flag) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.content_test_dialog, null);//获取自定义布局
@@ -100,14 +94,14 @@ public class HeadsetActivity extends BaseActivity {
         Button pass = (Button) layout.findViewById(R.id.pass);
         Button fail = (Button) layout.findViewById(R.id.fail);
         LinearLayout ll = (LinearLayout) layout.findViewById(R.id.result);
-        if (!flag){
+        if (!flag) {
             mTitle.setText(R.string.headset_context_dialog_title);
             mContent.setText(R.string.headset_context_dialog_conteent);
             ok.setVisibility(View.VISIBLE);
             ll.setVisibility(View.GONE);
-        }else{
+        } else {
             mTitle.setText(R.string.dialog_title);
-            if (mContentDialog != null){
+            if (mContentDialog != null) {
                 String sFormat = getResources().getString(R.string.dialog_context);
                 String s = String.format(sFormat, mContentDialog);
                 mContent.setText(s);
@@ -117,27 +111,29 @@ public class HeadsetActivity extends BaseActivity {
         }
 
 
-
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 if (dlg != null) {
                     dlg.dismiss();
                 }
-                sendResult(false);
+                mResult = false;
+                sendResult();
             }
         });
 
         pass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                sendResult(true);
+                mResult = true;
+                sendResult();
             }
         });
         fail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                sendResult(false);
+                mResult = false;
+                sendResult();
             }
         });
         dlg = builder.create();
@@ -147,18 +143,18 @@ public class HeadsetActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         prepareExit();
-        sendResult(false);
+        super.onBackPressed();
     }
 
     private void prepareExit() {
 
-        if(player != null) {
+        if (player != null) {
             player.release();
         }
-        try{
+        try {
             unregisterReceiver(mHPReceiver);
-        }catch ( Exception e ) {
-            Log.e(TAG, "unregister failed "+ e );
+        } catch (Exception e) {
+            Log.e(TAG, "unregister failed " + e);
         }
     }
 
@@ -175,29 +171,24 @@ public class HeadsetActivity extends BaseActivity {
             player.prepare();
             player.start();
         } catch (IOException e) {
-            Log.e(TAG,"can't play melody cause:"+e);
+            Log.e(TAG, "can't play melody cause:" + e);
         }
     }
 
-    private class HeadsetPlugReceiver extends BroadcastReceiver
-    {
+    private class HeadsetPlugReceiver extends BroadcastReceiver {
 
         @Override
-        public void onReceive(Context context, Intent intent)
-        {
-            if (intent.hasExtra("state"))
-            {
-                if (intent.getIntExtra("state", 0) == 0)
-                {
+        public void onReceive(Context context, Intent intent) {
+            if (intent.hasExtra("state")) {
+                if (intent.getIntExtra("state", 0) == 0) {
                     //plug out
                     isPlug = false;
-                    if(player != null){
+                    if (player != null) {
                         player.release();
                     }
                     showTheDialog(false);
-                }
-                else if (intent.getIntExtra("state", 0) == 1) {
-                    if(dlg!=null) {
+                } else if (intent.getIntExtra("state", 0) == 1) {
+                    if (dlg != null) {
                         dlg.dismiss();
                     }
                     isPlug = true;
@@ -205,27 +196,27 @@ public class HeadsetActivity extends BaseActivity {
                     localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                     player = new MediaPlayer();
                     player.reset();
-                    localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,15,0);
-                    localAudioManager.setStreamVolume(AudioManager.STREAM_RING,15,0);
-                    if(localAudioManager.isSpeakerphoneOn()){
+                    localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
+                    localAudioManager.setStreamVolume(AudioManager.STREAM_RING, 15, 0);
+                    if (localAudioManager.isSpeakerphoneOn()) {
                         localAudioManager.setSpeakerphoneOn(false);
                     }
-                    player.setVolume(1.0f,0.000f);/* ajayet invert to match headset */
+                    player.setVolume(1.0f, 0.000f);/* ajayet invert to match headset */
                     playMelody(getResources(), R.raw.bootaudio);
                     player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override
                         public void onCompletion(MediaPlayer mp) {
-                            if(isPlug){
+                            if (isPlug) {
                                 mTxt.setText(R.string.headset_context_right);
                                 localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                                 player = new MediaPlayer();
                                 player.reset();
-                                localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,15,0);
-                                localAudioManager.setStreamVolume(AudioManager.STREAM_RING,15,0);
-                                if(localAudioManager.isSpeakerphoneOn()){
+                                localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
+                                localAudioManager.setStreamVolume(AudioManager.STREAM_RING, 15, 0);
+                                if (localAudioManager.isSpeakerphoneOn()) {
                                     localAudioManager.setSpeakerphoneOn(false);
                                 }
-                                player.setVolume(0.000f,1.0f);/* ajayet invert to match headset */
+                                player.setVolume(0.000f, 1.0f);/* ajayet invert to match headset */
                                 playMelody(getResources(), R.raw.bootaudio);
                                 player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                                     @Override

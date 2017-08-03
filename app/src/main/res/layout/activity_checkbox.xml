@@ -119,7 +119,7 @@
 
 
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/touch_fail_btn"
+        android:id="@+id/fail_btn"
         android:textAllCaps="false"
         android:layout_width="match_parent"
         android:layout_height="@dimen/test_action_button_height"

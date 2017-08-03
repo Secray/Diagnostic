@@ -1,10 +1,6 @@
 package com.wingtech.diagnostic.activity;
 
 
-import android.content.Context;
-import android.content.Intent;
-import android.media.AudioManager;
-import android.media.AudioRecord;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.CountDownTimer;
@@ -18,24 +14,22 @@ import android.widget.TextView;
 import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.util.Log;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 
 import static com.wingtech.diagnostic.util.Constants.MIC_REQUEST_CODE;
-import static com.wingtech.diagnostic.util.Constants.RECIEVER_REQUEST_CODE;
 
 /**
  * Created by gaoweili on 17-7-28.
  */
 
-public class BoardMicActivity extends BaseActivity {
+public class BoardMicActivity extends TestingActivity {
     private String mContentDialog;
     public static final String TAG = "BoardMicActivity";
     private TextView mTxt = null;
     private String path = null;
     CountDownTimer mTimer;
     CountDownTimer mtimer;
+
     @Override
     protected int getLayoutResId() {
         return R.layout.content_dialog_test;
@@ -45,12 +39,12 @@ public class BoardMicActivity extends BaseActivity {
     protected void initViews() {
         mTxt = (TextView) findViewById(R.id.dialog_txt);
         mContentDialog = getIntent().getStringExtra("title_dialog");
-        path = Environment.getExternalStorageDirectory().getAbsolutePath()+"/test.pcm";
+        path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/test.pcm";
     }
 
     @Override
     protected void initToolbar() {
-
+        mRequestCode = MIC_REQUEST_CODE;
     }
 
     @Override
@@ -90,17 +84,18 @@ public class BoardMicActivity extends BaseActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if (mTimer != null){
+        if (mTimer != null) {
             mTimer.cancel();
-            mTimer=null;
+            mTimer = null;
         }
-        if (mtimer != null){
+        if (mtimer != null) {
             mtimer.cancel();
-            mtimer=null;
+            mtimer = null;
         }
         stopPlayer();
         stopRecorder();
-        sendResult(false);
+        mResult = false;
+        sendResult();
     }
 
     @Override
@@ -108,20 +103,13 @@ public class BoardMicActivity extends BaseActivity {
         super.onResume();
     }
 
-    private void sendResult(boolean mResult) {
-        Intent intent = new Intent(this, SingleTestActivity.class);
-        intent.putExtra("result", mResult);
-        setResult(MIC_REQUEST_CODE, intent);
-        finish();
-    }
-
-    public void showTheDialog(){
+    public void showTheDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.content_test_dialog, null);//获取自定义布局
         builder.setView(layout);
         TextView mContent = (TextView) layout.findViewById(R.id.dialog_context);
-        if (mContentDialog != null){
+        if (mContentDialog != null) {
             String sFormat = getResources().getString(R.string.dialog_context);
             String s = String.format(sFormat, mContentDialog);
             mContent.setText(s);
@@ -130,26 +118,24 @@ public class BoardMicActivity extends BaseActivity {
         pass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                sendResult(true);
+                mResult = true;
+                sendResult();
             }
         });
         Button fail = (Button) layout.findViewById(R.id.fail);
         fail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                sendResult(false);
+                mResult = false;
+                sendResult();
             }
         });
         AlertDialog dlg = builder.create();
         dlg.show();
     }
 
-    @Override
-    public void onBackPressed() {
-        sendResult(false);
-    }
-
     private MediaRecorder mRecorder;
+
     public boolean startRecorder(String path) {
         //设置音源为Micphone
 
@@ -177,11 +163,12 @@ public class BoardMicActivity extends BaseActivity {
             mRecorder.release();
             mRecorder = null;
         }
-            return false;
+        return false;
 
     }
 
     private MediaPlayer mPlayer;
+
     public boolean startPlayer(String path) {
         try {
             //设置要播放的文件
@@ -190,7 +177,7 @@ public class BoardMicActivity extends BaseActivity {
             mPlayer.prepare();
             //播放
             mPlayer.start();
-        }catch(Exception e){
+        } catch (Exception e) {
             Log.e(TAG, "prepare() failed");
         }
 
@@ -205,7 +192,6 @@ public class BoardMicActivity extends BaseActivity {
         }
         return false;
     }
-
 
 
 }

@@ -27,7 +27,7 @@ import static com.wingtech.diagnostic.util.Constants.HEADSETMIC_REQUEST_CODE;
  * Created by gaoweili on 17-7-28.
  */
 
-public class HeadsetMicActivity extends BaseActivity {
+public class HeadsetMicActivity extends TestingActivity {
 
     private String mContentDialog;
     public static final String TAG = "HeadsetMicActivity";
@@ -53,7 +53,7 @@ public class HeadsetMicActivity extends BaseActivity {
 
     @Override
     protected void initToolbar() {
-
+        mRequestCode = HEADSETMIC_REQUEST_CODE;
     }
 
     @Override
@@ -76,13 +76,6 @@ public class HeadsetMicActivity extends BaseActivity {
         intentFilter.addAction("android.intent.action.HEADSET_PLUG");
         registerReceiver(mHPReceiver, intentFilter);
 
-    }
-
-    private void sendResult(boolean mResult) {
-        Intent intent = new Intent(this, SingleTestActivity.class);
-        intent.putExtra("result", mResult);
-        setResult(HEADSETMIC_REQUEST_CODE, intent);
-        finish();
     }
 
     public void showTheDialog(boolean flag){
@@ -120,29 +113,27 @@ public class HeadsetMicActivity extends BaseActivity {
                 if (dlg != null) {
                     dlg.dismiss();
                 }
-                sendResult(false);
+                mResult = false;
+                sendResult();
             }
         });
 
         pass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                sendResult(true);
+                mResult = true;
+                sendResult();
             }
         });
         fail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                sendResult(false);
+                mResult = false;
+                sendResult();
             }
         });
         dlg = builder.create();
         dlg.show();
-    }
-
-    @Override
-    public void onBackPressed() {
-        sendResult(false);
     }
 
     @Override
@@ -158,7 +149,8 @@ public class HeadsetMicActivity extends BaseActivity {
         }
         stopPlayer();
         stopRecorder();
-        sendResult(false);
+        mResult = false;
+        sendResult();
     }
 
     private class HeadsetPlugReceiver extends BroadcastReceiver

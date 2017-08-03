@@ -26,6 +26,7 @@ import com.wingtech.diagnostic.activity.SpeakerActivity;
 import com.wingtech.diagnostic.activity.TouchTestActivity;
 import com.wingtech.diagnostic.activity.WireChargActivity;
 import com.wingtech.diagnostic.dialog.LoadingDialog;
+import com.wingtech.diagnostic.listener.OnResultChangedCallback;
 import com.wingtech.diagnostic.listener.OnTitleChangedListener;
 import com.wingtech.diagnostic.util.SharedPreferencesUtils;
 
@@ -40,6 +41,7 @@ import static com.wingtech.diagnostic.util.Constants.G_SENSOR_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.HEADSETKEY_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.HEADSETMIC_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.HEADSET_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.KEYPAD_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.LIGHTSENSOR_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.MIC_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.MODEM_REQUEST_CODE;
@@ -52,6 +54,7 @@ import static com.wingtech.diagnostic.util.Constants.SDCARD_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.SIM2_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.SIMCARD_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.SPEAK_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.TOUCH_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.VGACAMERA_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.VIBRATOR_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.WIFI_REQUEST_CODE;
@@ -69,12 +72,16 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
     private TextView mTestResult;
     AppCompatButton mTestBtn;
     private OnTitleChangedListener mListener;
+    private OnResultChangedCallback mCallback;
     private Activity activity;
     private String mTitle;
 
-
     public void setTitleChangedListener(OnTitleChangedListener listener) {
         this.mListener = listener;
+    }
+
+    public void setOnResultChangedCallback(OnResultChangedCallback callback) {
+        this.mCallback = callback;
     }
 
     @Override
@@ -129,20 +136,25 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
             case MIC_REQUEST_CODE:
             case MODEM_REQUEST_CODE:
             case HEADSETMIC_REQUEST_CODE:
+            case TOUCH_REQUEST_CODE:
                 boolean result = data.getBooleanExtra("result", false);
-                mTestResultField.setVisibility(View.VISIBLE);
-                if (result) {
-                    mTestResult.setText(getResources().getString(R.string.test_pass, mTitle));
-                    mTestResult.setTextColor(getResources().getColor(R.color.test_result_pass));
-                    mTestResultImg.setImageResource(R.drawable.ic_test_pass);
-                    SharedPreferencesUtils.setParam(activity,mTitle,SharedPreferencesUtils.PASS);
+                if (mCallback != null) {
+                    mCallback.onChange(result);
                 } else {
-                    mTestResult.setText(getResources().getString(R.string.test_fail, mTitle));
-                    mTestResult.setTextColor(getResources().getColor(R.color.test_result_fail));
-                    mTestResultImg.setImageResource(R.drawable.ic_test_fail);
-                    SharedPreferencesUtils.setParam(activity,mTitle,SharedPreferencesUtils.FAIL);
+                    mTestResultField.setVisibility(View.VISIBLE);
+                    if (result) {
+                        mTestResult.setText(getResources().getString(R.string.test_pass, mTitle));
+                        mTestResult.setTextColor(getResources().getColor(R.color.test_result_pass));
+                        mTestResultImg.setImageResource(R.drawable.ic_test_pass);
+                        SharedPreferencesUtils.setParam(activity, mTitle, SharedPreferencesUtils.PASS);
+                    } else {
+                        mTestResult.setText(getResources().getString(R.string.test_fail, mTitle));
+                        mTestResult.setTextColor(getResources().getColor(R.color.test_result_fail));
+                        mTestResultImg.setImageResource(R.drawable.ic_test_fail);
+                        SharedPreferencesUtils.setParam(activity, mTitle, SharedPreferencesUtils.FAIL);
+                    }
+                    mTestBtn.setText(R.string.btn_test_again);
                 }
-                mTestBtn.setText(R.string.btn_test_again);
                 break;
         }
     }
@@ -169,61 +181,75 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 break;
 
             case "Touch Test":
-                startActivity(new Intent(mActivity, TouchTestActivity.class));
+                i = new Intent(mActivity, TouchTestActivity.class);
+                i.putExtra("isTestAll", mCallback != null);
+                startActivityForResult(i, CAMERA_REQUEST_CODE);
                 break;
             case "MainCam Test":
                 int camId = 0;
                 i = new Intent(mActivity, CameraTestActivity.class);
+                i.putExtra("isTestAll", mCallback != null);
                 i.putExtra("camId", camId);
                 startActivityForResult(i, CAMERA_REQUEST_CODE);
                 break;
             case "VGACam Test":
                 camId = 1;
                 i = new Intent(mActivity, CameraTestActivity.class);
+                i.putExtra("isTestAll", mCallback != null);
                 i.putExtra("camId", camId);
                 startActivityForResult(i, VGACAMERA_REQUEST_CODE);
                 break;
             case "Camera Flash Test":
                 i = new Intent(mActivity, CameraFlashActivity.class);
+                i.putExtra("isTestAll", mCallback != null);
                 startActivityForResult(i, CAMERAFLASH_REQUEST_CODE);
                 break;
             case "Display Test":
                 i = new Intent(mActivity, DisplayActivity.class);
+                i.putExtra("isTestAll", mCallback != null);
                 i.putExtra("title", mListener.getChangedTitle());
                 i.putExtra("title_dialog","Display");
                 startActivityForResult(i, DISPLAY_REQUEST_CODE);
                 break;
             case "Proximity Test":
                 i = new Intent(mActivity, ProximityActivity.class);
+                i.putExtra("isTestAll", mCallback != null);
                 i.putExtra("title", mListener.getChangedTitle());
                 startActivityForResult(i, PROXIMITY_REQUEST_CODE);
                 break;
             case "HeadsetKey Test":
                 i = new Intent(mActivity, HeadsetKeyActivity.class);
+                i.putExtra("isTestAll", mCallback != null);
                 i.putExtra("title", mListener.getChangedTitle());
                 startActivityForResult(i, HEADSETKEY_REQUEST_CODE);
                 break;
             case "LightSensor Test":
                 i = new Intent(mActivity, LightSensorActivity.class);
+                i.putExtra("isTestAll", mCallback != null);
                 i.putExtra("title", mListener.getChangedTitle());
                 startActivityForResult(i, LIGHTSENSOR_REQUEST_CODE);
                 break;
             case "Keypad Test":
-                startActivity(new Intent(mActivity, KeypadActivity.class));
+                i = new Intent(mActivity, KeypadActivity.class);
+                i.putExtra("isTestAll", mCallback != null);
+                startActivityForResult(i, KEYPAD_REQUEST_CODE);
                 break;
             case "NFC Test":
                 i = new Intent(mActivity, NfcActivity.class);
                 i.putExtra("title", mListener.getChangedTitle());
+                i.putExtra("isTestAll", mCallback != null);
                 startActivityForResult(i, NFC_REQUEST_CODE);
                 break;
             case "Wireless Charging Test":
                 i = new Intent(mActivity, WireChargActivity.class);
+                i.putExtra("isTestAll", mCallback != null);
                 i.putExtra("title", mListener.getChangedTitle());
                 startActivityForResult(i, WIRECHARGKEY_REQUEST_CODE);
                 break;
             case "Receiver Test":
                 i = new Intent(mActivity, RecieverActivity.class);
                 i.putExtra("title", mListener.getChangedTitle());
+                i.putExtra("isTestAll", mCallback != null);
                 i.putExtra("title_dialog","Receiver");
                 i.putExtra("context","Playing");
                 startActivityForResult(i, RECIEVER_REQUEST_CODE);
@@ -231,6 +257,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
             case "Headset Test":
                 i = new Intent(mActivity, HeadsetActivity.class);
                 i.putExtra("title", mListener.getChangedTitle());
+                i.putExtra("isTestAll", mCallback != null);
                 i.putExtra("title_dialog","Headset");
                 startActivityForResult(i, HEADSET_REQUEST_CODE);
                 break;
@@ -238,18 +265,21 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 i = new Intent(mActivity, SpeakerActivity.class);
                 i.putExtra("title", mListener.getChangedTitle());
                 i.putExtra("title_dialog","Speaker");
+                i.putExtra("isTestAll", mCallback != null);
                 startActivityForResult(i, SPEAK_REQUEST_CODE);
                 break;
             case "BoardMic Test":
                 i = new Intent(mActivity, BoardMicActivity.class);
                 i.putExtra("title", mListener.getChangedTitle());
                 i.putExtra("title_dialog","BoardMic");
+                i.putExtra("isTestAll", mCallback != null);
                 startActivityForResult(i, MIC_REQUEST_CODE);
                 break;
             case "HeadsetMic Test":
                 i = new Intent(mActivity, HeadsetMicActivity.class);
                 i.putExtra("title", mListener.getChangedTitle());
                 i.putExtra("title_dialog","HeadsetMic");
+                i.putExtra("isTestAll", mCallback != null);
                 startActivityForResult(i, HEADSETMIC_REQUEST_CODE);
                 break;
             default:

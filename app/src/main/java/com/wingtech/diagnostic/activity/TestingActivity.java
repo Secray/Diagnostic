@@ -16,12 +16,18 @@ public abstract class TestingActivity extends BaseActivity {
     protected TextView mTxtTitle;
     protected String mTitle;
     protected int mRequestCode;
+    private boolean mIsTestAll;
 
     protected void sendResult() {
-        Intent intent = new Intent(this, SingleTestActivity.class);
+        Intent intent = new Intent(this, mIsTestAll ? TestAllActivity.class : SingleTestActivity.class);
         intent.putExtra("result", mResult);
         setResult(mRequestCode, intent);
         finish();
+    }
+
+    @Override
+    protected void handleIntent(Intent intent) {
+        mIsTestAll = intent.getBooleanExtra("isTestAll", false);
     }
 
     @Override

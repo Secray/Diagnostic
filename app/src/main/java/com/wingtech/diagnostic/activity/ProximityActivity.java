@@ -1,7 +1,6 @@
 package com.wingtech.diagnostic.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -20,7 +19,7 @@ import static com.wingtech.diagnostic.util.Constants.PROXIMITY_REQUEST_CODE;
  * Created by gaoweili on 17-7-28.
  */
 
-public class ProximityActivity extends BaseActivity implements SensorEventListener {
+public class ProximityActivity extends TestingActivity implements SensorEventListener {
     private CheckBox mNearFirst = null;
     private CheckBox mFast = null;
     private CheckBox mNearSecond = null;
@@ -66,7 +65,7 @@ public class ProximityActivity extends BaseActivity implements SensorEventListen
 
     @Override
     protected void initToolbar() {
-
+        mRequestCode = PROXIMITY_REQUEST_CODE;
     }
 
     @Override
@@ -79,7 +78,8 @@ public class ProximityActivity extends BaseActivity implements SensorEventListen
         mTouchFailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendResult(false);
+                mResult = false;
+                sendResult();
             }
         });
     }
@@ -143,7 +143,8 @@ public class ProximityActivity extends BaseActivity implements SensorEventListen
 
         if(mIsNear == true && mIsNearSecond == true &&  mIsFar == true){
             Log.d(TAG,"finish ");
-            sendResult(true);
+            mResult = true;
+            sendResult();
         }
     }
 
@@ -161,17 +162,5 @@ public class ProximityActivity extends BaseActivity implements SensorEventListen
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
-    }
-
-    private void sendResult(boolean mResult) {
-        Intent intent = new Intent(this, SingleTestActivity.class);
-        intent.putExtra("result", mResult);
-        setResult(PROXIMITY_REQUEST_CODE, intent);
-        finish();
-    }
-
-    @Override
-    public void onBackPressed(){
-        sendResult(false);
     }
 }

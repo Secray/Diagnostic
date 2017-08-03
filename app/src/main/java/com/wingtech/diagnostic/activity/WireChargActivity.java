@@ -20,7 +20,7 @@ import static com.wingtech.diagnostic.util.Constants.WIRECHARGKEY_REQUEST_CODE;
  * Created by gaoweili on 17-7-28.
  */
 
-public class WireChargActivity extends BaseActivity {
+public class WireChargActivity extends TestingActivity {
 
     private static final String TAG = "WireChargActivity";
 
@@ -31,6 +31,7 @@ public class WireChargActivity extends BaseActivity {
 
     private int pbatParam0 = 0;
     private int pbatParam1 = 0;
+
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_checkbox;
@@ -48,7 +49,7 @@ public class WireChargActivity extends BaseActivity {
 
     @Override
     protected void initToolbar() {
-
+        mRequestCode = WIRECHARGKEY_REQUEST_CODE;
     }
 
     @Override
@@ -59,37 +60,26 @@ public class WireChargActivity extends BaseActivity {
         mTouchFailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendResult(false);
+                mResult = false;
+                sendResult();
             }
         });
     }
 
-    private void sendResult(boolean mResult) {
-        Intent intent = new Intent(this, SingleTestActivity.class);
-        intent.putExtra("result", mResult);
-        setResult(WIRECHARGKEY_REQUEST_CODE, intent);
-        finish();
-    }
-
     @Override
-    public void onBackPressed() {
-        sendResult(false);
-    }
-    @Override
-    protected void onPause()
-    {
+    protected void onPause() {
         super.onPause();
         unregisterReceiver(mBatReceiver);
     }
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
         IntentFilter localIntentFilter = new IntentFilter();
         localIntentFilter.addAction("android.intent.action.BATTERY_CHANGED");
         registerReceiver(mBatReceiver, localIntentFilter);
     }
+
     private BroadcastReceiver mBatReceiver = new BroadcastReceiver() {
 
         @Override
@@ -99,37 +89,26 @@ public class WireChargActivity extends BaseActivity {
 
             int local_p = 0;
 
-            if(strAct.equals(strCmp)){
+            if (strAct.equals(strCmp)) {
                 pbatParam0 = paramIntent.getIntExtra(BatteryManager.EXTRA_STATUS, local_p);
                 pbatParam1 = paramIntent.getIntExtra(BatteryManager.EXTRA_PLUGGED, local_p);
 
-                switch(pbatParam0){
+                switch (pbatParam0) {
                     case BatteryManager.BATTERY_STATUS_CHARGING:
-                        Log.i(TAG,"charging");
+                        Log.i(TAG, "charging");
                         break;
                     case BatteryManager.BATTERY_STATUS_FULL:
-                        Log.i(TAG,"charging full");
+                        Log.i(TAG, "charging full");
                         break;
                     case BatteryManager.BATTERY_STATUS_DISCHARGING:
                     default:
                         Log.i(TAG, "battery using");
                         break;
                 }
-                if(pbatParam1==BatteryManager.BATTERY_PLUGGED_USB){
-                    Log.i(TAG, "USB connectting");
+                if (pbatParam1 == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
                     mWireChargKey.setChecked(true);
-                    sendResult(true);
-                }
-                else if(pbatParam1==BatteryManager.BATTERY_PLUGGED_AC){
-                    Log.i(TAG, "charger connectting");
-                    mWireChargKey.setChecked(true);
-                    sendResult(true);
-                }
-
-                if(pbatParam0 == BatteryManager.BATTERY_STATUS_CHARGING ||
-                        pbatParam0 == BatteryManager.BATTERY_STATUS_FULL){
-                    mWireChargKey.setChecked(true);
-                    sendResult(true);
+                    mResult = true;
+                    sendResult();
                 }
             }
         }

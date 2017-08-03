@@ -40,7 +40,7 @@ public class Constants {
     public static final int HEADSETMIC_REQUEST_CODE = 25;
     public static final int MODEM_REQUEST_CODE = 26;
     public static final int KEYPAD_REQUEST_CODE = 27;
-
+    public static final int TOUCH_REQUEST_CODE = 28;
 
 
 }

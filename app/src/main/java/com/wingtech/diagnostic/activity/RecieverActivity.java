@@ -1,7 +1,6 @@
 package com.wingtech.diagnostic.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.support.v7.app.AlertDialog;
@@ -13,14 +12,13 @@ import android.widget.TextView;
 import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.util.Log;
 
-
 import static com.wingtech.diagnostic.util.Constants.RECIEVER_REQUEST_CODE;
 
 /**
  * Created by gaoweili on 17-7-28.
  */
 
-public class RecieverActivity extends BaseActivity {
+public class RecieverActivity extends TestingActivity {
 
     private String mContentDialog;
     private MediaPlayer player = null;
@@ -28,8 +26,9 @@ public class RecieverActivity extends BaseActivity {
     private int audio_mode = AudioManager.MODE_NORMAL;
     private int oldVolume;
     public static final String TAG = "RecieverActivity";
-    private boolean isPlayerStoped  = false;
+    private boolean isPlayerStoped = false;
     private TextView mTxt = null;
+
     @Override
     protected int getLayoutResId() {
         return R.layout.content_dialog_test;
@@ -38,13 +37,13 @@ public class RecieverActivity extends BaseActivity {
     @Override
     protected void initViews() {
         mTxt = (TextView) findViewById(R.id.dialog_txt);
-        localAudioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);//"audio";
+        localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);//"audio";
         mContentDialog = getIntent().getStringExtra("title_dialog");
     }
 
     @Override
     protected void initToolbar() {
-
+        mRequestCode = RECIEVER_REQUEST_CODE;
     }
 
     @Override
@@ -53,49 +52,46 @@ public class RecieverActivity extends BaseActivity {
         audio_mode = localAudioManager.getMode();
         localAudioManager.setMode(AudioManager.MODE_IN_CALL);
         localAudioManager.setSpeakerphoneOn(false);
-        Log.i(TAG, "isSpeakerphoneOn :" +  localAudioManager.isSpeakerphoneOn());
+        Log.i(TAG, "isSpeakerphoneOn :" + localAudioManager.isSpeakerphoneOn());
         int maxVolume = localAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         oldVolume = localAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-        localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, maxVolume,0);
+        localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, maxVolume, 0);
 
     }
 
-    public void onPause()
-    {
+    public void onPause() {
         super.onPause();
-        if(player.isPlaying())
-        {
+        if (player.isPlaying()) {
             player.stop();
             player.release();
             player = null;
         }
-        if(localAudioManager!=null){
-            localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, oldVolume,0);
+        if (localAudioManager != null) {
+            localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, oldVolume, 0);
         }
         localAudioManager.setMode(audio_mode);
     }
 
-    public void onDestroy()
-    {
-        if(player != null)
-        {
+    public void onDestroy() {
+        if (player != null) {
             player.release();
             player = null;
         }
         isPlayerStoped = false;
         super.onDestroy();
     }
+
     @Override
     protected void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
         localAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
-        if(isPlayerStoped == true){
+        if (isPlayerStoped == true) {
             return;
         }
-        if(player == null){
+        if (player == null) {
             player = MediaPlayer.create(this, R.raw.bootaudio);
-        }else{
+        } else {
             player.stop();
             player.release();
             player = null;
@@ -111,20 +107,13 @@ public class RecieverActivity extends BaseActivity {
         });
     }
 
-    private void sendResult(boolean mResult) {
-        Intent intent = new Intent(this, SingleTestActivity.class);
-        intent.putExtra("result", mResult);
-        setResult(RECIEVER_REQUEST_CODE, intent);
-        finish();
-    }
-
-    public void showTheDialog(){
+    public void showTheDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.content_test_dialog, null);//获取自定义布局
         builder.setView(layout);
         TextView mContent = (TextView) layout.findViewById(R.id.dialog_context);
-        if (mContentDialog != null){
+        if (mContentDialog != null) {
             String sFormat = getResources().getString(R.string.dialog_context);
             String s = String.format(sFormat, mContentDialog);
             mContent.setText(s);
@@ -133,24 +122,19 @@ public class RecieverActivity extends BaseActivity {
         pass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                sendResult(true);
+                mResult = true;
+                sendResult();
             }
         });
         Button fail = (Button) layout.findViewById(R.id.fail);
         fail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                sendResult(false);
+                mResult = false;
+                sendResult();
             }
         });
         AlertDialog dlg = builder.create();
         dlg.show();
     }
-
-    @Override
-    public void onBackPressed() {
-        sendResult(false);
-    }
-
-
 }

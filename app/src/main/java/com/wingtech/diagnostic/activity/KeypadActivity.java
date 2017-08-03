@@ -9,11 +9,13 @@ import android.widget.Toast;
 
 import com.wingtech.diagnostic.R;
 
+import static com.wingtech.diagnostic.util.Constants.KEYPAD_REQUEST_CODE;
+
 /**
  * Created by gaoweili on 17-7-28.
  */
 
-public class KeypadActivity extends BaseActivity {
+public class KeypadActivity extends TestingActivity implements View.OnClickListener {
 
     private static final String TAG = "KeypadActivity";
 
@@ -34,8 +36,6 @@ public class KeypadActivity extends BaseActivity {
     private boolean is_upkey_pressed = false;
     private boolean is_downkey_pressed = false;
     private boolean is_recentkey_pressed = true;
-
-    private int tag = 0;
 
     @Override
     protected int getLayoutResId() {
@@ -65,43 +65,18 @@ public class KeypadActivity extends BaseActivity {
         mHomeTxt.setVisibility(View.VISIBLE);
         mBackTxt.setVisibility(View.VISIBLE);
         mRecentTxt.setVisibility(View.VISIBLE);
+        findViewById(R.id.fail_btn).setOnClickListener(this);
     }
 
     @Override
-    protected void initToolbar() {
+    public void onBackPressed() {
 
     }
 
     @Override
     protected void onWork() {
+        mRequestCode = KEYPAD_REQUEST_CODE;
         mTitle.setText(String.format(getResources().getString(R.string.pad_title), mUp.getText().toString()));
-    }
-
-    private void changeBtn(int sum)
-    {
-        switch(sum)
-        {
-            case 0:
-
-                tag++;
-                break;
-            case 1:
-                tag++;
-                break;
-            case 2:
-                tag++;
-                break;
-            case 3:
-                tag++;
-                break;
-            case 4:
-                tag++;
-                break;
-
-            default:
-
-                break;
-        }
     }
 
     @Override
@@ -121,44 +96,54 @@ public class KeypadActivity extends BaseActivity {
     }
 
     @Override
-    public boolean onKeyDown (int keyCode, KeyEvent event) {
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
         Log.i(TAG,"onKeyDown keyCode: " + keyCode);
         switch (keyCode)
         {
             case KeyEvent.KEYCODE_HOME:
-                Log.v(TAG,"KEYCODE_HOME");
-                Toast.makeText(this,"KEYCODE_HOME",Toast.LENGTH_SHORT).show();
                 is_homekey_pressed = true;
+                mHome.setChecked(true);
                 break;
             case KeyEvent.KEYCODE_BACK:
                 is_backkey_pressed = true;
+                mBack.setChecked(true);
                 break;
             case KeyEvent.KEYCODE_VOLUME_UP:
-                Toast.makeText(this,"KEYCODE_BACK",Toast.LENGTH_SHORT).show();
                 is_upkey_pressed = true;
+                mUp.setChecked(true);
                 break;
             case KeyEvent.KEYCODE_VOLUME_DOWN:
-                Toast.makeText(this,"KEYCODE_VOLUME_DOWN",Toast.LENGTH_SHORT).show();
                 is_downkey_pressed = true;
+                mDown.setChecked(true);
                 break;
             case KeyEvent.KEYCODE_MENU:
-                Toast.makeText(this,"KEYCODE_MENU",Toast.LENGTH_SHORT).show();
                 is_recentkey_pressed = true;
-                Log.d(TAG, "keyevent:menu");
+                mRecent.setChecked(true);
                 break;
             case KeyEvent.KEYCODE_SEARCH:
-                Toast.makeText(this,"KEYCODE_SEARCH",Toast.LENGTH_SHORT).show();
                 is_recentkey_pressed = true;
+                mRecent.setChecked(true);
                 break;
             case KeyEvent.KEYCODE_APP_SWITCH:
-                Toast.makeText(this,"KEYCODE_APP_SWITCH",Toast.LENGTH_SHORT).show();
                 is_recentkey_pressed = true;
-                Log.d(TAG, "keyevent:switch");
+                mRecent.setChecked(true);
                 break;
 
             default:
                 return super.onKeyDown(keyCode, event);
         }
+        if (is_homekey_pressed && is_backkey_pressed
+                && is_upkey_pressed && is_downkey_pressed
+                && is_recentkey_pressed) {
+            mResult = true;
+            sendResult();
+        }
         return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+        mResult = false;
+        sendResult();
     }
 }

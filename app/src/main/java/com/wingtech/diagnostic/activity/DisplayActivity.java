@@ -1,6 +1,5 @@
 package com.wingtech.diagnostic.activity;
 
-import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -25,7 +24,7 @@ import static com.wingtech.diagnostic.util.Constants.DISPLAY_REQUEST_CODE;
  * Created by gaoweili on 17-7-28.
  */
 
-public class DisplayActivity extends BaseActivity {
+public class DisplayActivity extends TestingActivity {
 
     private LinearLayout mLayout = null;
     private int mtick = 0;
@@ -44,7 +43,7 @@ public class DisplayActivity extends BaseActivity {
 
     @Override
     protected void initToolbar() {
-
+        mRequestCode = DISPLAY_REQUEST_CODE;
     }
 
     @Override
@@ -105,13 +104,6 @@ public class DisplayActivity extends BaseActivity {
         return super.onTouchEvent(event);
     }
 
-    private void sendResult(boolean mResult) {
-        Intent intent = new Intent(this, SingleTestActivity.class);
-        intent.putExtra("result", mResult);
-        setResult(DISPLAY_REQUEST_CODE, intent);
-        finish();
-    }
-
     public void showTheDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -127,22 +119,19 @@ public class DisplayActivity extends BaseActivity {
         pass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                sendResult(true);
+                mResult = true;
+                sendResult();
             }
         });
         Button fail = (Button) layout.findViewById(R.id.fail);
         fail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                sendResult(false);
+                mResult = false;
+                sendResult();
             }
         });
         AlertDialog dlg = builder.create();
         dlg.show();
-    }
-
-    @Override
-    public void onBackPressed() {
-        sendResult(false);
     }
 }

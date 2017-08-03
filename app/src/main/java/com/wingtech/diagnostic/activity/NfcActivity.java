@@ -1,6 +1,5 @@
 package com.wingtech.diagnostic.activity;
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -14,7 +13,7 @@ import static com.wingtech.diagnostic.util.Constants.NFC_REQUEST_CODE;
  * Created by gaoweili on 17-7-28.
  */
 
-public class NfcActivity extends BaseActivity {
+public class NfcActivity extends TestingActivity {
 
     private static final String TAG = "NfcActivity";
 
@@ -39,7 +38,7 @@ public class NfcActivity extends BaseActivity {
 
     @Override
     protected void initToolbar() {
-
+        mRequestCode = NFC_REQUEST_CODE;
     }
 
     @Override
@@ -50,21 +49,9 @@ public class NfcActivity extends BaseActivity {
         mTouchFailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendResult(false);
+                mResult = false;
+                sendResult();
             }
         });
-    }
-
-
-    private void sendResult(boolean mResult) {
-        Intent intent = new Intent(this, SingleTestActivity.class);
-        intent.putExtra("result", mResult);
-        setResult(NFC_REQUEST_CODE, intent);
-        finish();
-    }
-
-    @Override
-    public void onBackPressed() {
-        sendResult(false);
     }
 }

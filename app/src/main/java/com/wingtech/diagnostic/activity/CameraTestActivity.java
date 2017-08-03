@@ -10,7 +10,6 @@ import android.graphics.PixelFormat;
 import android.hardware.Camera;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
-import android.net.Uri;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatImageView;
@@ -25,7 +24,6 @@ import com.wingtech.diagnostic.util.Log;
 import com.wingtech.diagnostic.widget.CameraPreview;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -41,7 +39,7 @@ import static com.wingtech.diagnostic.util.Constants.VGACAMERA_REQUEST_CODE;
  * @date 2017-7-24
  */
 
-public class CameraTestActivity extends BaseActivity {
+public class CameraTestActivity extends TestingActivity {
     private AppCompatImageButton mCapture = null;
     private AppCompatImageView mPng = null;
     private AppCompatButton mPass = null;
@@ -78,7 +76,7 @@ public class CameraTestActivity extends BaseActivity {
         mPng = (AppCompatImageView) findViewById(R.id.png);
         mPass = (AppCompatButton) findViewById(R.id.pass);
         mFail = (AppCompatButton) findViewById(R.id.fail);
-
+        mRequestCode = CAMERA_REQUEST_CODE;
     }
 
     @Override
@@ -122,13 +120,15 @@ public class CameraTestActivity extends BaseActivity {
         mPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendResult(true);
+                mResult = true;
+                sendResult();
             }
         });
         mFail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendResult(false);
+                mResult = false;
+                sendResult();
             }
         });
     }
@@ -325,7 +325,8 @@ public class CameraTestActivity extends BaseActivity {
 
     }
 
-    private void sendResult(boolean mResult) {
+    @Override
+    protected void sendResult() {
         Intent intent = new Intent(this, SingleTestActivity.class);
         intent.putExtra("result", mResult);
         if (mCameraId == 0){
@@ -334,10 +335,5 @@ public class CameraTestActivity extends BaseActivity {
             setResult(VGACAMERA_REQUEST_CODE, intent);
         }
         finish();
-    }
-
-    @Override
-    public void onBackPressed() {
-        sendResult(false);
     }
 }

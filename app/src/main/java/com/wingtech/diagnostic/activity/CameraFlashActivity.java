@@ -1,7 +1,6 @@
 package com.wingtech.diagnostic.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.hardware.Camera;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
@@ -21,7 +20,7 @@ import static com.wingtech.diagnostic.util.Constants.CAMERAFLASH_REQUEST_CODE;
  * Created by gaoweili on 17-7-28.
  */
 
-public class CameraFlashActivity extends BaseActivity {
+public class CameraFlashActivity extends TestingActivity {
 
     Camera  camera = null;
     private Camera.Parameters parameter;
@@ -43,7 +42,7 @@ public class CameraFlashActivity extends BaseActivity {
 
     @Override
     protected void initToolbar() {
-
+        mRequestCode = CAMERAFLASH_REQUEST_CODE;
     }
 
     @Override
@@ -52,13 +51,15 @@ public class CameraFlashActivity extends BaseActivity {
         mPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendResult(true);
+                mResult = true;
+                sendResult();
             }
         });
         mFail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendResult(false);
+                mResult = false;
+                sendResult();
             }
         });
     }
@@ -116,17 +117,5 @@ public class CameraFlashActivity extends BaseActivity {
     public void onDestroy()
     {
         super.onDestroy();
-    }
-
-    private void sendResult(boolean mResult) {
-        Intent intent = new Intent(this, SingleTestActivity.class);
-        intent.putExtra("result", mResult);
-        setResult(CAMERAFLASH_REQUEST_CODE, intent);
-        finish();
-    }
-
-    @Override
-    public void onBackPressed() {
-        sendResult(false);
     }
 }
