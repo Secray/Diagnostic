@@ -34,7 +34,7 @@ public class HeadsetKeyActivity extends TestingActivity {
         mHeadsetKey = (CheckBox) findViewById(R.id.box_txt_1);
         mHeadsetKeyTxt = (TextView) findViewById(R.id.txt_box_1);
         mTitle = (TextView) findViewById(R.id.activity_checkbox_title);
-        mTouchFailBtn = (Button) findViewById(R.id.touch_fail_btn);
+        mTouchFailBtn = (Button) findViewById(R.id.fail_btn);
         mHeadsetKey.setVisibility(View.VISIBLE);
         mHeadsetKeyTxt.setVisibility(View.VISIBLE);
     }

@@ -59,7 +59,7 @@ public class LightSensorActivity extends TestingActivity implements SensorEventL
         mWeakTxt.setVisibility(View.VISIBLE);
         mNearSecondTxt.setVisibility(View.VISIBLE);
         mStrongFirstTxt.setVisibility(View.VISIBLE);
-        mTouchFailBtn = (Button) findViewById(R.id.touch_fail_btn);
+        mTouchFailBtn = (Button) findViewById(R.id.fail_btn);
 
         mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);

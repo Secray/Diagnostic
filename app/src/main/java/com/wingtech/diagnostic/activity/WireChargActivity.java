@@ -42,7 +42,7 @@ public class WireChargActivity extends TestingActivity {
         mWireChargKey = (CheckBox) findViewById(R.id.box_txt_1);
         mWireChargKeyTxt = (TextView) findViewById(R.id.txt_box_1);
         mTitle = (TextView) findViewById(R.id.activity_checkbox_title);
-        mTouchFailBtn = (Button) findViewById(R.id.touch_fail_btn);
+        mTouchFailBtn = (Button) findViewById(R.id.fail_btn);
         mWireChargKey.setVisibility(View.VISIBLE);
         mWireChargKeyTxt.setVisibility(View.VISIBLE);
     }

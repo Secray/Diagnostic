@@ -57,7 +57,7 @@ public class ProximityActivity extends TestingActivity implements SensorEventLis
         mFastTxt.setVisibility(View.VISIBLE);
         mNearSecondTxt.setVisibility(View.VISIBLE);
         mNearFirstTxt.setVisibility(View.VISIBLE);
-        mTouchFailBtn = (Button) findViewById(R.id.touch_fail_btn);
+        mTouchFailBtn = (Button) findViewById(R.id.fail_btn);
 
         mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);

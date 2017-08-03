@@ -31,7 +31,7 @@ public class NfcActivity extends TestingActivity {
         mNfc = (CheckBox) findViewById(R.id.box_txt_1);
         mNfcTxt = (TextView) findViewById(R.id.txt_box_1);
         mTitle = (TextView) findViewById(R.id.activity_checkbox_title);
-        mTouchFailBtn = (Button) findViewById(R.id.touch_fail_btn);
+        mTouchFailBtn = (Button) findViewById(R.id.fail_btn);
         mNfc.setVisibility(View.VISIBLE);
         mNfcTxt.setVisibility(View.VISIBLE);
     }
