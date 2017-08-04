@@ -70,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/chart_legend_padding_title"
-            android:src="@drawable/ic_cpu_chart_line"/>
+            android:src="@drawable/asus_diagnostic_ic_line_blue"/>
 
         <TextView
             style="@style/AppTheme.LineChartLegendTitle"
@@ -82,7 +82,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_battery_chart_line"
+            android:src="@drawable/asus_diagnostic_ic_line_green"
             android:paddingLeft="@dimen/chart_legend_padding_cpu_battery"/>
 
         <TextView

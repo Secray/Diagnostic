@@ -17,7 +17,7 @@
         android:layout_marginRight="@dimen/fail_btn_margin_left_right"
         android:layout_marginBottom="@dimen/fail_btn_margin_bottom"
         android:background="@drawable/ripple_circle_button_bg"
-        android:src="@drawable/ic_camera_btn"/>
+        android:src="@drawable/asus_diagnostic_btn_take_photo"/>
 
     <RelativeLayout
         android:id="@+id/judgment"
