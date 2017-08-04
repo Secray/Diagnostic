@@ -116,6 +116,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.wingtech.diagnostic.activity.BoardMicActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name="com.wingtech.diagnostic.activity.SecondaryMicActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name="com.wingtech.diagnostic.activity.HeadsetMicActivity"
             android:screenOrientation="portrait"/>
 

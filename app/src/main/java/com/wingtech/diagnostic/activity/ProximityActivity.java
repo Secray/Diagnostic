@@ -51,9 +51,6 @@ public class ProximityActivity extends TestingActivity implements SensorEventLis
         mFastTxt = (TextView) findViewById(R.id.txt_box_2);
         mNearSecondTxt = (TextView) findViewById(R.id.txt_box_3);
         mTitle = (TextView) findViewById(R.id.activity_checkbox_title);
-        mNearFirst.setVisibility(View.VISIBLE);
-        mFast.setVisibility(View.VISIBLE);
-        mNearSecond.setVisibility(View.VISIBLE);
         mFastTxt.setVisibility(View.VISIBLE);
         mNearSecondTxt.setVisibility(View.VISIBLE);
         mNearFirstTxt.setVisibility(View.VISIBLE);
@@ -125,6 +122,7 @@ public class ProximityActivity extends TestingActivity implements SensorEventLis
             mIsNear = true;
             Log.d(TAG,"mIsNear = "+mIsNear);
             mNearFirst.setChecked(mIsNear);
+            mNearFirst.setVisibility(View.VISIBLE);
             mTitle.setText(R.string.proximity_title_away);
 
         }
@@ -132,6 +130,7 @@ public class ProximityActivity extends TestingActivity implements SensorEventLis
             mIsFar = true;
             Log.d(TAG,"mIsFar = "+mIsFar);
             mFast.setChecked(mIsFar);
+            mFast.setVisibility(View.VISIBLE);
             mTitle.setText(R.string.proximity_title);
 
         }
@@ -139,6 +138,8 @@ public class ProximityActivity extends TestingActivity implements SensorEventLis
             mIsNearSecond = true;
             Log.d(TAG,"mIsNearSecond = "+mIsNearSecond);
             mNearSecond.setChecked(mIsNearSecond);
+            mNearSecond.setVisibility(View.VISIBLE);
+
         }
 
         if(mIsNear == true && mIsNearSecond == true &&  mIsFar == true){

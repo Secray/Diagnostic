@@ -42,5 +42,6 @@ public class Constants {
     public static final int KEYPAD_REQUEST_CODE = 27;
     public static final int TOUCH_REQUEST_CODE = 28;
     public static final int FINGERPRINT_REQUEST_CODE = 29;
+    public static final int SECONDMIC_REQUEST_CODE = 30;
 
 }

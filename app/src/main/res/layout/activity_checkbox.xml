@@ -30,7 +30,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="false"
-                android:visibility="gone"/>
+                android:button="@drawable/checkbox_style"
+                android:visibility="invisible"
+                />
             <TextView
                 android:id="@+id/txt_box_1"
                 android:layout_marginLeft="10dp"
@@ -49,7 +51,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="false"
-                android:visibility="gone"/>
+                android:button="@drawable/checkbox_style"
+                android:visibility="invisible"/>
             <TextView
                 android:id="@+id/txt_box_2"
                 android:layout_marginLeft="10dp"
@@ -68,7 +71,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="false"
-                android:visibility="gone"/>
+                android:button="@drawable/checkbox_style"
+                android:visibility="invisible"/>
             <TextView
                 android:id="@+id/txt_box_3"
                 android:layout_marginLeft="10dp"
@@ -87,7 +91,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="false"
-                android:visibility="gone"/>
+                android:button="@drawable/checkbox_style"
+                android:visibility="invisible"/>
             <TextView
                 android:id="@+id/txt_box_4"
                 android:layout_marginLeft="10dp"
@@ -106,7 +111,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="false"
-                android:visibility="gone"/>
+                android:button="@drawable/checkbox_style"
+                android:visibility="invisible"/>
             <TextView
                 android:id="@+id/txt_box_5"
                 android:layout_marginLeft="10dp"

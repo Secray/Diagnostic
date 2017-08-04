@@ -35,7 +35,6 @@ public class HeadsetKeyActivity extends TestingActivity {
         mHeadsetKeyTxt = (TextView) findViewById(R.id.txt_box_1);
         mTitle = (TextView) findViewById(R.id.activity_checkbox_title);
         mTouchFailBtn = (Button) findViewById(R.id.fail_btn);
-        mHeadsetKey.setVisibility(View.VISIBLE);
         mHeadsetKeyTxt.setVisibility(View.VISIBLE);
     }
 
@@ -71,6 +70,7 @@ public class HeadsetKeyActivity extends TestingActivity {
             case KeyEvent.KEYCODE_HEADSETHOOK:
                 Log.i(TAG,"onKeyDown keyCode setChecked: " + keyCode);
                 mHeadsetKey.setChecked(true);
+                mHeadsetKey.setVisibility(View.VISIBLE);
                 mResult = true;
                 sendResult();
                 return true;

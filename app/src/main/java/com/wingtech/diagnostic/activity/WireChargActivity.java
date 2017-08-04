@@ -43,7 +43,6 @@ public class WireChargActivity extends TestingActivity {
         mWireChargKeyTxt = (TextView) findViewById(R.id.txt_box_1);
         mTitle = (TextView) findViewById(R.id.activity_checkbox_title);
         mTouchFailBtn = (Button) findViewById(R.id.fail_btn);
-        mWireChargKey.setVisibility(View.VISIBLE);
         mWireChargKeyTxt.setVisibility(View.VISIBLE);
     }
 
@@ -107,6 +106,7 @@ public class WireChargActivity extends TestingActivity {
                 }
                 if (pbatParam1 == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
                     mWireChargKey.setChecked(true);
+                    mWireChargKey.setVisibility(View.VISIBLE);
                     mResult = true;
                     sendResult();
                 }

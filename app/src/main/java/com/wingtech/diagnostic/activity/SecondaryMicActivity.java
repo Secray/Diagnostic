@@ -2,9 +2,6 @@ package com.wingtech.diagnostic.activity;
 
 
 import android.media.AudioFormat;
-import android.media.AudioManager;
-import android.media.AudioRecord;
-import android.media.AudioTrack;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.CountDownTimer;
@@ -21,14 +18,15 @@ import com.wingtech.diagnostic.util.Log;
 import java.io.IOException;
 
 import static com.wingtech.diagnostic.util.Constants.MIC_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.SECONDMIC_REQUEST_CODE;
 
 /**
  * Created by gaoweili on 17-7-28.
  */
 
-public class BoardMicActivity extends TestingActivity {
+public class SecondaryMicActivity extends TestingActivity {
     private String mContentDialog;
-    public static final String TAG = "BoardMicActivity";
+    public static final String TAG = "SecondaryMicActivity";
     private TextView mTxt = null;
     private String path = null;
     CountDownTimer mTimer;
@@ -43,12 +41,12 @@ public class BoardMicActivity extends TestingActivity {
     protected void initViews() {
         mTxt = (TextView) findViewById(R.id.dialog_txt);
         mContentDialog = getIntent().getStringExtra("title_dialog");
-        path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/test.pcm";
+        path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/second_mic_test.pcm";
     }
 
     @Override
     protected void initToolbar() {
-        mRequestCode = MIC_REQUEST_CODE;
+        mRequestCode = SECONDMIC_REQUEST_CODE;
     }
 
     @Override
@@ -140,11 +138,25 @@ public class BoardMicActivity extends TestingActivity {
 
     private MediaRecorder mRecorder;
 
+    /*private void getChnnal(){
+        int trbusize= AudioTrack.getMinBufferSize(RECORDER_SAMPLERATE, AudioFormat.CHANNEL_OUT_STEREO,
+                AudioFormat.ENCODING_PCM_16BIT);
+        AudioTrack mAudioTrack = new AudioTrack(AudioManager.STREAM_MUSIC,RECORDER_SAMPLERATE,
+                AudioFormat.CHANNEL_IN_STEREO,
+                AudioFormat.ENCODING_PCM_16BIT,
+                trbusize,
+                AudioTrack.MODE_STREAM);
+        //初始化AudioRecord
+        int rebusize = AudioRecord.getMinBufferSize(RECORDER_SAMPLERATE,
+                AudioFormat.CHANNEL_IN_STEREO,AudioFormat.ENCODING_PCM_16BIT);
+        AudioRecord mAudioRecord= new AudioRecord(MediaRecorder.AudioSource.MIC,RECORDER_SAMPLERATE,
+                AudioFormat.CHANNEL_IN_STEREO, AudioFormat.ENCODING_PCM_16BIT, rebusize);
+    }*/
+
     public boolean startRecorder(String path) {
         //设置音源为Micphone
-
         mRecorder = new MediaRecorder();
-        mRecorder.setAudioChannels(2);
+        mRecorder.setAudioChannels(1);
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         //设置封装格式
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);

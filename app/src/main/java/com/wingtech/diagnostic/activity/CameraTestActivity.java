@@ -154,7 +154,11 @@ public class CameraTestActivity extends TestingActivity {
             bm = BitmapFactory.decodeStream(bis, null, options);
             mCameralayout.setVisibility(View.GONE);
             mPng.setVisibility(View.VISIBLE);
-            mPng.setImageBitmap(rotateBitmapByDegree(bm, 90));
+            if (mCameraId == 0){
+                mPng.setImageBitmap(rotateBitmapByDegree(bm, 90));
+            }else if (mCameraId == 1){
+                mPng.setImageBitmap(rotateBitmapByDegree(bm, -90));
+            }
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "保存照片失败！", Toast.LENGTH_LONG).show();

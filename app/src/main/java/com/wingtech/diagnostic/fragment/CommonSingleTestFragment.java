@@ -24,6 +24,7 @@ import com.wingtech.diagnostic.activity.MultiTouchTestingActivity;
 import com.wingtech.diagnostic.activity.NfcActivity;
 import com.wingtech.diagnostic.activity.ProximityActivity;
 import com.wingtech.diagnostic.activity.RecieverActivity;
+import com.wingtech.diagnostic.activity.SecondaryMicActivity;
 import com.wingtech.diagnostic.activity.SingleTestingActivity;
 import com.wingtech.diagnostic.activity.SpeakerActivity;
 import com.wingtech.diagnostic.activity.TouchTestActivity;
@@ -56,6 +57,7 @@ import static com.wingtech.diagnostic.util.Constants.NFC_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.PROXIMITY_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.RECIEVER_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.SDCARD_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.SECONDMIC_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.SIM2_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.SIMCARD_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.SPEAK_REQUEST_CODE;
@@ -303,6 +305,13 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 i.putExtra("title_dialog","BoardMic");
                 i.putExtra("isTestAll", mCallback != null);
                 startActivityForResult(i, MIC_REQUEST_CODE);
+                break;
+            case "SecondaryMic Test":
+                i = new Intent(mActivity, SecondaryMicActivity.class);
+                i.putExtra("title", mListener.getChangedTitle());
+                i.putExtra("title_dialog","SecondaryMic");
+                i.putExtra("isTestAll", mCallback != null);
+                startActivityForResult(i, SECONDMIC_REQUEST_CODE);
                 break;
             case "HeadsetMic Test":
                 i = new Intent(mActivity, HeadsetMicActivity.class);

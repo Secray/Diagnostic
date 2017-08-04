@@ -97,10 +97,12 @@ public abstract class BaseActivity extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 SharedPreferencesUtils.setNull(BaseActivity.this);
-                SingleTestListActivity.adapter.notifyDataSetChanged();
-                TestResultActivity.adapter.notifyDataSetChanged();
-
-
+                if (SingleTestListActivity.adapter != null){
+                    SingleTestListActivity.adapter.notifyDataSetChanged();
+                }
+                if (TestResultActivity.adapter != null) {
+                    TestResultActivity.adapter.notifyDataSetChanged();
+                }
                 dlg.dismiss();
             }
         });

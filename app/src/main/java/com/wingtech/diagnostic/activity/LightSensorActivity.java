@@ -53,9 +53,6 @@ public class LightSensorActivity extends TestingActivity implements SensorEventL
         mWeakTxt = (TextView) findViewById(R.id.txt_box_2);
         mNearSecondTxt = (TextView) findViewById(R.id.txt_box_3);
         mTitle = (TextView) findViewById(R.id.activity_checkbox_title);
-        mStrongFirst.setVisibility(View.VISIBLE);
-        mWeak.setVisibility(View.VISIBLE);
-        mNearSecond.setVisibility(View.VISIBLE);
         mWeakTxt.setVisibility(View.VISIBLE);
         mNearSecondTxt.setVisibility(View.VISIBLE);
         mStrongFirstTxt.setVisibility(View.VISIBLE);
@@ -73,7 +70,7 @@ public class LightSensorActivity extends TestingActivity implements SensorEventL
     @Override
     protected void onWork() {
         mWeakTxt.setText(R.string.lightsensor_txt_strong);
-        mNearSecondTxt.setText(R.string.lightsensor_txt_strong);
+        mNearSecondTxt.setText(R.string.lightsensor_txt_weak);
         mStrongFirstTxt.setText(R.string.lightsensor_txt_strong);
         mTitle.setText(R.string.lightsensor_title);
 
@@ -128,17 +125,22 @@ public class LightSensorActivity extends TestingActivity implements SensorEventL
             mTitle.setText(R.string.lightsensor_title_weak);
             Log.d(TAG,"lightLevel = "+lightLevel);
             mStrongFirst.setChecked(mIsStrong);
+            mStrongFirst.setVisibility(View.VISIBLE);
         }
         if(lightLevel < lightStrong && mIsStrong == true){
             mIsWeak = true;
             mTitle.setText(R.string.lightsensor_title);
             Log.d(TAG,"lightLevel = "+lightLevel);
             mWeak.setChecked(mIsWeak);
+            mWeak.setVisibility(View.VISIBLE);
+
         }
         if(lightLevel > lightStrong && mIsWeak == true &&  mIsStrong == true){
             mIsStrongSecond = true;
             Log.d(TAG,"mIsStrongSecond lightLevel = "+lightLevel);
             mNearSecond.setChecked(mIsStrongSecond);
+            mNearSecond.setVisibility(View.VISIBLE);
+
         }
 
         if(mIsStrong == true && mIsWeak == true &&  mIsStrongSecond == true){
