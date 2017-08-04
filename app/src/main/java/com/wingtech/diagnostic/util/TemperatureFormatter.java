@@ -13,6 +13,9 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 public class TemperatureFormatter implements IAxisValueFormatter{
     @Override
     public String getFormattedValue(float value, AxisBase axis) {
+        if ((int) value % 50 != 0) {
+            return "";
+        }
         return (int) value + "℃";
     }
 }

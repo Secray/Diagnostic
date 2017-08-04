@@ -13,6 +13,6 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 public class TimeValueFormatter implements IAxisValueFormatter {
     @Override
     public String getFormattedValue(float value, AxisBase axis) {
-        return (int) (value / 60) + "min";
+        return (int) (value / 6) + "min";
     }
 }

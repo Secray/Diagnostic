@@ -135,6 +135,7 @@
         <activity android:name=".activity.VibratorTestingActivity"
             android:screenOrientation="portrait"/>
 
+        <service android:name=".service.TemperatureService" />
     </application>
 
 </manifest>

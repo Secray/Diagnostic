@@ -21,6 +21,13 @@
         <Switch
             android:id="@+id/vibrator_switch"
             android:layout_marginLeft="@dimen/test_text_switch_margin_left"
+            android:textOff="@string/switch_off"
+            android:textOn="@string/switch_on"
+            android:switchTextAppearance="?android:attr/textAppearanceSmallInverse"
+            android:typeface="serif"
+            android:showText="true"
+            android:track="@drawable/switch_track"
+            android:thumb="@drawable/switch_thumb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>

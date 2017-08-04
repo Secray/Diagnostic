@@ -134,7 +134,7 @@ public class PercentView extends View {
 
         float clipStartY = startY - mBound.height();
         float clipEndY;
-        float height = mBound.height() + value2px(1, VALUE.DP);
+        float height = mBound.height();
 
         if (mDirection == TOP) {
             clipEndY = clipStartY + height * mPercent;
@@ -306,6 +306,7 @@ public class PercentView extends View {
      */
     public void setTypeface(int typeface) {
         mPaint.setTypeface(obtainTypeface(typeface));
+        mPercentPaint.setTypeface(obtainTypeface(typeface));
         requestLayout();
         invalidate();
     }

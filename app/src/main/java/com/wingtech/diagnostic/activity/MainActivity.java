@@ -1,12 +1,18 @@
 package com.wingtech.diagnostic.activity;
 
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.graphics.DashPathEffect;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.IBinder;
+import android.os.Message;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -18,6 +24,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.wingtech.diagnostic.R;
+import com.wingtech.diagnostic.service.TemperatureService;
 import com.wingtech.diagnostic.util.Log;
 import com.wingtech.diagnostic.util.TemperatureFormatter;
 import com.wingtech.diagnostic.util.TimeValueFormatter;
@@ -26,18 +33,28 @@ import com.wingtech.diagnostic.widget.PercentView;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.lang.String.format;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity
+        implements View.OnClickListener {
     LineChart mLineChart;
+    LineDataSet mCPUDataSet;
+    LineDataSet mBatterySet;
+
     Toolbar mToolbar;
     PercentView mCPUPercent;
     PercentView mBatteryPercent;
+
+    TemperatureService mService;
+
+    private HandlerThread mLineChartThread;
+    private Handler mLineChartHandler;
+    private Handler mHandler = new Handler();
 
     private void buildChart() {
         mLineChart.setDrawGridBackground(false);
@@ -73,7 +90,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mLineChart.getAxisRight().setEnabled(false);
         mLineChart.getLegend().setEnabled(false);
 
-        setData(240, 100);
+        //setData(240, 100);
 
         mLineChart.animateX(1000);
     }
@@ -102,72 +119,84 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void onWork() {
+        bindService(new Intent(this, TemperatureService.class), mServiceConn, BIND_AUTO_CREATE);
         IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
         registerReceiver(mBatteryReceiver, filter);
         buildChart();
         mCPUAsyncTask.execute();
+        mLineChartThread = new HandlerThread("line-chart-thread");
+        mLineChartThread.start();
+        mLineChartHandler = new Handler(mLineChartThread.getLooper()) {
+            @Override
+            public void handleMessage(Message msg) {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mService != null) {
+                            setData(mService.getCPUList(), mService.getBatteryList());
+                        }
+                    }
+                });
+                mLineChartHandler.sendEmptyMessageDelayed(0, 10000);
+            }
+        };
+        mLineChartHandler.sendEmptyMessageDelayed(0, 0);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        unbindService(mServiceConn);
         unregisterReceiver(mBatteryReceiver);
+        mLineChartThread.quit();
+        mHandler.removeCallbacksAndMessages(null);
         mCPUAsyncTask.cancel(true);
     }
 
-    private void setData(int count, float range) {
+    private void setData(LinkedList<Integer> cpuTemps, LinkedList<Integer> batteryTemps) {
+        int cpuLen = cpuTemps.size();
+        int batteryLen = batteryTemps.size();
+        Log.i("cpuLen = " + cpuLen + " batteryLen " + batteryLen);
         ArrayList<Entry> values1 = new ArrayList<>();
-        for (int i = 0; i <= count; i += 10) {
-            float val = (float) (Math.random() * range) + 3;
-            values1.add(new Entry(i, val));
+        for (int i = 0; i < cpuLen; i++) {
+            values1.add(new Entry(i, cpuTemps.get(i)));
         }
 
         ArrayList<Entry> values2 = new ArrayList<>();
-        for (int i = 0; i <= count; i += 10) {
-            float val = (float) (Math.random() * range) + 3;
-            values2.add(new Entry(i, val));
+        for (int i = 0; i < batteryLen; i++) {
+            values2.add(new Entry(i, batteryTemps.get(i)));
         }
 
-        LineDataSet set1;
-        LineDataSet set2;
+        // create a dataset and give it a type
+        mCPUDataSet = new LineDataSet(values1, "CPU");
+        mBatterySet = new LineDataSet(values2, "Battery");
 
-        if (mLineChart.getData() != null &&
-                mLineChart.getData().getDataSetCount() > 0) {
-            set1 = (LineDataSet) mLineChart.getData().getDataSetByIndex(0);
-            set2 = (LineDataSet) mLineChart.getData().getDataSetByIndex(1);
-            set1.setValues(values1);
-            set2.setValues(values2);
-            mLineChart.getData().notifyDataChanged();
-            mLineChart.notifyDataSetChanged();
-        } else {
-            // create a dataset and give it a type
-            set1 = new LineDataSet(values1, "CPU");
-            set2 = new LineDataSet(values2, "Battery");
+        mCPUDataSet.setColor(getColor(R.color.main_cpu_line_color));
+        mCPUDataSet.setDrawValues(false);
+        mCPUDataSet.setDrawCircles(false);
+        mCPUDataSet.setFormLineWidth(1f);
+        mCPUDataSet.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 5f}, 0f));
+        mCPUDataSet.setFormSize(15.f);
 
-            set1.setColor(getColor(R.color.main_cpu_line_color));
-            set1.setDrawValues(false);
-            set1.setDrawCircles(false);
-            set1.setFormLineWidth(1f);
-            set1.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 5f}, 0f));
-            set1.setFormSize(15.f);
+        mBatterySet.setColor(getColor(R.color.main_battery_line_color));
+        mBatterySet.setDrawValues(false);
+        mBatterySet.setDrawCircles(false);
+        mBatterySet.setFormLineWidth(1f);
+        mBatterySet.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 5f}, 0f));
+        mBatterySet.setFormSize(15.f);
 
-            set2.setColor(getColor(R.color.main_battery_line_color));
-            set2.setDrawValues(false);
-            set2.setDrawCircles(false);
-            set2.setFormLineWidth(1f);
-            set2.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 5f}, 0f));
-            set2.setFormSize(15.f);
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(mCPUDataSet); // add the datasets
+        dataSets.add(mBatterySet);
 
-            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-            dataSets.add(set1); // add the datasets
-            dataSets.add(set2);
+        // create a data object with the datasets
+        LineData data = new LineData(dataSets);
 
-            // create a data object with the datasets
-            LineData data = new LineData(dataSets);
-
-            // set data
-            mLineChart.setData(data);
-        }
+        // set data
+        mLineChart.setData(data);
+        mLineChart.getData().notifyDataChanged();
+        mLineChart.notifyDataSetChanged();
+        mLineChart.animateX(1000);
     }
 
     @Override
@@ -302,4 +331,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         return (int) (rate * 100);
     }
+
+    ServiceConnection mServiceConn = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            mService =
+                    ((TemperatureService.TemperatureBinder) service).getService();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            Log.i("service disconnect");
+        }
+    };
 }

@@ -184,5 +184,7 @@
     <string name="headset_context_dialog_btn">OK</string>
     <string name="mic_context_dialog_record">Recording...</string>
     <string name="mic_context_dialog_play">Playing...</string>
+    <string name="switch_on">ON</string>
+    <string name="switch_off">OFF</string>
 
 </resources>
