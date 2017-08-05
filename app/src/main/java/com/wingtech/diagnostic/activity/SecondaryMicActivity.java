@@ -156,8 +156,9 @@ public class SecondaryMicActivity extends TestingActivity {
     public boolean startRecorder(String path) {
         //设置音源为Micphone
         mRecorder = new MediaRecorder();
-        mRecorder.setAudioChannels(1);
-        mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        //mRecorder.setAudioChannels(1);
+        //mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        mRecorder.setAudioSource(MediaRecorder.AudioSource.VOICE_COMMUNICATION);
         //设置封装格式
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         mRecorder.setOutputFile(path);

@@ -144,7 +144,7 @@ public class BoardMicActivity extends TestingActivity {
         //设置音源为Micphone
 
         mRecorder = new MediaRecorder();
-        mRecorder.setAudioChannels(2);
+        //mRecorder.setAudioChannels(1);
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         //设置封装格式
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);

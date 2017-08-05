@@ -69,8 +69,8 @@ public class LightSensorActivity extends TestingActivity implements SensorEventL
 
     @Override
     protected void onWork() {
-        mWeakTxt.setText(R.string.lightsensor_txt_strong);
-        mNearSecondTxt.setText(R.string.lightsensor_txt_weak);
+        mWeakTxt.setText(R.string.lightsensor_txt_weak);
+        mNearSecondTxt.setText(R.string.lightsensor_txt_strong);
         mStrongFirstTxt.setText(R.string.lightsensor_txt_strong);
         mTitle.setText(R.string.lightsensor_title);
 

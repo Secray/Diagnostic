@@ -1,6 +1,7 @@
 package com.wingtech.diagnostic.activity;
 
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 
 import com.wingtech.diagnostic.R;
 
@@ -32,4 +33,6 @@ public class TouchActivity extends BaseActivity {
     protected void onWork() {
 
     }
+
+
 }

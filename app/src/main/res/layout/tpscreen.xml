@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:background="@color/main_bg_color">
+	 <com.wingtech.diagnostic.widget.TPTestView
+		android:id="@+id/mLocusViewTP"
+		android:layout_width="fill_parent" 
+		android:layout_height="fill_parent">
+	</com.wingtech.diagnostic.widget.TPTestView>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/touch_fail_btn"
+        android:textAllCaps="false"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/test_action_button_height"
+        android:textColor="@android:color/white"
+        android:background="@drawable/ripple_test_fail_btn_bg"
+        android:text="@string/test_fail_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="@dimen/list_single_test_item_height"
+        android:layout_marginRight="@dimen/list_single_test_item_height"
+        android:layout_marginBottom="@dimen/list_single_test_item_height"
+        android:layout_marginTop="@dimen/fail_btn_margin_top" />
+</RelativeLayout>

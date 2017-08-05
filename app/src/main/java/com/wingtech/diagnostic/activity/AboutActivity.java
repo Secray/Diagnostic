@@ -1,8 +1,11 @@
 package com.wingtech.diagnostic.activity;
 
+import android.graphics.Camera;
 import android.support.v7.widget.Toolbar;
 
 import com.wingtech.diagnostic.R;
+
+import java.security.Policy;
 
 
 /**
