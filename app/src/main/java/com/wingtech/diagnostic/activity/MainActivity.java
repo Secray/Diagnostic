@@ -23,6 +23,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.EntryXComparator;
 import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.service.TemperatureService;
 import com.wingtech.diagnostic.util.Log;
@@ -34,6 +35,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -42,6 +44,8 @@ import static java.lang.String.format;
 
 public class MainActivity extends BaseActivity
         implements View.OnClickListener {
+    private static final int MAX_SIZE= 24;
+    private static final int REFRESH_TIME = 60 * 1000;
     LineChart mLineChart;
     LineDataSet mCPUDataSet;
     LineDataSet mBatterySet;
@@ -158,15 +162,20 @@ public class MainActivity extends BaseActivity
         int batteryLen = batteryTemps.size();
         Log.i("cpuLen = " + cpuLen + " batteryLen " + batteryLen);
         ArrayList<Entry> values1 = new ArrayList<>();
-        for (int i = 0; i < cpuLen; i++) {
-            values1.add(new Entry(i, cpuTemps.get(i)));
-        }
-
         ArrayList<Entry> values2 = new ArrayList<>();
-        for (int i = 0; i < batteryLen; i++) {
-            values2.add(new Entry(i, batteryTemps.get(i)));
+        int remainLen = MAX_SIZE - cpuLen;
+        for (int i = 0; i < remainLen; i ++) {
+            values1.add(new Entry(i, 0));
+            values2.add(new Entry(i, 0));
         }
 
+        for (int i = remainLen; i < MAX_SIZE; i++) {
+            values1.add(new Entry(i, cpuTemps.get(i - remainLen)));
+            values2.add(new Entry(i, batteryTemps.get(i - remainLen)));
+        }
+
+        Collections.sort(values1, new EntryXComparator());
+        Collections.sort(values2, new EntryXComparator());
         // create a dataset and give it a type
         mCPUDataSet = new LineDataSet(values1, "CPU");
         mBatterySet = new LineDataSet(values2, "Battery");
