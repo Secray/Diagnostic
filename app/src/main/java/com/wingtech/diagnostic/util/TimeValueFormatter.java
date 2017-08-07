@@ -13,6 +13,9 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 public class TimeValueFormatter implements IAxisValueFormatter {
     @Override
     public String getFormattedValue(float value, AxisBase axis) {
+        if (value == 23.0f) {
+            return "Now";
+        }
         return (int) ((24 - value) / 6) + "min";
     }
 }

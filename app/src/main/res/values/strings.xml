@@ -186,5 +186,8 @@
     <string name="mic_context_dialog_play">Playing...</string>
     <string name="switch_on">ON</string>
     <string name="switch_off">OFF</string>
+    <string name="test_all_dialog_title">Test all not finished</string>
+    <string name="test_all_dialog_content">You have not finished all of the test items.Do you want to continue to finish it?</string>
+    <string name="btn_continue">Continue</string>
 
 </resources>

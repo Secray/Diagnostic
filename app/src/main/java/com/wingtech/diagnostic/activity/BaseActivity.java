@@ -44,7 +44,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                onBackPressed();
                 break;
             case R.id.clear:
             case R.id.reset:
@@ -97,12 +97,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 SharedPreferencesUtils.setNull(BaseActivity.this);
-                if (SingleTestListActivity.adapter != null){
-                    SingleTestListActivity.adapter.notifyDataSetChanged();
-                }
-                if (TestResultActivity.adapter != null) {
-                    TestResultActivity.adapter.notifyDataSetChanged();
-                }
                 dlg.dismiss();
             }
         });

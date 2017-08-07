@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.wingtech.diagnostic.App;
 import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.activity.BoardMicActivity;
 import com.wingtech.diagnostic.activity.CameraFlashActivity;
@@ -80,14 +81,8 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
     AppCompatButton mTestBtn;
     private OnTitleChangedListener mListener;
     private OnResultChangedCallback mCallback;
-    private Activity activity;
     private String mTitle;
-    private int mPos;
-    TypedArray mImgArray;
 
-    public CommonSingleTestFragment(int pos) {
-        mPos = pos;
-    }
     public void setTitleChangedListener(OnTitleChangedListener listener) {
         this.mListener = listener;
     }
@@ -98,7 +93,6 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
 
     @Override
     protected int getLayoutResId() {
-        activity  = getActivity();
         return R.layout.fragment_test;
     }
 
@@ -109,16 +103,14 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
         mTestResultField = view.findViewById(R.id.result_field);
         mTestResultImg = (ImageView) view.findViewById(R.id.ic_test_result);
         mTestResult = (TextView) view.findViewById(R.id.txt_test_result);
-        mImgArray = getResources().obtainTypedArray(R.array.test_imgs);
         mTestBtn.setOnClickListener(this);
-        int id = mImgArray.getResourceId(mPos, 0);
-        mTestImg.setImageResource(id);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         mTitle = mListener.getChangedTitle();
+        mTestImg.setImageResource(((App) mActivity.getApplication()).getResMap().get(mTitle));
     }
 
     @Override
@@ -154,6 +146,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
             case TOUCH_REQUEST_CODE:
             case KEYPAD_REQUEST_CODE:
             case FINGERPRINT_REQUEST_CODE:
+            case SECONDMIC_REQUEST_CODE:
                 boolean result = data.getBooleanExtra("result", false);
                 if (mCallback != null) {
                     mCallback.onChange(result);
@@ -163,12 +156,12 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                         mTestResult.setText(getResources().getString(R.string.test_pass, mTitle));
                         mTestResult.setTextColor(getResources().getColor(R.color.test_result_pass));
                         mTestResultImg.setImageResource(R.drawable.asus_diagnostic_ic_pass);
-                        SharedPreferencesUtils.setParam(activity, mTitle, SharedPreferencesUtils.PASS);
+                        SharedPreferencesUtils.setParam(mActivity, mTitle, SharedPreferencesUtils.PASS);
                     } else {
                         mTestResult.setText(getResources().getString(R.string.test_fail, mTitle));
                         mTestResult.setTextColor(getResources().getColor(R.color.test_result_fail));
                         mTestResultImg.setImageResource(R.drawable.asus_diagnostic_ic_fail);
-                        SharedPreferencesUtils.setParam(activity, mTitle, SharedPreferencesUtils.FAIL);
+                        SharedPreferencesUtils.setParam(mActivity, mTitle, SharedPreferencesUtils.FAIL);
                     }
                     mTestBtn.setText(R.string.btn_test_again);
                 }

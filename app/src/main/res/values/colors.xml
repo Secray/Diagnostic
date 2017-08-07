@@ -43,6 +43,7 @@
     <color name="test_result_fail">#ff1147</color>
     <color name="test_testing_text_color">#fff</color>
     <color name="test_checkbox_title_color">#ababab</color>
+    <color name="dialog_divider_color">#40b3b6b9</color>
 
     <!-- Touch test -->
     <color name="test_touch_circle_color_1">#b0b966</color>

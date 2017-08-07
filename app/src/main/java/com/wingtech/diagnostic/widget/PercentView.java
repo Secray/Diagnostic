@@ -246,7 +246,7 @@ public class PercentView extends View {
         if (mText.length() >= 3) {
             mTextSize = 86;
             mPaint.setTextSize(value2px(mTextSize, VALUE.DP));
-            //requestLayout();
+            requestLayout();
         }
         invalidate();
     }

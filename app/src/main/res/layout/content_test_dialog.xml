@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="20dp"
+        android:textColor="@color/main_bg_color"
         android:gravity="center_vertical"
         android:text="@string/dialog_title"
         android:textSize="18sp"/>
@@ -15,7 +16,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/main_text_color"/>
+        android:background="@color/dialog_divider_color"/>
 
     <TextView
         android:id="@+id/dialog_context"
@@ -23,14 +24,15 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:textColor="@color/main_bg_color"
         android:layout_marginLeft="20dp"
         android:layout_marginBottom="30dp"
         android:text="@string/dialog_context"
         android:textSize="15sp"/>
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/main_text_color"/>
+        android:layout_height="1dp"
+        android:background="@color/dialog_divider_color"/>
     <LinearLayout
         android:id="@+id/result"
         android:layout_width="match_parent"
@@ -40,29 +42,32 @@
             android:id="@+id/fail"
             android:layout_width="0dp"
             android:text="@string/test_fail_btn"
+            android:textAllCaps="false"
             android:layout_height="match_parent"
-            android:background="@null"
-            android:textColor="@color/main_bottom_button_text_color_pressed"
+            android:background="@drawable/dialog_button_bg"
+            android:textColor="@color/main_bg_color"
             android:layout_weight="1"/>
         <View
-            android:layout_width="2dp"
+            android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@color/main_text_color"/>
+            android:background="@color/dialog_divider_color"/>
         <Button
             android:id="@+id/pass"
             android:layout_width="0dp"
-            android:background="@null"
-            android:textColor="@color/main_bottom_button_text_color_pressed"
+            android:background="@drawable/dialog_button_bg"
+            android:textColor="@color/main_bg_color"
             android:text="@string/test_pass_btn"
+            android:textAllCaps="false"
             android:layout_height="match_parent"
             android:layout_weight="1"/>
     </LinearLayout>
     <Button
         android:id="@+id/ok"
         android:layout_width="match_parent"
-        android:background="@null"
+        android:background="@drawable/dialog_button_bg"
         android:visibility="gone"
-        android:textColor="@color/main_bottom_button_text_color_pressed"
+        android:textAllCaps="false"
+        android:textColor="@color/main_bg_color"
         android:text="@string/headset_context_dialog_btn"
         android:layout_height="40dp"
         />

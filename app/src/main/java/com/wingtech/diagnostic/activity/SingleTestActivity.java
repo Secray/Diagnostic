@@ -38,7 +38,7 @@ public class SingleTestActivity extends BaseActivity implements OnTitleChangedLi
 
     @Override
     protected void onWork() {
-        CommonSingleTestFragment fragment = new CommonSingleTestFragment(mPos);
+        CommonSingleTestFragment fragment = new CommonSingleTestFragment();
         fragment.setTitleChangedListener(this);
         getSupportFragmentManager().beginTransaction().replace(R.id.test_content,
                 fragment).commit();

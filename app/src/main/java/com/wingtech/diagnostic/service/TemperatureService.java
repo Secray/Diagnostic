@@ -69,11 +69,11 @@ public class TemperatureService extends Service {
                         readTemperature("cat /sys/devices/virtual/thermal/thermal_zone19/temp");
                 Log.i("cpu temperature = " + cpuTemp + " battery temperature = " + batteryTemp);
                 if (mBatteryList.size() >= 24) {
-                    mBatteryList.pop();
-                    mCPUList.pop();
+                    mBatteryList.poll();
+                    mCPUList.poll();
                 }
-                mBatteryList.push(batteryTemp);
-                mCPUList.push(cpuTemp);
+                mBatteryList.offer(batteryTemp);
+                mCPUList.offer(cpuTemp);
 
                 mTemperatureHandler.sendEmptyMessageDelayed(0, 10000);
             }

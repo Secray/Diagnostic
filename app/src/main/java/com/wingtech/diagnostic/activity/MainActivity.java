@@ -15,6 +15,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -29,6 +30,7 @@ import com.wingtech.diagnostic.service.TemperatureService;
 import com.wingtech.diagnostic.util.Log;
 import com.wingtech.diagnostic.util.TemperatureFormatter;
 import com.wingtech.diagnostic.util.TimeValueFormatter;
+import com.wingtech.diagnostic.widget.LoadingView;
 import com.wingtech.diagnostic.widget.PercentView;
 
 import java.io.BufferedReader;
@@ -53,6 +55,7 @@ public class MainActivity extends BaseActivity
     Toolbar mToolbar;
     PercentView mCPUPercent;
     PercentView mBatteryPercent;
+    LoadingView mLoadingView;
 
     TemperatureService mService;
 
@@ -110,6 +113,7 @@ public class MainActivity extends BaseActivity
         mLineChart = (LineChart) findViewById(R.id.chart);
         mCPUPercent = (PercentView) findViewById(R.id.cpu_percent);
         mBatteryPercent = (PercentView) findViewById(R.id.battery_percent);
+        mLoadingView = (LoadingView) findViewById(R.id.cpu_loading);
         findViewById(R.id.test_all).setOnClickListener(this);
         findViewById(R.id.single_test).setOnClickListener(this);
         findViewById(R.id.repair).setOnClickListener(this);
@@ -119,6 +123,8 @@ public class MainActivity extends BaseActivity
     @Override
     protected void initToolbar() {
         setSupportActionBar(mToolbar);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
+                WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     @Override
@@ -272,6 +278,9 @@ public class MainActivity extends BaseActivity
             mCPUPercent.setFirstColor(color);
             mCPUPercent.setSecondColor(bgColor);
             mCPUPercent.setPercent((float) value / 100);
+
+            mLoadingView.setVisibility(View.GONE);
+            mCPUPercent.setVisibility(View.VISIBLE);
         }
     };
 

@@ -29,7 +29,7 @@ public class SingleTestListActivity extends BaseActivity implements OnItemClickL
 
     TypedArray mIconArray;
 
-    public static SingleTestAdapter adapter;
+    SingleTestAdapter adapter;
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_single_test_list;
