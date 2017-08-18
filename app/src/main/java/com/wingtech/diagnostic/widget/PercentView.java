@@ -199,13 +199,12 @@ public class PercentView extends View {
         mPaint.getTextBounds(mText, 0, mText.length(), mBound);
         mClipStartY = mStartY - mBound.height();
         float height = mBound.height();
-        mClipEndY = mClipStartY + height * mPercent;
         if (mDirection == TOP) {
             mClipEndY = mClipStartY + height * mPercent;
             mGradient = new LinearGradient(mStartX, mClipStartY, mStartX, mClipEndY,
                     mFirstColor, mSecondColor, Shader.TileMode.CLAMP);
         } else {
-            mClipEndY = mStartY - height * mPercent;
+            mClipEndY = mStartY - height * mPercent + value2px(1, VALUE.DP);
             mGradient = new LinearGradient(mStartX, mClipEndY, mStartX,
                     mStartY + value2px(1, VALUE.DP),
                     mFirstColor, mSecondColor, Shader.TileMode.CLAMP);

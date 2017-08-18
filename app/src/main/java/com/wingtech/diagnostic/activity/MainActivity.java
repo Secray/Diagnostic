@@ -260,7 +260,6 @@ public class MainActivity extends BaseActivity
     };
 
     private void initCPUPercent(int cpuRate) {
-        Log.i("xk", cpuRate + " ");
         int color;
         int secColor;
         int bgColor;
