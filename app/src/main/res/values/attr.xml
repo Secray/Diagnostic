@@ -12,6 +12,7 @@
     <attr name="titleSize" format="dimension"/>
     <attr name="firstColor" format="color"/>
     <attr name="secondColor" format="color"/>
+    <attr name="backgroundColor" format="color"/>
     <attr name="typeface">
         <enum name="normal" value="0" />
         <enum name="sans" value="1" />
@@ -34,6 +35,7 @@
         <attr name="textSize"/>
         <attr name="firstColor"/>
         <attr name="secondColor"/>
+        <attr name="backgroundColor"/>
         <attr name="direction"/>
         <attr name="typeface"/>
         <attr name="gravity"/>

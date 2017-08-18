@@ -7,6 +7,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.view.View;
 
 import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.widget.GSensorView;
@@ -24,7 +25,8 @@ import static com.wingtech.diagnostic.util.Constants.G_SENSOR_REQUEST_CODE;
  * @date 2017-7-24
  */
 
-public class GSensorTestActivity extends TestingActivity implements SensorEventListener {
+public class GSensorTestActivity extends TestingActivity implements
+        SensorEventListener, View.OnClickListener {
     GSensorView mGSensorView;
 
     private SensorManager mSensorManager;
@@ -42,6 +44,7 @@ public class GSensorTestActivity extends TestingActivity implements SensorEventL
         mGSensorView = (GSensorView) findViewById(R.id.gsensor_view);
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        findViewById(R.id.gsensor_fail).setOnClickListener(this);
     }
 
     @Override
@@ -109,5 +112,11 @@ public class GSensorTestActivity extends TestingActivity implements SensorEventL
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        mResult = false;
+        sendResult();
     }
 }

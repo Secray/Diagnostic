@@ -104,4 +104,5 @@
                 android:src="@drawable/asus_diagnostic_ic_hotline_service_41" />
         </RelativeLayout>
     </LinearLayout>
+    <include layout="@layout/list_divider"/>
 </LinearLayout>

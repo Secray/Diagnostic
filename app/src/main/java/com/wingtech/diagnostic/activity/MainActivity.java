@@ -8,7 +8,6 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.graphics.DashPathEffect;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -41,8 +40,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static java.lang.String.format;
 
 public class MainActivity extends BaseActivity
         implements View.OnClickListener {
@@ -133,15 +130,17 @@ public class MainActivity extends BaseActivity
         IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
         registerReceiver(mBatteryReceiver, filter);
         buildChart();
-        mCPUAsyncTask.execute();
+        //mCPUAsyncTask.execute();
         mLineChartThread = new HandlerThread("line-chart-thread");
         mLineChartThread.start();
         mLineChartHandler = new Handler(mLineChartThread.getLooper()) {
             @Override
             public void handleMessage(Message msg) {
+                int cpuRate = getCPURateDesc();
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
+                        initCPUPercent(cpuRate);
                         if (mService != null) {
                             setData(mService.getCPUList(), mService.getBatteryList());
                         }
@@ -158,9 +157,9 @@ public class MainActivity extends BaseActivity
         super.onDestroy();
         unbindService(mServiceConn);
         unregisterReceiver(mBatteryReceiver);
-        mLineChartThread.quit();
+        mLineChartHandler.removeCallbacksAndMessages(null);
         mHandler.removeCallbacksAndMessages(null);
-        mCPUAsyncTask.cancel(true);
+        mLineChartThread.quit();
     }
 
     private void setData(LinkedList<Integer> cpuTemps, LinkedList<Integer> batteryTemps) {
@@ -238,51 +237,54 @@ public class MainActivity extends BaseActivity
             int level = intent.getIntExtra("level", 0);
             int scale = intent.getIntExtra("scale", 0);
             int color;
+            int secColor;
             int bgColor;
             if (level >= 50 && level <= 100) {
                 color = getColor(R.color.batter_50_100);
+                secColor = getColor(R.color.batter_50_100_2);
                 bgColor = getColor(R.color.batter_50_100_bg);
             } else if (level < 50 && level >= 20) {
                 color = getColor(R.color.battery_20_50);
+                secColor = getColor(R.color.battery_20_50_2);
                 bgColor = getColor(R.color.battery_20_50_bg);
             } else {
                 color = getColor(R.color.battery_10_20);
+                secColor = getColor(R.color.battery_10_20_2);
                 bgColor = getColor(R.color.battery_10_20_bg);
             }
-            mBatteryPercent.setFirstColor(bgColor);
-            mBatteryPercent.setSecondColor(color);
-            mBatteryPercent.setPercent((float) level / scale);
+            mBatteryPercent.setFirstColor(color);
+            mBatteryPercent.setSecondColor(secColor);
+            mBatteryPercent.setBackgroundColor(bgColor);
+            mBatteryPercent.setPercent((float) level / 100);
         }
     };
 
-    AsyncTask<Void, Void, Integer> mCPUAsyncTask = new AsyncTask<Void, Void, Integer>() {
-        @Override
-        protected Integer doInBackground(Void... params) {
-            return getCPURateDesc();
+    private void initCPUPercent(int cpuRate) {
+        Log.i("xk", cpuRate + " ");
+        int color;
+        int secColor;
+        int bgColor;
+        if (cpuRate >= 80 && cpuRate <= 100) {
+            color = getColor(R.color.cpu_80_100);
+            secColor = getColor(R.color.cpu_80_100_2);
+            bgColor = getColor(R.color.cpu_80_100_bg);
+        } else if (cpuRate < 80 && cpuRate >= 50) {
+            color = getColor(R.color.cpu_50_80);
+            secColor = getColor(R.color.cpu_50_80_2);
+            bgColor = getColor(R.color.cpu_50_80_bg);
+        } else {
+            color = getColor(R.color.cpu_0_50);
+            secColor = getColor(R.color.cpu_0_50_2);
+            bgColor = getColor(R.color.cpu_0_50_bg);
         }
+        mCPUPercent.setFirstColor(color);
+        mCPUPercent.setSecondColor(secColor);
+        mCPUPercent.setBackgroundColor(bgColor);
+        mCPUPercent.setPercent((float) cpuRate / 100);
 
-        @Override
-        protected void onPostExecute(Integer value) {
-            int color;
-            int bgColor;
-            if (value >= 80 && value <= 100) {
-                color = getColor(R.color.cpu_80_100);
-                bgColor = getColor(R.color.cpu_80_100_bg);
-            } else if (value < 80 && value >= 50) {
-                color = getColor(R.color.cpu_50_80);
-                bgColor = getColor(R.color.cpu_50_80_bg);
-            } else {
-                color = getColor(R.color.cpu_0_50);
-                bgColor = getColor(R.color.cpu_0_50_bg);
-            }
-            mCPUPercent.setFirstColor(color);
-            mCPUPercent.setSecondColor(bgColor);
-            mCPUPercent.setPercent((float) value / 100);
-
-            mLoadingView.setVisibility(View.GONE);
-            mCPUPercent.setVisibility(View.VISIBLE);
-        }
-    };
+        mLoadingView.setVisibility(View.GONE);
+        mCPUPercent.setVisibility(View.VISIBLE);
+    }
 
     public static int getCPURateDesc() {
         String path = "/proc/stat";

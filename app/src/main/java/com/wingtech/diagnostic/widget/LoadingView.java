@@ -40,7 +40,7 @@ public class LoadingView extends ImageView {
 
 
     private void init() {
-        setImageResource(R.drawable.loading);
+        setImageResource(R.drawable.asus_diagnostic_ic_loading1);
         mFrameTime = 1000 / 12;
         mUpdateViewRunnable = new Runnable() {
             @Override

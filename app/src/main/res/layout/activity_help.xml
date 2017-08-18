@@ -39,4 +39,6 @@
             android:text="@string/help_list_item_send_request"/>
     </LinearLayout>
 
+    <include layout="@layout/list_divider"/>
+
 </LinearLayout>

@@ -51,4 +51,5 @@
             style="@style/AppTheme.ListItem.Text"
             android:text="@string/repair_list_item_factory_reset"/>
     </LinearLayout>
+    <include layout="@layout/list_divider"/>
 </LinearLayout>

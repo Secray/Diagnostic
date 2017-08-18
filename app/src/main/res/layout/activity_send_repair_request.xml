@@ -100,6 +100,7 @@
             <EditText
                 android:id="@+id/edt_state"
                 android:nextFocusDown="@+id/edt_description"
+                style="@style/AppTheme.SendRepairRequest.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/send_repair_request_edittext_height" />
 
