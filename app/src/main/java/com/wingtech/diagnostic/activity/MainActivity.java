@@ -15,6 +15,7 @@ import android.os.Message;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -285,7 +286,7 @@ public class MainActivity extends BaseActivity
         mCPUPercent.setVisibility(View.VISIBLE);
     }
 
-    public static int getCPURateDesc() {
+    private int getCPURateDesc() {
         String path = "/proc/stat";
         long totalJiffies[] = new long[2];
         long totalIdle[] = new long[2];
@@ -303,7 +304,7 @@ public class MainActivity extends BaseActivity
                 String str;
                 while ((str = bufferedReader.readLine()) != null
                         && (i == 0 || currentCPUNum < firstCPUNum)) {
-                    if (str.toLowerCase().startsWith("cpu")) {
+                    if (str.toLowerCase().startsWith("cpu ")) {
                         currentCPUNum++;
                         int index = 0;
                         Matcher matcher = pattern.matcher(str);
@@ -323,7 +324,7 @@ public class MainActivity extends BaseActivity
                     if (i == 0) {
                         firstCPUNum = currentCPUNum;
                         try {//暂停50毫秒，等待系统更新信息。
-                            Thread.sleep(50);
+                            Thread.sleep(100);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -343,6 +344,7 @@ public class MainActivity extends BaseActivity
             }
         }
         double rate = -1;
+        //Toast.makeText(this, totalJiffies[0] + " " + totalJiffies[1] + " " + totalIdle[0] + " " + totalIdle[1], Toast.LENGTH_LONG).show();
         if (totalJiffies[0] > 0 && totalJiffies[1] > 0 && totalJiffies[0] != totalJiffies[1]) {
             rate = 1.0 * ((totalJiffies[1] - totalIdle[1]) -
                     (totalJiffies[0] - totalIdle[0])) / (totalJiffies[1] - totalJiffies[0]);

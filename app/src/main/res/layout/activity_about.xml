@@ -37,5 +37,5 @@
             style="@style/AppTheme.About.Text.Value"
             android:text="@string/about_website_value"/>
     </LinearLayout>
-
+    <include layout="@layout/list_divider"/>
 </LinearLayout>

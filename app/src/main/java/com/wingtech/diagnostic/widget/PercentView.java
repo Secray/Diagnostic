@@ -204,7 +204,8 @@ public class PercentView extends View {
             mGradient = new LinearGradient(mStartX, mClipStartY, mStartX, mClipEndY,
                     mFirstColor, mSecondColor, Shader.TileMode.CLAMP);
         } else {
-            mClipEndY = mStartY - height * mPercent + value2px(1, VALUE.DP);
+            mClipEndY = mStartY - height * mPercent
+                    + (mPercent == 0.01f ? 0 : value2px(1, VALUE.DP));
             mGradient = new LinearGradient(mStartX, mClipEndY, mStartX,
                     mStartY + value2px(1, VALUE.DP),
                     mFirstColor, mSecondColor, Shader.TileMode.CLAMP);
