@@ -147,7 +147,7 @@ public class MainActivity extends BaseActivity
                         }
                     }
                 });
-                mLineChartHandler.sendEmptyMessageDelayed(0, 10000);
+                mLineChartHandler.sendEmptyMessageDelayed(0, 1000);
             }
         };
         mLineChartHandler.sendEmptyMessageDelayed(0, 0);

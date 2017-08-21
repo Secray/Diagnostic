@@ -24,4 +24,10 @@
         android:orderInCategory="200"
         app:showAsAction="never"
         android:title="@string/menu_test_about"/>
+
+    <item
+        android:id="@+id/exit"
+        android:orderInCategory="200"
+        app:showAsAction="never"
+        android:title="@string/menu_test_exit"/>
 </menu>
