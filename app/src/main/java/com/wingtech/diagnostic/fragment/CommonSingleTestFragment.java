@@ -39,6 +39,7 @@ import com.wingtech.diagnostic.util.SharedPreferencesUtils;
 import static com.wingtech.diagnostic.util.Constants.BATTERY_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.BLUETOOTH_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.CAMERAFLASH_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.CAMERAFRONTFLASH_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.CAMERA_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.DISPLAY_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.E_COMPASS_REQUEST_CODE;
@@ -82,6 +83,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
     private OnTitleChangedListener mListener;
     private OnResultChangedCallback mCallback;
     private String mTitle;
+    private int flashId = 0;
 
     public void setTitleChangedListener(OnTitleChangedListener listener) {
         this.mListener = listener;
@@ -224,9 +226,18 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 startActivityForResult(i, VGACAMERA_REQUEST_CODE);
                 break;
             case "Camera Flash Test":
+                flashId = 0;
                 i = new Intent(mActivity, CameraFlashActivity.class);
                 i.putExtra("isTestAll", mCallback != null);
+                i.putExtra("flashid", flashId);
                 startActivityForResult(i, CAMERAFLASH_REQUEST_CODE);
+                break;
+            case "Camera Front Flash Test":
+                flashId = 1;
+                i = new Intent(mActivity, CameraFlashActivity.class);
+                i.putExtra("isTestAll", mCallback != null);
+                i.putExtra("flashid", flashId);
+                startActivityForResult(i, CAMERAFRONTFLASH_REQUEST_CODE);
                 break;
             case "Display Test":
                 i = new Intent(mActivity, DisplayActivity.class);

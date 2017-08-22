@@ -14,7 +14,6 @@ import android.view.View;
 
 import com.wingtech.diagnostic.R;
 
-import static com.wingtech.diagnostic.util.Constants.CAMERAFLASH_REQUEST_CODE;
 
 /**
  * Created by gaoweili on 17-7-28.
@@ -28,6 +27,7 @@ public class CameraFlashActivity extends TestingActivity {
     public static final String TAG = "CameraFlashActivity";
     private AppCompatButton mPass = null;
     private AppCompatButton mFail = null;
+    private int mFlashId = 0;
     @Override
     protected int getLayoutResId() {
         return R.layout.content_test_camera_flash;
@@ -42,7 +42,7 @@ public class CameraFlashActivity extends TestingActivity {
 
     @Override
     protected void initToolbar() {
-        mRequestCode = CAMERAFLASH_REQUEST_CODE;
+        mFlashId = getIntent().getIntExtra("flashid", 0);
     }
 
     @Override
@@ -66,15 +66,22 @@ public class CameraFlashActivity extends TestingActivity {
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private String getCameraId() throws CameraAccessException {
+    private String getCameraId(int flashId) throws CameraAccessException {
         String[] ids = mCameraManager.getCameraIdList();
         for (String id : ids) {
             CameraCharacteristics c = mCameraManager.getCameraCharacteristics(id);
             Boolean flashAvailable = c.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
             Integer lensFacing = c.get(CameraCharacteristics.LENS_FACING);
-            if (flashAvailable != null && flashAvailable && lensFacing != null
-                    && lensFacing == CameraCharacteristics.LENS_FACING_BACK) {
-                return id;
+            if(1 == mFlashId){
+                if (flashAvailable != null && flashAvailable && lensFacing != null
+                    && lensFacing == CameraCharacteristics.LENS_FACING_FRONT) {
+                    return id;
+                }
+            }else if(0 == mFlashId){
+                if (flashAvailable != null && flashAvailable && lensFacing != null
+                        && lensFacing == CameraCharacteristics.LENS_FACING_BACK) {
+                    return id;
+                }
             }
         }
         return null;
@@ -93,7 +100,7 @@ public class CameraFlashActivity extends TestingActivity {
     public void setFlashlight(boolean enabled) {
         synchronized (this) {
             try {
-                String cameraId = getCameraId();
+                String cameraId = getCameraId(mFlashId);
                 if(TextUtils.isEmpty(cameraId))
                 {
                     Log.e(TAG,"cameraID is null");

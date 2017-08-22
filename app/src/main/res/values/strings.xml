@@ -60,6 +60,7 @@
     <string name="test_case_fingerprint">Fingerprint Test</string>
     <string name="test_case_sim2">SIM2 Test</string>
     <string name="test_case_secondary_mic">SecondaryMic Test</string>
+    <string name="test_case_camera_front_flash">Camera Front Flash Test</string>
 
 
 
@@ -141,6 +142,7 @@
     <string name="ten">10</string>
     <string name="touch">touch</string>
     <string name="camera_flash_description">Please check whether the camera flash light on or not and make a judge.</string>
+    <string name="camera_front_flash_description">Please check whether the camera front flash light on or not and make a judge.</string>
     <string name="vibrator">Vibrator</string>
 
     <!-- Keypad Activity-->

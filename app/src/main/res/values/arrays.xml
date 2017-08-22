@@ -32,6 +32,7 @@
         <item>@string/test_case_fingerprint</item>
         <item>@string/test_case_sim2</item>
         <item>@string/test_case_secondary_mic</item>
+        <item>@string/test_case_camera_front_flash</item>
     </string-array>
 
     <integer-array name="test_icons">
@@ -66,6 +67,7 @@
         <item>@drawable/asus_diagnostic_ic_fingerprint</item>
         <item>@drawable/asus_diagnostic_ic_simcard</item>
         <item>@drawable/asus_diagnostic_ic_boardmic</item>
+        <item>@drawable/asus_diagnostic_ic_cameraflash</item>
     </integer-array>
 
 
@@ -101,5 +103,6 @@
         <item>@drawable/asus_diagnostic_img_fingerprint</item>
         <item>@drawable/asus_diagnostic_img_simcard</item>
         <item>@drawable/asus_diagnostic_img_boardmic</item>
+        <item>@drawable/asus_diagnostic_img_camera_flash</item>
     </integer-array>
 </resources>
