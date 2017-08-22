@@ -86,6 +86,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     }
 
+    protected void handleTestResult() {
+
+    }
+
     public void showTheDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -102,6 +106,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 SharedPreferencesUtils.setNull(BaseActivity.this);
+                handleTestResult();
                 dlg.dismiss();
             }
         });

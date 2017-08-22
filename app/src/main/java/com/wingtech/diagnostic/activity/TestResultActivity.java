@@ -26,7 +26,7 @@ public class TestResultActivity extends BaseActivity implements View.OnClickList
     String[] mTestCases;
 
     TypedArray mIconArray;
-    public static TestResultAdapter adapter;
+    TestResultAdapter adapter;
 
     @Override
     protected int getLayoutResId() {
@@ -86,6 +86,13 @@ public class TestResultActivity extends BaseActivity implements View.OnClickList
             case R.id.btn_test_repair:
                 startActivity(new Intent(this, RepairActivity.class));
                 break;
+        }
+    }
+
+    @Override
+    protected void handleTestResult() {
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
         }
     }
 }

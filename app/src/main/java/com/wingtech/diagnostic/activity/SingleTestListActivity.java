@@ -91,4 +91,12 @@ public class SingleTestListActivity extends BaseActivity implements OnItemClickL
         adapter.notifyDataSetChanged();
 
     }
+
+    @Override
+    protected void handleTestResult() {
+        if (adapter != null){
+            adapter.notifyDataSetChanged();
+        }
+
+    }
 }
