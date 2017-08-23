@@ -7,6 +7,7 @@ import android.util.TypedValue;
 import com.wingtech.diagnostic.fragment.BatteryTestingFragment;
 import com.wingtech.diagnostic.fragment.BlueToothFragment;
 import com.wingtech.diagnostic.fragment.CMDMouseTestingFragment;
+import com.wingtech.diagnostic.fragment.GpsTestingFragment;
 import com.wingtech.diagnostic.fragment.GyroscopeTestingFragment;
 import com.wingtech.diagnostic.fragment.MagneticTestingFragment;
 import com.wingtech.diagnostic.fragment.ModemTestingFragment;
@@ -81,6 +82,8 @@ public class Utils {
                 break;
             case "CMD Mouse Test":
                 fragment = new CMDMouseTestingFragment();
+            case "GPS Test":
+                fragment = new GpsTestingFragment();
                 break;
         }
         return fragment;
