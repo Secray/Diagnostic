@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="@dimen/bottom_indicator_pic_margin_right"
-                android:layout_gravity="center"
+                android:layout_centerVertical="true"
                 android:src="@drawable/asus_diagnostic_ic_previous"/>
 
             <TextView
@@ -71,9 +71,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/bottom_indicator_pic_margin_right"
                 android:layout_marginLeft="@dimen/bottom_indicator_pic_margin_left"
-                android:layout_gravity="center"
                 android:src="@drawable/asus_diagnostic_ic_next"/>
         </RelativeLayout>
     </LinearLayout>

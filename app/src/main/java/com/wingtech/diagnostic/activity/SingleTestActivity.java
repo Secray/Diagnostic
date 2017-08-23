@@ -3,16 +3,18 @@ package com.wingtech.diagnostic.activity;
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 
+import com.wingtech.diagnostic.App;
 import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.fragment.CommonSingleTestFragment;
-import com.wingtech.diagnostic.listener.OnTitleChangedListener;
+import com.wingtech.diagnostic.listener.OnTestItemListener;
+import com.wingtech.diagnostic.util.TestItem;
 
 /**
  * @author xiekui
  * @date 2017-7-19
  */
 
-public class SingleTestActivity extends BaseActivity implements OnTitleChangedListener {
+public class SingleTestActivity extends BaseActivity implements OnTestItemListener {
     Toolbar mToolbar;
     String[] mTestCases;
     int mPos = -1;
@@ -39,7 +41,7 @@ public class SingleTestActivity extends BaseActivity implements OnTitleChangedLi
     @Override
     protected void onWork() {
         CommonSingleTestFragment fragment = new CommonSingleTestFragment();
-        fragment.setTitleChangedListener(this);
+        fragment.setOnTestItemListener(this);
         getSupportFragmentManager().beginTransaction().replace(R.id.test_content,
                 fragment).commit();
     }
@@ -47,11 +49,11 @@ public class SingleTestActivity extends BaseActivity implements OnTitleChangedLi
     @Override
     protected void handleIntent(Intent intent) {
         mPos = intent.getIntExtra("position", 0);
-        mTitle = mTestCases[mPos];
+        mTitle = App.mItems.get(mPos).getName();
     }
 
     @Override
-    public String getChangedTitle() {
-        return mTitle;
+    public TestItem getTestItem() {
+        return App.mItems.get(mPos);
     }
 }

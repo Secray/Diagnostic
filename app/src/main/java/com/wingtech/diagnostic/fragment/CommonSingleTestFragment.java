@@ -1,16 +1,12 @@
 package com.wingtech.diagnostic.fragment;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.res.TypedArray;
-import android.hardware.Camera;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.wingtech.diagnostic.App;
 import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.activity.BoardMicActivity;
 import com.wingtech.diagnostic.activity.CameraFlashActivity;
@@ -34,9 +30,9 @@ import com.wingtech.diagnostic.activity.VibratorTestingActivity;
 import com.wingtech.diagnostic.activity.WireChargActivity;
 import com.wingtech.diagnostic.dialog.LoadingDialog;
 import com.wingtech.diagnostic.listener.OnResultChangedCallback;
-import com.wingtech.diagnostic.listener.OnTitleChangedListener;
-import com.wingtech.diagnostic.util.Log;
+import com.wingtech.diagnostic.listener.OnTestItemListener;
 import com.wingtech.diagnostic.util.SharedPreferencesUtils;
+import com.wingtech.diagnostic.util.TestItem;
 
 import static com.wingtech.diagnostic.util.Constants.ASSITSCAMERA_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.BATTERY_REQUEST_CODE;
@@ -83,14 +79,15 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
     private ImageView mTestResultImg;
     private TextView mTestResult;
     AppCompatButton mTestBtn;
-    private OnTitleChangedListener mListener;
+    private OnTestItemListener mTestItemListener;
     private OnResultChangedCallback mCallback;
     private String mTitle;
+    private TestItem mTestItem;
     private int flashId = 0;
     private int camId = 0;
 
-    public void setTitleChangedListener(OnTitleChangedListener listener) {
-        this.mListener = listener;
+    public void setOnTestItemListener(OnTestItemListener listener) {
+        this.mTestItemListener = listener;
     }
 
     public void setOnResultChangedCallback(OnResultChangedCallback callback) {
@@ -115,8 +112,9 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
     @Override
     public void onResume() {
         super.onResume();
-        mTitle = mListener.getChangedTitle();
-        mTestImg.setImageResource(((App) mActivity.getApplication()).getResMap().get(mTitle));
+        mTestItem = mTestItemListener.getTestItem();
+        mTitle = mTestItem.getName();
+        mTestImg.setImageResource(mTestItem.getImg());
     }
 
     @Override
@@ -255,26 +253,26 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
             case "Display Test":
                 i = new Intent(mActivity, DisplayActivity.class);
                 i.putExtra("isTestAll", mCallback != null);
-                i.putExtra("title", mListener.getChangedTitle());
+                i.putExtra("title", mTitle);
                 i.putExtra("title_dialog","Display");
                 startActivityForResult(i, DISPLAY_REQUEST_CODE);
                 break;
             case "Proximity Test":
                 i = new Intent(mActivity, ProximityActivity.class);
                 i.putExtra("isTestAll", mCallback != null);
-                i.putExtra("title", mListener.getChangedTitle());
+                i.putExtra("title", mTitle);
                 startActivityForResult(i, PROXIMITY_REQUEST_CODE);
                 break;
             case "HeadsetKey Test":
                 i = new Intent(mActivity, HeadsetKeyActivity.class);
                 i.putExtra("isTestAll", mCallback != null);
-                i.putExtra("title", mListener.getChangedTitle());
+                i.putExtra("title", mTitle);
                 startActivityForResult(i, HEADSETKEY_REQUEST_CODE);
                 break;
             case "LightSensor Test":
                 i = new Intent(mActivity, LightSensorActivity.class);
                 i.putExtra("isTestAll", mCallback != null);
-                i.putExtra("title", mListener.getChangedTitle());
+                i.putExtra("title", mTitle);
                 startActivityForResult(i, LIGHTSENSOR_REQUEST_CODE);
                 break;
             case "Keypad Test":
@@ -284,19 +282,19 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 break;
             case "NFC Test":
                 i = new Intent(mActivity, NfcActivity.class);
-                i.putExtra("title", mListener.getChangedTitle());
+                i.putExtra("title", mTitle);
                 i.putExtra("isTestAll", mCallback != null);
                 startActivityForResult(i, NFC_REQUEST_CODE);
                 break;
             case "Wireless Charging Test":
                 i = new Intent(mActivity, WireChargActivity.class);
                 i.putExtra("isTestAll", mCallback != null);
-                i.putExtra("title", mListener.getChangedTitle());
+                i.putExtra("title", mTitle);
                 startActivityForResult(i, WIRECHARGKEY_REQUEST_CODE);
                 break;
             case "Receiver Test":
                 i = new Intent(mActivity, RecieverActivity.class);
-                i.putExtra("title", mListener.getChangedTitle());
+                i.putExtra("title", mTitle);
                 i.putExtra("isTestAll", mCallback != null);
                 i.putExtra("title_dialog","Receiver");
                 i.putExtra("context","Playing");
@@ -304,35 +302,35 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 break;
             case "Headset Test":
                 i = new Intent(mActivity, HeadsetActivity.class);
-                i.putExtra("title", mListener.getChangedTitle());
+                i.putExtra("title", mTitle);
                 i.putExtra("isTestAll", mCallback != null);
                 i.putExtra("title_dialog","Headset");
                 startActivityForResult(i, HEADSET_REQUEST_CODE);
                 break;
             case "Speaker Test":
                 i = new Intent(mActivity, SpeakerActivity.class);
-                i.putExtra("title", mListener.getChangedTitle());
+                i.putExtra("title", mTitle);
                 i.putExtra("title_dialog","Speaker");
                 i.putExtra("isTestAll", mCallback != null);
                 startActivityForResult(i, SPEAK_REQUEST_CODE);
                 break;
             case "BoardMic Test":
                 i = new Intent(mActivity, BoardMicActivity.class);
-                i.putExtra("title", mListener.getChangedTitle());
+                i.putExtra("title", mTitle);
                 i.putExtra("title_dialog","BoardMic");
                 i.putExtra("isTestAll", mCallback != null);
                 startActivityForResult(i, MIC_REQUEST_CODE);
                 break;
             case "SecondaryMic Test":
                 i = new Intent(mActivity, SecondaryMicActivity.class);
-                i.putExtra("title", mListener.getChangedTitle());
+                i.putExtra("title", mTitle);
                 i.putExtra("title_dialog","SecondaryMic");
                 i.putExtra("isTestAll", mCallback != null);
                 startActivityForResult(i, SECONDMIC_REQUEST_CODE);
                 break;
             case "HeadsetMic Test":
                 i = new Intent(mActivity, HeadsetMicActivity.class);
-                i.putExtra("title", mListener.getChangedTitle());
+                i.putExtra("title", mTitle);
                 i.putExtra("title_dialog","HeadsetMic");
                 i.putExtra("isTestAll", mCallback != null);
                 startActivityForResult(i, HEADSETMIC_REQUEST_CODE);

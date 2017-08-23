@@ -15,7 +15,6 @@ import android.os.Message;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -45,7 +44,6 @@ import java.util.regex.Pattern;
 public class MainActivity extends BaseActivity
         implements View.OnClickListener {
     private static final int MAX_SIZE= 24;
-    private static final int REFRESH_TIME = 60 * 1000;
     LineChart mLineChart;
     LineDataSet mCPUDataSet;
     LineDataSet mBatterySet;
@@ -131,7 +129,6 @@ public class MainActivity extends BaseActivity
         IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
         registerReceiver(mBatteryReceiver, filter);
         buildChart();
-        //mCPUAsyncTask.execute();
         mLineChartThread = new HandlerThread("line-chart-thread");
         mLineChartThread.start();
         mLineChartHandler = new Handler(mLineChartThread.getLooper()) {

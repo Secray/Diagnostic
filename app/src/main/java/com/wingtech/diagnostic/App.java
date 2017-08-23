@@ -2,9 +2,11 @@ package com.wingtech.diagnostic;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.util.ArrayMap;
+import android.util.SparseArray;
+
+import com.wingtech.diagnostic.util.TestItem;
+import com.wingtech.diagnostic.util.TestItemHandler;
 
 import java.util.ArrayList;
 
@@ -13,25 +15,23 @@ import java.util.ArrayList;
  */
 
 public class App extends Application implements Application.ActivityLifecycleCallbacks {
-    private ArrayMap<String, Integer> mResMap;
     private static ArrayList<Activity> mList;
+    public static ArrayList<TestItem> mItems;
 
     @Override
     public void onCreate() {
         super.onCreate();
         mList = new ArrayList<>();
-        mResMap = new ArrayMap<>();
+        mItems = new ArrayList<>();
         registerActivityLifecycleCallbacks(this);
-        String[] testCases = getResources().getStringArray(R.array.test_cases);
-        TypedArray typedArray = getResources().obtainTypedArray(R.array.test_imgs);
-        int len = testCases.length;
-        for (int i = 0; i < len; i++) {
-            mResMap.put(testCases[i], typedArray.getResourceId(i, 0));
-        }
+
+        new TestItemHandler(this).start();
     }
 
-    public ArrayMap<String, Integer> getResMap() {
-        return mResMap;
+    public static void addItems(TestItem item) {
+        if (item != null) {
+            mItems.add(item);
+        }
     }
 
     @Override

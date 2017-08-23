@@ -1,6 +1,7 @@
 package com.wingtech.diagnostic.util;
 
 import android.content.Context;
+import android.util.SparseArray;
 import android.util.TypedValue;
 
 import com.wingtech.diagnostic.fragment.BatteryTestingFragment;
@@ -14,8 +15,11 @@ import com.wingtech.diagnostic.fragment.SIMCardTestingFragment;
 import com.wingtech.diagnostic.fragment.TestFragment;
 import com.wingtech.diagnostic.fragment.WiFiTestingFragment;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -34,38 +38,12 @@ public class Utils {
                 value, context.getResources().getDisplayMetrics());
     }
 
-    public static List<String> getTestAllCases(String []testCases) {
-        List<String> list = Arrays.asList(testCases);
-        Collections.sort(Arrays.asList(testCases), (o1, o2) -> {
-            switch (o1) {
-                case "Bluetooth Test":
-                case "Wi-Fi Test":
-                case "Battery Test":
-                case "E-Compass Test":
-                case "Gyroscope Test":
-                case "Modem Test":
-                case "CMD Mouse Test":
-                case "SD Card Test":
-                case "SIM Card Test":
-                case "SIM2 Test":
-                    switch (o2) {
-                        case "Bluetooth Test":
-                        case "Wi-Fi Test":
-                        case "Battery Test":
-                        case "E-Compass Test":
-                        case "Gyroscope Test":
-                        case "Modem Test":
-                        case "CMD Mouse Test":
-                        case "SD Card Test":
-                        case "SIM Card Test":
-                        case "SIM2 Test":
-                            return 0;
-                        default:
-                            break;
-                    }
-                    return -1;
-                default:
-                    return 1;
+    public static ArrayList<TestItem> getTestAllCases(ArrayList<TestItem> items) {
+        ArrayList<TestItem> list = new ArrayList<>(items);
+        Collections.sort(list, new Comparator<TestItem>() {
+            @Override
+            public int compare(TestItem o1, TestItem o2) {
+                return ((Boolean) o2.isAutoTest()).compareTo(o1.isAutoTest());
             }
         });
         return list;

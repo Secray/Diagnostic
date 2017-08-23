@@ -8,10 +8,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.wingtech.diagnostic.App;
 import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.adapter.SingleTestAdapter;
 import com.wingtech.diagnostic.bean.SingleTestCase;
 import com.wingtech.diagnostic.listener.OnItemClickListener;
+import com.wingtech.diagnostic.util.Log;
 
 import java.util.ArrayList;
 
@@ -25,10 +27,6 @@ public class SingleTestListActivity extends BaseActivity implements OnItemClickL
 
     RecyclerView mRecyclerView;
 
-    String[] mTestCases;
-
-    TypedArray mIconArray;
-
     SingleTestAdapter adapter;
     @Override
     protected int getLayoutResId() {
@@ -38,9 +36,7 @@ public class SingleTestListActivity extends BaseActivity implements OnItemClickL
     @Override
     protected void initViews() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mTestCases = getResources().getStringArray(R.array.test_cases);
         mRecyclerView = (RecyclerView) findViewById(R.id.single_list);
-        mIconArray = getResources().obtainTypedArray(R.array.test_icons);
     }
 
     @Override
@@ -62,17 +58,13 @@ public class SingleTestListActivity extends BaseActivity implements OnItemClickL
     }
 
     ArrayList<SingleTestCase> initList() {
-        int len = mIconArray.length();
-        int[] testIcons = new int[len];
-        for (int j = 0; j < len; j ++) {
-            testIcons[j] = mIconArray.getResourceId(j, 0);
-        }
         ArrayList<SingleTestCase> list = new ArrayList<>();
-        for (int i = 0; i < mTestCases.length; i ++) {
+        int size = App.mItems.size();
+        Log.i(" size = " + size);
+        for (int i = 0; i < size; i++) {
             SingleTestCase t = new SingleTestCase();
-            t.setPassed(i % 2 == 0);
-            t.setIcon(getDrawable(testIcons[i]));
-            t.setTitle(mTestCases[i]);
+            t.setTitle(App.mItems.get(i).getName());
+            t.setIcon(getDrawable(App.mItems.get(i).getIcon()));
             list.add(t);
         }
         return list;
@@ -89,7 +81,6 @@ public class SingleTestListActivity extends BaseActivity implements OnItemClickL
     protected void onResume() {
         super.onResume();
         adapter.notifyDataSetChanged();
-
     }
 
     @Override

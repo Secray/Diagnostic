@@ -8,21 +8,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.wingtech.diagnostic.App;
 import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.fragment.CommonSingleTestFragment;
 import com.wingtech.diagnostic.fragment.TestFragment;
 import com.wingtech.diagnostic.listener.OnResultChangedCallback;
-import com.wingtech.diagnostic.listener.OnTitleChangedListener;
-import com.wingtech.diagnostic.util.Log;
+import com.wingtech.diagnostic.listener.OnTestItemListener;
 import com.wingtech.diagnostic.util.SharedPreferencesUtils;
+import com.wingtech.diagnostic.util.TestItem;
 import com.wingtech.diagnostic.util.Utils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 /**
  * @author xiekui
@@ -30,7 +26,7 @@ import java.util.function.Consumer;
  */
 
 public class TestAllActivity extends BaseActivity
-        implements OnTitleChangedListener, OnResultChangedCallback {
+        implements OnTestItemListener, OnResultChangedCallback {
     Toolbar mToolbar;
     TextView mPrevious;
     TextView mNext;
@@ -41,7 +37,7 @@ public class TestAllActivity extends BaseActivity
     int mCurrent = 0;
     String mTitle;
     int mLen;
-    private List<String> mCaseList;
+    private List<TestItem> mCaseList;
 
     @Override
     protected int getLayoutResId() {
@@ -56,8 +52,7 @@ public class TestAllActivity extends BaseActivity
         mRlPrevious = findViewById(R.id.rl_previous);
         mRlNext = findViewById(R.id.rl_next);
         mIndicator = (TextView) findViewById(R.id.text_indicator);
-        String[] testCases = getResources().getStringArray(R.array.test_cases);
-        mCaseList = Utils.getTestAllCases(testCases);
+        mCaseList = Utils.getTestAllCases(App.mItems);
     }
 
     @Override
@@ -117,11 +112,11 @@ public class TestAllActivity extends BaseActivity
 
     void doTest() {
         mIndicator.setText((mCurrent + 1) + "/" + mLen);
-        mTitle = mCaseList.get(mCurrent);
+        mTitle = mCaseList.get(mCurrent).getName();
         getSupportActionBar().setTitle(mTitle);
-        mPrevious.setText(mCurrent == 0 ? "" : mCaseList.get(mCurrent - 1));
+        mPrevious.setText(mCurrent == 0 ? "" : mCaseList.get(mCurrent - 1).getName());
         mRlPrevious.setVisibility(mCurrent == 0 ? View.INVISIBLE : View.VISIBLE);
-        mNext.setText(mCurrent == mLen - 1 ? "" : mCaseList.get(mCurrent + 1));
+        mNext.setText(mCurrent == mLen - 1 ? "" : mCaseList.get(mCurrent + 1).getName());
         mRlNext.setVisibility(mCurrent == mLen - 1 ? View.INVISIBLE : View.VISIBLE);
 
         TestFragment fragment = Utils.getFragment(mTitle);
@@ -133,15 +128,10 @@ public class TestAllActivity extends BaseActivity
         } else {
             CommonSingleTestFragment commonFragment = new CommonSingleTestFragment();
             commonFragment.setOnResultChangedCallback(this);
-            commonFragment.setTitleChangedListener(this);
+            commonFragment.setOnTestItemListener(this);
             getSupportFragmentManager().beginTransaction().replace(R.id.test_content,
                     commonFragment).commit();
         }
-    }
-
-    @Override
-    public String getChangedTitle() {
-        return mTitle;
     }
 
     @Override
@@ -152,7 +142,13 @@ public class TestAllActivity extends BaseActivity
         if (mCurrent > mCaseList.size() - 1) {
             startActivity(new Intent(this, TestResultActivity.class));
             finish();
+        } else {
+            doTest();
         }
-        doTest();
+    }
+
+    @Override
+    public TestItem getTestItem() {
+        return App.mItems.get(mCurrent);
     }
 }

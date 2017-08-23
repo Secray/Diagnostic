@@ -5,22 +5,5 @@ package com.wingtech.diagnostic.bean;
  */
 
 public final class SingleTestCase extends BaseTestCase {
-    private boolean mIsPassed;
-    private boolean mIsShowResult;
 
-    public boolean isPassed() {
-        return mIsPassed;
-    }
-
-    public void setPassed(boolean passed) {
-        mIsPassed = passed;
-    }
-
-    public boolean isShowResult() {
-        return mIsShowResult;
-    }
-
-    public void setShowResult(boolean isShowResult) {
-        this.mIsShowResult = isShowResult;
-    }
 }

@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.wingtech.diagnostic.receiver.BatteryBroadcastReceiver;
+import com.wingtech.diagnostic.util.Log;
 
 import static com.wingtech.diagnostic.receiver.BatteryBroadcastReceiver.BATTERY_FAILED;
 import static com.wingtech.diagnostic.receiver.BatteryBroadcastReceiver.BATTERY_PASSED;
@@ -29,6 +30,7 @@ public class BatteryTestingFragment extends TestFragment {
                     mResult = false;
                     break;
             }
+            Log.i("xk", "handle message");
             mCallback.onChange(mResult);
         }
     };
@@ -36,6 +38,7 @@ public class BatteryTestingFragment extends TestFragment {
     @Override
     protected void onWork() {
         super.onWork();
+        Log.i("xk", "onWork");
         mBatteryBroadcastReceiver = new BatteryBroadcastReceiver(mHandler);
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_BATTERY_CHANGED);
@@ -45,14 +48,14 @@ public class BatteryTestingFragment extends TestFragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (mBatteryBroadcastReceiver != null) {
-            mActivity.unregisterReceiver(mBatteryBroadcastReceiver);
-        }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (mBatteryBroadcastReceiver != null) {
+            mActivity.unregisterReceiver(mBatteryBroadcastReceiver);
+        }
         mHandler.removeCallbacksAndMessages(null);
     }
 }
