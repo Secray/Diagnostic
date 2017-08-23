@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.hardware.Camera;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.ImageView;
@@ -34,8 +35,10 @@ import com.wingtech.diagnostic.activity.WireChargActivity;
 import com.wingtech.diagnostic.dialog.LoadingDialog;
 import com.wingtech.diagnostic.listener.OnResultChangedCallback;
 import com.wingtech.diagnostic.listener.OnTitleChangedListener;
+import com.wingtech.diagnostic.util.Log;
 import com.wingtech.diagnostic.util.SharedPreferencesUtils;
 
+import static com.wingtech.diagnostic.util.Constants.ASSITSCAMERA_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.BATTERY_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.BLUETOOTH_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.CAMERAFLASH_REQUEST_CODE;
@@ -84,6 +87,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
     private OnResultChangedCallback mCallback;
     private String mTitle;
     private int flashId = 0;
+    private int camId = 0;
 
     public void setTitleChangedListener(OnTitleChangedListener listener) {
         this.mListener = listener;
@@ -149,6 +153,8 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
             case KEYPAD_REQUEST_CODE:
             case FINGERPRINT_REQUEST_CODE:
             case SECONDMIC_REQUEST_CODE:
+            case CAMERAFRONTFLASH_REQUEST_CODE:
+            case ASSITSCAMERA_REQUEST_CODE:
                 boolean result = data.getBooleanExtra("result", false);
                 if (mCallback != null) {
                     mCallback.onChange(result);
@@ -212,7 +218,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 startActivityForResult(i, CAMERA_REQUEST_CODE);
                 break;
             case "MainCam Test":
-                int camId = 0;
+                camId = 0;
                 i = new Intent(mActivity, CameraTestActivity.class);
                 i.putExtra("isTestAll", mCallback != null);
                 i.putExtra("camId", camId);
@@ -224,6 +230,13 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 i.putExtra("isTestAll", mCallback != null);
                 i.putExtra("camId", camId);
                 startActivityForResult(i, VGACAMERA_REQUEST_CODE);
+                break;
+            case "AssistCam Test":
+                camId = 2;
+                i = new Intent(mActivity, CameraTestActivity.class);
+                i.putExtra("isTestAll", mCallback != null);
+                i.putExtra("camId", camId);
+                startActivityForResult(i, ASSITSCAMERA_REQUEST_CODE);
                 break;
             case "Camera Flash Test":
                 flashId = 0;

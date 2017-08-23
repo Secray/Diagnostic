@@ -33,6 +33,7 @@
         <item>@string/test_case_sim2</item>
         <item>@string/test_case_secondary_mic</item>
         <item>@string/test_case_camera_front_flash</item>
+        <item>@string/test_case_assist_cam</item>
     </string-array>
 
     <integer-array name="test_icons">
@@ -68,6 +69,7 @@
         <item>@drawable/asus_diagnostic_ic_simcard</item>
         <item>@drawable/asus_diagnostic_ic_boardmic</item>
         <item>@drawable/asus_diagnostic_ic_cameraflash</item>
+        <item>@drawable/asus_diagnostic_ic_vgacamcapture</item>
     </integer-array>
 
 
@@ -104,5 +106,6 @@
         <item>@drawable/asus_diagnostic_img_simcard</item>
         <item>@drawable/asus_diagnostic_img_boardmic</item>
         <item>@drawable/asus_diagnostic_img_camera_flash</item>
+        <item>@drawable/asus_diagnostic_img_vgacamcapture</item>
     </integer-array>
 </resources>

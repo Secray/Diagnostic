@@ -30,6 +30,7 @@ import java.io.FileOutputStream;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import static com.wingtech.diagnostic.util.Constants.ASSITSCAMERA_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.CAMERA_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.VGACAMERA_REQUEST_CODE;
 
@@ -76,22 +77,25 @@ public class CameraTestActivity extends TestingActivity {
         mPng = (AppCompatImageView) findViewById(R.id.png);
         mPass = (AppCompatButton) findViewById(R.id.pass);
         mFail = (AppCompatButton) findViewById(R.id.fail);
-        mRequestCode = CAMERA_REQUEST_CODE;
+
     }
 
     @Override
     protected void initToolbar() {
         mCameraId = getIntent().getIntExtra("camId", 0);
+        Log.i(TAG,"mCameraId = " + mCameraId);
     }
 
     @Override
     protected void onWork() {
         if (!checkCameraHardware(CameraTestActivity.this)) {
-            Toast.makeText(CameraTestActivity.this, "相机不支持", Toast.LENGTH_SHORT)
+            Toast.makeText(CameraTestActivity.this, "Camera does not support", Toast.LENGTH_SHORT)
                     .show();
         } else {
             openCamera(mCameraId);
-            setCameraDisplayOrientation(CameraTestActivity.this, mCameraId, mCamera);
+            if(mCamera != null) {
+                setCameraDisplayOrientation(CameraTestActivity.this, mCameraId, mCamera);
+            }
 
         }
 
@@ -157,6 +161,8 @@ public class CameraTestActivity extends TestingActivity {
             if (mCameraId == 0){
                 mPng.setImageBitmap(rotateBitmapByDegree(bm, 90));
             }else if (mCameraId == 1){
+                mPng.setImageBitmap(rotateBitmapByDegree(bm, -90));
+            }else if(mCameraId == 2){
                 mPng.setImageBitmap(rotateBitmapByDegree(bm, -90));
             }
         } catch (Exception e) {
@@ -278,7 +284,22 @@ public class CameraTestActivity extends TestingActivity {
             Log.v(TAG, "openLegacy failed due to " + e.getMessage()
                     + ", using open instead");
 
-            mCamera = android.hardware.Camera.open(id);
+            //mCamera = android.hardware.Camera.open(id);
+            Toast.makeText(CameraTestActivity.this, "no front assist camera", Toast.LENGTH_SHORT)
+                    .show();
+            Intent intent = new Intent(this, SingleTestActivity.class);
+            mResult = false;
+            intent.putExtra("result", mResult);
+            if (mCameraId == 0){
+                setResult(CAMERA_REQUEST_CODE, intent);
+            }else if(mCameraId == 1){
+                setResult(VGACAMERA_REQUEST_CODE, intent);
+            }else if(mCameraId == 2){
+                setResult(ASSITSCAMERA_REQUEST_CODE, intent);
+            }
+            finish();
+
+        }finally {
 
         }
         return mCamera;
@@ -289,36 +310,37 @@ public class CameraTestActivity extends TestingActivity {
         Log.v(TAG, "openCamera id = " + id);
         if (mCamera == null) {
             mCamera = getCameraInstance(id);
-
-            //add by gaoweili start
-            Camera.Parameters p = mCamera.getParameters();
-            List<Camera.Size> li = p.getSupportedPictureSizes();
-            for (int i = 0; i < li.size() ; i++){
-                tag = (li.get(i).width ) * (li.get(i).height);
-                Log.v(TAG, "li.get(i).width =" + li.get(i).width + "li.get(i).height =" + li.get(i).height);
-                if(tag > tagResult){
-                    tagResult = tag;
-                    cWidth = li.get(i).width;
-                    cHeight = li.get(i).height;
+            if(mCamera != null){
+                //add by gaoweili start
+                Camera.Parameters p = mCamera.getParameters();
+                List<Camera.Size> li = p.getSupportedPictureSizes();
+                for (int i = 0; i < li.size() ; i++){
+                    tag = (li.get(i).width ) * (li.get(i).height);
+                    Log.v(TAG, "li.get(i).width =" + li.get(i).width + "li.get(i).height =" + li.get(i).height);
+                    if(tag > tagResult){
+                        tagResult = tag;
+                        cWidth = li.get(i).width;
+                        cHeight = li.get(i).height;
+                    }
                 }
+                List<Camera.Size> lp = p.getSupportedPreviewSizes();
+                for (int i = 0; i < lp.size() ; i++){
+                    Log.v(TAG, "cwWidth =" + lp.get(i).width + "cwHeight =" + lp.get(i).height);
+                }
+                Log.v(TAG, "cWidth =" + cWidth + "cHeight =" + cHeight);
+                p.setPictureSize(cWidth, cHeight);
+                p.setPreviewSize(1920,1080);
+                p.set("zsl","on");
+                //频闪问题，设置为50HZ
+               // p.set("zsl","Parameters.ANTIBANDING_50HZ = " + Camera.Parameters.ANTIBANDING_50HZ);
+                //p.setAntibanding(Camera.Parameters.ANTIBANDING_50HZ);
+                mCamera.setParameters(p);
+                //add by gaoweili end
+                mPreview = new CameraPreview(CameraTestActivity.this, mCamera);
+                mCameralayout = (FrameLayout) findViewById(R.id.camera_preview);
+                mCameralayout.addView(mPreview);
+                mCamera.startPreview();
             }
-            List<Camera.Size> lp = p.getSupportedPreviewSizes();
-            for (int i = 0; i < lp.size() ; i++){
-                Log.v(TAG, "cwWidth =" + lp.get(i).width + "cwHeight =" + lp.get(i).height);
-            }
-            Log.v(TAG, "cWidth =" + cWidth + "cHeight =" + cHeight);
-            p.setPictureSize(cWidth, cHeight);
-            p.setPreviewSize(1920,1080);
-            p.set("zsl","on");
-            //频闪问题，设置为50HZ
-           // p.set("zsl","Parameters.ANTIBANDING_50HZ = " + Camera.Parameters.ANTIBANDING_50HZ);
-            //p.setAntibanding(Camera.Parameters.ANTIBANDING_50HZ);
-            mCamera.setParameters(p);
-            //add by gaoweili end
-            mPreview = new CameraPreview(CameraTestActivity.this, mCamera);
-            mCameralayout = (FrameLayout) findViewById(R.id.camera_preview);
-            mCameralayout.addView(mPreview);
-            mCamera.startPreview();
         }
     }
 
@@ -337,6 +359,8 @@ public class CameraTestActivity extends TestingActivity {
             setResult(CAMERA_REQUEST_CODE, intent);
         }else if(mCameraId == 1){
             setResult(VGACAMERA_REQUEST_CODE, intent);
+        }else if(mCameraId == 2){
+            setResult(ASSITSCAMERA_REQUEST_CODE, intent);
         }
         finish();
     }

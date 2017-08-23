@@ -44,5 +44,6 @@ public class Constants {
     public static final int FINGERPRINT_REQUEST_CODE = 29;
     public static final int SECONDMIC_REQUEST_CODE = 30;
     public static final int CAMERAFRONTFLASH_REQUEST_CODE = 31;
+    public static final int ASSITSCAMERA_REQUEST_CODE = 32;
 
 }
