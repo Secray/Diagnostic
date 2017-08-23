@@ -38,7 +38,6 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
         mVoltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, 0);
         mTemperature = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, 1000);
 
-        Log.i("xk", "status = " + mStatus + " level = " + mLevel + " scale =" + mScale + " health = " + mHealth + " voltage = " + mVoltage + " Temperature = " + mTemperature);
         if (mLevel == 0 || mScale == 0 || mHealth == 0
                 || mVoltage == 0 || mTemperature == 1000) {
             mHandler.sendEmptyMessage(BATTERY_FAILED);

@@ -14,6 +14,7 @@ import com.wingtech.diagnostic.fragment.CommonSingleTestFragment;
 import com.wingtech.diagnostic.fragment.TestFragment;
 import com.wingtech.diagnostic.listener.OnResultChangedCallback;
 import com.wingtech.diagnostic.listener.OnTestItemListener;
+import com.wingtech.diagnostic.util.Log;
 import com.wingtech.diagnostic.util.SharedPreferencesUtils;
 import com.wingtech.diagnostic.util.TestItem;
 import com.wingtech.diagnostic.util.Utils;
@@ -95,6 +96,7 @@ public class TestAllActivity extends BaseActivity
         pass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
+                dlg.dismiss();
                 finish();
             }
         });
@@ -138,13 +140,13 @@ public class TestAllActivity extends BaseActivity
     public void onChange(boolean result) {
         SharedPreferencesUtils.setParam(this, mTitle,
                 result ? SharedPreferencesUtils.PASS : SharedPreferencesUtils.FAIL);
+        Log.i("xk", "mCurrent = " + mCurrent + " " + mTitle + " " + result);
         mCurrent ++;
         if (mCurrent > mCaseList.size() - 1) {
             startActivity(new Intent(this, TestResultActivity.class));
             finish();
-        } else {
-            doTest();
         }
+        doTest();
     }
 
     @Override

@@ -88,21 +88,22 @@ public class WiFiTestingFragment extends TestFragment {
         if (mWiFiState != WifiManager.WIFI_STATE_ENABLED) {
             mResult = false;
             mCallback.onChange(mResult);
-        }
-        mWiFiManager.startScan();
-        mScanResults = mWiFiManager.getScanResults();
-
-        Log.i("WiFi Scan results = " + mScanResults.size());
-        if (isWiFi(mActivity)) {
-            Log.e("It's not WiFi");
-        }
-
-        if (mScanResults.size() > 0 && mWiFiEnable) {
-            mResult = true;
         } else {
-            mResult = false;
+            mWiFiManager.startScan();
+            mScanResults = mWiFiManager.getScanResults();
+
+            Log.i("WiFi Scan results = " + mScanResults.size());
+            if (isWiFi(mActivity)) {
+                Log.e("It's not WiFi");
+            }
+
+            if (mScanResults.size() > 0 && mWiFiEnable) {
+                mResult = true;
+            } else {
+                mResult = false;
+            }
+            mCallback.onChange(mResult);
         }
-        mCallback.onChange(mResult);
     }
 
     BroadcastReceiver mWiFiReceiver = new BroadcastReceiver() {

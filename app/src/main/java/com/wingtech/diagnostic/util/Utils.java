@@ -82,6 +82,7 @@ public class Utils {
                 break;
             case "CMD Mouse Test":
                 fragment = new CMDMouseTestingFragment();
+                break;
             case "GPS Test":
                 fragment = new GpsTestingFragment();
                 break;
