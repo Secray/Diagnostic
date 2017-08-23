@@ -47,6 +47,7 @@ import static com.wingtech.diagnostic.util.Constants.CAMERA_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.DISPLAY_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.E_COMPASS_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.FINGERPRINT_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.GPS_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.GYROSCOPE_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.G_SENSOR_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.HEADSETKEY_REQUEST_CODE;
@@ -155,6 +156,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
             case SECONDMIC_REQUEST_CODE:
             case CAMERAFRONTFLASH_REQUEST_CODE:
             case ASSITSCAMERA_REQUEST_CODE:
+            case GPS_REQUEST_CODE:
                 boolean result = data.getBooleanExtra("result", false);
                 if (mCallback != null) {
                     mCallback.onChange(result);
@@ -191,6 +193,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
             case "SIM2 Test":
             case "CMD Mouse Test":
             case "Fingerprint Test":
+            case "GPS Test":
                 Intent i = new Intent(mActivity, SingleTestingActivity.class);
                 i.putExtra("title", mTitle);
                 startActivityForResult(i, MOUSE_REQUEST_CODE);

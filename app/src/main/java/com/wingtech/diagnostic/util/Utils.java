@@ -6,6 +6,7 @@ import android.util.TypedValue;
 import com.wingtech.diagnostic.fragment.BatteryTestingFragment;
 import com.wingtech.diagnostic.fragment.BlueToothFragment;
 import com.wingtech.diagnostic.fragment.CMDMouseTestingFragment;
+import com.wingtech.diagnostic.fragment.GpsTestingFragment;
 import com.wingtech.diagnostic.fragment.GyroscopeTestingFragment;
 import com.wingtech.diagnostic.fragment.MagneticTestingFragment;
 import com.wingtech.diagnostic.fragment.ModemTestingFragment;
@@ -48,6 +49,7 @@ public class Utils {
                 case "SD Card Test":
                 case "SIM Card Test":
                 case "SIM2 Test":
+                case "GPS Test":
                     switch (o2) {
                         case "Bluetooth Test":
                         case "Wi-Fi Test":
@@ -59,6 +61,7 @@ public class Utils {
                         case "SD Card Test":
                         case "SIM Card Test":
                         case "SIM2 Test":
+                        case "GPS Test":
                             return 0;
                         default:
                             break;
@@ -103,6 +106,8 @@ public class Utils {
                 break;
             case "CMD Mouse Test":
                 fragment = new CMDMouseTestingFragment();
+            case "GPS Test":
+                fragment = new GpsTestingFragment();
                 break;
         }
         return fragment;

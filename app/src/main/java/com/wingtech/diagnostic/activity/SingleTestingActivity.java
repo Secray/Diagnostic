@@ -8,6 +8,7 @@ import com.wingtech.diagnostic.fragment.BatteryTestingFragment;
 import com.wingtech.diagnostic.fragment.BlueToothFragment;
 import com.wingtech.diagnostic.fragment.CMDMouseTestingFragment;
 import com.wingtech.diagnostic.fragment.FingerprintFragment;
+import com.wingtech.diagnostic.fragment.GpsTestingFragment;
 import com.wingtech.diagnostic.fragment.GyroscopeTestingFragment;
 import com.wingtech.diagnostic.fragment.MagneticTestingFragment;
 import com.wingtech.diagnostic.fragment.ModemTestingFragment;
@@ -21,6 +22,7 @@ import static com.wingtech.diagnostic.util.Constants.BATTERY_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.BLUETOOTH_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.E_COMPASS_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.FINGERPRINT_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.GPS_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.GYROSCOPE_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.MODEM_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.MOUSE_REQUEST_CODE;
@@ -113,6 +115,10 @@ public class SingleTestingActivity extends BaseActivity implements OnResultChang
             case "Fingerprint Test":
                 mRequestCode = FINGERPRINT_REQUEST_CODE;
                 mFragment = new FingerprintFragment();
+                break;
+            case "GPS Test":
+                mRequestCode = GPS_REQUEST_CODE;
+                mFragment = new GpsTestingFragment();
                 break;
             default:
                 mFragment = new BlueToothFragment();
