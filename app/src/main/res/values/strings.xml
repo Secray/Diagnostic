@@ -190,5 +190,7 @@
     <string name="test_all_dialog_content">You have not finished all of the test items.Do you want to continue to finish it?</string>
     <string name="btn_continue">Continue</string>
 
+    <!-- Diaplay Activity-->
+    <string name="nfc_disabled">NFC disable</string>
 
 </resources>

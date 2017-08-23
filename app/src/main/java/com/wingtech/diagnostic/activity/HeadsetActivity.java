@@ -137,6 +137,7 @@ public class HeadsetActivity extends TestingActivity {
             }
         });
         dlg = builder.create();
+        dlg.setCanceledOnTouchOutside(false);
         dlg.show();
     }
 
