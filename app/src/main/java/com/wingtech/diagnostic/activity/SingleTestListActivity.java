@@ -60,7 +60,6 @@ public class SingleTestListActivity extends BaseActivity implements OnItemClickL
     ArrayList<SingleTestCase> initList() {
         ArrayList<SingleTestCase> list = new ArrayList<>();
         int size = App.mItems.size();
-        Log.i(" size = " + size);
         for (int i = 0; i < size; i++) {
             SingleTestCase t = new SingleTestCase();
             t.setTitle(App.mItems.get(i).getName());

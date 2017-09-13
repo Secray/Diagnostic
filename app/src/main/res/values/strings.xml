@@ -104,7 +104,7 @@
     <string name="repair_request_address">Address:</string>
     <string name="repair_request_detail_address">Detail Address</string>
     <string name="repair_request_state">State:</string>
-    <string name="repair_request_description">Leave some words to describe your request</string>
+    <string name="repair_request_description">Leave some message to describe your request</string>
     <string name="repair_request_btn_send">Send</string>
 
     <!-- Test ListItem -->

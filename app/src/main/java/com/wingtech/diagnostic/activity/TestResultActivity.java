@@ -8,9 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.wingtech.diagnostic.App;
 import com.wingtech.diagnostic.R;
 import com.wingtech.diagnostic.adapter.TestResultAdapter;
+import com.wingtech.diagnostic.bean.SingleTestCase;
 import com.wingtech.diagnostic.bean.TestCaseResult;
+import com.wingtech.diagnostic.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -61,17 +65,12 @@ public class TestResultActivity extends BaseActivity implements View.OnClickList
     }
 
     ArrayList<TestCaseResult> initList() {
-        int len = mIconArray.length();
-        int[] testIcons = new int[len];
-        for (int j = 0; j < len; j ++) {
-            testIcons[j] = mIconArray.getResourceId(j, 0);
-        }
         ArrayList<TestCaseResult> list = new ArrayList<>();
-        for (int i = 0; i < mTestCases.length; i ++) {
+        int size = App.mItems.size();
+        for (int i = 0; i < size; i++) {
             TestCaseResult t = new TestCaseResult();
-            t.setResult(i % 2 == 0);
-            t.setIcon(getDrawable(testIcons[i]));
-            t.setTitle(mTestCases[i]);
+            t.setTitle(App.mItems.get(i).getName());
+            t.setIcon(getDrawable(App.mItems.get(i).getIcon()));
             list.add(t);
         }
         return list;

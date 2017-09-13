@@ -151,6 +151,6 @@ public class TestAllActivity extends BaseActivity
 
     @Override
     public TestItem getTestItem() {
-        return App.mItems.get(mCurrent);
+        return mCaseList.get(mCurrent);
     }
 }
