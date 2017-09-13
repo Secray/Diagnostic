@@ -7,15 +7,15 @@
     <TEST_ITEM Id="4" Name="Gyroscope Test" Disable="0" AutoTest="1" Icon="asus_diagnostic_ic_gyroscope" Img="asus_diagnostic_img_gyroscope"/>
     <TEST_ITEM Id="5" Name="Modem Test" Disable="0" AutoTest="1" Icon="asus_diagnostic_ic_modembus" Img="asus_diagnostic_img_modembus"/>
     <TEST_ITEM Id="6" Name="Touch Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_touch" Img="asus_diagnostic_img_touch"/>
-    <TEST_ITEM Id="7" Name="G-Sensor Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_gsensor" Img="asus_diagnostic_img_gsensor"/>
+    <TEST_ITEM Id="7" Name="G-Sensor Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_gsensor" Img="asus_diagnostic_img_g_sensor"/>
     <TEST_ITEM Id="8" Name="Keypad Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_keypad" Img="asus_diagnostic_img_keypad"/>
     <TEST_ITEM Id="9" Name="MultiTouch Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_multitouch" Img="asus_diagnostic_img_multitouch"/>
     <TEST_ITEM Id="10" Name="Vibrator Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_vibrator" Img="asus_diagnostic_img_vibrator"/>
     <TEST_ITEM Id="11" Name="VGACam Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_vgacamcapture" Img="asus_diagnostic_img_vgacamcapture"/>
     <TEST_ITEM Id="12" Name="MainCam Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_maincamcapture" Img="asus_diagnostic_img_maincamcapture"/>
     <TEST_ITEM Id="13" Name="Display Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_display" Img="asus_diagnostic_img_display"/>
-    <TEST_ITEM Id="14" Name="Speaker Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_speaker" Img="asus_diagnostic_img_speaker"/>
-    <TEST_ITEM Id="15" Name="Receiver Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_receiver2" Img="asus_diagnostic_img_receiver2"/>
+    <TEST_ITEM Id="14" Name="Speaker Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_speaker" Img="asus_diagnostic_img_speake"/>
+    <TEST_ITEM Id="15" Name="Receiver Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_receiver2" Img="asus_diagnostic_img_receive"/>
     <TEST_ITEM Id="16" Name="BoardMic Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_boardmic" Img="asus_diagnostic_img_boardmic"/>
     <TEST_ITEM Id="17" Name="Headset Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_headset" Img="asus_diagnostic_img_headset"/>
     <TEST_ITEM Id="18" Name="HeadsetMic Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_headsetmic" Img="asus_diagnostic_img_headsetmic"/>
@@ -28,7 +28,7 @@
     <TEST_ITEM Id="25" Name="SIM Card Test" Disable="0" AutoTest="1" Icon="asus_diagnostic_ic_simcard" Img="asus_diagnostic_img_simcard"/>
     <TEST_ITEM Id="26" Name="SIM2 Test" Disable="0" AutoTest="1" Icon="asus_diagnostic_ic_simcard" Img="asus_diagnostic_img_simcard"/>
     <TEST_ITEM Id="27" Name="Wireless Charging Test" Disable="1" AutoTest="0" Icon="asus_diagnostic_ic_wireless_charging" Img="asus_diagnostic_img_wireless_charging"/>
-    <TEST_ITEM Id="28" Name="Camera Flash Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_cameraflash" Img="asus_diagnostic_img_cameraflash"/>
+    <TEST_ITEM Id="28" Name="Camera Flash Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_cameraflash" Img="asus_diagnostic_img_camera_flash"/>
     <TEST_ITEM Id="29" Name="HeadsetKey Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_headsetkey" Img="asus_diagnostic_img_headsetkey"/>
     <TEST_ITEM Id="30" Name="SecondaryMic Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_boardmic" Img="asus_diagnostic_img_boardmic"/>
     <TEST_ITEM Id="31" Name="Fingerprint Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_fingerprint" Img="asus_diagnostic_img_fingerprint"/>

@@ -79,13 +79,13 @@ public class GSensorTestActivity extends TestingActivity implements
             mXMinusPass = true;
         }
 
-        if(event.values[1] >= 9 && !mYPlusPass){
+        if(event.values[1] <= -9 && !mYPlusPass){
             mGSensorView.setYPlusPass(true);
             mSum ++;
             mYPlusPass = true;
         }
 
-        if(event.values[1] <= -9 && !mYMinusPass){
+        if(event.values[1] >= 9 && !mYMinusPass){
             mGSensorView.setYMinusPass(true);
             mSum ++;
             mYMinusPass = true;
