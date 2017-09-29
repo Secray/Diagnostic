@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg_color">
+    <TableLayout
+        android:id="@+id/sim1_content"
+        android:paddingTop="@dimen/about_text_padding"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:textColor="@color/main_text_color"
+                android:id="@+id/sim_id1"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:text="@string/sim_1_card"/>
+            <TextView
+                android:textColor="@color/main_text_color"
+                android:id="@+id/sim_msg1"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:text="@string/please_plug_sim_card"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/network_info1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView android:layout_column="1"
+                android:textColor="@color/main_text_color"
+                android:layout_weight="1"
+                android:text="@string/network"/>
+            <TextView
+                android:textColor="@color/main_text_color"
+                android:id="@+id/network1"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:text="1111111111"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/cellular_info1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView android:layout_column="1"
+                android:layout_weight="1"
+                android:textColor="@color/main_text_color"
+                android:text="@string/cellular_network"/>
+            <TextView
+                android:id="@+id/cellular_network_state1"
+                android:layout_column="1"
+                android:textColor="@color/main_text_color"
+                android:layout_weight="1"
+                android:text="1111111111"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/signal_info1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView android:layout_column="1"
+                android:textColor="@color/main_text_color"
+                android:layout_weight="1"
+                android:text="@string/signal_level"/>
+            <TextView
+                android:id="@+id/signal_level1"
+                android:layout_column="1"
+                android:textColor="@color/main_text_color"
+                android:layout_weight="1"
+                android:text="1111111111"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/sim1_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView android:layout_column="1"
+                android:layout_span="1"
+                android:textColor="@color/main_text_color"
+                android:layout_weight="1"
+                android:text="@string/please_open_cellular_network_and_try_again"/>
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout
+        android:id="@+id/sim2_content"
+        android:paddingTop="@dimen/about_text_padding"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/sim_id2"
+                android:textColor="@color/main_text_color"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:text="@string/sim_2_card"/>
+            <TextView
+                android:id="@+id/sim_msg2"
+                android:layout_column="1"
+                android:textColor="@color/main_text_color"
+                android:layout_weight="1"
+                android:text="@string/please_plug_sim_card"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/network_info2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView android:layout_column="1"
+                android:layout_weight="1"
+                android:textColor="@color/main_text_color"
+                android:text="@string/network"/>
+            <TextView
+                android:id="@+id/network2"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:textColor="@color/main_text_color"
+                android:text="1111111111"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/cellular_info2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView android:layout_column="1"
+                android:layout_weight="1"
+                android:textColor="@color/main_text_color"
+                android:text="@string/cellular_network"/>
+            <TextView
+                android:id="@+id/cellular_network_state2"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:textColor="@color/main_text_color"
+                android:text="1111111111"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/signal_info2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView android:layout_column="1"
+                android:layout_weight="1"
+                android:textColor="@color/main_text_color"
+                android:text="@string/signal_level"/>
+            <TextView
+                android:id="@+id/signal_level2"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:textColor="@color/main_text_color"
+                android:text="1111111111"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/sim2_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView android:layout_column="1"
+                android:layout_span="1"
+                android:textColor="@color/main_text_color"
+                android:layout_weight="1"
+                android:text="@string/please_open_cellular_network_and_try_again"/>
+        </TableRow>
+    </TableLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/test_camera_flash_margin_bottom"
+        android:gravity="bottom">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/fail"
+            android:layout_alignParentLeft="true"
+            android:textAllCaps="false"
+            android:layout_width="@dimen/test_action_button_width"
+            android:layout_height="@dimen/test_action_button_height"
+            android:textColor="@android:color/white"
+            android:background="@drawable/ripple_test_fail_btn_bg"
+            android:text="@string/test_fail_btn"/>
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/pass"
+            android:layout_alignParentRight="true"
+            android:textAllCaps="false"
+            android:background="@drawable/ripple_circle_button_bg"
+            android:textColor="@android:color/white"
+            android:layout_width="@dimen/test_action_button_width"
+            android:layout_height="@dimen/test_action_button_height"
+            android:text="@string/test_pass_btn"/>
+    </RelativeLayout>
+</LinearLayout>

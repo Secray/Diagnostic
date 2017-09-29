@@ -9,8 +9,10 @@ import android.widget.TextView;
 
 import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.activity.BoardMicActivity;
+import com.wingtech.diagnostic.activity.CallActivity;
 import com.wingtech.diagnostic.activity.CameraFlashActivity;
 import com.wingtech.diagnostic.activity.CameraTestActivity;
+import com.wingtech.diagnostic.activity.CellularNetworkActivity;
 import com.wingtech.diagnostic.activity.ChargingActivity;
 import com.wingtech.diagnostic.activity.DisplayActivity;
 import com.wingtech.diagnostic.activity.GSensorTestActivity;
@@ -38,9 +40,11 @@ import com.wingtech.diagnostic.util.TestItem;
 import static com.wingtech.diagnostic.util.Constants.ASSITSCAMERA_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.BATTERY_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.BLUETOOTH_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.CALL_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.CAMERAFLASH_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.CAMERAFRONTFLASH_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.CAMERA_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.CELLULAR_NETWORK_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.DISPLAY_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.E_COMPASS_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.FINGERPRINT_REQUEST_CODE;
@@ -155,6 +159,8 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
             case CAMERAFRONTFLASH_REQUEST_CODE:
             case ASSITSCAMERA_REQUEST_CODE:
             case GPS_REQUEST_CODE:
+            case CALL_REQUEST_CODE:
+            case CELLULAR_NETWORK_REQUEST_CODE:
                 boolean result = data.getBooleanExtra("result", false);
                 if (mCallback != null) {
                     mCallback.onChange(result);
@@ -314,6 +320,20 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 i.putExtra("title", mTitle);
                 i.putExtra("plugged", 2);
                 startActivityForResult(i, WIRECHARGKEY_REQUEST_CODE);
+                break;
+
+            case "Phone Call Test":
+                i = new Intent(mActivity, CallActivity.class);
+                i.putExtra("isTestAll", mCallback != null);
+                i.putExtra("title", mTitle);
+                startActivityForResult(i, CALL_REQUEST_CODE);
+                break;
+
+            case "SIM Signal Test":
+                i = new Intent(mActivity, CellularNetworkActivity.class);
+                i.putExtra("isTestAll", mCallback != null);
+                i.putExtra("title", mTitle);
+                startActivityForResult(i, CALL_REQUEST_CODE);
                 break;
 
             case "Receiver Test":

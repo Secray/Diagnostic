@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/list_margin"
+    android:paddingRight="@dimen/list_margin"
+    android:background="@color/main_bg_color">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/phone_number_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+
+        <EditText
+            android:id="@+id/phone_number"
+            android:inputType="phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:hint="@string/phone_number" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:textAllCaps="false"
+        android:layout_width="@dimen/btn_test_again_width"
+        android:layout_height="@dimen/btn_test_again_height"
+        android:layout_below="@+id/phone_number_wrapper"
+        android:layout_marginTop="@dimen/about_padding"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="sans-serif"
+        android:textSize="@dimen/btn_test_again_text_size"
+        android:background="@drawable/ripple_circle_button_bg"
+        android:textColor="@android:color/white"
+        android:text="@string/call_phone_action"
+        android:id="@+id/call_action" />
+</RelativeLayout>

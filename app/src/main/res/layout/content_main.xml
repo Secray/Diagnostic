@@ -117,7 +117,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:columnCount="2"
-        android:rowCount="2">
+        android:rowCount="1">
         <LinearLayout
             style="@style/AppTheme.BottomAction"
             android:layout_marginRight="@dimen/main_bottom_button_divider_line"
@@ -137,27 +137,6 @@
                 style="@style/AppTheme.BottomActionText"
                 android:drawableTop="@drawable/main_test_single_button"
                 android:text="@string/main_bottom_button_single_test"/>
-        </LinearLayout>
-        <LinearLayout
-            style="@style/AppTheme.BottomAction"
-            android:layout_marginRight="@dimen/main_bottom_button_divider_line"
-            android:layout_marginTop="@dimen/main_bottom_button_divider_line">
-            <TextView
-                android:id="@+id/repair"
-                style="@style/AppTheme.BottomActionText"
-                android:drawableTop="@drawable/main_repair_button"
-                android:text="@string/main_bottom_button_repair"/>
-        </LinearLayout>
-
-        <LinearLayout
-            style="@style/AppTheme.BottomAction"
-            android:layout_marginRight="@dimen/main_bottom_button_divider_line"
-            android:layout_marginTop="@dimen/main_bottom_button_divider_line">
-            <TextView
-                android:id="@+id/help"
-                style="@style/AppTheme.BottomActionText"
-                android:drawableTop="@drawable/main_help_button"
-                android:text="@string/main_bottom_button_help"/>
         </LinearLayout>
     </GridLayout>
 </LinearLayout>

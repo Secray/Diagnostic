@@ -46,5 +46,6 @@ public class Constants {
     public static final int CAMERAFRONTFLASH_REQUEST_CODE = 31;
     public static final int ASSITSCAMERA_REQUEST_CODE = 32;
     public static final int GPS_REQUEST_CODE = 33;
-
+    public static final int CALL_REQUEST_CODE = 34;
+    public static final int CELLULAR_NETWORK_REQUEST_CODE = 35;
 }

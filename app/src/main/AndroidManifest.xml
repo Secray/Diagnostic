@@ -143,7 +143,12 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.wingtech.diagnostic.activity.VibratorTestingActivity"
             android:screenOrientation="portrait"/>
-				<service android:name="com.wingtech.diagnostic.service.TemperatureService" />
+        <activity android:name="com.wingtech.diagnostic.activity.CallActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.wingtech.diagnostic.activity.CellularNetworkActivity"
+            android:screenOrientation="portrait"/>
+
+        <service android:name="com.wingtech.diagnostic.service.TemperatureService" />
     </application>
 
 </manifest>

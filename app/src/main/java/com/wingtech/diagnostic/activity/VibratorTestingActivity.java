@@ -29,6 +29,7 @@ public class VibratorTestingActivity extends TestingActivity implements View.OnC
         if (mVibrator == null) {
             mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         }
+        mVibratorSwitch.setChecked(true);
     }
 
     @Override

@@ -112,8 +112,8 @@ public class MainActivity extends BaseActivity
         mLoadingView = (LoadingView) findViewById(R.id.cpu_loading);
         findViewById(R.id.test_all).setOnClickListener(this);
         findViewById(R.id.single_test).setOnClickListener(this);
-        findViewById(R.id.repair).setOnClickListener(this);
-        findViewById(R.id.help).setOnClickListener(this);
+        //findViewById(R.id.repair).setOnClickListener(this);
+        //findViewById(R.id.help).setOnClickListener(this);
     }
 
     @Override
@@ -220,12 +220,12 @@ public class MainActivity extends BaseActivity
             case R.id.single_test:
                 startActivity(new Intent(MainActivity.this, SingleTestListActivity.class));
                 break;
-            case R.id.repair:
+            /*case R.id.repair:
                 startActivity(new Intent(MainActivity.this, RepairActivity.class));
                 break;
             case R.id.help:
                 startActivity(new Intent(MainActivity.this, HelpActivity.class));
-                break;
+                break;*/
         }
     }
 

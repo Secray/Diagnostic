@@ -193,5 +193,16 @@
 
     <!-- Diaplay Activity-->
     <string name="nfc_disabled">NFC disable</string>
+    <string name="phone_number">Phone number</string>
+    <string name="call_phone_action">call</string>
+    <string name="sim_not_found_msg">please plug SIM card in the device and continue to test again.</string>
+    <string name="no_sim_find_title">No SIM card found</string>
+    <string name="network">NetWork:</string>
+    <string name="cellular_network">Cellular Network:</string>
+    <string name="please_plug_sim_card">please plug sim card</string>
+    <string name="sim_1_card">SIM 1 Card:</string>
+    <string name="please_open_cellular_network_and_try_again">please open cellular network and try again.</string>
+    <string name="signal_level">Signal Level:</string>
+    <string name="sim_2_card">SIM 2 Card</string>
 
 </resources>
