@@ -111,4 +111,102 @@
         <item>@drawable/asus_diagnostic_img_vgacamcapture</item>
         <item>@drawable/asus_diagnostic_ic_gyroscope</item>
     </integer-array>
+ 
+    <string-array name="test_cases_smmi">
+        <item>@string/test_case_bluetooth</item>
+        <item>@string/test_case_wifi</item>
+        <item>@string/test_case_battery</item>
+        <item>@string/test_case_e_compass</item>
+        <item>@string/test_case_gyroscope</item>
+        <item>@string/test_case_mode</item>
+        <item>@string/test_case_touch</item>
+        <item>@string/test_case_g_sensor</item>
+        <item>@string/test_case_keypad</item>
+        <item>@string/test_case_multi_touch</item>
+        <item>@string/test_case_vibrator</item>
+        <item>@string/test_case_VGA_cam</item>
+        <item>@string/test_case_main_cam</item>
+        <item>@string/test_case_display</item>           
+        <item>@string/test_case_speaker</item>
+        <item>@string/test_case_receiver</item>
+        <item>@string/test_case_board_mic</item>     
+        <item>@string/test_case_headset</item>
+        <item>@string/test_case_headset_mic</item>
+        <item>@string/test_case_proximity</item>
+        <item>@string/test_case_light_sensor</item>
+        <item>@string/test_case_cmd_mouse</item>
+        <item>@string/test_case_sd_card</item>
+        <item>@string/test_case_sim_card</item>        
+        <item>@string/test_case_sim2</item>
+        <item>@string/test_case_camera_flash</item>
+        <item>@string/test_case_headset_key</item>
+        <item>@string/test_case_secondary_mic</item>
+        <item>@string/test_case_fingerprint</item>
+    </string-array>
+    
+    <integer-array name="smmi_error_code">
+        <item>1912</item>
+        <item>1914</item>
+        <item>1911</item>
+        <item>1939</item>
+        <item>1980</item>
+        <item>1913</item>
+        <item>1937</item>
+        <item>1907</item>
+        <item>1905</item>
+        <item>1969</item>
+        <item>1910</item>
+        <item>1968</item>
+        <item>1967</item>
+        <item>1908</item>
+        <item>1926</item>
+        <item>1927</item>
+        <item>1930</item>
+        <item>1935</item>
+        <item>1929</item>
+        <item>1940</item>
+        <item>1906</item>
+        <item>12020</item>
+        <item>1916</item>
+        <item>1915</item>
+        <item>2031</item>
+        <item>1909</item>
+        <item>1935</item>
+        <item>1930</item>
+        <item>2148</item>
+    </integer-array>
+    	
+    <string-array name="smmi_error_txt">
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+    </string-array>
+
+    
 </resources>
