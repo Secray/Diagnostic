@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-import com.wingtech.diagnostic.R;
+import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.util.Log;
 
 import java.io.IOException;

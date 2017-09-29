@@ -12,7 +12,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
-import com.wingtech.diagnostic.R;
+import com.asus.atd.smmitest.R;
 
 
 /**

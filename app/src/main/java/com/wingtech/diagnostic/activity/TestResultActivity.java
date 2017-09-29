@@ -8,8 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.wingtech.diagnostic.util.SharedPreferencesUtils;
+
 import com.wingtech.diagnostic.App;
-import com.wingtech.diagnostic.R;
+import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.adapter.TestResultAdapter;
 import com.wingtech.diagnostic.bean.SingleTestCase;
 import com.wingtech.diagnostic.bean.TestCaseResult;
@@ -55,6 +57,8 @@ public class TestResultActivity extends BaseActivity implements View.OnClickList
 
     @Override
     protected void onWork() {
+    		SharedPreferencesUtils.deleteFile();
+    		SharedPreferencesUtils.outputFile(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration itemDecoration =
                 new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);

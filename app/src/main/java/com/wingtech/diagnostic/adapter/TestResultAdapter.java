@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.wingtech.diagnostic.R;
+import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.bean.TestCaseResult;
 import com.wingtech.diagnostic.util.SharedPreferencesUtils;
 

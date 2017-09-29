@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.wingtech.diagnostic.R;
+import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.activity.BoardMicActivity;
 import com.wingtech.diagnostic.activity.CameraFlashActivity;
 import com.wingtech.diagnostic.activity.CameraTestActivity;
@@ -69,6 +69,8 @@ import static com.wingtech.diagnostic.util.Constants.VIBRATOR_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.WIFI_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.WIRECHARGKEY_REQUEST_CODE;
 
+import com.wingtech.diagnostic.util.SharedPreferencesUtils;
+import com.wingtech.diagnostic.util.Log;
 /**
  * @author xiekui
  * @date 2017-7-20
@@ -173,6 +175,9 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                     }
                     mTestBtn.setText(R.string.btn_test_again);
                 }
+                SharedPreferencesUtils.deleteFile();
+    						SharedPreferencesUtils.outputFile(mActivity);
+    						Log.i("gaoweili","file del output");
                 break;
         }
     }

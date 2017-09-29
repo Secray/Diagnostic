@@ -9,7 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.wingtech.diagnostic.App;
-import com.wingtech.diagnostic.R;
+import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.adapter.SingleTestAdapter;
 import com.wingtech.diagnostic.bean.SingleTestCase;
 import com.wingtech.diagnostic.listener.OnItemClickListener;

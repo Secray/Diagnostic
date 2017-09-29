@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.wingtech.diagnostic.R;
+import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.util.Log;
 
 import static com.wingtech.diagnostic.util.Constants.RECIEVER_REQUEST_CODE;

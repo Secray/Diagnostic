@@ -3,6 +3,18 @@ package com.wingtech.diagnostic.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import android.os.Environment;
+import java.util.ArrayList;
+import com.wingtech.diagnostic.App;
+import com.wingtech.diagnostic.util.Log;
+import android.content.res.TypedArray;
+import com.asus.atd.smmitest.R;
+import com.wingtech.diagnostic.bean.TestCaseResult;
 /**
  * Created by gaoweili on 17-8-1.
  */
@@ -12,11 +24,19 @@ public class SharedPreferencesUtils {
      * 保存在手机里面的文件名
      */
     private static final String FILE_NAME = "share_date";
-
+		private static String TAG = "SharedPreferencesUtils";
 
     public static final int PASS = 2;
     public static final int FAIL = 1;
     public static final int NOT_TEST = 0;
+    
+    private static final String RESULT_FILE = "SMMI_TestResult.txt";
+		private File targetFile;
+		private static BufferedWriter buf;
+		private static String[] mTestCases;
+		private static int[] mTestCasesErrorCode;
+		private static String[] mTestCasesErrorTxt;
+		private static StringBuffer stringSMMI = null;
 
     /**
      * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
@@ -85,4 +105,70 @@ public class SharedPreferencesUtils {
 
         return null;
     }
+    
+		public static void deleteFile() {
+    		String emmcFilePath;
+        emmcFilePath = Environment.getExternalStorageDirectory().getPath();
+        File file = new File(emmcFilePath+"/"+RESULT_FILE);
+	    	if(file.exists()) {
+	    			file.delete();
+	    	}
+    }
+    
+    public static void outputFile(Context context){
+    	  stringSMMI = new StringBuffer();
+				String title = "[SMMI Test Result]\n";
+				initfileAndWriteData(title);	
+        mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi);
+        mTestCasesErrorCode = context.getResources().getIntArray(R.array.smmi_error_code);
+        mTestCasesErrorTxt = context.getResources().getStringArray(R.array.smmi_error_txt);
+        int result = 0;
+        for (int i = 0; i < mTestCases.length; i++) {
+        		getParam(context,mTestCases[i],NOT_TEST);
+        		result = (int) getParam(context,mTestCases[i], NOT_TEST);
+        		Log.i(TAG,"mTestCases[i] = " + mTestCases[i] + "," + "result = " + result);
+        		stringSMMI.append(mTestCases[i]);
+						stringSMMI.append(",");
+        		if (result == 0){
+							stringSMMI.append("1000");
+							stringSMMI.append(",");
+							stringSMMI.append("not test");
+		        }else if(result == 1){       						
+							stringSMMI.append(mTestCasesErrorCode[i]);
+							stringSMMI.append(",");
+							stringSMMI.append(mTestCasesErrorTxt[i]);
+		        }else if(result == 2){
+		          stringSMMI.append("0");
+							stringSMMI.append(",");
+							stringSMMI.append("pass");
+		        }
+						stringSMMI.append("\n");
+            initfileAndWriteData(stringSMMI.toString());     
+            stringSMMI.setLength(0);     
+        }
+				String endString = "[SMMI All Test Done]\n";
+				Boolean endvalue = false;
+				if(!endvalue) {
+					initfileAndWriteData(endString);
+				}
+		}
+		
+		public static void initfileAndWriteData(String info) {
+
+        try {
+        		String emmcFilePath;
+            emmcFilePath = Environment.getExternalStorageDirectory().getPath();
+            File file = new File(emmcFilePath+"/"+RESULT_FILE);
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
+            //String info = "sdcard test";
+            bw.write(info);
+            bw.flush();
+            Log.i(TAG,"write success!");
+            bw.close();
+        } catch (Exception e) {
+        		Log.i(TAG,"write fail!");
+            e.printStackTrace();
+        }
+    }
+  
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.wingtech.diagnostic">
+    package="com.asus.atd.smmitest"
+    android:sharedUserId="android.uid.system">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -22,18 +23,17 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    <uses-permission android:name="android.permission.NFC" />
-    <uses-feature android:name="android.hardware.nfc" />
 
     <application
-        android:name=".App"
+				android:name="com.wingtech.diagnostic.App"
         android:allowBackup="true"
         android:icon="@drawable/asus_icon_self_diagnostic"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name="com.wingtech.diagnostic.activity.MainActivity"
@@ -42,6 +42,15 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.asus.atd.smmitest.main.MAIN"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"  >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
 
@@ -118,26 +127,23 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.wingtech.diagnostic.activity.BoardMicActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.wingtech.diagnostic.activity.SecondaryMicActivity"
-            android:screenOrientation="portrait"/>
         <activity android:name="com.wingtech.diagnostic.activity.HeadsetMicActivity"
             android:screenOrientation="portrait"/>
-
+				<activity android:name="com.wingtech.diagnostic.activity.SecondaryMicActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name="com.wingtech.diagnostic.activity.TestAllActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".activity.CameraFlashActivity"
+        <activity android:name="com.wingtech.diagnostic.activity.CameraFlashActivity" />
+        <activity android:name="com.wingtech.diagnostic.activity.SingleTestingActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.SingleTestingActivity"
+				<activity android:name="com.wingtech.diagnostic.activity.GSensorTestActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.GSensorTestActivity"
+        <activity android:name="com.wingtech.diagnostic.activity.MultiTouchTestingActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.MultiTouchTestingActivity"
+        <activity android:name="com.wingtech.diagnostic.activity.VibratorTestingActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.VibratorTestingActivity"
-            android:screenOrientation="portrait"/>
-
-        <service android:name=".service.TemperatureService" />
+				<service android:name="com.wingtech.diagnostic.service.TemperatureService" />
     </application>
 
 </manifest>

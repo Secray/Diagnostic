@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.wingtech.diagnostic.R;
+import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.listener.OnPointsChangedListener;
 import com.wingtech.diagnostic.util.Utils;
 import com.wingtech.diagnostic.widget.MultiTouchView;

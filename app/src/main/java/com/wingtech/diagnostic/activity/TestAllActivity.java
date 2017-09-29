@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.wingtech.diagnostic.App;
-import com.wingtech.diagnostic.R;
+import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.fragment.CommonSingleTestFragment;
 import com.wingtech.diagnostic.fragment.TestFragment;
 import com.wingtech.diagnostic.listener.OnResultChangedCallback;
@@ -145,8 +145,9 @@ public class TestAllActivity extends BaseActivity
         if (mCurrent > mCaseList.size() - 1) {
             startActivity(new Intent(this, TestResultActivity.class));
             finish();
+        } else {
+            doTest();
         }
-        doTest();
     }
 
     @Override

@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.wingtech.diagnostic.R;
+import com.asus.atd.smmitest.R;
 
 /**
  * @author xiekui

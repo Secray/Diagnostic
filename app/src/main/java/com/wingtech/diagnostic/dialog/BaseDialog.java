@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.wingtech.diagnostic.R;
+import com.asus.atd.smmitest.R;
 
 
 /**

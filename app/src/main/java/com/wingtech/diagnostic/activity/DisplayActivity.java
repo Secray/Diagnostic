@@ -10,12 +10,13 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.wingtech.diagnostic.R;
+import com.asus.atd.smmitest.R;
 
 import static android.graphics.Color.BLACK;
 import static android.graphics.Color.BLUE;
 import static android.graphics.Color.GREEN;
 import static android.graphics.Color.RED;
+import static android.graphics.Color.GRAY;
 import static android.graphics.Color.WHITE;
 import static android.graphics.Color.YELLOW;
 import static com.wingtech.diagnostic.util.Constants.DISPLAY_REQUEST_CODE;
@@ -60,23 +61,23 @@ public class DisplayActivity extends TestingActivity {
                 mLayout.setBackgroundColor(RED);
                 break;
             case 1:
-                mLayout.setBackgroundColor(BLACK);
-                break;
-            case 2:
-                mLayout.setBackgroundColor(WHITE);
-                break;
-            case 3:
-                mLayout.setBackgroundColor(YELLOW);
-                break;
-            case 4:
-                mLayout.setBackgroundColor(BLUE);
-                break;
-            case 5:
                 mLayout.setBackgroundColor(GREEN);
                 break;
-            case 6:
-                mLayout.setBackgroundResource(R.drawable.lcd_tiaowen);
+            case 2:
+                mLayout.setBackgroundColor(BLUE);
                 break;
+            case 3:
+                mLayout.setBackgroundColor(BLACK);
+                break;
+            case 4:
+                mLayout.setBackgroundColor(WHITE);
+                break;
+            case 5:
+                mLayout.setBackgroundColor(GRAY);
+                break;
+            //case 6:
+             //   mLayout.setBackgroundResource(R.drawable.lcd_tiaowen);
+             //   break;
             default:
                 mLayout.setBackgroundColor(RED);
                 break;
@@ -89,11 +90,11 @@ public class DisplayActivity extends TestingActivity {
         int action = event.getAction();
         switch(action){
             case MotionEvent.ACTION_DOWN:
-                if(mtick <= 6) {
+                if(mtick <= 5) {
                     mtick++;
                     changeColor(mtick);
                 }
-                if(mtick >= 7) {
+                if(mtick >= 6) {
                     showTheDialog();
                 }
 

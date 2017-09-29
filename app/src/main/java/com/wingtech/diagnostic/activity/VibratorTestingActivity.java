@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
-import com.wingtech.diagnostic.R;
+import com.asus.atd.smmitest.R;
 
 import static com.wingtech.diagnostic.util.Constants.VIBRATOR_REQUEST_CODE;
 

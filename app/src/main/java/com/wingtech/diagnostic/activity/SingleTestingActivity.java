@@ -3,7 +3,7 @@ package com.wingtech.diagnostic.activity;
 import android.content.Intent;
 import android.view.WindowManager;
 
-import com.wingtech.diagnostic.R;
+import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.fragment.BatteryTestingFragment;
 import com.wingtech.diagnostic.fragment.BlueToothFragment;
 import com.wingtech.diagnostic.fragment.CMDMouseTestingFragment;
@@ -29,7 +29,6 @@ import static com.wingtech.diagnostic.util.Constants.MOUSE_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.SDCARD_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.SIMCARD_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.WIFI_REQUEST_CODE;
-
 /**
  * @author xiekui
  * @date 2017-8-2

@@ -22,7 +22,7 @@
     <TEST_ITEM Id="19" Name="Proximity Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_proximity" Img="asus_diagnostic_img_proximity"/>
     <TEST_ITEM Id="20" Name="LightSensor Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_lightsensor" Img="asus_diagnostic_img_lightsensor"/>
     <TEST_ITEM Id="21" Name="CMD Mouse Test" Disable="0" AutoTest="1" Icon="asus_diagnostic_ic_cmd_mouse" Img="asus_diagnostic_img_cmd_mouse"/>
-    <TEST_ITEM Id="22" Name="NFC Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_nfc" Img="asus_diagnostic_img_nfc"/>
+    <TEST_ITEM Id="22" Name="NFC Test" Disable="1" AutoTest="0" Icon="asus_diagnostic_ic_nfc" Img="asus_diagnostic_img_nfc"/>
     <TEST_ITEM Id="23" Name="HDMI Test" Disable="1" AutoTest="0" Icon="asus_diagnostic_ic_hdmi" Img="asus_diagnostic_img_hdmi"/>
     <TEST_ITEM Id="24" Name="SD Card Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_sdcard" Img="asus_diagnostic_img_sdcard"/>
     <TEST_ITEM Id="25" Name="SIM Card Test" Disable="0" AutoTest="1" Icon="asus_diagnostic_ic_simcard" Img="asus_diagnostic_img_simcard"/>

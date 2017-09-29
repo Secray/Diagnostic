@@ -19,7 +19,7 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.wingtech.diagnostic.R;
+import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.util.Log;
 import com.wingtech.diagnostic.widget.CameraPreview;
 
@@ -252,7 +252,8 @@ public class CameraTestActivity extends TestingActivity {
         super.onPause();
         releaseCamera();
         Log.v(TAG, "onPause finish activity");
-        finish();
+		mResult = false;
+        sendResult();
     }
 
     @Override
