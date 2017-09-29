@@ -11,6 +11,7 @@ import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.activity.BoardMicActivity;
 import com.wingtech.diagnostic.activity.CameraFlashActivity;
 import com.wingtech.diagnostic.activity.CameraTestActivity;
+import com.wingtech.diagnostic.activity.ChargingActivity;
 import com.wingtech.diagnostic.activity.DisplayActivity;
 import com.wingtech.diagnostic.activity.GSensorTestActivity;
 import com.wingtech.diagnostic.activity.HeadsetActivity;
@@ -27,10 +28,10 @@ import com.wingtech.diagnostic.activity.SingleTestingActivity;
 import com.wingtech.diagnostic.activity.SpeakerActivity;
 import com.wingtech.diagnostic.activity.TouchTestActivity;
 import com.wingtech.diagnostic.activity.VibratorTestingActivity;
-import com.wingtech.diagnostic.activity.WireChargActivity;
 import com.wingtech.diagnostic.dialog.LoadingDialog;
 import com.wingtech.diagnostic.listener.OnResultChangedCallback;
 import com.wingtech.diagnostic.listener.OnTestItemListener;
+import com.wingtech.diagnostic.util.Log;
 import com.wingtech.diagnostic.util.SharedPreferencesUtils;
 import com.wingtech.diagnostic.util.TestItem;
 
@@ -68,9 +69,6 @@ import static com.wingtech.diagnostic.util.Constants.VGACAMERA_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.VIBRATOR_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.WIFI_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.WIRECHARGKEY_REQUEST_CODE;
-
-import com.wingtech.diagnostic.util.SharedPreferencesUtils;
-import com.wingtech.diagnostic.util.Log;
 /**
  * @author xiekui
  * @date 2017-7-20
@@ -295,11 +293,29 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 startActivityForResult(i, NFC_REQUEST_CODE);
                 break;
             case "Wireless Charging Test":
-                i = new Intent(mActivity, WireChargActivity.class);
+                i = new Intent(mActivity, ChargingActivity.class);
                 i.putExtra("isTestAll", mCallback != null);
                 i.putExtra("title", mTitle);
+                i.putExtra("plugged", 4);
                 startActivityForResult(i, WIRECHARGKEY_REQUEST_CODE);
                 break;
+
+            case "AC Charging Test":
+                i = new Intent(mActivity, ChargingActivity.class);
+                i.putExtra("isTestAll", mCallback != null);
+                i.putExtra("title", mTitle);
+                i.putExtra("plugged", 1);
+                startActivityForResult(i, WIRECHARGKEY_REQUEST_CODE);
+                break;
+
+            case "USB Charging Test":
+                i = new Intent(mActivity, ChargingActivity.class);
+                i.putExtra("isTestAll", mCallback != null);
+                i.putExtra("title", mTitle);
+                i.putExtra("plugged", 2);
+                startActivityForResult(i, WIRECHARGKEY_REQUEST_CODE);
+                break;
+
             case "Receiver Test":
                 i = new Intent(mActivity, RecieverActivity.class);
                 i.putExtra("title", mTitle);

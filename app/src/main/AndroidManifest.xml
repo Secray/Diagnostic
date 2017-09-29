@@ -117,7 +117,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.wingtech.diagnostic.activity.NfcActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.wingtech.diagnostic.activity.WireChargActivity"
+        <activity android:name="com.wingtech.diagnostic.activity.ChargingActivity"
             android:screenOrientation="portrait"/>
         <activity android:name="com.wingtech.diagnostic.activity.RecieverActivity"
             android:screenOrientation="portrait"/>

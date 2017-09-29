@@ -20,7 +20,7 @@ import static com.wingtech.diagnostic.util.Constants.WIRECHARGKEY_REQUEST_CODE;
  * Created by gaoweili on 17-7-28.
  */
 
-public class WireChargActivity extends TestingActivity {
+public class ChargingActivity extends TestingActivity {
 
     private static final String TAG = "WireChargActivity";
 
@@ -31,6 +31,7 @@ public class WireChargActivity extends TestingActivity {
 
     private int pbatParam0 = 0;
     private int pbatParam1 = 0;
+    private int mPlugged;
 
     @Override
     protected int getLayoutResId() {
@@ -55,7 +56,7 @@ public class WireChargActivity extends TestingActivity {
     protected void onWork() {
         mTitle.setText(R.string.wirechargkey_title);
         mWireChargKeyTxt.setText(R.string.wirechargkey_txt);
-
+        mPlugged = getIntent().getIntExtra("plugged", 1);
         mTouchFailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,7 +105,7 @@ public class WireChargActivity extends TestingActivity {
                         Log.i(TAG, "battery using");
                         break;
                 }
-                if (pbatParam1 == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
+                if (pbatParam1 == mPlugged) {
                     mWireChargKey.setChecked(true);
                     mWireChargKey.setVisibility(View.VISIBLE);
                     mResult = true;
