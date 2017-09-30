@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.CountDownTimer;
@@ -35,7 +36,7 @@ public class HeadsetMicActivity extends TestingActivity {
     private boolean isPlug = false;
     private HeadsetPlugReceiver mHPReceiver;
     AlertDialog dlg;
-
+    private AudioManager localAudioManager = null;
     private String path = null;
     CountDownTimer mTimer;
     CountDownTimer mtimer;
@@ -249,7 +250,20 @@ public class HeadsetMicActivity extends TestingActivity {
     public boolean startPlayer(String path) {
         try {
             //设置要播放的文件
+            if (localAudioManager == null) {
+                localAudioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+            }
             mPlayer = new MediaPlayer();
+            mPlayer.reset();
+            localAudioManager.setMode(AudioManager.MODE_IN_CALL);
+            localAudioManager.setSpeakerphoneOn(false);
+            setVolumeControlStream(AudioManager.STREAM_VOICE_CALL);
+
+            int max = localAudioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL);
+            Log.i(TAG, "max=" + max);
+            localAudioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL,max,0);
+            mPlayer.setVolume(13.0f, 13.0f);
+            mPlayer.setAudioStreamType(AudioManager.STREAM_VOICE_CALL);
             mPlayer.setDataSource(path);
             mPlayer.prepare();
             //播放

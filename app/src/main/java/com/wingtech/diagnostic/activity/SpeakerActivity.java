@@ -198,10 +198,11 @@ public class SpeakerActivity extends TestingActivity {
                     localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                     player = new MediaPlayer();
                     player.reset();
+                    localAudioManager.setMode(AudioManager.STREAM_MUSIC);
+                    localAudioManager.setSpeakerphoneOn(true);
                     localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
-                    localAudioManager.setStreamVolume(AudioManager.STREAM_RING, 15, 0);
 
-                    player.setVolume(1.0f, 0.000f);/* ajayet invert to match headset */
+                    player.setVolume(13.0f, 0.000f);/* ajayet invert to match headset */
                     playMelody(getResources(), R.raw.bootaudio);
                     player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override
@@ -211,10 +212,11 @@ public class SpeakerActivity extends TestingActivity {
                                 localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                                 player = new MediaPlayer();
                                 player.reset();
+                                localAudioManager.setMode(AudioManager.STREAM_MUSIC);
+                                localAudioManager.setSpeakerphoneOn(true);
                                 localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
-                                localAudioManager.setStreamVolume(AudioManager.STREAM_RING, 15, 0);
 
-                                player.setVolume(0.000f, 1.0f);/* ajayet invert to match headset */
+                                player.setVolume(0.000f, 13.0f);/* ajayet invert to match headset */
                                 playMelody(getResources(), R.raw.bootaudio);
                                 player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                                     @Override

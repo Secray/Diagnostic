@@ -22,12 +22,12 @@ public class RecieverActivity extends TestingActivity {
 
     private String mContentDialog;
     private MediaPlayer player = null;
-    private AudioManager localAudioManager = null;
     private int audio_mode = AudioManager.MODE_NORMAL;
     private int oldVolume;
     public static final String TAG = "RecieverActivity";
     private boolean isPlayerStoped = false;
     private TextView mTxt = null;
+    private AudioManager localAudioManager = null;
 
     @Override
     protected int getLayoutResId() {
@@ -53,9 +53,8 @@ public class RecieverActivity extends TestingActivity {
         localAudioManager.setMode(AudioManager.MODE_IN_CALL);
         localAudioManager.setSpeakerphoneOn(false);
         Log.i(TAG, "isSpeakerphoneOn :" + localAudioManager.isSpeakerphoneOn());
-        int maxVolume = localAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         oldVolume = localAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-        localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, maxVolume, 0);
+        localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
 
     }
 

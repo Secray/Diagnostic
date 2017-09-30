@@ -169,6 +169,7 @@ public class HeadsetActivity extends TestingActivity {
                 afd.close();
             }
             //player.setLooping(true);
+            player.setAudioStreamType(AudioManager.STREAM_VOICE_CALL);
             player.prepare();
             player.start();
         } catch (IOException e) {
@@ -194,29 +195,36 @@ public class HeadsetActivity extends TestingActivity {
                     }
                     isPlug = true;
                     mTxt.setText(R.string.headset_context_left);
-                    localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                    if(localAudioManager == null) {
+                        localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                    }
+                    localAudioManager.setMode(AudioManager.MODE_IN_CALL);
+                    localAudioManager.setSpeakerphoneOn(false);
+                    setVolumeControlStream(AudioManager.STREAM_VOICE_CALL);
+
+                    int max = localAudioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL);
+                    Log.i(TAG, "max=" + max);
+                    localAudioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL,max,0);
                     player = new MediaPlayer();
                     player.reset();
-                    localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
-                    localAudioManager.setStreamVolume(AudioManager.STREAM_RING, 15, 0);
-                    if (localAudioManager.isSpeakerphoneOn()) {
-                        localAudioManager.setSpeakerphoneOn(false);
-                    }
-                    player.setVolume(1.0f, 0.000f);/* ajayet invert to match headset */
+                    player.setVolume(1.0f, 0.000f);
                     playMelody(getResources(), R.raw.bootaudio);
                     player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override
                         public void onCompletion(MediaPlayer mp) {
                             if (isPlug) {
                                 mTxt.setText(R.string.headset_context_right);
-                                localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                                if(localAudioManager == null) {
+                                    localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                                }
                                 player = new MediaPlayer();
                                 player.reset();
-                                localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
-                                localAudioManager.setStreamVolume(AudioManager.STREAM_RING, 15, 0);
-                                if (localAudioManager.isSpeakerphoneOn()) {
-                                    localAudioManager.setSpeakerphoneOn(false);
-                                }
+                                localAudioManager.setMode(AudioManager.MODE_IN_CALL);
+                                localAudioManager.setSpeakerphoneOn(false);
+                                setVolumeControlStream(AudioManager.STREAM_VOICE_CALL);
+                                int max = localAudioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL);
+                                Log.i(TAG, "max=" + max);
+                                localAudioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL,max,0);
                                 player.setVolume(0.000f, 1.0f);/* ajayet invert to match headset */
                                 playMelody(getResources(), R.raw.bootaudio);
                                 player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {

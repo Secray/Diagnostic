@@ -1,7 +1,9 @@
 package com.wingtech.diagnostic.activity;
 
 
+import android.content.Context;
 import android.media.AudioFormat;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.CountDownTimer;
@@ -32,6 +34,7 @@ public class SecondaryMicActivity extends TestingActivity {
     private String path = null;
     CountDownTimer mTimer;
     CountDownTimer mtimer;
+    private AudioManager localAudioManager = null;
 
     @Override
     protected int getLayoutResId() {
@@ -190,8 +193,15 @@ public class SecondaryMicActivity extends TestingActivity {
 
     public boolean startPlayer(String path) {
         try {
-            //设置要播放的文件
+            if(localAudioManager == null){
+                localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+            }
+            localAudioManager.setMode(AudioManager.STREAM_MUSIC);
+            localAudioManager.setSpeakerphoneOn(true);
+            localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
             mPlayer = new MediaPlayer();
+            mPlayer.reset();
+            mPlayer.setVolume(13.0f, 13.0f);
             mPlayer.setDataSource(path);
             mPlayer.prepare();
             //播放
