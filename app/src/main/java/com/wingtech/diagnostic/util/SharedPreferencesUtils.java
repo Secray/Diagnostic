@@ -37,7 +37,7 @@ public class SharedPreferencesUtils {
 		private static int[] mTestCasesErrorCode;
 		private static String[] mTestCasesErrorTxt;
 		private static StringBuffer stringSMMI = null;
-
+        private static boolean isTestAll = false;
     /**
      * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
      * @param context
@@ -123,6 +123,7 @@ public class SharedPreferencesUtils {
         mTestCasesErrorCode = context.getResources().getIntArray(R.array.smmi_error_code);
         mTestCasesErrorTxt = context.getResources().getStringArray(R.array.smmi_error_txt);
         int result = 0;
+        isTestAll = true;
         for (int i = 0; i < mTestCases.length; i++) {
         		getParam(context,mTestCases[i],NOT_TEST);
         		result = (int) getParam(context,mTestCases[i], NOT_TEST);
@@ -133,6 +134,7 @@ public class SharedPreferencesUtils {
 							stringSMMI.append("1000");
 							stringSMMI.append(",");
 							stringSMMI.append("not test");
+                            isTestAll = false;
 		        }else if(result == 1){       						
 							stringSMMI.append(mTestCasesErrorCode[i]);
 							stringSMMI.append(",");
@@ -147,8 +149,7 @@ public class SharedPreferencesUtils {
             stringSMMI.setLength(0);     
         }
 				String endString = "[SMMI All Test Done]\n";
-				Boolean endvalue = false;
-				if(!endvalue) {
+				if(isTestAll) {
 					initfileAndWriteData(endString);
 				}
 		}

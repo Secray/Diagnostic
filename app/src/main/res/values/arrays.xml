@@ -126,6 +126,7 @@
         <item>@string/test_case_vibrator</item>
         <item>@string/test_case_VGA_cam</item>
         <item>@string/test_case_main_cam</item>
+        <item>@string/test_case_assist_cam</item>
         <item>@string/test_case_display</item>           
         <item>@string/test_case_speaker</item>
         <item>@string/test_case_receiver</item>
@@ -136,8 +137,12 @@
         <item>@string/test_case_light_sensor</item>
         <item>@string/test_case_cmd_mouse</item>
         <item>@string/test_case_sd_card</item>
-        <item>@string/test_case_sim_card</item>        
+        <item>@string/test_case_sim_card</item>
         <item>@string/test_case_sim2</item>
+        <item>@string/test_case_ac</item>
+        <item>@string/test_case_usb</item>
+        <item>@string/test_case_phone</item>
+        <item>@string/test_case_sim</item>
         <item>@string/test_case_camera_flash</item>
         <item>@string/test_case_headset_key</item>
         <item>@string/test_case_secondary_mic</item>
@@ -158,6 +163,7 @@
         <item>1910</item>
         <item>1968</item>
         <item>1967</item>
+        <item>1967</item>
         <item>1908</item>
         <item>1926</item>
         <item>1927</item>
@@ -170,6 +176,10 @@
         <item>1916</item>
         <item>1915</item>
         <item>2031</item>
+        <item>1925</item>
+        <item>1925</item>
+        <item>2173</item>
+        <item>2174</item>
         <item>1909</item>
         <item>1935</item>
         <item>1930</item>
@@ -177,6 +187,11 @@
     </integer-array>
     	
     <string-array name="smmi_error_txt">
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
+        <item>fail</item>
         <item>fail</item>
         <item>fail</item>
         <item>fail</item>

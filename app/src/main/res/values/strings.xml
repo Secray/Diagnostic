@@ -62,6 +62,10 @@
     <string name="test_case_secondary_mic">SecondaryMic Test</string>
     <string name="test_case_camera_front_flash">Camera Front Flash Test</string>
     <string name="test_case_assist_cam">AssistCam Test</string>
+    <string name="test_case_ac">AC Charging Test</string>
+    <string name="test_case_usb">USB Charging Test</string>
+    <string name="test_case_phone">Phome Call Test</string>
+    <string name="test_case_sim">SIM Signal Test</string>
     <string name="test_case_gps">GPS Test</string>
 
     <!-- RepairActivity -->
