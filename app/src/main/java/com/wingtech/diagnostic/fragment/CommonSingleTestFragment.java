@@ -265,14 +265,6 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                     dis += "\n";
                 }
                 break;
-            case "USB Charging Test":
-                String[] discription_wc = getResources().getStringArray(R.array.TestItem_Des_Wireless_Charger_Test);
-                dis =  discription_wc[0];
-                for (int i = 1; i < discription_wc.length; i++){
-                    dis = dis + discription_wc[i];
-                    dis += "\n";
-                }
-                break;
             case "MainCam Test":
                 String[] discription_cam = getResources().getStringArray(R.array.TestItem_Des_MainCamCapture_Test);
                 dis =  discription_cam[0];
@@ -414,6 +406,22 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 dis =  discription_ce[0];
                 for (int i = 1; i < discription_ce.length; i++){
                     dis = dis + discription_ce[i];
+                    dis += "\n";
+                }
+                break;
+            case "AC Charging Test":
+                String[] discription_ac = getResources().getStringArray(R.array.TestItem_Des_AC_Charger_Test);
+                dis =  discription_ac[0];
+                for (int i = 1; i < discription_ac.length; i++){
+                    dis = dis + discription_ac[i];
+                    dis += "\n";
+                }
+                break;
+            case "USB Charging Test":
+                String[] discription_usb = getResources().getStringArray(R.array.TestItem_Des_USBCharger_Test);
+                dis =  discription_usb[0];
+                for (int i = 1; i < discription_usb.length; i++){
+                    dis = dis + discription_usb[i];
                     dis += "\n";
                 }
                 break;
