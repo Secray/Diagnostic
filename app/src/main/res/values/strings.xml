@@ -209,4 +209,315 @@
     <string name="signal_level">Signal Level:</string>
     <string name="sim_2_card">SIM 2 Card</string>
 
+    <string-array name="TestItem_Des_Battery_Test">
+        <item>The "Battery Test" is used to test the battery status.</item>
+        <item>(This test procedure will automatically start without any manual operation.)</item>
+    </string-array>
+    <string-array name="TestItem_Des_BoardMic_Test">
+        <item>The "Board Mic Test" is used to test the board mic function.</item>
+        <item>Test procedure:</item>
+        <item>1. Tap [Start] to start recording.</item>
+        <item>2. After getting the recording results and if the mic function of the headset is working well, press [PASS], else press [FAIL] to terminate this test.</item>
+    </string-array>
+    <string-array name="TestItem_Des_BoardMic2_Test">
+        <item>The "Board Mic2 Test" is used to test the upper board mic function.</item>
+        <item>Test procedure:</item>
+        <item>1. Tap [Start] to start recording.</item>
+        <item>2. After getting the recording results and if the mic function of the headset is working well, press [PASS], else press [FAIL] to terminate this test.</item>
+    </string-array>
+    <string-array name="TestItem_Des_BoardMic3_Test">
+        <item>The "Board Mic3 Test" is used to test the upper board mic function.</item>
+        <item>Test procedure:</item>
+        <item>1. Tap [Start] to start recording.</item>
+        <item>2. Check the recording results; if the mic function of the headset is working well, tap [PASS], or else tap [FAIL] to terminate this test.</item>
+    </string-array>
+    <string-array name="TestItem_Des_BT_Test">
+        <item>The "Bluetooth Test" allows you to test the Bluetooth function. This test procedure will start automatically without any manual operations.</item>
+        <item>Note: This requires another working Bluetooth device for testing. </item>
+    </string-array>
+    <string-array name="TestItem_Des_Barometer_Test">
+        <item>The Barometer Test is used to test the barometer function.</item>
+        <item>Test Procedure: </item>
+        <item>Tap [Start] to start test.This test procedure will be started automatically without any manual </item>
+    </string-array>
+    <string-array name="TestItem_Des_CameraFlash_Test">
+        <item>The "Camera Flash Test" is used to test the camera flash.</item>
+        <item>Test procedure:</item>
+        <item>1. To start testing, the device opens the camera flash automatically.</item>
+        <item>"2. Tap the number that corresponds to the number of flashes. Tap [FAIL] if it's not working."</item>
+    </string-array>
+    <string-array name="TestItem_Des_CameraFlash_Front_Test">
+        <item>The "Front Camera Flash Test" is used to test the front camera flash.</item>
+        <item>Test procedure:</item>
+        <item>1. When the testing starts, the device automatically opens the flash.</item>
+        <item>"2. Tap the number that corresponds to the number of flashes. Tap [FAIL] if it's not working."</item>
+    </string-array>
+    <string-array name="TestItem_Des_CMD_Mouse_Test">
+        <item>The "Mouse Test" is used to test the mouse function.</item>
+        <item>Test procedure:</item>
+        <item>1. Connect the mouse to your device via OTG.</item>
+        <item>2. This test procedure will automatically start without any manual operation.</item>
+    </string-array>
+    <string-array name="TestItem_Des_OTG_Mouse_Test">
+        <item>The "Mouse Test" is used to test the mouse function.</item>
+        <item>Test procedure:</item>
+        <item>1. Connect the mouse to your device via OTG.</item>
+        <item>2. This test procedure will automatically detect the mouse at its first time. Move the mouse when you see "No OTG mouse found".</item>
+    </string-array>
+    <string-array name="TestItem_Des_Display_Test">
+        <item>The "Display Test" is used to test the RGB color model and brightness of the LCD.</item>
+        <item>Test procedure:</item>
+        <item>1. Tap the screen to change the background.</item>
+        <item>2. If the display works well, press [PASS], else press [FAIL] to terminate this test.</item>
+    </string-array>
+    <string-array name="TestItem_Des_ECompass_Test">
+        <item>The "ECompass Test" is used to test the ECompass sensor.</item>
+        <item>(This test procedure will automatically start without any manual operation.)</item>
+    </string-array>
+    <string-array name="TestItem_Des_FingerPrint_Test">
+        <item>The "Fingerprint Test" is used to test the fingerprint function.</item>
+        <item>(This test procedure will automatically start without any manual operation.)</item>
+    </string-array>
+    <string-array name="TestItem_Des_GPS_Test">
+        <item>The "GPS Test" is used to test the GPS feature.</item>
+        <item>(This test procedure will automatically start without any manual operation.)</item>
+    </string-array>
+    <string-array name="TestItem_Des_GSensor_Test">
+        <item>The "GSensor Test" is used to test the gravity sensor.</item>
+        <item>Test procedure:</item>
+        <item>1. Tilt the device in portrait, landscape, or slant modes.</item>
+        <item>2. If the device detects the gravity, the screen shows the marks on the X, Y, and Z axis.</item>
+        <item>3. If the marks on the three axis appear, this test will finish automatically, else press [FAIL], to terminate this test.</item>
+    </string-array>
+    <string-array name="TestItem_Des_Gyroscope_Test">
+        <item>The "Gyroscope Test" is used to test the Gyroscope sensor.</item>
+        <item>(This test procedure will automatically start without any manual operation.)</item>
+    </string-array>
+    <string-array name="TestItem_Des_HDMI_Test">
+        <item>The "HDMI Test" is used to test the audio and video transfer to an HDMI display.</item>
+        <item>Test procedure:</item>
+        <item>1. Connect your device to an external HDMI display via USB port.</item>
+        <item>2. Tap [Start] to broadcast the video.</item>
+        <item>3. If the HDMI function works, press [PASS], else press [FAIL] to terminate this test.</item>
+    </string-array>
+    <string-array name="TestItem_Des_Headset_Test">
+        <item>The "Headset Test" is used to test the left and right channels of the headset.</item>
+        <item>Test procedure:</item>
+        <item>1. Connect a headset to the device.</item>
+        <item>2. Tap [Start].</item>
+        <item>3. If the headset function works, press [PASS], else press [FAIL] to terminate this test.</item>
+    </string-array>
+    <string-array name="TestItem_Des_Headset_L_Test">
+        <item>"The \"Headset Left Channel Test\" is used to check if the headset's left channel is working."</item>
+        <item>Test Procedure:</item>
+        <item>1. Connect the headset to the headset port of the device.</item>
+        <item>2. Tap [Start].</item>
+        <item>"3. If the headset's left channel functions well, tap [PASS]. If not, tap [FAIL] to terminate the procedure."</item>
+    </string-array>
+    <string-array name="TestItem_Des_Headset_R_Test">
+        <item>"The \"Headset Right Channel Test\" is used to check if the headset's right channel is working."</item>
+        <item>Test Procedure:</item>
+        <item>1. Connect the headset to the headset port of the device.</item>
+        <item>2. Tap [Start].</item>
+        <item>"3. If the headset's right channel functions well, tap [PASS]. If not, tap [FAIL] to stop the test."</item>
+    </string-array>
+    <string-array name="TestItem_Des_DigitalTV_Test">
+        <item>The digital TV test is used to check the digital TV functionality. Please ensure that the digital signal in your location is available before testing.</item>
+        <item>Test Procedure:</item>
+        <item>1. Plug the headset (which serves as your antenna) to the headset port of your device.</item>
+        <item>2. Select a digital channel to watch in a DigitalTV app.</item>
+        <item>3. Tap the Back key to leave DigitalTV. If the function works well, tap [PASS]. If not, tap [FAIL] to stop the test.</item>
+    </string-array>
+    <string-array name="TestItem_Des_HeadsetKey_Test">
+        <item>The "Headset Main Key Test" is used to test the key on headset.</item>
+        <item>Test procedure:</item>
+        <item>1. Connect a headset to the device.</item>
+        <item>2. Press the key on the headset.</item>
+        <item>"3. If the function of the headset's key works, this test will finish automatically, else press [FAIL] to terminate this test."</item>
+    </string-array>
+    <string-array name="TestItem_Des_HeadsetMic_Test">
+        <item>The "Headset Mic Test" is used to test the mic feature of the headset.</item>
+        <item>Test procedure:</item>
+        <item>1. Connect a headset to the device.</item>
+        <item>2. Tap [Start] to start recording.</item>
+        <item>3. After getting the recording results and if the mic function of the headset is working well, press [PASS], else press [FAIL] to terminate this test.</item>
+    </string-array>
+    <string-array name="TestItem_Des_Keyboard_Test">
+        <item>The "Keyboard Test" is used to test the Keyboard function.</item>
+        <item>Test procedure:</item>
+        <item>1. Select a local keyboard.</item>
+        <item>2. Press all displayed keys in any sequence.</item>
+        <item>3. If the keyboard works, this test will finish automatically, else press [FAIL] to terminate this test.</item>
+    </string-array>
+    <string-array name="TestItem_Des_Keypad_Test">
+        <item>The "Keypad Test" is used to test the Keypad function.</item>
+        <item>Test procedure:</item>
+        <item>1. According to the step, press the specific button/key.</item>
+        <item>2. If the keypad works, this test will finish automatically, else press [FAIL] to terminate this test.</item>
+    </string-array>
+    <string-array name="TestItem_Des_LightSensor_Test">
+        <item>The "Light Sensor Test" is used to test the light sensor.</item>
+        <item>Test procedure:</item>
+        <item>1. Place the device to a well-lit environment, then move it to a poor-lit surrounding to determine the function of the ambient light sensor.</item>
+        <item>2. If the light sensor works, this test will finish automatically, else press [FAIL] to terminate this test. </item>
+    </string-array>
+    <string-array name="TestItem_Des_MainCamCapture_Test">
+        <item>The "Main Camera Capture Test" is used to test the main camera of the device.</item>
+        <item>Test procedure:</item>
+        <item>1. Press [SHUTTER] to capture photo.</item>
+        <item>2. If the photo is captured, press [PASS], else press [FAIL] to terminate this test.</item>
+        <item>Note: This test is to try the camera by opening, taking a picture, and show the photo. This test does not include performance and clarity.</item>
+    </string-array>
+    <string-array name="TestItem_Des_WideCamCapture_Test">
+        <item>The Wide-angled Camera Capture Test is used to test if the main camera is working</item>
+        <item>Test Procedure:</item>
+        <item>1. Tap Capture to snap a photo.</item>
+        <item>2. If the photo is captured successfully, tap [PASS]. If not, tap [FAIL] to stop the test.</item>
+        <item>Note: This test is only for basic functions such as launching camera, capturing a photo, and showing the result. This test is not meant for measuring performance and clarity.</item>
+    </string-array>
+    <string-array name="TestItem_Des_TeleCamCapture_Test">
+        <item>The Tele Camera Capture Test is used to check if the main camera in the device is working.</item>
+        <item>Test Procedure:</item>
+        <item>1. Tap Capture to snap a photo.</item>
+        <item>2. If the photo is captured successfully, tap [PASS]. If not, tap [FAIL] to stop the test.</item>
+        <item>Note: This test is only for basic functions such as launching camera, capturing a photo, and showing the result. This test is not meant for measuring performance and clarity.</item>
+    </string-array>
+    <string-array name="TestItem_Des_FrontWideCamCapture_Test">
+        <item>The Front Wide-angle Camera Capture Test allows you to test the main camera.</item>
+        <item>To test the front wide camera:</item>
+        <item>1. Tap [Capture].</item>
+        <item>2. If the photo is captured, tap [PASS]. If not, tap [FAIL].</item>
+        <item>Note: This test in only for basic camera functions such as launching camera, capturing a photo, and displaying the photo. This test is not meant to measure the performance and clarity.</item>
+    </string-array>
+    <string-array name="TestItem_Des_FrontTeleCamCapture_Test">
+        <item>The Front Tele Camera Capture Test allows you to test the main camera.</item>
+        <item>To test the front tele camera:</item>
+        <item>1. Tap [Capture].</item>
+        <item>2. If the photo is captured, tap [PASS]. If not, tap [FAIL].</item>
+        <item>Note: This test in only for basic camera functions such as launching camera, capturing a photo, and displaying the photo. This test is not meant to measure the performance and clarity.</item>
+    </string-array>
+    <string-array name="TestItem_Des_ModemBus_Test">
+        <item>The "Modem Test" is used to test the modem function of the device.</item>
+        <item>(This test procedure will automatically start without any manual operation.)</item>
+    </string-array>
+    <string-array name="TestItem_Des_MultiTouch_Test">
+        <item>The "Multiple Touch Test" is used to test the multiple touch function on the panel.</item>
+        <item>Test procedure:</item>
+        <item>1. Put your fingers on the screen.</item>
+        <item>2. If the multitouch function works, this test will finish automatically, else press [FAIL] to terminate this test.</item>
+    </string-array>
+    <string-array name="TestItem_Des_NFC_TagReader_Test">
+        <item>The "NFC Tag Reader Test" is used to test the NFC sensor.</item>
+        <item>Test procedure:</item>
+        <item>1. Ensure that the NFC feature is ON. </item>
+        <item>2. Place an NFC-tagged object near the device. </item>
+        <item>3. If the NFC tag reader works, this test will finish automatically, else press [FAIL] to terminate this test.</item>
+    </string-array>
+    <string-array name="TestItem_Des_PhoneCall_Test">
+        <item>"The \"Phone Call Test\" allows you to test the phone call functionality."</item>
+        <item>To test a phone call:</item>
+        <item>1. Enter the phone number, then tap [Call].</item>
+        <item>2. Tap Back key to return to the test result screen. If the call is successful, tap [PASS]. If not, tap [FAIL].</item>
+        <item>Notes: </item>
+        <item>1. This test is designed to test the call function, NOT the quality of the call.</item>
+        <item>2. SIM2 is necessary if the device supports dual SIM card functionality.</item>
+    </string-array>
+    <string-array name="TestItem_Des_Proximity_Test">
+        <item>The "Proximity Test" is used to test the proximity sensor function.</item>
+        <item>Test procedure:</item>
+        <item>1. Place your hand near the proximity sensor of the device, then move your hand away to complete the proximity detection.</item>
+        <item>2. If the proximity function works, this test will finish automatically, else press [FAIL] to terminate this test.</item>
+    </string-array>
+    <string-array name="TestItem_Des_Receiver1_Test">
+        <item>The "Receiver Test" is used to test the receiver function.</item>
+        <item>Test procedure:</item>
+        <item>1. The receiver of the device will emit a voice prompt. </item>
+        <item>"2. Follow the voice prompt by tapping the correct number. Tap [FAIL] if it's not working."</item>
+    </string-array>
+    <string-array name="TestItem_Des_Receiver2_Test">
+        <item>The "Receiver Test" is used to test the receiver function.</item>
+        <item>Test procedure:</item>
+        <item>1. The receiver of the device will make a sound.</item>
+        <item>"2. Follow the voice prompt by tapping the correct number. Tap [FAIL] if it's not working."</item>
+    </string-array>
+    <string-array name="TestItem_Des_SDcard_Test">
+        <item>The "SD Card Test" is used to test the SD card reader function.</item>
+        <item>Test procedure:</item>
+        <item>1. Insert a microSD card to the microSD card slot of the device.</item>
+        <item>2. This test procedure will automatically start without any manual operation.</item>
+    </string-array>
+    <string-array name="TestItem_Des_SIMcard_Test">
+        <item>The "SIM Card Test" is used to test the SIM card on the SIM card slot of the device.</item>
+        <item>Test procedure:</item>
+        <item>1. Insert the SIM card in SIM card slot of the device. </item>
+        <item>2. This test procedure will automatically start without any manual operation.</item>
+    </string-array>
+    <string-array name="TestItem_Des_SIMcard_Test2">
+        <item>The "SIM Card2 Test" is used to test the second SIM card on the SIM card slot 2 of the device.</item>
+        <item>Test procedure:</item>
+        <item>1. Insert the SIM card in SIM card slot 2 of the device.</item>
+        <item>2. This test procedure will automatically start without any manual operation.</item>
+    </string-array>
+    <string-array name="TestItem_Des_SIM_Signal_Test">
+        <item>"The \"SIM Signal Test\" allows you to test the SIM signal strength."</item>
+        <item>1. Insert the SIM card into the SIM card slot of the device.</item>
+        <item>2. Tap [Start] to start testing.</item>
+        <item>"If the item \"Network\" shows the mobile service provider, and
+		Cellular network status shows \"Connected\", tap [PASS]. Otherwise, tap [FAIL] to stop the test."</item>
+        <item>Notes:</item>
+        <item>1. You must test both SIM card slots.</item>
+        <item>2. Move the SIM card to the other slot or install another SIM card if using a dual-SIM device.</item>
+    </string-array>
+    <string-array name="TestItem_Des_Speaker_Test">
+        <item>The "Speaker Test" is used to test the speaker function of this device.</item>
+        <item>Test procedure:</item>
+        <item>1. Tap [Start] to listen to the sound.</item>
+        <item>2. If the speaker function works, tap [PASS]. If not, tap [FAIL] to stop the test.</item>
+    </string-array>
+    <string-array name="TestItem_Des_Touch_Test">
+        <item>The "Touch Test" is used to test the sensitivity of the touch screen by finger pressure.</item>
+        <item>Test procedure:</item>
+        <item>1. Using your finger, draw a straight line across the length of each one of the six gray areas. The line should only occupy the gray area and should span its entire length.</item>
+        <item>2. The gray area turns green when the test is successful. If not, it turns red.</item>
+        <item>3. Repeat this procedure if the gray area turns red. If, after several attempts, it still turns red, tap [FAIL] to stop the test.</item>
+    </string-array>
+    <string-array name="TestItem_Des_VGACamCapture_Test">
+        <item>The "Front Camera Capture Test" is used to test the front camera capture function.</item>
+        <item>Test procedure:</item>
+        <item>1. Press [SHUTTER] to capture photo.</item>
+        <item>2. If the photo is captured successfully, tap [PASS]. If not, tap [FAIL] to stop the test.</item>
+        <item>"Note: This test doesn't measure your camera's performance nor fix clarity issues."</item>
+    </string-array>
+    <string-array name="TestItem_Des_Vibrator_Test">
+        <item>The "Vibration Test" is used to test the vibration function.</item>
+        <item>Test procedure:</item>
+        <item>1. Tap [Start].</item>
+        <item>"Tap the number that corresponds to the number of vibrations. Tap [FAIL] if it's not working."</item>
+    </string-array>
+    <string-array name="TestItem_Des_WiFiBus_Test">
+        <item>"The \"Wi-Fi Test\" allows you to test the Wi-Fi
+		function of this device. This test procedure will start automatically without any manual operations."</item>
+        <item>Note: A working Wi-Fi hotspot should be present during testing.</item>
+    </string-array>
+    <string-array name="TestItem_Des_Wireless_Charger_Test">
+        <item>The "Wireless Charger Test" is used to test the wireless charging function of this device.</item>
+        <item>Test procedure:</item>
+        <item>1.Put your device on a powered-on wireless charger.</item>
+        <item>2. If the wireless charging works, this test will automatically finish. If not, tap [FAIL] to stop the test.</item>
+    </string-array>
+    <string-array name="TestItem_Des_USBCharger_Test">
+        <item>"The \"USB Charging Test\" allows you to test the USB charging function of this device."</item>
+        <item>To test the USB charging function:</item>
+        <item>1. Connect your device to a USB charger.</item>
+        <item>"2. If the device indicates that it's charging, it passed the test. Unplug the charger
+	 to continue. If not, tap [FAIL] to stop the test."</item>
+    </string-array>
+    <string-array name="TestItem_Des_AC_Charger_Test">
+        <item>"The \"AC Charging Test\" allows you to test the AC charging function of this device."</item>
+        <item>To test the AC charging function:</item>
+        <item>1. Connect your device to an AC charger.</item>
+        <item>"2. If the device indicates that it's charging, it passed the test. Unplug the charger
+	 to continue. If not, tap [FAIL] to stop the test."</item>
+    </string-array>
+
 </resources>
