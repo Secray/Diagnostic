@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.AudioManager;
 import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -23,9 +24,8 @@ import static com.wingtech.diagnostic.util.Constants.HEADSETKEY_REQUEST_CODE;
  */
 
 public class HeadsetKeyActivity extends TestingActivity {
-
     private static final String TAG = "HeadsetKeyActivity";
-
+    private boolean isShow = true;
     private CheckBox mHeadsetKey = null;
     private TextView mHeadsetKeyTxt = null;
     private TextView mTitle = null;
@@ -33,7 +33,7 @@ public class HeadsetKeyActivity extends TestingActivity {
     private boolean isPlug = false;
     private HeadsetPlugReceiver mHPReceiver;
     private String mContentDialog;
-
+    private AudioManager localAudioManager = null;
     AlertDialog dlg;
     @Override
     protected int getLayoutResId() {
@@ -58,7 +58,11 @@ public class HeadsetKeyActivity extends TestingActivity {
     protected void onWork() {
         mTitle.setText(R.string.headsetkey_title);
         mHeadsetKeyTxt.setText(R.string.headsetkey_txt);
-
+        localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        if (!localAudioManager.isWiredHeadsetOn() && isShow) {
+            isPlug = false;
+            showTheDialog(false);
+        }
         mTouchFailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,6 +173,10 @@ public class HeadsetKeyActivity extends TestingActivity {
         public void onReceive(Context context, Intent intent) {
             if (intent.hasExtra("state")) {
                 if (intent.getIntExtra("state", 0) == 0) {
+                    if (dlg != null) {
+                        dlg.dismiss();
+                    }
+                    isShow = false;
                     showTheDialog(false);
                 } else if (intent.getIntExtra("state", 0) == 1) {
                     if (dlg != null) {

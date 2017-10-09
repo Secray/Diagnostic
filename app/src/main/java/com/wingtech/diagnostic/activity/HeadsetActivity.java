@@ -37,7 +37,7 @@ public class HeadsetActivity extends TestingActivity {
     private boolean isPlug = false;
     private HeadsetPlugReceiver mHPReceiver;
     AlertDialog dlg;
-
+    private boolean isShow = true;
     @Override
     protected int getLayoutResId() {
         return R.layout.content_dialog_test;
@@ -56,7 +56,14 @@ public class HeadsetActivity extends TestingActivity {
 
     @Override
     protected void onWork() {
-
+        localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        if (!localAudioManager.isWiredHeadsetOn() && isShow) {
+            isPlug = false;
+            if (player != null) {
+                player.release();
+            }
+            showTheDialog(false);
+        }
     }
 
     public void onPause() {
@@ -183,6 +190,10 @@ public class HeadsetActivity extends TestingActivity {
         public void onReceive(Context context, Intent intent) {
             if (intent.hasExtra("state")) {
                 if (intent.getIntExtra("state", 0) == 0) {
+                    if (dlg != null) {
+                        dlg.dismiss();
+                    }
+                    isShow = false;
                     //plug out
                     isPlug = false;
                     if (player != null) {

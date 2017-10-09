@@ -40,6 +40,7 @@ public class HeadsetMicActivity extends TestingActivity {
     private String path = null;
     CountDownTimer mTimer;
     CountDownTimer mtimer;
+    private boolean isShow = true;
     @Override
     protected int getLayoutResId() {
         return R.layout.content_dialog_test;
@@ -59,7 +60,11 @@ public class HeadsetMicActivity extends TestingActivity {
 
     @Override
     protected void onWork() {
-
+        localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        if (!localAudioManager.isWiredHeadsetOn() && isShow) {
+            isPlug = false;
+            showTheDialog(false);
+        }
     }
 
     public void onPause()
@@ -165,6 +170,10 @@ public class HeadsetMicActivity extends TestingActivity {
             {
                 if (intent.getIntExtra("state", 0) == 0)
                 {
+                    if (dlg != null) {
+                        dlg.dismiss();
+                    }
+                    isShow = false;
                     //plug out
                     isPlug = false;
                     showTheDialog(false);

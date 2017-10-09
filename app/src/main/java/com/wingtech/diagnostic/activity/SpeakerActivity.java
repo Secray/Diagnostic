@@ -37,7 +37,7 @@ public class SpeakerActivity extends TestingActivity {
     private boolean isPlug = false;
     private HeadsetPlugReceiver mHPReceiver;
     AlertDialog dlg;
-
+	private boolean isShow = true;
     @Override
     protected int getLayoutResId() {
         return R.layout.content_dialog_test;
@@ -56,7 +56,48 @@ public class SpeakerActivity extends TestingActivity {
 
     @Override
     protected void onWork() {
+        localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        if (!localAudioManager.isWiredHeadsetOn() && isShow) {
+            if (dlg != null) {
+                dlg.dismiss();
+            }
+            isPlug = true;
+            mTxt.setText(R.string.headset_context_left);
+            localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+            player = new MediaPlayer();
+            player.reset();
+            localAudioManager.setMode(AudioManager.STREAM_MUSIC);
+            localAudioManager.setSpeakerphoneOn(true);
+            localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
 
+            player.setVolume(13.0f, 0.000f);/* ajayet invert to match headset */
+            playMelody(getResources(), R.raw.bootaudio);
+            player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    if (isPlug) {
+                        mTxt.setText(R.string.headset_context_right);
+                        localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                        player = new MediaPlayer();
+                        player.reset();
+                        localAudioManager.setMode(AudioManager.STREAM_MUSIC);
+                        localAudioManager.setSpeakerphoneOn(true);
+                        localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
+
+                        player.setVolume(0.000f, 13.0f);/* ajayet invert to match headset */
+                        playMelody(getResources(), R.raw.bootaudio);
+                        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mp) {
+                                if (isPlug) {
+                                    showTheDialog(true);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
     }
 
     public void onPause() {
@@ -182,6 +223,10 @@ public class SpeakerActivity extends TestingActivity {
         public void onReceive(Context context, Intent intent) {
             if (intent.hasExtra("state")) {
                 if (intent.getIntExtra("state", 0) == 1) {
+                    if (dlg != null) {
+                        dlg.dismiss();
+                    }
+					isShow = false;
                     //plug out
                     isPlug = false;
                     if (player != null) {
