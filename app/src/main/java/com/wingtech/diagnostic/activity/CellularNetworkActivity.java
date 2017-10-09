@@ -60,6 +60,7 @@ public class CellularNetworkActivity extends TestingActivity implements OnResult
                 @Override
                 public void run() {
                     CellularNetworkTestFragment fragment = new CellularNetworkTestFragment();
+                    fragment.setListener(CellularNetworkActivity.this);
                     fragment.setSim1(mSim1);
                     fragment.setSim2(mSim2);
                     fragment.setSim1Level(s1.getLevel());

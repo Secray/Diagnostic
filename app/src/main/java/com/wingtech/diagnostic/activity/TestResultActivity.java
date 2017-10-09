@@ -1,6 +1,5 @@
 package com.wingtech.diagnostic.activity;
 
-import android.content.Intent;
 import android.content.res.TypedArray;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,14 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.wingtech.diagnostic.util.SharedPreferencesUtils;
-
-import com.wingtech.diagnostic.App;
 import com.asus.atd.smmitest.R;
+import com.wingtech.diagnostic.App;
 import com.wingtech.diagnostic.adapter.TestResultAdapter;
-import com.wingtech.diagnostic.bean.SingleTestCase;
 import com.wingtech.diagnostic.bean.TestCaseResult;
-import com.wingtech.diagnostic.util.Log;
+import com.wingtech.diagnostic.util.SharedPreferencesUtils;
 
 import java.util.ArrayList;
 
@@ -24,7 +20,7 @@ import java.util.ArrayList;
  * @date 2017-7-18
  */
 
-public class TestResultActivity extends BaseActivity implements View.OnClickListener {
+public class TestResultActivity extends BaseActivity {
     Toolbar mToolbar;
 
     RecyclerView mRecyclerView;
@@ -45,8 +41,6 @@ public class TestResultActivity extends BaseActivity implements View.OnClickList
         mTestCases = getResources().getStringArray(R.array.test_cases);
         mRecyclerView = (RecyclerView) findViewById(R.id.result_list);
         mIconArray = getResources().obtainTypedArray(R.array.test_icons);
-        findViewById(R.id.btn_test_help).setOnClickListener(this);
-        findViewById(R.id.btn_test_repair).setOnClickListener(this);
     }
 
     @Override
@@ -78,18 +72,6 @@ public class TestResultActivity extends BaseActivity implements View.OnClickList
             list.add(t);
         }
         return list;
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_test_help:
-                startActivity(new Intent(this, HelpActivity.class));
-                break;
-            case R.id.btn_test_repair:
-                startActivity(new Intent(this, RepairActivity.class));
-                break;
-        }
     }
 
     @Override

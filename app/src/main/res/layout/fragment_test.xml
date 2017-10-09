@@ -14,18 +14,24 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <TextView
-        style="@style/AppTheme.Test.Text.Description"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/main_test_padding_bottom"
-        android:paddingLeft="@dimen/list_margin"
-        android:paddingRight="@dimen/list_margin"
-        android:text="@string/test_description"
-        android:id="@+id/test_description"
+        android:layout_height="120dp"
         android:layout_below="@+id/img_test"
+        android:id="@+id/test_scrollview"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true">
+        <TextView
+            style="@style/AppTheme.Test.Text.Description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_test_padding_bottom"
+            android:paddingLeft="@dimen/list_margin"
+            android:paddingRight="@dimen/list_margin"
+            android:text="@string/test_description"
+            android:id="@+id/test_description" />
+    </ScrollView>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,7 +39,7 @@
         android:gravity="center"
         android:orientation="vertical"
         android:layout_above="@+id/test_action"
-        android:layout_below="@+id/test_description"
+        android:layout_below="@+id/test_scrollview"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:visibility="gone"
