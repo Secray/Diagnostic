@@ -1,8 +1,8 @@
 package com.wingtech.diagnostic.util;
 
 import android.content.Context;
-import android.os.Handler;
 
+import com.android.helper.Helper;
 import com.wingtech.diagnostic.App;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -18,8 +18,10 @@ import java.lang.ref.WeakReference;
 
 public class TestItemHandler extends Thread {
     private WeakReference<Context> mContext;
+    private String mConfigName;
     public TestItemHandler(Context context) {
         this.mContext = new WeakReference<>(context);
+        mConfigName = "config/config_" + Helper.getSystemProperties("ro.board.cpuname", "") + ".xml";
     }
 
     @Override
@@ -30,7 +32,7 @@ public class TestItemHandler extends Thread {
     private void parseConfig() {
         InputStream is = null;
         try {
-            is = mContext.get().getResources().getAssets().open("config/config.xml");
+            is = mContext.get().getResources().getAssets().open(mConfigName);
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             XmlPullParser xmlPullParser = factory.newPullParser();
             xmlPullParser.setInput(is, "UTF-8");
