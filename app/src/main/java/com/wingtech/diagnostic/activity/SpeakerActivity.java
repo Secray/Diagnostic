@@ -37,7 +37,7 @@ public class SpeakerActivity extends TestingActivity {
     private boolean isPlug = false;
     private HeadsetPlugReceiver mHPReceiver;
     AlertDialog dlg;
-	private boolean isShow = true;
+	private static boolean isShow = true;
     @Override
     protected int getLayoutResId() {
         return R.layout.content_dialog_test;
@@ -58,44 +58,37 @@ public class SpeakerActivity extends TestingActivity {
     protected void onWork() {
         localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         if (!localAudioManager.isWiredHeadsetOn() && isShow) {
-            if (dlg != null) {
-                dlg.dismiss();
-            }
-            isPlug = true;
             mTxt.setText(R.string.headset_context_left);
             localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
             player = new MediaPlayer();
             player.reset();
             localAudioManager.setMode(AudioManager.STREAM_MUSIC);
             localAudioManager.setSpeakerphoneOn(true);
-            localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
-
-            player.setVolume(13.0f, 0.000f);/* ajayet invert to match headset */
+            localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 3, 0);
+            player.setVolume(3.0f, 0.000f);/* ajayet invert to match headset */
             playMelody(getResources(), R.raw.bootaudio);
             player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
-                    if (isPlug) {
+
                         mTxt.setText(R.string.headset_context_right);
                         localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                         player = new MediaPlayer();
                         player.reset();
                         localAudioManager.setMode(AudioManager.STREAM_MUSIC);
                         localAudioManager.setSpeakerphoneOn(true);
-                        localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
+                        localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 3, 0);
 
-                        player.setVolume(0.000f, 13.0f);/* ajayet invert to match headset */
+                        player.setVolume(0.000f, 3.0f);/* ajayet invert to match headset */
                         playMelody(getResources(), R.raw.bootaudio);
                         player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                             @Override
                             public void onCompletion(MediaPlayer mp) {
-                                if (isPlug) {
                                     showTheDialog(true);
-                                }
                             }
                         });
                     }
-                }
+
             });
         }
     }
@@ -103,6 +96,11 @@ public class SpeakerActivity extends TestingActivity {
     public void onPause() {
         super.onPause();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     @Override
@@ -190,6 +188,12 @@ public class SpeakerActivity extends TestingActivity {
 
     private void prepareExit() {
 
+        if (dlg != null) {
+            dlg.dismiss();
+        }
+        //plug out
+        isPlug = false;
+
         if (player != null) {
             player.release();
         }
@@ -238,6 +242,7 @@ public class SpeakerActivity extends TestingActivity {
                     if (dlg != null) {
                         dlg.dismiss();
                     }
+                    isShow = false;
                     isPlug = true;
                     mTxt.setText(R.string.headset_context_left);
                     localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
@@ -245,9 +250,9 @@ public class SpeakerActivity extends TestingActivity {
                     player.reset();
                     localAudioManager.setMode(AudioManager.STREAM_MUSIC);
                     localAudioManager.setSpeakerphoneOn(true);
-                    localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
+                    localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 3, 0);
 
-                    player.setVolume(13.0f, 0.000f);/* ajayet invert to match headset */
+                    player.setVolume(3.0f, 0.000f);/* ajayet invert to match headset */
                     playMelody(getResources(), R.raw.bootaudio);
                     player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override
@@ -259,9 +264,9 @@ public class SpeakerActivity extends TestingActivity {
                                 player.reset();
                                 localAudioManager.setMode(AudioManager.STREAM_MUSIC);
                                 localAudioManager.setSpeakerphoneOn(true);
-                                localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
+                                localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 3, 0);
 
-                                player.setVolume(0.000f, 13.0f);/* ajayet invert to match headset */
+                                player.setVolume(0.000f, 3.0f);/* ajayet invert to match headset */
                                 playMelody(getResources(), R.raw.bootaudio);
                                 player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                                     @Override
