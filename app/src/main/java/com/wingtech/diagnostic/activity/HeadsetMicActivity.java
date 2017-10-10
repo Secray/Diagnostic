@@ -40,7 +40,7 @@ public class HeadsetMicActivity extends TestingActivity {
     private String path = null;
     CountDownTimer mTimer;
     CountDownTimer mtimer;
-    private boolean isShow = true;
+    private static boolean isShow = true;
     @Override
     protected int getLayoutResId() {
         return R.layout.content_dialog_test;
@@ -182,6 +182,7 @@ public class HeadsetMicActivity extends TestingActivity {
                     if(dlg!=null) {
                         dlg.dismiss();
                     }
+                    isShow = false;
                     isPlug = true;
                     mTxt.setText(R.string.mic_context_dialog_record);
                     startRecorder(path);

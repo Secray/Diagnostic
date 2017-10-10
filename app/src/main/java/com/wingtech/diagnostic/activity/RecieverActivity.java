@@ -67,8 +67,10 @@ public class RecieverActivity extends TestingActivity {
         }
         if (localAudioManager != null) {
             localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, oldVolume, 0);
+            localAudioManager.setMode(AudioManager.STREAM_MUSIC);
+            localAudioManager.setSpeakerphoneOn(true);
         }
-        localAudioManager.setMode(audio_mode);
+
     }
 
     public void onDestroy() {

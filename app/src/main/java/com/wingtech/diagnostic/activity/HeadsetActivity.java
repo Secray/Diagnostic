@@ -37,7 +37,7 @@ public class HeadsetActivity extends TestingActivity {
     private boolean isPlug = false;
     private HeadsetPlugReceiver mHPReceiver;
     AlertDialog dlg;
-    private boolean isShow = true;
+    private static boolean isShow = true;
     @Override
     protected int getLayoutResId() {
         return R.layout.content_dialog_test;
@@ -204,6 +204,7 @@ public class HeadsetActivity extends TestingActivity {
                     if (dlg != null) {
                         dlg.dismiss();
                     }
+                    isShow = false;
                     isPlug = true;
                     mTxt.setText(R.string.headset_context_left);
                     if(localAudioManager == null) {
