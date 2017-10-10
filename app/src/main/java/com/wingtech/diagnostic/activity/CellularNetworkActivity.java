@@ -50,25 +50,38 @@ public class CellularNetworkActivity extends TestingActivity implements OnResult
                         sendResult();
                     }).create().show();
         } else {
-            SignalListener s1 = new SignalListener(mSim1.getSubscriptionId());
-            SignalListener s2 = new SignalListener(mSim2.getSubscriptionId());
-            telephonyManager.listen(s1,
-                    LISTEN_SIGNAL_STRENGTHS | LISTEN_DATA_CONNECTION_STATE);
-            telephonyManager.listen(s2,
-                    LISTEN_SIGNAL_STRENGTHS | LISTEN_DATA_CONNECTION_STATE);
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    CellularNetworkTestFragment fragment = new CellularNetworkTestFragment();
-                    fragment.setListener(CellularNetworkActivity.this);
-                    fragment.setSim1(mSim1);
-                    fragment.setSim2(mSim2);
-                    fragment.setSim1Level(s1.getLevel());
-                    fragment.setSim2Level(s2.getLevel());
-                    fragment.setSim1State(s1.getState());
-                    fragment.setSim2State(s2.getState());
-                    getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
-                }
+            SignalListener s1;
+            if (mSim1 != null) {
+                s1 = new SignalListener(mSim1.getSubscriptionId());
+            } else {
+                s1 = null;
+            }
+            SignalListener s2;
+
+            if (mSim2 != null) {
+                s2 = new SignalListener(mSim2.getSubscriptionId());
+            } else {
+                s2 = null;
+            }
+
+            if (s1 != null) {
+                telephonyManager.listen(s1,
+                        LISTEN_SIGNAL_STRENGTHS | LISTEN_DATA_CONNECTION_STATE);
+            }
+            if (s2 != null) {
+                telephonyManager.listen(s2,
+                        LISTEN_SIGNAL_STRENGTHS | LISTEN_DATA_CONNECTION_STATE);
+            }
+            mHandler.postDelayed(() -> {
+                CellularNetworkTestFragment fragment = new CellularNetworkTestFragment();
+                fragment.setListener(CellularNetworkActivity.this);
+                fragment.setSim1(mSim1);
+                fragment.setSim2(mSim2);
+                fragment.setSim1Level(s1 != null ? s1.getLevel() : 0);
+                fragment.setSim2Level(s2 != null ? s2.getLevel() : 0);
+                fragment.setSim1State(s1 != null ? s1.getState() : 0);
+                fragment.setSim2State(s2 != null ? s2.getState() : 0);
+                getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
             }, 1000);
         }
     }
