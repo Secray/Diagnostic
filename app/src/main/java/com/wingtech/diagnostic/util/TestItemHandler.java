@@ -1,6 +1,7 @@
 package com.wingtech.diagnostic.util;
 
 import android.content.Context;
+import android.os.Build;
 
 import com.android.helper.Helper;
 import com.wingtech.diagnostic.App;
@@ -21,7 +22,7 @@ public class TestItemHandler extends Thread {
     private String mConfigName;
     public TestItemHandler(Context context) {
         this.mContext = new WeakReference<>(context);
-        mConfigName = "config/config_" + Helper.getSystemProperties("ro.board.cpuname", "") + ".xml";
+        mConfigName = "config/config_" + Build.MODEL + ".xml";
     }
 
     @Override

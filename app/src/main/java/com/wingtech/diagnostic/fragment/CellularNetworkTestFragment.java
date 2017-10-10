@@ -65,6 +65,8 @@ public class CellularNetworkTestFragment extends TestFragment implements View.On
 
         mSuccess = (AppCompatButton) view.findViewById(R.id.pass);
         mFail = (AppCompatButton) view.findViewById(R.id.fail);
+        mSuccess.setOnClickListener(this);
+        mFail.setOnClickListener(this);
     }
 
     @Override

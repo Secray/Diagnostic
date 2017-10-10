@@ -947,7 +947,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 i = new Intent(mActivity, CellularNetworkActivity.class);
                 i.putExtra("isTestAll", mCallback != null);
                 i.putExtra("title", mTitle);
-                startActivityForResult(i, CALL_REQUEST_CODE);
+                startActivityForResult(i, CELLULAR_NETWORK_REQUEST_CODE);
                 break;
 
             case "Receiver Test":
