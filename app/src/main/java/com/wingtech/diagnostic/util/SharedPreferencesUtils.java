@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import android.os.Build;
 import android.os.Environment;
 import java.util.ArrayList;
 import com.wingtech.diagnostic.App;
@@ -29,7 +31,7 @@ public class SharedPreferencesUtils {
     public static final int PASS = 2;
     public static final int FAIL = 1;
     public static final int NOT_TEST = 0;
-    
+
     private static final String RESULT_FILE = "SMMI_TestResult.txt";
 		private File targetFile;
 		private static BufferedWriter buf;
@@ -118,10 +120,16 @@ public class SharedPreferencesUtils {
     public static void outputFile(Context context){
     	  stringSMMI = new StringBuffer();
 				String title = "[SMMI Test Result]\n";
-				initfileAndWriteData(title);	
-        mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi);
-        mTestCasesErrorCode = context.getResources().getIntArray(R.array.smmi_error_code);
-        mTestCasesErrorTxt = context.getResources().getStringArray(R.array.smmi_error_txt);
+				initfileAndWriteData(title);
+        if(Build.MODEL.equals("ASUS_X00LD")){
+            mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_3_cam);
+            mTestCasesErrorCode = context.getResources().getIntArray(R.array.smmi_error_code_3_cam);
+            mTestCasesErrorTxt = context.getResources().getStringArray(R.array.smmi_error_txt_3_cam);
+        }else{
+            mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_2_cam);
+            mTestCasesErrorCode = context.getResources().getIntArray(R.array.smmi_error_code_2_cam);
+            mTestCasesErrorTxt = context.getResources().getStringArray(R.array.smmi_error_txt_2_cam);
+        }
         int result = 0;
         isTestAll = true;
         for (int i = 0; i < mTestCases.length; i++) {

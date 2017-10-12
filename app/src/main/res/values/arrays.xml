@@ -112,7 +112,7 @@
         <item>@drawable/asus_diagnostic_ic_gyroscope</item>
     </integer-array>
  
-    <string-array name="test_cases_smmi">
+    <string-array name="test_cases_smmi_3_cam">
         <item>@string/test_case_bluetooth</item>
         <item>@string/test_case_wifi</item>
         <item>@string/test_case_battery</item>
@@ -144,12 +144,13 @@
         <item>@string/test_case_phone</item>
         <item>@string/test_case_sim</item>
         <item>@string/test_case_camera_flash</item>
+        <item>@string/test_case_camera_front_flash</item>
         <item>@string/test_case_headset_key</item>
         <item>@string/test_case_secondary_mic</item>
         <item>@string/test_case_fingerprint</item>
     </string-array>
     
-    <integer-array name="smmi_error_code">
+    <integer-array name="smmi_error_code_3_cam">
         <item>1912</item>
         <item>1914</item>
         <item>1911</item>
@@ -181,47 +182,158 @@
         <item>2173</item>
         <item>2174</item>
         <item>1909</item>
+        <item>1909</item>
         <item>1935</item>
         <item>1930</item>
         <item>2148</item>
     </integer-array>
     	
-    <string-array name="smmi_error_txt">
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
-        <item>fail</item>
+    <string-array name="smmi_error_txt_3_cam">
+        <item>BT_Error</item>
+        <item>WiFiBus_Error</item>
+        <item>Battery_Error</item>
+        <item>ECompass_Error</item>
+        <item>Gyroscope_Error</item>
+        <item>ModemBus_Error</item>
+        <item>Touch_Error</item>
+        <item>GSensor_Error</item>
+        <item>Keypad_Error</item>
+        <item>MultiTouch_Error</item>
+        <item>Vibrator_Error</item>
+        <item>VGACamCapture_Error</item>
+        <item>MainCamCapture_Error</item>
+        <item>TeleCamCapture_Error</item>
+        <item>Display_Error</item>
+        <item>Speaker_Error</item>
+        <item>Receiver1_Error</item>
+        <item>BoardMic_Error</item>
+        <item>Headset_Error</item>
+        <item>HeadsetMic_Error</item>
+        <item>Proximity_Error</item>
+        <item>LightSenso_Error</item>
+        <item>OTG_Mouse_Error</item>
+        <item>SDcard_Error</item>
+        <item>SIMcard_Error</item>
+        <item>SIMcard_Test2_Error</item>
+        <item>AC_Charger_Error</item>
+        <item>USBCharger_Error</item>
+        <item>PhoneCall_Error</item>
+        <item>SIM_Signal_Error</item>
+        <item>CameraFlash_Error</item>
+        <item>CameraFlash_Front_Error</item>
+        <item>HeadsetKey_Error</item>
+        <item>BoardMic2_Error</item>
+        <item>FingerPrint_Error</item>
     </string-array>
 
-    
+    <string-array name="test_cases_smmi_2_cam">
+        <item>@string/test_case_bluetooth</item>
+        <item>@string/test_case_wifi</item>
+        <item>@string/test_case_battery</item>
+        <item>@string/test_case_e_compass</item>
+        <item>@string/test_case_gyroscope</item>
+        <item>@string/test_case_mode</item>
+        <item>@string/test_case_touch</item>
+        <item>@string/test_case_g_sensor</item>
+        <item>@string/test_case_keypad</item>
+        <item>@string/test_case_multi_touch</item>
+        <item>@string/test_case_vibrator</item>
+        <item>@string/test_case_VGA_cam</item>
+        <item>@string/test_case_main_cam</item>
+        <item>@string/test_case_display</item>
+        <item>@string/test_case_speaker</item>
+        <item>@string/test_case_receiver</item>
+        <item>@string/test_case_board_mic</item>
+        <item>@string/test_case_headset</item>
+        <item>@string/test_case_headset_mic</item>
+        <item>@string/test_case_proximity</item>
+        <item>@string/test_case_light_sensor</item>
+        <item>@string/test_case_cmd_mouse</item>
+        <item>@string/test_case_sd_card</item>
+        <item>@string/test_case_sim_card</item>
+        <item>@string/test_case_sim2</item>
+        <item>@string/test_case_ac</item>
+        <item>@string/test_case_usb</item>
+        <item>@string/test_case_phone</item>
+        <item>@string/test_case_sim</item>
+        <item>@string/test_case_camera_flash</item>
+        <item>@string/test_case_camera_front_flash</item>
+        <item>@string/test_case_headset_key</item>
+        <item>@string/test_case_secondary_mic</item>
+        <item>@string/test_case_fingerprint</item>
+    </string-array>
+
+    <integer-array name="smmi_error_code_2_cam">
+        <item>1912</item>
+        <item>1914</item>
+        <item>1911</item>
+        <item>1939</item>
+        <item>1980</item>
+        <item>1913</item>
+        <item>1937</item>
+        <item>1907</item>
+        <item>1905</item>
+        <item>1969</item>
+        <item>1910</item>
+        <item>1968</item>
+        <item>1967</item>
+        <item>1908</item>
+        <item>1926</item>
+        <item>1927</item>
+        <item>1930</item>
+        <item>1935</item>
+        <item>1929</item>
+        <item>1940</item>
+        <item>1906</item>
+        <item>12020</item>
+        <item>1916</item>
+        <item>1915</item>
+        <item>2031</item>
+        <item>1925</item>
+        <item>1925</item>
+        <item>2173</item>
+        <item>2174</item>
+        <item>1909</item>
+        <item>1909</item>
+        <item>1935</item>
+        <item>1930</item>
+        <item>2148</item>
+    </integer-array>
+
+    <string-array name="smmi_error_txt_2_cam">
+        <item>BT_Error</item>
+        <item>WiFiBus_Error</item>
+        <item>Battery_Error</item>
+        <item>ECompass_Error</item>
+        <item>Gyroscope_Error</item>
+        <item>ModemBus_Error</item>
+        <item>Touch_Error</item>
+        <item>GSensor_Error</item>
+        <item>Keypad_Error</item>
+        <item>MultiTouch_Error</item>
+        <item>Vibrator_Error</item>
+        <item>VGACamCapture_Error</item>
+        <item>MainCamCapture_Error</item>
+        <item>Display_Error</item>
+        <item>Speaker_Error</item>
+        <item>Receiver1_Error</item>
+        <item>BoardMic_Error</item>
+        <item>Headset_Error</item>
+        <item>HeadsetMic_Error</item>
+        <item>Proximity_Error</item>
+        <item>LightSenso_Error</item>
+        <item>OTG_Mouse_Error</item>
+        <item>SDcard_Error</item>
+        <item>SIMcard_Error</item>
+        <item>SIMcard_Test2_Error</item>
+        <item>AC_Charger_Error</item>
+        <item>USBCharger_Error</item>
+        <item>PhoneCall_Error</item>
+        <item>SIM_Signal_Error</item>
+        <item>CameraFlash_Error</item>
+        <item>CameraFlash_Front_Error</item>
+        <item>HeadsetKey_Error</item>
+        <item>BoardMic2_Error</item>
+        <item>FingerPrint_Error</item>
+    </string-array>
 </resources>
