@@ -210,7 +210,7 @@
         <item>Headset_Error</item>
         <item>HeadsetMic_Error</item>
         <item>Proximity_Error</item>
-        <item>LightSenso_Error</item>
+        <item>LightSensor_Error</item>
         <item>OTG_Mouse_Error</item>
         <item>SDcard_Error</item>
         <item>SIMcard_Error</item>
@@ -321,7 +321,7 @@
         <item>Headset_Error</item>
         <item>HeadsetMic_Error</item>
         <item>Proximity_Error</item>
-        <item>LightSenso_Error</item>
+        <item>LightSensor_Error</item>
         <item>OTG_Mouse_Error</item>
         <item>SDcard_Error</item>
         <item>SIMcard_Error</item>
