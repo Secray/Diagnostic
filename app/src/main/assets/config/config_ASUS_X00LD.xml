@@ -31,7 +31,7 @@
     <TEST_ITEM Id="28" Name="Wireless Charging Test" Disable="1" AutoTest="0" Icon="asus_diagnostic_ic_wireless_charging" Img="asus_diagnostic_img_wireless_charging"/>
     <TEST_ITEM Id="29" Name="AC Charging Test" Disable="0" AutoTest="0" Icon="asus_diagnosticself_ic_accharger" Img="ac_charger"/>
     <TEST_ITEM Id="30" Name="USB Charging Test" Disable="0" AutoTest="0" Icon="asus_diagnosticself_ic_usbcharger" Img="usb_charger"/>
-    <TEST_ITEM Id="31" Name="Phone Call Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_wireless_charging" Img="asus_diagnostic_img_wireless_charging"/>
+    <TEST_ITEM Id="31" Name="Phone Call Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_phonecall" Img="asus_diagnostic_img_phonecall_test"/>
     <TEST_ITEM Id="32" Name="SIM Signal Test" Disable="0" AutoTest="0" Icon="asus_diagnosticself_ic_network" Img="cellular_network"/>
     <TEST_ITEM Id="33" Name="Camera Flash Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_cameraflash" Img="asus_diagnostic_img_camera_flash"/>
     <TEST_ITEM Id="34" Name="Camera Front Flash Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_cameraflash" Img="asus_diagnostic_img_camera_flash"/>
