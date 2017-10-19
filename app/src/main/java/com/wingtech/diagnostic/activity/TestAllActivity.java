@@ -39,6 +39,7 @@ public class TestAllActivity extends BaseActivity
     String mTitle;
     int mLen;
     private List<TestItem> mCaseList;
+    private AlertDialog mDialog;
 
     @Override
     protected int getLayoutResId() {
@@ -75,18 +76,20 @@ public class TestAllActivity extends BaseActivity
     @Override
     public void onBackPressed() {
         if (mCurrent < mCaseList.size() - 1) {
-            showTheDialog();
+            mDialog = showDialog();
+            mDialog.show();
         } else {
             super.onBackPressed();
         }
     }
 
-    public void showTheDialog(){
+    private AlertDialog showDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.content_test_dialog, null);//获取自定义布局
         builder.setView(layout);
         AlertDialog dlg = builder.create();
+        dlg.setCancelable(false);
         TextView mContent = (TextView) layout.findViewById(R.id.dialog_context);
         TextView mTitle = (TextView) layout.findViewById(R.id.dialog_title);
         mTitle.setText(R.string.test_all_dialog_title);
@@ -105,11 +108,12 @@ public class TestAllActivity extends BaseActivity
         fail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
+                doTest();
                 dlg.dismiss();
             }
         });
 
-        dlg.show();
+        return dlg;
     }
 
     void doTest() {
@@ -140,13 +144,15 @@ public class TestAllActivity extends BaseActivity
     public void onChange(boolean result) {
         SharedPreferencesUtils.setParam(this, mTitle,
                 result ? SharedPreferencesUtils.PASS : SharedPreferencesUtils.FAIL);
-        Log.i("xk", "mCurrent = " + mCurrent + " " + mTitle + " " + result);
+        Log.i("mCurrent = " + mCurrent + " " + mTitle + " " + result);
         mCurrent ++;
         if (mCurrent > mCaseList.size() - 1) {
             startActivity(new Intent(this, TestResultActivity.class));
             finish();
         } else {
-            doTest();
+            if (mDialog == null || !mDialog.isShowing()) {
+                doTest();
+            }
         }
     }
 
