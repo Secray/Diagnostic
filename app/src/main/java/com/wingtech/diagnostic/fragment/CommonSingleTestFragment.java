@@ -403,7 +403,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 break;
             case "SIM Signal Test":
                 String[] discription_ce = getResources().getStringArray(R.array.TestItem_Des_SIM_Signal_Test);
-                dis =  discription_ce[0];
+                dis =  discription_ce[0] + "\n";
                 for (int i = 1; i < discription_ce.length; i++){
                     dis = dis + discription_ce[i];
                     dis += "\n";
@@ -786,7 +786,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 break;
             case CELLULAR_NETWORK_REQUEST_CODE:
                 String[] discription_ce = getResources().getStringArray(R.array.TestItem_Des_SIM_Signal_Test);
-                dis =  discription_ce[0];
+                dis =  discription_ce[0] + "\n";
                 for (int i = 1; i < discription_ce.length; i++){
                     dis = dis + discription_ce[i];
                     dis += "\n";
