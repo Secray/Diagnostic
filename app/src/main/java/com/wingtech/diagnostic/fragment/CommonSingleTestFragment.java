@@ -185,7 +185,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                     dis += "\n";
                 }
                 break;
-            case "SIM2 Test":
+            case "SIM Card2 Test":
                 String[] discription_sim2 = getResources().getStringArray(R.array.TestItem_Des_SIMcard_Test2);
                 dis =  discription_sim2[0];
                 for (int i = 1; i < discription_sim2.length; i++){
@@ -265,7 +265,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                     dis += "\n";
                 }
                 break;
-            case "MainCam Test":
+            case "Main Camera Capture Test":
                 String[] discription_cam = getResources().getStringArray(R.array.TestItem_Des_MainCamCapture_Test);
                 dis =  discription_cam[0];
                 for (int i = 1; i < discription_cam.length; i++){
@@ -273,7 +273,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                     dis += "\n";
                 }
                 break;
-            case "VGACam Test":
+            case "Front Camera Capture Test":
                 String[] discription_vga = getResources().getStringArray(R.array.TestItem_Des_VGACamCapture_Test);
                 dis =  discription_vga[0];
                 for (int i = 1; i < discription_vga.length; i++){
@@ -281,7 +281,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                     dis += "\n";
                 }
                 break;
-            case "TeleCam Test":
+            case "Front Tele Camera Capture Test":
                 String[] discription_telecamera = getResources().getStringArray(R.array.TestItem_Des_FrontTeleCamCapture_Test);
                 dis =  discription_telecamera[0];
                 for (int i = 1; i < discription_telecamera.length; i++){
@@ -369,7 +369,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                     dis += "\n";
                 }
                 break;
-            case "SecondaryMic Test":
+            case "BoardMic2 Test":
                 String[] discription_mic2 = getResources().getStringArray(R.array.TestItem_Des_BoardMic2_Test);
                 dis =  discription_mic2[0];
                 for (int i = 1; i < discription_mic2.length; i++){
@@ -385,7 +385,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                     dis += "\n";
                 }
                 break;
-            case "WideCam Test":
+            case "Front WideCamera Capture Test":
                 String[] discription_assist = getResources().getStringArray(R.array.TestItem_Des_FrontWideCamCapture_Test);
                 dis =  discription_assist[0];
                 for (int i = 1; i < discription_assist.length; i++){
@@ -819,7 +819,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
             case "Gyroscope Test":
             case "SD Card Test":
             case "SIM Card Test":
-            case "SIM2 Test":
+            case "SIM Card2 Test":
             case "CMD Mouse Test":
             case "Fingerprint Test":
             case "GPS Test":
@@ -849,22 +849,22 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 i.putExtra("isTestAll", mCallback != null);
                 startActivityForResult(i, CAMERA_REQUEST_CODE);
                 break;
-            case "MainCam Test":
+            case "Main Camera Capture Test":
                 camId = 0;
                 i = new Intent(mActivity, CameraTestActivity.class);
                 i.putExtra("isTestAll", mCallback != null);
                 i.putExtra("camId", camId);
                 startActivityForResult(i, CAMERA_REQUEST_CODE);
                 break;
-            case "VGACam Test":
-            case "TeleCam Test":
+            case "Front Camera Capture Test":
+            case "Front Tele Camera Capture Test":
                 camId = 1;
                 i = new Intent(mActivity, CameraTestActivity.class);
                 i.putExtra("isTestAll", mCallback != null);
                 i.putExtra("camId", camId);
                 startActivityForResult(i, VGACAMERA_REQUEST_CODE);
                 break;
-            case "WideCam Test":
+            case "Front WideCamera Capture Test":
                 camId = 2;
                 i = new Intent(mActivity, CameraTestActivity.class);
                 i.putExtra("isTestAll", mCallback != null);
@@ -988,7 +988,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 i.putExtra("isTestAll", mCallback != null);
                 startActivityForResult(i, MIC_REQUEST_CODE);
                 break;
-            case "SecondaryMic Test":
+            case "BoardMic2 Test":
                 i = new Intent(mActivity, SecondaryMicActivity.class);
                 i.putExtra("title", mTitle);
                 i.putExtra("title_dialog","SecondaryMic");
