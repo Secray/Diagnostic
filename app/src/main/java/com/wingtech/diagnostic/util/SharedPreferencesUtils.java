@@ -133,6 +133,22 @@ public class SharedPreferencesUtils {
         int result = 0;
         isTestAll = true;
         for (int i = 0; i < mTestCases.length; i++) {
+            getParam(context,mTestCases[i],NOT_TEST);
+            result = (int) getParam(context,mTestCases[i], NOT_TEST);
+            Log.i(TAG,"mTestCases[i] = " + mTestCases[i] + "," + "result = " + result);
+            stringSMMI.append(mTestCases[i]);
+            stringSMMI.append(",");
+
+            stringSMMI.append(mTestCasesErrorCode[i]);
+            stringSMMI.append(",");
+            stringSMMI.append("Initialize");
+
+            stringSMMI.append("\n");
+            initfileAndWriteData(stringSMMI.toString());
+            stringSMMI.setLength(0);
+        }
+
+        for (int i = 0; i < mTestCases.length; i++) {
         		getParam(context,mTestCases[i],NOT_TEST);
         		result = (int) getParam(context,mTestCases[i], NOT_TEST);
         		Log.i(TAG,"mTestCases[i] = " + mTestCases[i] + "," + "result = " + result);

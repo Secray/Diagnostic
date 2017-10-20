@@ -69,7 +69,10 @@
     <string name="test_case_phone">Phone Call Test</string>
     <string name="test_case_sim">SIM Signal Test</string>
     <string name="test_case_gps">GPS Test</string>
-
+    <string name="test_case_vga_front">Front Camera Capture Test</string>
+    <string name="test_case_tele_front">Front Tele Camera Capture Test</string>
+    <string name="test_case_wide_front">Front WideCamera Capture Test</string>
+    <string name="test_case_main_back">Main Camera Capture Test</string>
     <!-- RepairActivity -->
     <string name="repair_list_item_software_update">Software Update</string>
     <string name="repair_list_item_safe_mode">Safe Mode</string>
