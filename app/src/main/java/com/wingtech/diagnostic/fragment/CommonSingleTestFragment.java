@@ -281,6 +281,14 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                     dis += "\n";
                 }
                 break;
+            case "TeleCam Test":
+                String[] discription_telecamera = getResources().getStringArray(R.array.TestItem_Des_FrontTeleCamCapture_Test);
+                dis =  discription_telecamera[0];
+                for (int i = 1; i < discription_telecamera.length; i++){
+                    dis = dis + discription_telecamera[i];
+                    dis += "\n";
+                }
+                break;
             case "Camera Flash Test":
                 String[] discription_camfl = getResources().getStringArray(R.array.TestItem_Des_CameraFlash_Test);
                 dis =  discription_camfl[0];
@@ -377,8 +385,8 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                     dis += "\n";
                 }
                 break;
-            case "AssistCam Test":
-                String[] discription_assist = getResources().getStringArray(R.array.TestItem_Des_WideCamCapture_Test);
+            case "WideCam Test":
+                String[] discription_assist = getResources().getStringArray(R.array.TestItem_Des_FrontWideCamCapture_Test);
                 dis =  discription_assist[0];
                 for (int i = 1; i < discription_assist.length; i++){
                     dis = dis + discription_assist[i];
@@ -849,13 +857,14 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 startActivityForResult(i, CAMERA_REQUEST_CODE);
                 break;
             case "VGACam Test":
+            case "TeleCamera Test":
                 camId = 1;
                 i = new Intent(mActivity, CameraTestActivity.class);
                 i.putExtra("isTestAll", mCallback != null);
                 i.putExtra("camId", camId);
                 startActivityForResult(i, VGACAMERA_REQUEST_CODE);
                 break;
-            case "AssistCam Test":
+            case "WideCam Test":
                 camId = 2;
                 i = new Intent(mActivity, CameraTestActivity.class);
                 i.putExtra("isTestAll", mCallback != null);
