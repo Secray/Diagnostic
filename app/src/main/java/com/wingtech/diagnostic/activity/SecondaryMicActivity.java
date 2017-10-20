@@ -137,6 +137,7 @@ public class SecondaryMicActivity extends TestingActivity {
             }
         });
         AlertDialog dlg = builder.create();
+        dlg.setCanceledOnTouchOutside(false);
         dlg.show();
     }
 

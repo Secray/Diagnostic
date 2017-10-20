@@ -136,6 +136,7 @@ public class RecieverActivity extends TestingActivity {
             }
         });
         AlertDialog dlg = builder.create();
+        dlg.setCanceledOnTouchOutside(false);
         dlg.show();
     }
 }
