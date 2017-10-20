@@ -36,13 +36,13 @@ public class GyroscopeTestingFragment extends TestFragment implements SensorEven
     @Override
     public void onSensorChanged(SensorEvent event) {
         Log.i("X = " + event.values[0] + " Y = " + event.values[1] + " Z = " + event.values[2]);
-        if (Math.abs(event.values[0]) >= 9) {
+        if (Math.abs(event.values[0]) >= 3) {
             mX = true;
         }
-        if (Math.abs(event.values[1]) >= 9) {
+        if (Math.abs(event.values[1]) >= 3) {
             mY = true;
         }
-        if (Math.abs(event.values[2]) >= 9) {
+        if (Math.abs(event.values[2]) >= 3) {
             mZ = true;
         }
 
