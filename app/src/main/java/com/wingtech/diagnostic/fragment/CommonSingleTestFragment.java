@@ -857,7 +857,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 startActivityForResult(i, CAMERA_REQUEST_CODE);
                 break;
             case "VGACam Test":
-            case "TeleCamera Test":
+            case "TeleCam Test":
                 camId = 1;
                 i = new Intent(mActivity, CameraTestActivity.class);
                 i.putExtra("isTestAll", mCallback != null);

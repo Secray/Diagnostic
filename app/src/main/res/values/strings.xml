@@ -62,6 +62,8 @@
     <string name="test_case_secondary_mic">SecondaryMic Test</string>
     <string name="test_case_camera_front_flash">Camera Front Flash Test</string>
     <string name="test_case_assist_cam">AssistCam Test</string>
+    <string name="test_case_tele_cam">TeleCam Test</string>
+    <string name="test_case_wide_cam">WideCam Test</string>
     <string name="test_case_ac">AC Charging Test</string>
     <string name="test_case_usb">USB Charging Test</string>
     <string name="test_case_phone">Phone Call Test</string>
