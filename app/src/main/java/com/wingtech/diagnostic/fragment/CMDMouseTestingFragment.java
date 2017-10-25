@@ -29,7 +29,7 @@ public class CMDMouseTestingFragment extends TestFragment
                     mCallback.onChange(mResult);
                     break;
                 } else {
-
+                    mTxtTitle.setText("Please insert the mouse...");
                 }
             }
         }
