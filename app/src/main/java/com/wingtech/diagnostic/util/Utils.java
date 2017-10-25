@@ -77,7 +77,7 @@ public class Utils {
             case "SIM Card Test":
                 fragment = new SIMCardTestingFragment(1);
                 break;
-            case "SIM2 Test":
+            case "SIM Card2 Test":
                 fragment = new SIMCardTestingFragment(2);
                 break;
             case "CMD Mouse Test":
