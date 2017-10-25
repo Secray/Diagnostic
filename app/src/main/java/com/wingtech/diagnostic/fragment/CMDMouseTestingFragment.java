@@ -13,11 +13,12 @@ import static android.content.Context.INPUT_SERVICE;
 
 public class CMDMouseTestingFragment extends TestFragment
         implements InputManager.InputDeviceListener {
+    private InputManager mIm;
     @Override
     protected void onWork() {
         super.onWork();
-        InputManager im = (InputManager) mActivity.getSystemService(INPUT_SERVICE);
-        im.registerInputDeviceListener(this, null);
+        mIm = (InputManager) mActivity.getSystemService(INPUT_SERVICE);
+        mIm.registerInputDeviceListener(this, null);
         final int[] devices = InputDevice.getDeviceIds();
         for (int deviceId : devices) {
             InputDevice device = InputDevice.getDevice(deviceId);
@@ -57,5 +58,11 @@ public class CMDMouseTestingFragment extends TestFragment
     @Override
     public void onInputDeviceChanged(int deviceId) {
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mIm.unregisterInputDeviceListener(this);
     }
 }
