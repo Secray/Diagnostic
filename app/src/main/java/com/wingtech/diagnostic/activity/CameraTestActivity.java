@@ -329,7 +329,7 @@ public class CameraTestActivity extends TestingActivity {
                     Log.v(TAG, "cwWidth =" + lp.get(i).width + "cwHeight =" + lp.get(i).height);
                 }
                 Log.v(TAG, "cWidth =" + cWidth + "cHeight =" + cHeight);
-                p.setPictureSize(cWidth, cHeight);
+                p.setPictureSize(1920, 1080);
                 p.setPreviewSize(1920,1080);
                 p.set("zsl","on");
                 //频闪问题，设置为50HZ
