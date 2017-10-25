@@ -46,6 +46,10 @@ public class SecondaryMicActivity extends TestingActivity {
         mTxt = (TextView) findViewById(R.id.dialog_txt);
         mContentDialog = getIntent().getStringExtra("title_dialog");
         path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/second_mic_test.pcm";
+        if(localAudioManager == null){
+            localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        }
+        localAudioManager.setParameters("mmi_route=6");
     }
 
     @Override
@@ -90,6 +94,10 @@ public class SecondaryMicActivity extends TestingActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        if(localAudioManager == null){
+            localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        }
+        localAudioManager.setParameters("mmi_route=0");
         if (mTimer != null) {
             mTimer.cancel();
             mTimer = null;
@@ -163,7 +171,7 @@ public class SecondaryMicActivity extends TestingActivity {
         mRecorder = new MediaRecorder();
         //mRecorder.setAudioChannels(1);
         //mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        mRecorder.setAudioSource(MediaRecorder.AudioSource.VOICE_COMMUNICATION);
+        mRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
         //设置封装格式
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         mRecorder.setOutputFile(path);

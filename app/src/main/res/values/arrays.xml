@@ -138,7 +138,7 @@
         <item>@string/test_case_cmd_mouse</item>
         <item>@string/test_case_sd_card</item>
         <item>@string/test_case_sim_card</item>
-        <item>@string/test_case_sim2</item>
+        <item>@string/test_case_sim_card2</item>
         <item>@string/test_case_ac</item>
         <item>@string/test_case_usb</item>
         <item>@string/test_case_phone</item>
@@ -146,7 +146,7 @@
         <item>@string/test_case_camera_flash</item>
         <item>@string/test_case_camera_front_flash</item>
         <item>@string/test_case_headset_key</item>
-        <item>@string/test_case_secondary_mic</item>
+        <item>@string/test_case_board_mic2</item>
         <item>@string/test_case_fingerprint</item>
     </string-array>
     
@@ -251,7 +251,7 @@
         <item>@string/test_case_cmd_mouse</item>
         <item>@string/test_case_sd_card</item>
         <item>@string/test_case_sim_card</item>
-        <item>@string/test_case_sim2</item>
+        <item>@string/test_case_sim_card2</item>
         <item>@string/test_case_ac</item>
         <item>@string/test_case_usb</item>
         <item>@string/test_case_phone</item>
@@ -259,7 +259,7 @@
         <item>@string/test_case_camera_flash</item>
         <item>@string/test_case_camera_front_flash</item>
         <item>@string/test_case_headset_key</item>
-        <item>@string/test_case_secondary_mic</item>
+        <item>@string/test_case_board_mic2</item>
         <item>@string/test_case_fingerprint</item>
     </string-array>
 

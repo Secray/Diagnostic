@@ -44,6 +44,7 @@
     <string name="test_case_receiver">Receiver Test</string>
     <string name="test_case_speaker">Speaker Test</string>
     <string name="test_case_board_mic">BoardMic Test</string>
+    <string name="test_case_board_mic2">BoardMic2 Test</string>
     <string name="test_case_main_cam">MainCam Test</string>
     <string name="test_case_VGA_cam">VGACam Test</string>
     <string name="test_case_camera_flash">Camera Flash Test</string>
@@ -56,6 +57,7 @@
     <string name="test_case_cmd_mouse">CMD Mouse Test</string>
     <string name="test_case_sd_card">SD Card Test</string>
     <string name="test_case_sim_card">SIM Card Test</string>
+    <string name="test_case_sim_card2">SIM Card2 Test</string>
     <string name="test_case_nfc">NFC Test</string>
     <string name="test_case_fingerprint">Fingerprint Test</string>
     <string name="test_case_sim2">SIM2 Test</string>
