@@ -5,6 +5,8 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
+import com.wingtech.diagnostic.util.Log;
+
 import static android.content.Context.SENSOR_SERVICE;
 
 /**
@@ -32,6 +34,7 @@ public class MagneticTestingFragment extends TestFragment implements SensorEvent
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+        Log.i("X = " + event.values[0] + " Y = " + event.values[1] + " Z = " + event.values[2]);
         if (Math.abs(event.values[0]) >= 1) {
             mX = true;
         }

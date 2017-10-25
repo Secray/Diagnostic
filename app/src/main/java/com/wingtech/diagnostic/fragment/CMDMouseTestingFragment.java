@@ -26,11 +26,13 @@ public class CMDMouseTestingFragment extends TestFragment
                     mResult = true;
                     Log.d("device.getName()=" + device.getName() + " device.getId() "
                             + device.getId() + " getDescriptor " + device.getDescriptor());
+                    mCallback.onChange(mResult);
                     break;
+                } else {
+
                 }
             }
         }
-        mCallback.onChange(mResult);
     }
 
     @Override
