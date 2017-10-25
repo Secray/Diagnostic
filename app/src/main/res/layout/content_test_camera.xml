@@ -20,6 +20,12 @@
         android:background="@drawable/ripple_circle_button_bg"
         android:src="@drawable/asus_diagnostic_btn_take_photo"/>
 
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/png"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>git 
+
     <RelativeLayout
         android:id="@+id/judgment"
         android:layout_width="wrap_content"
@@ -53,10 +59,6 @@
             android:textColor="@android:color/white" />
     </RelativeLayout>
 
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/png"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"/>
+
 
 </FrameLayout>
