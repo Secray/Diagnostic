@@ -166,7 +166,7 @@ public class SharedPreferencesUtils {
 		        }else if(result == 2){
 		          stringSMMI.append("0");
 							stringSMMI.append(",");
-							stringSMMI.append("pass");
+							stringSMMI.append("Pass");
 		        }
 						stringSMMI.append("\n");
             initfileAndWriteData(stringSMMI.toString());     
