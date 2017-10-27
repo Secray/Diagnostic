@@ -157,7 +157,7 @@ public class SharedPreferencesUtils {
         		if (result == 0){
 							stringSMMI.append("1000");
 							stringSMMI.append(",");
-							stringSMMI.append("not test");
+							stringSMMI.append("Not Test");
                             isTestAll = false;
 		        }else if(result == 1){       						
 							stringSMMI.append(mTestCasesErrorCode[i]);
@@ -166,7 +166,7 @@ public class SharedPreferencesUtils {
 		        }else if(result == 2){
 		          stringSMMI.append("0");
 							stringSMMI.append(",");
-							stringSMMI.append("pass");
+							stringSMMI.append("Pass");
 		        }
 						stringSMMI.append("\n");
             initfileAndWriteData(stringSMMI.toString());     
