@@ -57,6 +57,7 @@ public class ChargingActivity extends TestingActivity {
         mTitle.setText(R.string.wirechargkey_title);
         mWireChargKeyTxt.setText(R.string.wirechargkey_txt);
         mPlugged = getIntent().getIntExtra("plugged", 1);
+        Log.i(TAG, "mPlugged = " +mPlugged);
         mTouchFailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,9 +106,11 @@ public class ChargingActivity extends TestingActivity {
                         Log.i(TAG, "battery using");
                         break;
                 }
+                Log.i(TAG, "pbatParam1 = " +pbatParam1 +","+"mPlugged = " + mPlugged);
                 if (pbatParam1 == mPlugged) {
                     mWireChargKey.setChecked(true);
                     mWireChargKey.setVisibility(View.VISIBLE);
+                    Log.i(TAG, " pass pbatParam1 = " +pbatParam1 +","+"mPlugged = " + mPlugged);
                     mResult = true;
                     sendResult();
                 }
