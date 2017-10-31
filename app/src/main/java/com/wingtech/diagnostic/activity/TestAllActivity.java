@@ -37,6 +37,7 @@ public class TestAllActivity extends BaseActivity
 
     int mCurrent = 0;
     String mTitle;
+    private boolean mIsFinishing;
     int mLen;
     private List<TestItem> mCaseList;
     private AlertDialog mDialog;
@@ -100,6 +101,7 @@ public class TestAllActivity extends BaseActivity
             @Override
             public void onClick(View arg0) {
                 dlg.dismiss();
+                mIsFinishing = true;
                 finish();
             }
         });
@@ -144,13 +146,13 @@ public class TestAllActivity extends BaseActivity
     public void onChange(boolean result) {
         SharedPreferencesUtils.setParam(this, mTitle,
                 result ? SharedPreferencesUtils.PASS : SharedPreferencesUtils.FAIL);
-        Log.i("mCurrent = " + mCurrent + " " + mTitle + " " + result);
+        Log.i("mCurrent = " + mCurrent + " " + mTitle + " " + result + " mIsFinishing = " + mIsFinishing);
         mCurrent ++;
         if (mCurrent > mCaseList.size() - 1) {
             startActivity(new Intent(this, TestResultActivity.class));
             finish();
         } else {
-            if (mDialog == null || !mDialog.isShowing()) {
+            if ((mDialog == null || !mDialog.isShowing()) && !mIsFinishing) {
                 doTest();
             }
         }
