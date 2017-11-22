@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg_color">
+
+    <TextView
+        android:id="@+id/test_title"
+        android:layout_weight="7"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:textColor="@color/main_text_color"
+        android:gravity="center"
+        android:text="@string/app_name"/>
+
+
+    <TableLayout
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/action_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/about_padding"
+                android:layout_weight="1"
+                android:background="@drawable/ripple_circle_button_bg"
+                android:text="@string/action_one"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/btn_test_again_text_size" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/action_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/about_padding"
+                android:background="@drawable/ripple_circle_button_bg"
+                android:text="@string/action_two"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/btn_test_again_text_size" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/action_three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/about_padding"
+                android:layout_marginRight="@dimen/about_padding"
+                android:background="@drawable/ripple_circle_button_bg"
+                android:text="@string/action_three"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/btn_test_again_text_size" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/about_text_padding"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/action_four"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/ripple_circle_button_bg"
+                android:text="@string/action_four"
+                android:textAllCaps="false"
+                android:layout_marginLeft="@dimen/about_padding"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/btn_test_again_text_size" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/action_five"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/about_padding"
+                android:background="@drawable/ripple_circle_button_bg"
+                android:text="@string/action_five"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/btn_test_again_text_size" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/action_fail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/ripple_test_fail_btn_bg"
+                android:text="@string/test_fail_btn"
+                android:layout_marginLeft="@dimen/about_padding"
+                android:layout_marginRight="@dimen/about_padding"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/btn_test_again_text_size" />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

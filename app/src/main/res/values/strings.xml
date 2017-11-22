@@ -153,6 +153,11 @@
     <string name="camera_flash_description">Please check whether the camera flash light on or not and make a judge.</string>
     <string name="camera_front_flash_description">Please check whether the camera front flash light on or not and make a judge.</string>
     <string name="vibrator">Vibrator</string>
+    <string name="action_one">1</string>
+    <string name="action_two">2</string>
+    <string name="action_three">3</string>
+    <string name="action_four">4</string>
+    <string name="action_five">5</string>
 
     <!-- Keypad Activity-->
     <string name="pad_up">Volume Up</string>

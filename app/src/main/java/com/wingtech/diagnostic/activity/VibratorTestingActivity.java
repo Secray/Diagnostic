@@ -1,13 +1,17 @@
 package com.wingtech.diagnostic.activity;
 
 import android.content.Context;
+import android.os.Handler;
 import android.os.Vibrator;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.asus.atd.smmitest.R;
+
+import java.util.Random;
 
 import static com.wingtech.diagnostic.util.Constants.VIBRATOR_REQUEST_CODE;
 
@@ -16,12 +20,12 @@ import static com.wingtech.diagnostic.util.Constants.VIBRATOR_REQUEST_CODE;
  * @date 2017-8-1
  */
 
-public class VibratorTestingActivity extends TestingActivity implements View.OnClickListener,
-        CompoundButton.OnCheckedChangeListener {
-    private static final long[] VIBRATE_PATTERN = new long[] {1000, 2000};
-    private Switch mVibratorSwitch;
-
+public class VibratorTestingActivity extends TestingActivity implements View.OnClickListener {
+    private static final long[] VIBRATE_PATTERN = new long[] {1000, 1000};
+    private int mIndex;
     private Vibrator mVibrator;
+    private Handler mHandler = new Handler();
+    private boolean mIsStoped;
 
     @Override
     protected void onWork() {
@@ -29,50 +33,93 @@ public class VibratorTestingActivity extends TestingActivity implements View.OnC
         if (mVibrator == null) {
             mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         }
-        mVibratorSwitch.setChecked(true);
+        ((TextView) findViewById(R.id.test_title)).setText(getIntent().getStringExtra("title"));
+
+        mVibrator.vibrate(VIBRATE_PATTERN, 0);
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mIsStoped = true;
+                mVibrator.cancel();
+            }
+        }, (mIndex + 1) * 2000 + 1);
     }
 
     @Override
     protected void initViews() {
-        mVibratorSwitch = (Switch) findViewById(R.id.vibrator_switch);
-        AppCompatButton failButton = (AppCompatButton) findViewById(R.id.fail_btn);
-        AppCompatButton passButton = (AppCompatButton) findViewById(R.id.pass_btn);
-        failButton.setOnClickListener(this);
-        passButton.setOnClickListener(this);
-        mVibratorSwitch.setOnCheckedChangeListener(this);
+        findViewById(R.id.action_one).setOnClickListener(this);
+        findViewById(R.id.action_two).setOnClickListener(this);
+        findViewById(R.id.action_three).setOnClickListener(this);
+        findViewById(R.id.action_four).setOnClickListener(this);
+        findViewById(R.id.action_five).setOnClickListener(this);
+        findViewById(R.id.action_fail).setOnClickListener(this);
+        Random r = new Random();
+        mIndex = r.nextInt(4);
     }
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.content_test_vibrator;
+        return R.layout.activity_common;
     }
 
     @Override
     public void onClick(View v) {
+        if (!mIsStoped) {
+            return;
+        }
+
         switch (v.getId()) {
-            case R.id.fail_btn:
+            case R.id.action_one:
+                if (mIndex == 0) {
+                    mResult = true;
+                } else {
+                    mResult = false;
+                }
+                break;
+            case R.id.action_two:
+                if (mIndex == 1) {
+                    mResult = true;
+                } else {
+                    mResult = false;
+                }
+                break;
+            case R.id.action_three:
+                if (mIndex == 2) {
+                    mResult = true;
+                } else {
+                    mResult = false;
+                }
+                break;
+            case R.id.action_four:
+                if (mIndex == 3) {
+                    mResult = true;
+                } else {
+                    mResult = false;
+                }
+                break;
+            case R.id.action_five:
+                if (mIndex == 4) {
+                    mResult = true;
+                } else {
+                    mResult = false;
+                }
+                break;
+            case R.id.action_fail:
                 mResult = false;
                 break;
-            case R.id.pass_btn:
-                mResult = true;
-                break;
         }
-        mVibrator.cancel();
         sendResult();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mVibratorSwitch.setChecked(false);
+        mVibrator.cancel();
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (isChecked) {
-            mVibrator.vibrate(VIBRATE_PATTERN, 0);
-        } else {
-            mVibrator.cancel();
-        }
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 }

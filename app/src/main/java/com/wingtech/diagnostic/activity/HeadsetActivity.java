@@ -220,7 +220,7 @@ public class HeadsetActivity extends TestingActivity {
                     player = new MediaPlayer();
                     player.reset();
                     player.setVolume(1.0f, 0.000f);
-                    playMelody(getResources(), R.raw.bootaudio);
+                    playMelody(getResources(), R.raw.heyasus_left_channel);
                     player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override
                         public void onCompletion(MediaPlayer mp) {
@@ -238,7 +238,7 @@ public class HeadsetActivity extends TestingActivity {
                                 Log.i(TAG, "max=" + max);
                                 localAudioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL,max,0);
                                 player.setVolume(0.000f, 1.0f);/* ajayet invert to match headset */
-                                playMelody(getResources(), R.raw.bootaudio);
+                                playMelody(getResources(), R.raw.heyasus_left_channel);
                                 player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                                     @Override
                                     public void onCompletion(MediaPlayer mp) {

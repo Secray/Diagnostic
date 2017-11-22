@@ -49,18 +49,18 @@ public class GSensorView extends View {
         canvas.drawLine(0, getMeasuredHeight() / 2, getMeasuredWidth(), getMeasuredHeight() / 2, mPaint);
         canvas.drawText("X-", CIRCLE_RADIUS * 2 + 18, getMeasuredHeight() / 2 - 18, mPaint);
         canvas.drawText("X+", getMeasuredWidth() - CIRCLE_RADIUS * 2 - 54, getMeasuredHeight() / 2 - 18, mPaint);
-        mPaint.setColor(mXMinusPass ? Color.GREEN : X_AXIS_COLOR);
+        mPaint.setColor(mXMinusPass ? Color.GREEN : Color.BLACK);
         canvas.drawCircle(CIRCLE_RADIUS, getMeasuredHeight() / 2, CIRCLE_RADIUS, mPaint);
-        mPaint.setColor(mXPlusPass ? Color.GREEN : X_AXIS_COLOR);
+        mPaint.setColor(mXPlusPass ? Color.GREEN : Color.BLACK);
         canvas.drawCircle(getMeasuredWidth() - CIRCLE_RADIUS, getMeasuredHeight() / 2, CIRCLE_RADIUS, mPaint);
 
         mPaint.setColor(Y_AXIS_COLOR);
         canvas.drawLine(getMeasuredWidth() / 2, 0, getMeasuredWidth() / 2, getMeasuredHeight(), mPaint);
         canvas.drawText("Y-", getMeasuredWidth() / 2 + 18, getMeasuredHeight() - CIRCLE_RADIUS * 2 - 18, mPaint);
         canvas.drawText("Y+", getMeasuredWidth() / 2 + 18, CIRCLE_RADIUS * 2 + 36, mPaint);
-        mPaint.setColor(mYMinusPass ? Color.GREEN : Y_AXIS_COLOR);
+        mPaint.setColor(mYMinusPass ? Color.GREEN : Color.BLACK);
         canvas.drawCircle(getMeasuredWidth() / 2, CIRCLE_RADIUS, CIRCLE_RADIUS, mPaint);
-        mPaint.setColor(mYPlusPass ? Color.GREEN : Y_AXIS_COLOR);
+        mPaint.setColor(mYPlusPass ? Color.GREEN : Color.BLACK);
         canvas.drawCircle(getMeasuredWidth() / 2, getMeasuredHeight() - CIRCLE_RADIUS, CIRCLE_RADIUS, mPaint);
 
         float startY = (float) Math.sin(Math.PI / 3) * getMeasuredHeight() / 2 + getMeasuredHeight() / 2;
@@ -71,9 +71,9 @@ public class GSensorView extends View {
         canvas.drawLine(startX, startY, endX, endY, mPaint);
         canvas.drawText("Z-", startX + CIRCLE_RADIUS + 18, startY - 18, mPaint);
         canvas.drawText("Z+", endX - 10, endY + 48 + CIRCLE_RADIUS, mPaint);
-        mPaint.setColor(mZMinusPass ? Color.GREEN : Z_AXIS_COLOR);
+        mPaint.setColor(mZMinusPass ? Color.GREEN : Color.BLACK);
         canvas.drawCircle(startX, startY, CIRCLE_RADIUS, mPaint);
-        mPaint.setColor(mZPlusPass ? Color.GREEN : Z_AXIS_COLOR);
+        mPaint.setColor(mZPlusPass ? Color.GREEN : Color.BLACK);
         canvas.drawCircle(endX, endY, CIRCLE_RADIUS, mPaint);
     }
 

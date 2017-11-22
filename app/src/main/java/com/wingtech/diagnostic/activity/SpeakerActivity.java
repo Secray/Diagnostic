@@ -66,7 +66,7 @@ public class SpeakerActivity extends TestingActivity {
             localAudioManager.setSpeakerphoneOn(true);
             localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
             player.setVolume(13.0f, 0.000f);/* ajayet invert to match headset */
-            playMelody(getResources(), R.raw.bootaudio);
+            playMelody(getResources(), R.raw.heyasus_left_channel);
             player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
@@ -80,7 +80,7 @@ public class SpeakerActivity extends TestingActivity {
                         localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
 
                         player.setVolume(0.000f, 13.0f);/* ajayet invert to match headset */
-                        playMelody(getResources(), R.raw.bootaudio);
+                        playMelody(getResources(), R.raw.heyasus_right_channel);
                         player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                             @Override
                             public void onCompletion(MediaPlayer mp) {
@@ -253,7 +253,7 @@ public class SpeakerActivity extends TestingActivity {
                     localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
 
                     player.setVolume(13.0f, 0.000f);/* ajayet invert to match headset */
-                    playMelody(getResources(), R.raw.bootaudio);
+                    playMelody(getResources(), R.raw.heyasus_left_channel);
                     player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override
                         public void onCompletion(MediaPlayer mp) {
@@ -267,7 +267,7 @@ public class SpeakerActivity extends TestingActivity {
                                 localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
 
                                 player.setVolume(0.000f, 13.0f);/* ajayet invert to match headset */
-                                playMelody(getResources(), R.raw.bootaudio);
+                                playMelody(getResources(), R.raw.heyasus_right_channel);
                                 player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                                     @Override
                                     public void onCompletion(MediaPlayer mp) {

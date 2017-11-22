@@ -830,6 +830,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
 
             case "Vibrator Test":
                 i = new Intent(mActivity, VibratorTestingActivity.class);
+                i.putExtra("title", mTitle);
                 i.putExtra("isTestAll", mCallback != null);
                 startActivityForResult(i, VIBRATOR_REQUEST_CODE);
                 break;
@@ -876,11 +877,13 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 i = new Intent(mActivity, CameraFlashActivity.class);
                 i.putExtra("isTestAll", mCallback != null);
                 i.putExtra("flashid", flashId);
+                i.putExtra("title", mTitle);
                 startActivityForResult(i, CAMERAFLASH_REQUEST_CODE);
                 break;
             case "Camera Front Flash Test":
                 flashId = 1;
                 i = new Intent(mActivity, CameraFlashActivity.class);
+                i.putExtra("title", mTitle);
                 i.putExtra("isTestAll", mCallback != null);
                 i.putExtra("flashid", flashId);
                 startActivityForResult(i, CAMERAFRONTFLASH_REQUEST_CODE);
