@@ -30,6 +30,7 @@ import com.wingtech.diagnostic.activity.SingleTestingActivity;
 import com.wingtech.diagnostic.activity.SpeakerActivity;
 import com.wingtech.diagnostic.activity.TouchTestActivity;
 import com.wingtech.diagnostic.activity.VibratorTestingActivity;
+import com.wingtech.diagnostic.activity.VirtualKeyActivity;
 import com.wingtech.diagnostic.dialog.LoadingDialog;
 import com.wingtech.diagnostic.listener.OnResultChangedCallback;
 import com.wingtech.diagnostic.listener.OnTestItemListener;
@@ -71,6 +72,7 @@ import static com.wingtech.diagnostic.util.Constants.SPEAK_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.TOUCH_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.VGACAMERA_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.VIBRATOR_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.VIRTUAL_KEY_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.WIFI_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.WIRECHARGKEY_REQUEST_CODE;
 /**
@@ -482,6 +484,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
             case GPS_REQUEST_CODE:
             case CALL_REQUEST_CODE:
             case CELLULAR_NETWORK_REQUEST_CODE:
+            case VIRTUAL_KEY_REQUEST_CODE:
                 boolean result = data.getBooleanExtra("result", false);
                 Log.d("gaoweili", "gaoweili:");
                 mDiscription.setText(returnDiscription(resultCode));
@@ -800,6 +803,9 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                     dis += "\n";
                 }
                 break;
+            case VIRTUAL_KEY_REQUEST_CODE:
+                dis = "virtual key is not define";
+                break;
             default:
                 dis = "";
                 break;
@@ -918,6 +924,13 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 i.putExtra("isTestAll", mCallback != null);
                 startActivityForResult(i, KEYPAD_REQUEST_CODE);
                 break;
+
+            case "Virtual Key Test":
+                i = new Intent(mActivity, VirtualKeyActivity.class);
+                i.putExtra("isTestAll", mCallback != null);
+                startActivityForResult(i, VIRTUAL_KEY_REQUEST_CODE);
+                break;
+
             case "NFC Test":
                 i = new Intent(mActivity, NfcActivity.class);
                 i.putExtra("title", mTitle);

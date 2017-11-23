@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg_color">
+
+    <TextView
+        android:layout_marginTop="40dp"
+        android:id="@+id/voltage"
+        android:textSize="@dimen/test_all_indicator_text_size"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:text="@string/voltage"/>
+
+    <TextView
+        android:id="@+id/not_charger"
+        android:layout_width="match_parent"
+        android:textSize="@dimen/test_all_indicator_text_size"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:layout_below="@+id/voltage"
+        android:text="@string/not_charging"/>
+
+    <TextView
+        android:id="@+id/tip_charging"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/test_all_indicator_text_size"
+        android:layout_below="@+id/not_charger"
+        android:textColor="@android:color/white"
+        android:text="@string/please_plug_in_charger"/>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/tip_charging"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/main_text_color"/>
+
+    <TextView
+        android:id="@+id/message_charging"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/divider"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:text="@string/message_charger"
+        android:textColor="@color/main_text_color"
+        android:textSize="@dimen/test_all_indicator_text_size" />
+
+    <TextView
+        android:id="@+id/not_charging"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/message_charging"
+        android:layout_alignLeft="@+id/message_charging"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/not_charging"
+        android:textColor="@color/main_text_color"
+        android:textSize="@dimen/test_all_indicator_text_size" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/fail_btn"
+        android:textAllCaps="false"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/test_action_button_height"
+        android:textColor="@android:color/white"
+        android:background="@drawable/ripple_test_fail_btn_bg"
+        android:text="@string/test_fail_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/fail_btn_margin_left_right"
+        android:layout_marginRight="@dimen/fail_btn_margin_left_right"
+        android:layout_marginBottom="@dimen/fail_btn_margin_bottom"
+        android:layout_marginTop="@dimen/fail_btn_margin_top" />
+</RelativeLayout>

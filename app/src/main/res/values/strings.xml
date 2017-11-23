@@ -221,6 +221,15 @@
     <string name="signal_level">Signal Level:</string>
     <string name="sim_2_card">SIM 2 Card</string>
 
+    <!-- Charging Activity-->
+    <string name="not_charging">Not charging</string>
+    <string name="voltage">Voltage = %1$s V</string>
+    <string name="please_plug_in_charger">please plug in charger</string>
+    <string name="message_charger">Please connect the %1$s charger.</string>
+    <string name="ac">AC</string>
+    <string name="usb">USB</string>
+    <string name="wireless">Wireless</string>
+
     <string-array name="TestItem_Des_Battery_Test">
         <item>The "Battery Test" is used to test the battery status.</item>
         <item>(This test procedure will automatically start without any manual operation.)</item>

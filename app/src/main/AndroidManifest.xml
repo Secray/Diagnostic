@@ -147,6 +147,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.wingtech.diagnostic.activity.CellularNetworkActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name="com.wingtech.diagnostic.activity.VirtualKeyActivity"
+            android:screenOrientation="portrait"/>
 
         <service android:name="com.wingtech.diagnostic.service.TemperatureService" />
     </application>

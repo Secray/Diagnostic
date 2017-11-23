@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
+import android.support.v7.widget.AppCompatButton;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -24,10 +25,10 @@ public class ChargingActivity extends TestingActivity {
 
     private static final String TAG = "WireChargActivity";
 
-    private CheckBox mWireChargKey = null;
-    private TextView mWireChargKeyTxt = null;
-    private TextView mTitle = null;
     private Button mTouchFailBtn = null;
+
+    TextView mVoltage;
+    TextView mMessage;
 
     private int pbatParam0 = 0;
     private int pbatParam1 = 0;
@@ -35,16 +36,14 @@ public class ChargingActivity extends TestingActivity {
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.activity_checkbox;
+        return R.layout.activity_charging;
     }
 
     @Override
     protected void initViews() {
-        mWireChargKey = (CheckBox) findViewById(R.id.box_txt_1);
-        mWireChargKeyTxt = (TextView) findViewById(R.id.txt_box_1);
-        mTitle = (TextView) findViewById(R.id.activity_checkbox_title);
-        mTouchFailBtn = (Button) findViewById(R.id.fail_btn);
-        mWireChargKeyTxt.setVisibility(View.VISIBLE);
+        mVoltage = (TextView) findViewById(R.id.voltage);
+        mMessage = (TextView) findViewById(R.id.message_charging);
+        mTouchFailBtn = (AppCompatButton) findViewById(R.id.fail_btn);
     }
 
     @Override
@@ -54,10 +53,22 @@ public class ChargingActivity extends TestingActivity {
 
     @Override
     protected void onWork() {
-        mTitle.setText(R.string.wirechargkey_title);
-        mWireChargKeyTxt.setText(R.string.wirechargkey_txt);
         mPlugged = getIntent().getIntExtra("plugged", 1);
-        Log.i(TAG, "mPlugged = " +mPlugged);
+        Log.i(TAG, "mPlugged = " + mPlugged);
+        String type = "AC";
+        switch (mPlugged) {
+            case 1:
+                type = getResources().getString(R.string.ac);
+                break;
+            case 2:
+                type = getResources().getString(R.string.usb);
+                break;
+            case 4:
+                type = getResources().getString(R.string.wireless);
+                break;
+        }
+        mMessage.setText(getResources().getString(R.string.message_charger, type));
+        mVoltage.setText(getResources().getString(R.string.voltage, "4.033"));
         mTouchFailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,9 +101,10 @@ public class ChargingActivity extends TestingActivity {
 
             int local_p = 0;
 
-            if (strAct.equals(strCmp)) {
+            if (strCmp.equals(strAct)) {
                 pbatParam0 = paramIntent.getIntExtra(BatteryManager.EXTRA_STATUS, local_p);
                 pbatParam1 = paramIntent.getIntExtra(BatteryManager.EXTRA_PLUGGED, local_p);
+                int voltage = paramIntent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, local_p);
 
                 switch (pbatParam0) {
                     case BatteryManager.BATTERY_STATUS_CHARGING:
@@ -106,10 +118,10 @@ public class ChargingActivity extends TestingActivity {
                         Log.i(TAG, "battery using");
                         break;
                 }
+
+                mVoltage.setText(getResources().getString(R.string.voltage, ((float) voltage) / 1000 + ""));
                 Log.i(TAG, "pbatParam1 = " +pbatParam1 +","+"mPlugged = " + mPlugged);
                 if (pbatParam1 == mPlugged) {
-                    mWireChargKey.setChecked(true);
-                    mWireChargKey.setVisibility(View.VISIBLE);
                     Log.i(TAG, " pass pbatParam1 = " +pbatParam1 +","+"mPlugged = " + mPlugged);
                     mResult = true;
                     sendResult();

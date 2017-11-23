@@ -48,4 +48,5 @@ public class Constants {
     public static final int GPS_REQUEST_CODE = 33;
     public static final int CALL_REQUEST_CODE = 34;
     public static final int CELLULAR_NETWORK_REQUEST_CODE = 35;
+    public static final int VIRTUAL_KEY_REQUEST_CODE = 36;
 }
