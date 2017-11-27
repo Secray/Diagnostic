@@ -1,6 +1,8 @@
 package com.wingtech.diagnostic.activity;
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
+import android.content.res.Resources;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.support.v7.app.AlertDialog;
@@ -23,9 +25,8 @@ import static com.wingtech.diagnostic.util.Constants.RECIEVER_REQUEST_CODE;
  */
 
 public class RecieverActivity extends TestingActivity implements View.OnClickListener {
-    private static final int []EN_SOURCE = {R.raw.en1, R.raw.en2, R.raw.en3, R.raw.en4, R.raw.en5};
-    private static final int []CN_SOURCE = {R.raw.zh1, R.raw.zh2, R.raw.zh3, R.raw.zh4, R.raw.zh5};
-    private String mContentDialog;
+    private static final int[] EN_SOURCE = {R.raw.en1, R.raw.en2, R.raw.en3, R.raw.en4, R.raw.en5};
+    private static final int[] CN_SOURCE = {R.raw.zh1, R.raw.zh2, R.raw.zh3, R.raw.zh4, R.raw.zh5};
     private MediaPlayer player = null;
     private int oldVolume;
     public static final String TAG = "RecieverActivity";
@@ -42,8 +43,6 @@ public class RecieverActivity extends TestingActivity implements View.OnClickLis
     @Override
     protected void initViews() {
         mTxt = (TextView) findViewById(R.id.test_title);
-        localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);//"audio";
-        mContentDialog = getIntent().getStringExtra("title_dialog");
         findViewById(R.id.action_one).setOnClickListener(this);
         findViewById(R.id.action_two).setOnClickListener(this);
         findViewById(R.id.action_three).setOnClickListener(this);
@@ -62,47 +61,78 @@ public class RecieverActivity extends TestingActivity implements View.OnClickLis
     @Override
     protected void onWork() {
         mTxt.setText(getIntent().getStringExtra("title"));
-        //localAudioManager.setMode(AudioManager.MODE_IN_CALL);
-        //localAudioManager.setSpeakerphoneOn(false);
-        //Log.i(TAG, "isSpeakerphoneOn :" + localAudioManager.isSpeakerphoneOn());
-        oldVolume = localAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-        localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
+        localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         Locale l = Locale.getDefault();
         int[] mRes;
         Log.d("country = " + l.getCountry());
-        if (l.getCountry().contains("zh")) {
-            Log.d("zh");
+        if (l.getCountry().contains("CN")) {
             mRes = CN_SOURCE;
         } else {
-            Log.d("en");
             mRes = EN_SOURCE;
         }
 
+        localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        player = new MediaPlayer();
+        player.reset();
         localAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+        localAudioManager.setSpeakerphoneOn(true);
+        localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, 0);
+        player.setVolume(0.0f, 0.000f);/* ajayet invert to match headset */
+        playMelody(getResources(), mRes[mIndex]);
+        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
 
-        if (player == null) {
-            player = MediaPlayer.create(this, mRes[mIndex]);
-        } else {
-            player.stop();
-            player.release();
-            player = null;
-            player = MediaPlayer.create(this, mRes[mIndex]);
+                localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                player = new MediaPlayer();
+                player.reset();
+                localAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+                localAudioManager.setSpeakerphoneOn(true);
+                localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
+
+                player.setVolume(13.000f, 13.0f);/* ajayet invert to match headset */
+                mTxt.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        playMelody(getResources(), mRes[mIndex]);
+                        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mp) {
+                                isCompleted = true;
+                            }
+                        });
+                    }
+                }, 500);
+            }
+
+        });
+    }
+
+    private void playMelody(Resources resources, int res) {
+        AssetFileDescriptor afd = resources.openRawResourceFd(res);
+        try {
+
+            if (afd != null) {
+                player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),
+                        afd.getLength());
+                afd.close();
+            }
+            //player.setLooping(true);
+            player.prepare();
+            player.start();
+        } catch (IOException e) {
+            Log.e(TAG, "can't play melody cause:" + e);
         }
-        //player.setLooping(true);
-        player.setOnPreparedListener(mp -> {
-            Log.d("onPrepared");
-            mp.start();
-        });
-        player.setOnCompletionListener(mp -> {
-            //showTheDialog();
-            isCompleted = true;
-        });
     }
 
     public void onPause() {
         super.onPause();
-        if (player.isPlaying()) {
+        if (player != null && player.isPlaying()) {
             player.stop();
             player.release();
             player = null;
