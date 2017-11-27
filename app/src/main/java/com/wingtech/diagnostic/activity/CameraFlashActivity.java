@@ -49,7 +49,7 @@ public class CameraFlashActivity extends TestingActivity implements View.OnClick
         findViewById(R.id.action_five).setOnClickListener(this);
         findViewById(R.id.action_fail).setOnClickListener(this);
         Random r = new Random();
-        mIndex = r.nextInt(4) + 1;
+        mIndex = r.nextInt(5) + 1;
     }
 
     @Override

@@ -23,6 +23,7 @@ public class TestItemHandler extends Thread {
     public TestItemHandler(Context context) {
         this.mContext = new WeakReference<>(context);
         mConfigName = "config/config_" + Build.MODEL + ".xml";
+        Log.i("model name = " + mConfigName);
     }
 
     @Override

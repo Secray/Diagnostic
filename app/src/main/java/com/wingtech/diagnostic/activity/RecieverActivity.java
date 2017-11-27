@@ -51,7 +51,7 @@ public class RecieverActivity extends TestingActivity implements View.OnClickLis
         findViewById(R.id.action_five).setOnClickListener(this);
         findViewById(R.id.action_fail).setOnClickListener(this);
         Random r = new Random();
-        mIndex = r.nextInt(4);
+        mIndex = r.nextInt(5);
     }
 
     @Override
