@@ -44,6 +44,18 @@
         android:layout_marginRight="16dp"
         android:background="@color/main_text_color"/>
 
+    <CheckBox
+        android:id="@+id/box_txt_1"
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:button="@drawable/checkbox_style"
+        android:layout_toStartOf="@+id/message_charging"
+        android:layout_alignBottom="@+id/message_charging"
+        android:layout_marginRight="@dimen/about_text_padding"
+        android:visibility="invisible"/>
+
     <TextView
         android:id="@+id/message_charging"
         android:layout_width="wrap_content"
@@ -55,6 +67,18 @@
         android:text="@string/message_charger"
         android:textColor="@color/main_text_color"
         android:textSize="@dimen/test_all_indicator_text_size" />
+
+    <CheckBox
+        android:id="@+id/box_txt_2"
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:layout_toStartOf="@+id/not_charging"
+        android:layout_alignBottom="@+id/not_charging"
+        android:layout_marginRight="@dimen/about_text_padding"
+        android:button="@drawable/checkbox_style"
+        android:visibility="invisible"/>
 
     <TextView
         android:id="@+id/not_charging"

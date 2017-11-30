@@ -29,6 +29,7 @@ public class RecieverActivity extends TestingActivity implements View.OnClickLis
     private static final int[] CN_SOURCE = {R.raw.zh1, R.raw.zh2, R.raw.zh3, R.raw.zh4, R.raw.zh5};
     private MediaPlayer player = null;
     private int oldVolume;
+    private int audio_mode = AudioManager.MODE_NORMAL;
     public static final String TAG = "RecieverActivity";
     private boolean isCompleted;
     private int mIndex;
@@ -62,6 +63,16 @@ public class RecieverActivity extends TestingActivity implements View.OnClickLis
     protected void onWork() {
         mTxt.setText(getIntent().getStringExtra("title"));
         localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        if(localAudioManager.isSpeakerphoneOn())
+        {
+            Log.i(TAG, "isSpeakerphoneOn ");
+            localAudioManager.setSpeakerphoneOn(false);
+        }
+        audio_mode = localAudioManager.getMode();
+        localAudioManager.setMode(AudioManager.MODE_IN_CALL);
+        oldVolume = localAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+        int maxVolume = localAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, maxVolume,0);
     }
 
     @Override
@@ -76,13 +87,11 @@ public class RecieverActivity extends TestingActivity implements View.OnClickLis
             mRes = EN_SOURCE;
         }
 
-        localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        localAudioManager.setMode(AudioManager.MODE_IN_CALL);
+
         player = new MediaPlayer();
         player.reset();
-        localAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
-        localAudioManager.setSpeakerphoneOn(true);
-        localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, 0);
-        player.setVolume(0.0f, 0.000f);/* ajayet invert to match headset */
+        //player.setVolume(0.0f, 0.000f);/* ajayet invert to match headset */
         playMelody(getResources(), mRes[mIndex]);
         player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
@@ -91,11 +100,8 @@ public class RecieverActivity extends TestingActivity implements View.OnClickLis
                 localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                 player = new MediaPlayer();
                 player.reset();
-                localAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
-                localAudioManager.setSpeakerphoneOn(true);
-                localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
 
-                player.setVolume(13.000f, 13.0f);/* ajayet invert to match headset */
+                player.setVolume(13.0f, 13.0f);/* ajayet invert to match headset */
                 mTxt.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -107,7 +113,7 @@ public class RecieverActivity extends TestingActivity implements View.OnClickLis
                             }
                         });
                     }
-                }, 500);
+                }, 550);
             }
 
         });
@@ -137,15 +143,15 @@ public class RecieverActivity extends TestingActivity implements View.OnClickLis
             player.release();
             player = null;
         }
-        if (localAudioManager != null) {
-            localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, oldVolume, 0);
-            localAudioManager.setMode(AudioManager.STREAM_MUSIC);
-            localAudioManager.setSpeakerphoneOn(true);
-        }
-
     }
 
     public void onDestroy() {
+        if (localAudioManager != null) {
+            localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, oldVolume, 0);
+            localAudioManager.setMode(audio_mode);
+            localAudioManager.setSpeakerphoneOn(true);
+        }
+
         if (player != null) {
             player.release();
             player = null;

@@ -56,39 +56,21 @@ public class SpeakerActivity extends TestingActivity {
 
     @Override
     protected void onWork() {
+        mTxt.setText(getIntent().getStringExtra("title"));
         localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         if (!localAudioManager.isWiredHeadsetOn()) {
-            mTxt.setText(R.string.headset_context_left);
-            localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
             player = new MediaPlayer();
             player.reset();
-            localAudioManager.setMode(AudioManager.STREAM_MUSIC);
+            localAudioManager.setMode(AudioManager.MODE_IN_CALL);
             localAudioManager.setSpeakerphoneOn(true);
-            localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
-            player.setVolume(13.0f, 0.000f);/* ajayet invert to match headset */
+            localAudioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, 15, 0);
+            player.setVolume(13.0f, 13.0f);/* ajayet invert to match headset */
             playMelody(getResources(), R.raw.heyasus_left_channel);
             player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
-
-                        mTxt.setText(R.string.headset_context_right);
-                        localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-                        player = new MediaPlayer();
-                        player.reset();
-                        localAudioManager.setMode(AudioManager.STREAM_MUSIC);
-                        localAudioManager.setSpeakerphoneOn(true);
-                        localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
-
-                        player.setVolume(0.000f, 13.0f);/* ajayet invert to match headset */
-                        playMelody(getResources(), R.raw.heyasus_right_channel);
-                        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                            @Override
-                            public void onCompletion(MediaPlayer mp) {
-                                    showTheDialog(true);
-                            }
-                        });
-                    }
-
+                    showTheDialog(true);
+                }
             });
             isShow = true;
         }
@@ -244,38 +226,19 @@ public class SpeakerActivity extends TestingActivity {
                         dlg.dismiss();
                     }
                     isPlug = true;
-                    mTxt.setText(R.string.headset_context_left);
-                    localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                     player = new MediaPlayer();
                     player.reset();
-                    localAudioManager.setMode(AudioManager.STREAM_MUSIC);
+                    localAudioManager.setMode(AudioManager.MODE_IN_CALL);
                     localAudioManager.setSpeakerphoneOn(true);
-                    localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
+                    localAudioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, 15, 0);
 
-                    player.setVolume(13.0f, 0.000f);/* ajayet invert to match headset */
+                    player.setVolume(13.0f, 13.0f);/* ajayet invert to match headset */
                     playMelody(getResources(), R.raw.heyasus_left_channel);
                     player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override
                         public void onCompletion(MediaPlayer mp) {
                             if (isPlug) {
-                                mTxt.setText(R.string.headset_context_right);
-                                localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-                                player = new MediaPlayer();
-                                player.reset();
-                                localAudioManager.setMode(AudioManager.STREAM_MUSIC);
-                                localAudioManager.setSpeakerphoneOn(true);
-                                localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
-
-                                player.setVolume(0.000f, 13.0f);/* ajayet invert to match headset */
-                                playMelody(getResources(), R.raw.heyasus_right_channel);
-                                player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                                    @Override
-                                    public void onCompletion(MediaPlayer mp) {
-                                        if (isPlug) {
-                                            showTheDialog(true);
-                                        }
-                                    }
-                                });
+                                showTheDialog(true);
                             }
                         }
                     });

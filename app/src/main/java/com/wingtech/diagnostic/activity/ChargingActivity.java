@@ -4,9 +4,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.hardware.usb.UsbManager;
 import android.os.BatteryManager;
 import android.support.v7.widget.AppCompatButton;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.util.Log;
 
+import static android.view.WindowManager.LayoutParams.TYPE_SYSTEM_ERROR;
 import static com.wingtech.diagnostic.util.Constants.WIRECHARGKEY_REQUEST_CODE;
 
 /**
@@ -29,10 +30,11 @@ public class ChargingActivity extends TestingActivity {
 
     TextView mVoltage;
     TextView mMessage;
+    CheckBox mMessageBox;
+    CheckBox mNotChargingBox;
 
-    private int pbatParam0 = 0;
-    private int pbatParam1 = 0;
     private int mPlugged;
+
 
     @Override
     protected int getLayoutResId() {
@@ -41,8 +43,11 @@ public class ChargingActivity extends TestingActivity {
 
     @Override
     protected void initViews() {
+        getWindow().setType(TYPE_SYSTEM_ERROR);
         mVoltage = (TextView) findViewById(R.id.voltage);
         mMessage = (TextView) findViewById(R.id.message_charging);
+        mMessageBox = (CheckBox) findViewById(R.id.box_txt_1);
+        mNotChargingBox = (CheckBox) findViewById(R.id.box_txt_2);
         mTouchFailBtn = (AppCompatButton) findViewById(R.id.fail_btn);
     }
 
@@ -76,20 +81,30 @@ public class ChargingActivity extends TestingActivity {
                 sendResult();
             }
         });
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        unregisterReceiver(mBatReceiver);
+        IntentFilter localIntentFilter = new IntentFilter();
+        localIntentFilter.addAction("android.intent.action.BATTERY_CHANGED");
+        localIntentFilter.addAction("android.hardware.usb.action.USB_STATE");
+        registerReceiver(mBatReceiver, localIntentFilter);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        IntentFilter localIntentFilter = new IntentFilter();
-        localIntentFilter.addAction("android.intent.action.BATTERY_CHANGED");
-        registerReceiver(mBatReceiver, localIntentFilter);
+        Log.i(TAG, "isActive");
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i(TAG, "not Active");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mBatReceiver);
+
     }
 
     private BroadcastReceiver mBatReceiver = new BroadcastReceiver() {
@@ -102,27 +117,34 @@ public class ChargingActivity extends TestingActivity {
             int local_p = 0;
 
             if (strCmp.equals(strAct)) {
-                pbatParam0 = paramIntent.getIntExtra(BatteryManager.EXTRA_STATUS, local_p);
-                pbatParam1 = paramIntent.getIntExtra(BatteryManager.EXTRA_PLUGGED, local_p);
+                int pbatParam1 = paramIntent.getIntExtra(BatteryManager.EXTRA_PLUGGED, local_p);
                 int voltage = paramIntent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, local_p);
 
-                switch (pbatParam0) {
-                    case BatteryManager.BATTERY_STATUS_CHARGING:
-                        Log.i(TAG, "charging");
-                        break;
-                    case BatteryManager.BATTERY_STATUS_FULL:
-                        Log.i(TAG, "charging full");
-                        break;
-                    case BatteryManager.BATTERY_STATUS_DISCHARGING:
-                    default:
-                        Log.i(TAG, "battery using");
-                        break;
+                mVoltage.setText(getResources().getString(R.string.voltage, ((float) voltage) / 1000 + ""));
+                Log.i(TAG, "pbatParam1 = " + pbatParam1 + "," + "mPlugged = " + mPlugged);
+                if (pbatParam1 == mPlugged) {
+                    Log.i(TAG, " pass pbatParam1 = " + pbatParam1 + "," + "mPlugged = " + mPlugged);
+                    mMessageBox.setVisibility(View.VISIBLE);
+                    mMessageBox.setChecked(true);
                 }
 
-                mVoltage.setText(getResources().getString(R.string.voltage, ((float) voltage) / 1000 + ""));
-                Log.i(TAG, "pbatParam1 = " +pbatParam1 +","+"mPlugged = " + mPlugged);
-                if (pbatParam1 == mPlugged) {
-                    Log.i(TAG, " pass pbatParam1 = " +pbatParam1 +","+"mPlugged = " + mPlugged);
+                if (pbatParam1 == 0 && mPlugged != 2) {
+                    if (mMessageBox.isChecked()) {
+                        mNotChargingBox.setVisibility(View.VISIBLE);
+                        mNotChargingBox.setChecked(true);
+                        mResult = true;
+                        sendResult();
+                    }
+                }
+            }
+
+            // 由于usb插拔会导致弹出是否传输文件的对话框，点击确认会影响充电结果，所有这里通过usb连接来判断是否断开
+            if (mPlugged == 2 && "android.hardware.usb.action.USB_STATE".equals(strAct)) {
+                boolean connected = paramIntent.getBooleanExtra("connected", false);
+                Log.i(TAG, "usb connected = " + connected);
+                if (!connected && mMessageBox.isChecked()) {
+                    mNotChargingBox.setVisibility(View.VISIBLE);
+                    mNotChargingBox.setChecked(true);
                     mResult = true;
                     sendResult();
                 }
