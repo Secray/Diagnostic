@@ -30,7 +30,13 @@ public class BatteryTestingFragment extends TestFragment {
                     mResult = false;
                     break;
             }
-            mCallback.onChange(mResult);
+            mTxtTitle.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mCallback.onChange(mResult);
+
+                }
+            }, 500);
         }
     };
 

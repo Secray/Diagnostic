@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.graphics.DashPathEffect;
 import android.graphics.Typeface;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -16,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.asus.atd.smmitest.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -24,15 +26,16 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.EntryXComparator;
-import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.service.TemperatureService;
 import com.wingtech.diagnostic.util.Log;
+import com.wingtech.diagnostic.util.SharedPreferencesUtils;
 import com.wingtech.diagnostic.util.TemperatureFormatter;
 import com.wingtech.diagnostic.util.TimeValueFormatter;
 import com.wingtech.diagnostic.widget.LoadingView;
 import com.wingtech.diagnostic.widget.PercentView;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,7 +46,7 @@ import java.util.regex.Pattern;
 
 public class MainActivity extends BaseActivity
         implements View.OnClickListener {
-    private static final int MAX_SIZE= 24;
+    private static final int MAX_SIZE = 24;
     LineChart mLineChart;
     LineDataSet mCPUDataSet;
     LineDataSet mBatterySet;
@@ -131,6 +134,8 @@ public class MainActivity extends BaseActivity
         buildChart();
         mLineChartThread = new HandlerThread("line-chart-thread");
         mLineChartThread.start();
+        File file = new File(Environment.getExternalStorageDirectory().getPath()
+                + File.separator + "SMMI_TestResult.txt");
         mLineChartHandler = new Handler(mLineChartThread.getLooper()) {
             @Override
             public void handleMessage(Message msg) {
@@ -139,12 +144,17 @@ public class MainActivity extends BaseActivity
                     @Override
                     public void run() {
                         initCPUPercent(cpuRate);
+                        if (!file.exists()) {
+                            SharedPreferencesUtils.setNull(MainActivity.this);
+                        }
                         if (mService != null) {
                             setData(mService.getCPUList(), mService.getBatteryList());
                         }
                     }
                 });
-                mLineChartHandler.sendEmptyMessageDelayed(0, 1000);
+                if (mLineChartThread.isAlive()) {
+                    mLineChartHandler.sendEmptyMessageDelayed(0, 1000);
+                }
             }
         };
         mLineChartHandler.sendEmptyMessageDelayed(0, 0);
@@ -155,8 +165,7 @@ public class MainActivity extends BaseActivity
         super.onDestroy();
         unbindService(mServiceConn);
         unregisterReceiver(mBatteryReceiver);
-        mLineChartHandler.removeCallbacksAndMessages(null);
-        mHandler.removeCallbacksAndMessages(null);
+        mLineChartHandler.removeMessages(0);
         mLineChartThread.quit();
     }
 
@@ -167,7 +176,7 @@ public class MainActivity extends BaseActivity
         ArrayList<Entry> values1 = new ArrayList<>();
         ArrayList<Entry> values2 = new ArrayList<>();
         int remainLen = MAX_SIZE - cpuLen;
-        for (int i = 0; i < remainLen; i ++) {
+        for (int i = 0; i < remainLen; i++) {
             values1.add(new Entry(i, 0));
             values2.add(new Entry(i, 0));
         }

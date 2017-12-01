@@ -87,7 +87,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void handleTestResult() {
-
+        SharedPreferencesUtils.deleteFile();
     }
 
     public void showTheDialog(){

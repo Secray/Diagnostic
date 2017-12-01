@@ -54,6 +54,7 @@ public class TemperatureService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mTemperatureHandler.removeCallbacksAndMessages(null);
         mTemperatureThread.quit();
     }
 
