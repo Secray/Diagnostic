@@ -27,6 +27,8 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
+    <uses-permission android:name="android.permission.MANAGE_FINGERPRINT"/>
 
     <application
 				android:name="com.wingtech.diagnostic.App"
@@ -151,6 +153,12 @@
             android:screenOrientation="portrait"/>
 
         <service android:name="com.wingtech.diagnostic.service.TemperatureService" />
+        <service android:name="com.goodix.service.FingerprintManagerService">
+            <intent-filter>
+                <!-- AIDL完整路径名。必须指明，客户端能够通过AIDL类名查找到它的实现类 -->
+                <action android:name="com.goodix.service.FingerprintManagerService" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

@@ -5,6 +5,8 @@ import android.app.Application;
 import android.os.Bundle;
 import android.util.SparseArray;
 
+import com.goodix.service.FingerprintManager;
+import com.wingtech.diagnostic.util.Log;
 import com.wingtech.diagnostic.util.TestItem;
 import com.wingtech.diagnostic.util.TestItemHandler;
 
@@ -18,6 +20,9 @@ public class App extends Application implements Application.ActivityLifecycleCal
     private static ArrayList<Activity> mList;
     public static ArrayList<TestItem> mItems;
 
+    private FingerprintManager mFingerprintManager;
+    private static App mApplication;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -26,6 +31,33 @@ public class App extends Application implements Application.ActivityLifecycleCal
         registerActivityLifecycleCallbacks(this);
 
         new TestItemHandler(this).start();
+
+        mApplication = this;
+        initFpMangerService();
+    }
+
+    @Override
+    public void onTerminate() {
+        Log.i("onTerminate");
+        if (mFingerprintManager != null) {
+            mFingerprintManager.unbindService();
+        }
+        super.onTerminate();
+    }
+
+    private void initFpMangerService() {
+        mFingerprintManager = new FingerprintManager(this);
+    }
+
+    public FingerprintManager getFpServiceManager() {
+        if (mFingerprintManager == null) {
+            initFpMangerService();
+        }
+        return mFingerprintManager;
+    }
+
+    public synchronized static App getInstance() {
+        return mApplication;
     }
 
     public static void addItems(TestItem item) {
