@@ -76,6 +76,38 @@
         </TableRow>
 
         <TableRow
+            android:id="@+id/asu_info1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView android:layout_column="1"
+                android:textColor="@color/main_text_color"
+                android:layout_weight="1"
+                android:text="@string/strength_level_asu"/>
+            <TextView
+                android:id="@+id/asu_level1"
+                android:layout_column="1"
+                android:textColor="@color/main_text_color"
+                android:layout_weight="1"
+                android:text="1111111111"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/dbm_info1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView android:layout_column="1"
+                android:textColor="@color/main_text_color"
+                android:layout_weight="1"
+                android:text="@string/strength_level_dbm"/>
+            <TextView
+                android:id="@+id/dbm_level1"
+                android:layout_column="1"
+                android:textColor="@color/main_text_color"
+                android:layout_weight="1"
+                android:text="1111111111"/>
+        </TableRow>
+
+        <TableRow
             android:id="@+id/sim1_info"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -156,6 +188,38 @@
                 android:layout_column="1"
                 android:layout_weight="1"
                 android:textColor="@color/main_text_color"
+                android:text="1111111111"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/asu_info2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView android:layout_column="1"
+                android:textColor="@color/main_text_color"
+                android:layout_weight="1"
+                android:text="@string/strength_level_asu"/>
+            <TextView
+                android:id="@+id/asu_level2"
+                android:layout_column="1"
+                android:textColor="@color/main_text_color"
+                android:layout_weight="1"
+                android:text="1111111111"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/dbm_info2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView android:layout_column="1"
+                android:textColor="@color/main_text_color"
+                android:layout_weight="1"
+                android:text="@string/strength_level_dbm"/>
+            <TextView
+                android:id="@+id/dbm_level2"
+                android:layout_column="1"
+                android:textColor="@color/main_text_color"
+                android:layout_weight="1"
                 android:text="1111111111"/>
         </TableRow>
 

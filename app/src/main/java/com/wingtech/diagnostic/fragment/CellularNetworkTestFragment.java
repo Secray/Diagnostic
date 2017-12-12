@@ -18,13 +18,13 @@ import com.wingtech.diagnostic.listener.OnResultListener;
 
 public class CellularNetworkTestFragment extends TestFragment implements View.OnClickListener {
     private TextView mSimId, mSimMsg, mNetWork, mCellularState, mSignalLevel;
-    private TableRow mInfo, mInfo1, mNetworkInfo1, mCellularInfo1, mSignalInfo1
-            , mNetworkInfo2, mCellularInfo2, mSignalInfo2;
+    private TableRow mInfo, mInfo1, mNetworkInfo1, mCellularInfo1, mSignalInfo1, mAsuInfo1, mDbmInfo1
+            , mNetworkInfo2, mCellularInfo2, mSignalInfo2, mAsuInfo2, mDbmInfo2;
     private TableLayout mSim1Content;
     private TableLayout mSim2Content;
-    private TextView mSimId1, mSimMsg1, mNetWork1, mCellularState1, mSignalLevel1;
+    private TextView mSimId1, mSimMsg1, mNetWork1, mCellularState1, mSignalLevel1, mAsuLevel1, mAsuLevel2, mDbm1, mDbm2;
     private AppCompatButton mFail, mSuccess;
-    private int mSim1Level, mSim2Level, mSim1State, mSim2State;
+    private int mSim1Level, mSim2Level, mSim1State, mSim2State, mSim1AsuLevel, mSim1Dbm, mSim2AsuLevel, mSim2Dbm;
     private SubscriptionInfo mSim1, mSim2;
     private OnResultListener mListener;
     public void setListener(OnResultListener listener) {
@@ -48,6 +48,10 @@ public class CellularNetworkTestFragment extends TestFragment implements View.On
         mSimId1 = (TextView) view.findViewById(R.id.sim_id2);
         mSimMsg1 = (TextView) view.findViewById(R.id.sim_msg2);
         mNetWork1 = (TextView) view.findViewById(R.id.network2);
+        mDbm1 = (TextView) view.findViewById(R.id.dbm_level1);
+        mDbm2 = (TextView) view.findViewById(R.id.dbm_level2);
+        mAsuLevel1 = (TextView) view.findViewById(R.id.asu_level1);
+        mAsuLevel2 = (TextView) view.findViewById(R.id.asu_level2);
         mCellularState1 = (TextView) view.findViewById(R.id.cellular_network_state2);
         mSignalLevel1 = (TextView) view.findViewById(R.id.signal_level2);
         mInfo1 = (TableRow) view.findViewById(R.id.sim2_info);
@@ -63,6 +67,12 @@ public class CellularNetworkTestFragment extends TestFragment implements View.On
         mSignalInfo1 = (TableRow) view.findViewById(R.id.signal_info1);
         mSignalInfo2 = (TableRow) view.findViewById(R.id.signal_info2);
 
+        mAsuInfo1 = (TableRow) view.findViewById(R.id.asu_info1);
+        mDbmInfo1 = (TableRow) view.findViewById(R.id.dbm_info1);
+
+        mAsuInfo2 = (TableRow) view.findViewById(R.id.asu_info2);
+        mDbmInfo2 = (TableRow) view.findViewById(R.id.dbm_info2);
+
         mSuccess = (AppCompatButton) view.findViewById(R.id.pass);
         mFail = (AppCompatButton) view.findViewById(R.id.fail);
         mSuccess.setOnClickListener(this);
@@ -72,6 +82,8 @@ public class CellularNetworkTestFragment extends TestFragment implements View.On
     @Override
     protected void onWork() {
         if (mSim1 == null) {
+            mAsuInfo1.setVisibility(View.GONE);
+            mDbmInfo1.setVisibility(View.GONE);
             mSignalInfo1.setVisibility(View.GONE);
             mCellularInfo1.setVisibility(View.GONE);
             mNetworkInfo1.setVisibility(View.GONE);
@@ -81,7 +93,8 @@ public class CellularNetworkTestFragment extends TestFragment implements View.On
             mNetWork.setText(mSim1.getCarrierName());
             mCellularState.setText(getState(mSim1State));
             mSignalLevel.setText(getSignalLevel(mSim1Level));
-
+            mAsuLevel1.setText(mSim1AsuLevel + "");
+            mDbm1.setText(mSim1Dbm + "");
             if ("Disconnected".equals(getState(mSim1State))) {
                 mSignalInfo1.setVisibility(View.GONE);
             } else {
@@ -90,6 +103,8 @@ public class CellularNetworkTestFragment extends TestFragment implements View.On
         }
 
         if (mSim2 == null) {
+            mAsuInfo2.setVisibility(View.GONE);
+            mDbmInfo2.setVisibility(View.GONE);
             mSignalInfo2.setVisibility(View.GONE);
             mCellularInfo2.setVisibility(View.GONE);
             mNetworkInfo2.setVisibility(View.GONE);
@@ -99,7 +114,8 @@ public class CellularNetworkTestFragment extends TestFragment implements View.On
             mNetWork1.setText(mSim2.getCarrierName());
             mCellularState1.setText(getState(mSim2State));
             mSignalLevel1.setText(getSignalLevel(mSim2Level));
-
+            mAsuLevel2.setText(mSim2AsuLevel + "");
+            mDbm2.setText(mSim2Dbm + "");
             if ("Disconnected".equals(getState(mSim2State))) {
                 mSignalInfo2.setVisibility(View.GONE);
             } else {
@@ -139,6 +155,23 @@ public class CellularNetworkTestFragment extends TestFragment implements View.On
 
     public void setSim2State(int state) {
         mSim2State = state;
+    }
+
+
+    public void setSim1AsuLevel(int sim1AsuLevel) {
+        this.mSim1AsuLevel = sim1AsuLevel;
+    }
+
+    public void setSim1Dbm(int sim1Dbm) {
+        this.mSim1Dbm = sim1Dbm;
+    }
+
+    public void setSim2AsuLevel(int sim2AsuLevel) {
+        this.mSim2AsuLevel = sim2AsuLevel;
+    }
+
+    public void setSim2Dbm(int sim2Dbm) {
+        this.mSim2Dbm = sim2Dbm;
     }
 
     public void setSim1(SubscriptionInfo s) {

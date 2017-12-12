@@ -12,12 +12,16 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
+import com.android.helper.Helper;
 import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.fragment.CellularNetworkTestFragment;
 import com.wingtech.diagnostic.fragment.CellularNetworkTestingFragment;
 import com.wingtech.diagnostic.listener.OnResultListener;
+import com.wingtech.diagnostic.util.Log;
 import com.wingtech.diagnostic.util.ReflectUtil;
 
+
+import java.lang.reflect.Method;
 
 import static android.telephony.PhoneStateListener.LISTEN_DATA_CONNECTION_STATE;
 import static android.telephony.PhoneStateListener.LISTEN_SIGNAL_STRENGTHS;
@@ -81,6 +85,10 @@ public class CellularNetworkActivity extends TestingActivity implements OnResult
                 fragment.setSim2Level(s2 != null ? s2.getLevel() : 0);
                 fragment.setSim1State(s1 != null ? s1.getState() : 0);
                 fragment.setSim2State(s2 != null ? s2.getState() : 0);
+                fragment.setSim1AsuLevel(s1 != null ? s1.getAsu() : 0);
+                fragment.setSim2AsuLevel(s2 != null ? s2.getAsu() : 0);
+                fragment.setSim1Dbm(s1 != null ? s1.getDbm() : 0);
+                fragment.setSim2Dbm(s2 != null ? s2.getDbm() : 0);
                 getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
             }, 1000);
         }
@@ -114,6 +122,8 @@ public class CellularNetworkActivity extends TestingActivity implements OnResult
     class SignalListener extends PhoneStateListener {
         private int mLevel;
         private int mState;
+        private int mAsu;
+        private int mDbm;
         public SignalListener(int subId) {
             super();
             ReflectUtil.setFieldValue(this, "mSubId", subId);
@@ -124,6 +134,9 @@ public class CellularNetworkActivity extends TestingActivity implements OnResult
         public void onSignalStrengthsChanged(SignalStrength signalStrength) {
             super.onSignalStrengthsChanged(signalStrength);
             mLevel = signalStrength.getLevel();
+            mAsu = Helper.getAsuLevel(signalStrength);
+            mDbm = Helper.getDbm(signalStrength);
+            Log.i("asu = " + mAsu + " dbm = " + mDbm);
         }
 
         @Override
@@ -138,6 +151,14 @@ public class CellularNetworkActivity extends TestingActivity implements OnResult
 
         public int getLevel() {
             return mLevel;
+        }
+
+        public int getAsu() {
+            return mAsu;
+        }
+
+        public int getDbm() {
+            return mDbm;
         }
     }
 }
