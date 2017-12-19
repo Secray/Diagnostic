@@ -18,13 +18,12 @@
  ************************************************************************/
 package com.goodix.service;
 
-import java.util.Vector;
-
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -41,9 +40,12 @@ import com.goodix.aidl.IRegisterCallback;
 import com.goodix.aidl.ITestCallback;
 import com.goodix.aidl.IUpdateBaseCallback;
 import com.goodix.aidl.IVerifyCallback;
-import com.goodix.device.FpDevice;
+import com.goodix.device.FpDeviceFactory;
+import com.goodix.device.IDevice;
 import com.goodix.device.MessageType;
 import com.goodix.util.L;
+
+import java.util.Vector;
 
 /**
  * <p>
@@ -56,7 +58,7 @@ import com.goodix.util.L;
 public class FingerprintManagerService extends Service {
     
     protected static final String TAG = "FpSetting";
-    private FpDevice device = FpDevice.open();
+    private IDevice device;
     private final String SERVICE_VERSION = "local";
     private String mPath;
     private String mCount_Capture = String.valueOf(30);
@@ -108,6 +110,7 @@ public class FingerprintManagerService extends Service {
     public void onCreate() {
         super.onCreate();
         Log.i(TAG, "service create");
+        device = new FpDeviceFactory(Build.MODEL).getFpDevice();
         HandlerThread mDispatchMessageThread = new HandlerThread("dispatch");
         mDispatchMessageThread.start();
         mDispathMessageHandler = new DispatchMessageHandler(
@@ -596,7 +599,7 @@ public class FingerprintManagerService extends Service {
         @Override
         public byte[] SendCmd(int cmd, byte[] data) throws RemoteException {
             Log.d(TAG, "FingerprintManagerService : SendCmd cmd = " + cmd);
-            return device.SendCmd(cmd, data);
+            return device.sendCmd(cmd, data);
         }
         
         @Override
@@ -609,13 +612,13 @@ public class FingerprintManagerService extends Service {
         public void setEnrollNum(int num) throws RemoteException {
             mCount_Register = String.valueOf(num);
             byte[] bytes = int2byte(num);
-            device.SendCmd(MessageType.FINGERPRINT_CMD_SET_ENROLL_CNT, bytes);
+            device.sendCmd(MessageType.FINGERPRINT_CMD_SET_ENROLL_CNT, bytes);
         }
         
         @Override
         public byte[] getEnrollNum() throws RemoteException {
             Log.d(TAG, "MilanService ---- getEnrollNum()");
-            return device.SendCmd(MessageType.FINGERPRINT_CMD_GET_ENROLL_CNT,
+            return device.sendCmd(MessageType.FINGERPRINT_CMD_GET_ENROLL_CNT,
                     null);
         }
         

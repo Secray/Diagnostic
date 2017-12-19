@@ -14,7 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.asus.atd.smmitest.R;
+
+import com.asusodm.atd.smmitest.R;
 
 import static com.wingtech.diagnostic.util.Constants.CALL_REQUEST_CODE;
 

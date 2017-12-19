@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.hardware.usb.UsbManager;
 import android.os.BatteryManager;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
@@ -12,7 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.asus.atd.smmitest.R;
+import com.asusodm.atd.smmitest.R;
 import com.wingtech.diagnostic.util.Log;
 
 import static android.view.WindowManager.LayoutParams.TYPE_SYSTEM_ERROR;

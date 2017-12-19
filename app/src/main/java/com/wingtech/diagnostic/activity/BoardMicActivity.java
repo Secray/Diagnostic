@@ -2,10 +2,7 @@ package com.wingtech.diagnostic.activity;
 
 
 import android.content.Context;
-import android.media.AudioFormat;
 import android.media.AudioManager;
-import android.media.AudioRecord;
-import android.media.AudioTrack;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.CountDownTimer;
@@ -16,7 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.asus.atd.smmitest.R;
+import com.asusodm.atd.smmitest.R;
 import com.wingtech.diagnostic.util.Log;
 
 import java.io.IOException;

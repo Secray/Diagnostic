@@ -8,13 +8,13 @@ import android.hardware.camera2.CameraManager;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
-import android.support.v7.widget.AppCompatButton;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.asus.atd.smmitest.R;
+
+import com.asusodm.atd.smmitest.R;
 
 import java.util.Random;
 

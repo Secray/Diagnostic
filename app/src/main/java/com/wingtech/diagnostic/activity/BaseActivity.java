@@ -2,7 +2,6 @@ package com.wingtech.diagnostic.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Process;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -14,8 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.asusodm.atd.smmitest.R;
 import com.wingtech.diagnostic.App;
-import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.util.SharedPreferencesUtils;
 
 

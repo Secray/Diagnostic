@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.asusodm.atd.smmitest.R;
 import com.wingtech.diagnostic.App;
-import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.fragment.CommonSingleTestFragment;
 import com.wingtech.diagnostic.fragment.TestFragment;
 import com.wingtech.diagnostic.listener.OnResultChangedCallback;

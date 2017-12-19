@@ -7,7 +7,8 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.asus.atd.smmitest.R;
+
+import com.asusodm.atd.smmitest.R;
 
 import static com.wingtech.diagnostic.util.Constants.KEYPAD_REQUEST_CODE;
 
@@ -69,6 +70,13 @@ public class KeypadActivity extends TestingActivity implements View.OnClickListe
         mHomeTxt.setVisibility(View.VISIBLE);
         mBackTxt.setVisibility(View.VISIBLE);
         findViewById(R.id.fail_btn).setOnClickListener(this);
+
+        mHome.setVisibility(View.GONE);
+        mHomeTxt.setVisibility(View.GONE);
+        mRecent.setVisibility(View.GONE);
+        mRecentTxt.setVisibility(View.GONE);
+        mBack.setVisibility(View.GONE);
+        mBackTxt.setVisibility(View.GONE);
     }
 
     @Override
@@ -99,20 +107,20 @@ public class KeypadActivity extends TestingActivity implements View.OnClickListe
         switch (keyCode)
         {
             case KeyEvent.KEYCODE_HOME:
-                if (is_backkey_pressed) {
+                /*if (is_backkey_pressed) {
                     is_homekey_pressed = true;
                     mHome.setChecked(true);
                     mHome.setVisibility(View.VISIBLE);
                     mTitle.setText(getResources().getString(R.string.pad_title, mRecentTxt.getText().toString()));
-                }
+                }*/
                 break;
             case KeyEvent.KEYCODE_BACK:
-                if(is_downkey_pressed) {
+                /*if(is_downkey_pressed) {
                     is_backkey_pressed = true;
                     mBack.setChecked(true);
                     mBack.setVisibility(View.VISIBLE);
                     mTitle.setText(getResources().getString(R.string.pad_title, mHomeTxt.getText().toString()));
-                }
+                }*/
                 break;
             case KeyEvent.KEYCODE_VOLUME_UP:
                 is_upkey_pressed = true;
@@ -125,13 +133,20 @@ public class KeypadActivity extends TestingActivity implements View.OnClickListe
                     is_downkey_pressed = true;
                     mDown.setChecked(true);
                     mDown.setVisibility(View.VISIBLE);
-                    mTitle.setText(getResources().getString(R.string.pad_title, mBackTxt.getText().toString()));
+                    //mTitle.setText(getResources().getString(R.string.pad_title, mBackTxt.getText().toString()));
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mResult = true;
+                            sendResult();
+                        }
+                    }, 500);
                 }
                 break;
             case KeyEvent.KEYCODE_MENU:
             case KeyEvent.KEYCODE_SEARCH:
             case KeyEvent.KEYCODE_APP_SWITCH:
-                if (is_homekey_pressed) {
+                /*if (is_homekey_pressed) {
                     is_recentkey_pressed = true;
                     mRecent.setChecked(true);
                     mRecent.setVisibility(View.VISIBLE);
@@ -142,7 +157,7 @@ public class KeypadActivity extends TestingActivity implements View.OnClickListe
                             sendResult();
                         }
                     }, 500);
-                }
+                }*/
                 break;
 
             default:

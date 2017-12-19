@@ -17,7 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.asus.atd.smmitest.R;
+import com.asusodm.atd.smmitest.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;

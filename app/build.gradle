@@ -4,13 +4,12 @@ android {
     compileSdkVersion 25
     buildToolsVersion "26.0.1"
     defaultConfig {
-        applicationId "com.asus.atd.smmitest"
+        applicationId "com.asusodm.atd.smmitest"
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 712
         versionName "7.1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
         jackOptions {
             enabled true
         }

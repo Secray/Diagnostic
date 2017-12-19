@@ -14,16 +14,11 @@ import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.TextUtils;
-import android.text.style.ScaleXSpan;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 
-import com.asus.atd.smmitest.R;
-import com.wingtech.diagnostic.util.Log;
+import com.asusodm.atd.smmitest.R;
 
 
 /**

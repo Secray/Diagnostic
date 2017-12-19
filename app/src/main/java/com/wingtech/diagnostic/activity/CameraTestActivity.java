@@ -19,7 +19,7 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.asus.atd.smmitest.R;
+import com.asusodm.atd.smmitest.R;
 import com.wingtech.diagnostic.util.Log;
 import com.wingtech.diagnostic.widget.CameraPreview;
 

@@ -1,11 +1,8 @@
 package com.wingtech.diagnostic.activity;
 
-import android.graphics.Camera;
 import android.support.v7.widget.Toolbar;
 
-import com.asus.atd.smmitest.R;
-
-import java.security.Policy;
+import com.asusodm.atd.smmitest.R;
 
 
 /**

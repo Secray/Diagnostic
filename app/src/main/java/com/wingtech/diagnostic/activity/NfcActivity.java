@@ -1,21 +1,19 @@
 package com.wingtech.diagnostic.activity;
 
-import android.app.AlertDialog;
 import android.app.PendingIntent;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.os.Parcelable;
-import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.asus.atd.smmitest.R;
+
+import com.asusodm.atd.smmitest.R;
 
 import java.nio.charset.Charset;
 import java.util.Locale;

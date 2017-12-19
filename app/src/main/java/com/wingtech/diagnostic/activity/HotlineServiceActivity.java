@@ -1,15 +1,11 @@
 package com.wingtech.diagnostic.activity;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageView;
 
-import com.asus.atd.smmitest.R;
+import com.asusodm.atd.smmitest.R;
 
 
 /**

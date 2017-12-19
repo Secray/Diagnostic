@@ -1,11 +1,8 @@
 package com.wingtech.diagnostic.activity;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.net.ConnectivityManager;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
-import android.telephony.CellInfo;
 import android.telephony.PhoneStateListener;
 import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
@@ -13,15 +10,12 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import com.android.helper.Helper;
-import com.asus.atd.smmitest.R;
+import com.asusodm.atd.smmitest.R;
 import com.wingtech.diagnostic.fragment.CellularNetworkTestFragment;
 import com.wingtech.diagnostic.fragment.CellularNetworkTestingFragment;
 import com.wingtech.diagnostic.listener.OnResultListener;
 import com.wingtech.diagnostic.util.Log;
 import com.wingtech.diagnostic.util.ReflectUtil;
-
-
-import java.lang.reflect.Method;
 
 import static android.telephony.PhoneStateListener.LISTEN_DATA_CONNECTION_STATE;
 import static android.telephony.PhoneStateListener.LISTEN_SIGNAL_STRENGTHS;

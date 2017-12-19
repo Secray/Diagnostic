@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.wingtech.diagnostic.receiver.BatteryBroadcastReceiver;
-import com.wingtech.diagnostic.util.Log;
 
 import static com.wingtech.diagnostic.receiver.BatteryBroadcastReceiver.BATTERY_FAILED;
 import static com.wingtech.diagnostic.receiver.BatteryBroadcastReceiver.BATTERY_PASSED;

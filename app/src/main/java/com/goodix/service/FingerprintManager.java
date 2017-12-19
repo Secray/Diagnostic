@@ -82,7 +82,7 @@ public class FingerprintManager implements ServiceConnection {
     public void getLocalService(Context context) {
         mContext = context;
         try {        
-			isHuiDing  = Helper.getSystemProperties(IS_HUI_DING,"0");
+			isHuiDing  = Helper.getSystemProperties(IS_HUI_DING,"1");
 			Log.d(TAG, "isisHuiDing = " + isHuiDing);
 			if(isHuiDing.equals("1")){
 				Intent intent = new Intent(context, FingerprintManagerService.class);
