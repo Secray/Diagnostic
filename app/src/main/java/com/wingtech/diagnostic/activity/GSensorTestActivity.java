@@ -2,7 +2,6 @@ package com.wingtech.diagnostic.activity;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -11,12 +10,6 @@ import android.view.View;
 
 import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.widget.GSensorView;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static com.wingtech.diagnostic.util.Constants.G_SENSOR_REQUEST_CODE;
 

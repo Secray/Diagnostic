@@ -1,10 +1,6 @@
 package com.goodix.device;
 
-import java.lang.reflect.Method;
-
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.hardware.FingerPrint;
 import android.hardware.FingerPrintClient;
 import android.hardware.IFpService;
@@ -14,13 +10,13 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 import android.util.Log;
+
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Method;
 
-import com.asus.atd.smmitest.R;
+public class FpDeviceExt implements IDevice {
 
-public class FpDevice {
-
-    private static final String TAG = "FpDevice";
+    private static final String TAG = "FpDeviceExt";
     private static final int FP_CLIENT_TYPE_SYSTEM_FP = 0; // for Android system
                                                            // fingerpeintd
     private static final int FP_CLIENT_TYPE_MP_TOOL_APP = 1; // for "MP_Tool"
@@ -32,16 +28,16 @@ public class FpDevice {
                                                                // Integrated_Test_Tool
     private static final int FP_CLIENT_TYPE_FP_NAV = 5; // for navigation demo
     private static final int FP_CLIENT_TYPE_FP_CMD = 6;
-    private static FpDevice mFpDevice = null;
+    private static FpDeviceExt mFpDevice = null;
     private static final String SERVICE_NAME = "goodix.fp";
     private IFpService daemon;
     private FingerPrint mFingerPrint;
     private Context mContext;
     private EventHandler mEventHandler = null;
 
-    public static FpDevice open() throws RuntimeException {
+    public static FpDeviceExt open() throws RuntimeException {
         if (mFpDevice == null) {
-            mFpDevice = new FpDevice();
+            mFpDevice = new FpDeviceExt();
         }
         return mFpDevice;
     };
@@ -62,7 +58,7 @@ public class FpDevice {
         }
     }
 
-    private FpDevice() throws RuntimeException {
+    private FpDeviceExt() throws RuntimeException {
         getService();
     }
 
@@ -300,7 +296,7 @@ public class FpDevice {
         }
         daemon = IFpService.Stub.asInterface(mIBinder);
         try {
-            Log.d(TAG, mIBinder.getInterfaceDescriptor());
+            Log.d(TAG, "remote service = " + mIBinder.getInterfaceDescriptor());
             IBinder client = daemon.connect(callback, 1);
             mFingerPrint = FingerPrint.Stub.asInterface(client);
             if (mFingerPrint == null) {
@@ -364,9 +360,14 @@ public class FpDevice {
         }
     };
 
+    @Override
+    public byte[] sendCmd(int cmd, byte[] data) {
+        return SendCmd(cmd, data);
+    }
+
     private class EventHandler extends Handler {
 
-        public EventHandler(FpDevice fp, Looper looper) {
+        public EventHandler(FpDeviceExt fp, Looper looper) {
             super(looper);
             mFpDevice = fp;
         }

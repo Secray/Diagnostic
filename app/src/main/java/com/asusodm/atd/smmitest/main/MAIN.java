@@ -1,4 +1,4 @@
-package com.asus.atd.smmitest.main;
+package com.asusodm.atd.smmitest.main;
 
 import com.wingtech.diagnostic.activity.MainActivity;
 

@@ -18,6 +18,8 @@ import com.wingtech.diagnostic.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static com.goodix.device.MessageType.FINGERPRINT_CMD_MP_TEST_EXIT;
 import static com.goodix.device.MessageType.FINGERPRINT_CMD_MP_TEST_INIT;
@@ -35,6 +37,7 @@ public class FingerprintFragment extends TestFragment {
     HandlerThread mHandlerThread;
     private DeviceManager manager;
     private List<Runnable> mListRuns;
+    private ExecutorService mCacheThreadPool;
 
     protected com.goodix.service.FingerprintManager mFpManager;
     protected com.goodix.service.FingerprintManager.TestSession mSession;
@@ -53,8 +56,8 @@ public class FingerprintFragment extends TestFragment {
     @Override
     protected void onWork() {
         super.onWork();
-
-        mType = Helper.getSystemProperties(FINGERPRINT_TYPE, "-1");
+        mCacheThreadPool = Executors.newCachedThreadPool();
+        mType = Helper.getSystemProperties(FINGERPRINT_TYPE, "1");
         Log.i("FingerPrint properties Fingerprint product " + mType);
 
         if ("1".equals(mType)) {
@@ -97,12 +100,17 @@ public class FingerprintFragment extends TestFragment {
         super.onResume();
         if ("1".equals(mType)) {
             Log.d("TEST_CHECK_SENSOR_TEST_INFO start");
-            mFpManager.sendCmd(
-                    FINGERPRINT_CMD_MP_TEST_INIT,
-                    FileUtil.intToBytes(3000));
-            mFpManager.sendCmd(
-                    FINGERPRINT_CMD_MP_TEST_SELFTEST,
-                    FileUtil.intToBytes(3000));
+            mCacheThreadPool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    mFpManager.sendCmd(
+                            FINGERPRINT_CMD_MP_TEST_INIT,
+                            FileUtil.intToBytes(3000));
+                    mFpManager.sendCmd(
+                            FINGERPRINT_CMD_MP_TEST_SELFTEST,
+                            FileUtil.intToBytes(3000));
+                }
+            });
         } else {
             manager.connect();
             doNextJob();
@@ -120,8 +128,13 @@ public class FingerprintFragment extends TestFragment {
     public void onStop() {
         super.onStop();
         if ("1".equals(mType)) {
-            mFpManager.sendCmd(FINGERPRINT_CMD_MP_TEST_EXIT,
-                    FileUtil.intToBytes(3000));
+            mCacheThreadPool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    mFpManager.sendCmd(FINGERPRINT_CMD_MP_TEST_EXIT,
+                            FileUtil.intToBytes(3000));
+                }
+            });
         } else {
             mTaskHandler.removeCallbacksAndMessages(null);
             mHandlerThread.quit();
@@ -131,6 +144,12 @@ public class FingerprintFragment extends TestFragment {
         }
 
         mHandler.removeCallbacksAndMessages(null);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mCacheThreadPool.shutdown();
     }
 
     private void doNextJob() {

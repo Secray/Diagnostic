@@ -31,8 +31,7 @@
             <TextView
                 android:id="@+id/network"
                 android:layout_column="1"
-                android:layout_weight="1"
-                android:text="1111111111"/>
+                android:layout_weight="1"/>
         </TableRow>
 
         <TableRow
@@ -42,8 +41,7 @@
                 android:layout_weight="1"
                 android:text="@string/cellular_network"/>
             <TextView android:layout_column="1"
-                android:layout_weight="1"
-                android:text="1111111111"/>
+                android:layout_weight="1"/>
         </TableRow>
 
         <TableRow
@@ -51,10 +49,9 @@
             android:layout_height="match_parent">
             <TextView android:layout_column="1"
                 android:layout_weight="1"
-                android:text="Signal Level:"/>
+                android:text="@string/signal_level"/>
             <TextView android:layout_column="1"
-                android:layout_weight="1"
-                android:text="1111111111"/>
+                android:layout_weight="1"/>
         </TableRow>
 
         <TableRow

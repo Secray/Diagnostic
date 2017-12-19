@@ -1,19 +1,17 @@
 package com.wingtech.diagnostic.activity;
 
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.wingtech.diagnostic.App;
 import com.asus.atd.smmitest.R;
+import com.wingtech.diagnostic.App;
 import com.wingtech.diagnostic.adapter.SingleTestAdapter;
 import com.wingtech.diagnostic.bean.SingleTestCase;
 import com.wingtech.diagnostic.listener.OnItemClickListener;
-import com.wingtech.diagnostic.util.Log;
 
 import java.util.ArrayList;
 

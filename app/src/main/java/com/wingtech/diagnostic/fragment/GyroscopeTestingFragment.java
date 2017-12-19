@@ -1,8 +1,6 @@
 package com.wingtech.diagnostic.fragment;
 
 import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
 import com.wingtech.diagnostic.util.Log;

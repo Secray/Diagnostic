@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+
 import com.asus.atd.smmitest.R;
 
 import static android.graphics.Color.BLACK;
@@ -18,7 +19,6 @@ import static android.graphics.Color.GREEN;
 import static android.graphics.Color.RED;
 import static android.graphics.Color.GRAY;
 import static android.graphics.Color.WHITE;
-import static android.graphics.Color.YELLOW;
 import static com.wingtech.diagnostic.util.Constants.DISPLAY_REQUEST_CODE;
 
 /**

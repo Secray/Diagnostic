@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+
 import com.asus.atd.smmitest.R;
 
 import static com.wingtech.diagnostic.util.Constants.KEYPAD_REQUEST_CODE;

@@ -39,8 +39,7 @@
                 android:textColor="@color/main_text_color"
                 android:id="@+id/network1"
                 android:layout_column="1"
-                android:layout_weight="1"
-                android:text="1111111111"/>
+                android:layout_weight="1"/>
         </TableRow>
 
         <TableRow
@@ -55,8 +54,7 @@
                 android:id="@+id/cellular_network_state1"
                 android:layout_column="1"
                 android:textColor="@color/main_text_color"
-                android:layout_weight="1"
-                android:text="1111111111"/>
+                android:layout_weight="1"/>
         </TableRow>
 
         <TableRow
@@ -71,8 +69,7 @@
                 android:id="@+id/signal_level1"
                 android:layout_column="1"
                 android:textColor="@color/main_text_color"
-                android:layout_weight="1"
-                android:text="1111111111"/>
+                android:layout_weight="1"/>
         </TableRow>
 
         <TableRow
@@ -87,8 +84,7 @@
                 android:id="@+id/asu_level1"
                 android:layout_column="1"
                 android:textColor="@color/main_text_color"
-                android:layout_weight="1"
-                android:text="1111111111"/>
+                android:layout_weight="1"/>
         </TableRow>
 
         <TableRow
@@ -103,8 +99,7 @@
                 android:id="@+id/dbm_level1"
                 android:layout_column="1"
                 android:textColor="@color/main_text_color"
-                android:layout_weight="1"
-                android:text="1111111111"/>
+                android:layout_weight="1"/>
         </TableRow>
 
         <TableRow
@@ -155,8 +150,7 @@
                 android:id="@+id/network2"
                 android:layout_column="1"
                 android:layout_weight="1"
-                android:textColor="@color/main_text_color"
-                android:text="1111111111"/>
+                android:textColor="@color/main_text_color"/>
         </TableRow>
 
         <TableRow
@@ -171,8 +165,7 @@
                 android:id="@+id/cellular_network_state2"
                 android:layout_column="1"
                 android:layout_weight="1"
-                android:textColor="@color/main_text_color"
-                android:text="1111111111"/>
+                android:textColor="@color/main_text_color"/>
         </TableRow>
 
         <TableRow
@@ -187,8 +180,7 @@
                 android:id="@+id/signal_level2"
                 android:layout_column="1"
                 android:layout_weight="1"
-                android:textColor="@color/main_text_color"
-                android:text="1111111111"/>
+                android:textColor="@color/main_text_color"/>
         </TableRow>
 
         <TableRow
@@ -203,8 +195,7 @@
                 android:id="@+id/asu_level2"
                 android:layout_column="1"
                 android:textColor="@color/main_text_color"
-                android:layout_weight="1"
-                android:text="1111111111"/>
+                android:layout_weight="1"/>
         </TableRow>
 
         <TableRow
@@ -219,8 +210,7 @@
                 android:id="@+id/dbm_level2"
                 android:layout_column="1"
                 android:textColor="@color/main_text_color"
-                android:layout_weight="1"
-                android:text="1111111111"/>
+                android:layout_weight="1"/>
         </TableRow>
 
         <TableRow

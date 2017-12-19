@@ -3,11 +3,9 @@ package com.wingtech.diagnostic.activity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.support.v7.widget.AppCompatButton;
 import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.TextView;
+
 
 import com.asus.atd.smmitest.R;
 

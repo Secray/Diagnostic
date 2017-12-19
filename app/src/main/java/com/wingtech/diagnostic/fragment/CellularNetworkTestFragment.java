@@ -9,7 +9,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.asus.atd.smmitest.R;
-import com.wingtech.diagnostic.activity.CellularNetworkActivity;
 import com.wingtech.diagnostic.listener.OnResultListener;
 
 /**

@@ -2,25 +2,15 @@ package com.wingtech.diagnostic.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-
 import android.os.Build;
 import android.os.Environment;
 
-import java.util.ArrayList;
-
-import com.wingtech.diagnostic.App;
-import com.wingtech.diagnostic.util.Log;
-
-import android.content.res.TypedArray;
 
 import com.asus.atd.smmitest.R;
-import com.wingtech.diagnostic.bean.TestCaseResult;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 
 /**
  * Created by gaoweili on 17-8-1.

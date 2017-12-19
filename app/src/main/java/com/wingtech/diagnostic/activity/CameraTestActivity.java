@@ -153,7 +153,7 @@ public class CameraTestActivity extends TestingActivity {
             FileInputStream f = new FileInputStream(image);
             Bitmap bm = null;
             BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = 8;//图片的长宽都是原来的1/8
+            //options.inSampleSize = 8;//图片的长宽都是原来的1/8
             BufferedInputStream bis = new BufferedInputStream(f);
             bm = BitmapFactory.decodeStream(bis, null, options);
             mCameralayout.setVisibility(View.GONE);
