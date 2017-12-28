@@ -22,6 +22,7 @@ import static com.wingtech.diagnostic.util.Constants.BLUETOOTH_STATE_CHANGED;
 public class BlueToothFragment extends TestFragment {
     BluetoothReceiver mBluetoothReceiver;
     BluetoothDevice mDevice;
+    boolean mIsOpen;
 
     BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -68,7 +69,9 @@ public class BlueToothFragment extends TestFragment {
         super.onPause();
         if (mBluetoothReceiver != null) {
             mActivity.unregisterReceiver(mBluetoothReceiver);
-            mBluetoothAdapter.disable();
+            if (!mIsOpen) {
+                mBluetoothAdapter.disable();
+            }
         }
         mHandler.removeCallbacksAndMessages(null);
     }
@@ -84,6 +87,7 @@ public class BlueToothFragment extends TestFragment {
         mBluetoothReceiver = new BluetoothReceiver(mBluetoothAdapter, mHandler);
         mActivity.registerReceiver(mBluetoothReceiver, intentFilter);
         if (mBluetoothAdapter.isEnabled()) {
+            mIsOpen = true;
             mBluetoothAdapter.startDiscovery();
         } else {
             mBluetoothAdapter.enable();

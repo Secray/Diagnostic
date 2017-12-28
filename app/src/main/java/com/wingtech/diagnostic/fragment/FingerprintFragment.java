@@ -52,6 +52,7 @@ public class FingerprintFragment extends TestFragment {
     public static final int MSG_IRQ = 1001;
     public static final int MSG_PASS = 1;
     public static final int MSG_FAIL = 0;
+    public static final int MSG_TEST_DISCONNECTED = 6666;
 
     @Override
     protected void onWork() {
@@ -103,12 +104,16 @@ public class FingerprintFragment extends TestFragment {
             mCacheThreadPool.execute(new Runnable() {
                 @Override
                 public void run() {
-                    mFpManager.sendCmd(
+                    byte[] init = mFpManager.sendCmd(
                             FINGERPRINT_CMD_MP_TEST_INIT,
                             FileUtil.intToBytes(3000));
-                    mFpManager.sendCmd(
-                            FINGERPRINT_CMD_MP_TEST_SELFTEST,
-                            FileUtil.intToBytes(3000));
+                    if (init == null) {
+                        mHandler.sendEmptyMessage(MSG_TEST_DISCONNECTED);
+                    } else {
+                        mFpManager.sendCmd(
+                                FINGERPRINT_CMD_MP_TEST_SELFTEST,
+                                FileUtil.intToBytes(3000));
+                    }
                 }
             });
         } else {
@@ -194,7 +199,25 @@ public class FingerprintFragment extends TestFragment {
                     mCallback.onChange(mIsIRQPass && mIsSPIPass);
                     break;
                 case MSG_GOODIX_SPI:
-                    mCallback.onChange(msg.arg2 == 0);
+                    if (msg.arg1 == 0) {
+                        Log.i("msg.arg2 = " + msg.arg2);
+                        boolean result = msg.arg2 == 0;
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                mCallback.onChange(result);
+                            }
+                        }, 1000);
+                    }
+                    break;
+                case MSG_TEST_DISCONNECTED:
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mCallback.onChange(false);
+
+                        }
+                    }, 1000);
                     break;
 
             }

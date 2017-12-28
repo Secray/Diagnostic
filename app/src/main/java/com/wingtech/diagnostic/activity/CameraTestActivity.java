@@ -98,22 +98,28 @@ public class CameraTestActivity extends TestingActivity {
             }
 
         }
+        mAutoFocusCallback = new Camera.AutoFocusCallback() {
+
+            public void onAutoFocus(boolean success, Camera camera) {
+                // TODO Auto-generated method stub
+                if(success){
+                    //mCamera.setOneShotPreviewCallback(null);
+                    Log.i("auto focus");
+                }
+            }
+        };
+
+        mPreview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCamera.autoFocus(mAutoFocusCallback);
+            }
+        });
 
         mCapture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //mCamera.autoFocus(null);
-                mAutoFocusCallback = new Camera.AutoFocusCallback() {
-
-                    public void onAutoFocus(boolean success, Camera camera) {
-                        // TODO Auto-generated method stub
-                        if(success){
-                            //mCamera.setOneShotPreviewCallback(null);
-
-                        }
-                    }
-                };
-                mCamera.autoFocus(mAutoFocusCallback);
                 mCamera.takePicture(shutterCallback, null, jpegCallback);
                 mCapture.setVisibility(View.GONE);
                 mPass.setVisibility(View.VISIBLE);
@@ -332,6 +338,8 @@ public class CameraTestActivity extends TestingActivity {
                 p.setPictureSize(1920, 1080);
                 p.setPreviewSize(1920,1080);
                 p.set("zsl","on");
+                p.setJpegQuality(85);
+                p.setPreviewFrameRate(5);
                 //频闪问题，设置为50HZ
                // p.set("zsl","Parameters.ANTIBANDING_50HZ = " + Camera.Parameters.ANTIBANDING_50HZ);
                 //p.setAntibanding(Camera.Parameters.ANTIBANDING_50HZ);

@@ -24,12 +24,14 @@ public class WiFiTestingFragment extends TestFragment {
     private WifiManager mWiFiManager;
     private int mWiFiState;
     private boolean mWiFiEnable;
+    private boolean mLastState;
     private List<ScanResult> mScanResults;
 
     @Override
     protected void onWork() {
         super.onWork();
         mWiFiManager = (WifiManager) mActivity.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        mLastState = mWiFiManager.isWifiEnabled();
         IntentFilter filter = new IntentFilter();
         filter.addAction(WIFI_STATE_CHANGED);
         mActivity.registerReceiver(mWiFiReceiver, filter);
@@ -39,7 +41,7 @@ public class WiFiTestingFragment extends TestFragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (mWiFiEnable) {
+        if (!mLastState) {
             mWiFiManager.setWifiEnabled(false);
         }
         mActivity.unregisterReceiver(mWiFiReceiver);
