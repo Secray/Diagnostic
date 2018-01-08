@@ -7,7 +7,7 @@
     <FrameLayout
         android:id="@+id/camera_preview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="640dp" />
 
     <android.support.v7.widget.AppCompatImageButton
         android:id="@+id/capture"
@@ -24,7 +24,7 @@
         android:id="@+id/png"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"/>git
+        android:visibility="gone"/>
 
     <RelativeLayout
         android:id="@+id/judgment"

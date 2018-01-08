@@ -33,7 +33,8 @@ public class App extends Application implements Application.ActivityLifecycleCal
         new TestItemHandler(this).start();
 
         mApplication = this;
-        initFpMangerService();
+        //ZD600KL没有汇顶指纹，注释掉汇顶指纹的初始化
+//        initFpMangerService();
     }
 
     @Override

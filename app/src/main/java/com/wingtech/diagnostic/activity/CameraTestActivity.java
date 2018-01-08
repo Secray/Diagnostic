@@ -152,10 +152,10 @@ public class CameraTestActivity extends TestingActivity {
 
             FileInputStream f = new FileInputStream(image);
             Bitmap bm = null;
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = 8;//图片的长宽都是原来的1/8
+//            BitmapFactory.Options options = new BitmapFactory.Options();
+//            options.inSampleSize = 8;//图片的长宽都是原来的1/8
             BufferedInputStream bis = new BufferedInputStream(f);
-            bm = BitmapFactory.decodeStream(bis, null, options);
+            bm = BitmapFactory.decodeStream(bis, null,null);
             mCameralayout.setVisibility(View.GONE);
             mPng.setVisibility(View.VISIBLE);
             if (mCameraId == 0){
@@ -334,10 +334,16 @@ public class CameraTestActivity extends TestingActivity {
                 p.set("zsl","on");
                 //频闪问题，设置为50HZ
                // p.set("zsl","Parameters.ANTIBANDING_50HZ = " + Camera.Parameters.ANTIBANDING_50HZ);
-                //p.setAntibanding(Camera.Parameters.ANTIBANDING_50HZ);
+                p.setAntibanding(Camera.Parameters.ANTIBANDING_50HZ);
                 mCamera.setParameters(p);
                 //add by gaoweili end
                 mPreview = new CameraPreview(CameraTestActivity.this, mCamera);
+                mPreview.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mCamera.autoFocus(mAutoFocusCallback);
+                    }
+                });
                 mCameralayout = (FrameLayout) findViewById(R.id.camera_preview);
                 mCameralayout.addView(mPreview);
                 mCamera.startPreview();

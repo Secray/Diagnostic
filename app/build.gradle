@@ -41,4 +41,5 @@ dependencies {
     compile files('libs/com.swfp.manager.jar')
     compile files('libs/goodix.jar')
     compile files('libs/helper.jar')
+    compile files('libs/FpExtensionService.jar')
 }
