@@ -8,7 +8,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.view.View;
 
-import com.asus.atd.smmitest.R;
+import com.asusodm.atd.smmitest.R;
 import com.wingtech.diagnostic.widget.GSensorView;
 
 import static com.wingtech.diagnostic.util.Constants.G_SENSOR_REQUEST_CODE;

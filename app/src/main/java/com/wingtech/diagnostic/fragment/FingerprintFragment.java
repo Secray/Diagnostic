@@ -2,12 +2,16 @@ package com.wingtech.diagnostic.fragment;
 
 import android.content.Context;
 import android.hardware.fingerprint.FingerprintManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.os.RemoteException;
+import android.support.annotation.RequiresApi;
 
 import com.android.helper.Helper;
+import com.fpsensor.fpsensorManager.fpSensorManager;
+import com.fpsensor.intf.IFpSensorTestTool;
 import com.goodix.aidl.ITestCallback;
 import com.goodix.util.FileUtil;
 import com.swfp.device.DeviceManager;
@@ -15,6 +19,7 @@ import com.swfp.device.TeeDeviceManagerImpl;
 import com.swfp.utils.MessageType;
 import com.wingtech.diagnostic.App;
 import com.wingtech.diagnostic.util.Log;
+import com.wingtech.diagnostic.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +50,10 @@ public class FingerprintFragment extends TestFragment {
     private boolean mIsSPIPass;
     private boolean mIsIRQPass;
 
+    private fpSensorManager thefpSensorMgr;
+    private IFpSensorTestTool theSensorTestTool;
+
+    private boolean isSwfp;
     private static final int MSG_TEST_RESULT = 998;
     public static final int MSG_NEXT_TASK = 999;
     public static final int MSG_SPI = 1000;
@@ -60,12 +69,16 @@ public class FingerprintFragment extends TestFragment {
         mCacheThreadPool = Executors.newCachedThreadPool();
         mType = Helper.getSystemProperties(FINGERPRINT_TYPE, "1");
         Log.i("FingerPrint properties Fingerprint product " + mType);
-
-        if ("1".equals(mType)) {
+        isSwfp = Utils.isSwfp();
+        if ("1".equals(mType) && !Build.MODEL.equals("ASUS_X017D")) {
             checkHardwareDetected();
             mFpManager = App.getInstance().getFpServiceManager();
             initDeviceMode();
+        } else if (!isSwfp) {
+            Log.d(Log.TAG, "jichuang");
+            initJiChuangManager();
         } else {
+            Log.d(Log.TAG, "xinwei");
             mListRuns = new ArrayList<>();
             mListRuns.add(mRunSpi);
             mListRuns.add(mRunIrq);
@@ -99,8 +112,9 @@ public class FingerprintFragment extends TestFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if ("1".equals(mType)) {
+        if (!isSwfp) {
             Log.d("TEST_CHECK_SENSOR_TEST_INFO start");
+            if (!Build.MODEL.equals("ASUS_X017D")) {
             mCacheThreadPool.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -116,9 +130,38 @@ public class FingerprintFragment extends TestFragment {
                     }
                 }
             });
+            } else {
+
+            int result = -1;
+            try {
+                if (theSensorTestTool != null)
+                    result = theSensorTestTool.fpSensorSelfTest();
+            } catch (RemoteException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            mCallback.onChange(result == 0);
+            }
+
         } else {
             manager.connect();
             doNextJob();
+        }
+    }
+
+    public void initJiChuangManager() {
+        thefpSensorMgr = fpSensorManager.getFpManager(getActivity());
+        if (thefpSensorMgr == null) {
+            //error. the fpExtensionSvc.apk has error
+            Log.d(Log.TAG, "Test Error. env set up error");
+            return;
+        }
+
+        theSensorTestTool = thefpSensorMgr.getFpSensorTestToolService();
+        if (theSensorTestTool == null) {
+            //error. the sensor is not connected when phone boot up
+            Log.d(Log.TAG, "sensor not connected");
+            return;
         }
     }
 
@@ -132,7 +175,7 @@ public class FingerprintFragment extends TestFragment {
     @Override
     public void onStop() {
         super.onStop();
-        if ("1".equals(mType)) {
+        if ("1".equals(mType) && !Build.MODEL.equals("ASUS_X017D")) {
             mCacheThreadPool.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -161,6 +204,7 @@ public class FingerprintFragment extends TestFragment {
         mTaskHandler.obtainMessage(MSG_NEXT_TASK).sendToTarget();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void checkHardwareDetected() {
         boolean isHardwareDetected;
         mFingerprintManager = (FingerprintManager) mActivity.getSystemService(Context.FINGERPRINT_SERVICE);

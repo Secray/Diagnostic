@@ -16,6 +16,10 @@ import com.wingtech.diagnostic.fragment.SIMCardTestingFragment;
 import com.wingtech.diagnostic.fragment.TestFragment;
 import com.wingtech.diagnostic.fragment.WiFiTestingFragment;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -88,5 +92,36 @@ public class Utils {
                 break;
         }
         return fragment;
+    }
+
+    public static boolean isSwfp() {
+        int code = 0;
+        BufferedReader br = null;
+        try {
+            Runtime runtime = Runtime.getRuntime();
+            Process process = runtime.exec("cat  /proc/asus/gpiostatus"); // 这儿进行的度操作
+            InputStream is = process.getInputStream();
+            InputStreamReader isr = new InputStreamReader(is);
+            br = new BufferedReader(isr);
+            String line = br.readLine();
+            int current = 0;
+            try {
+                current = Integer.parseInt(line);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+            code = current;
+        } catch (IOException e) {
+            code = -1;
+        } finally {
+            try {
+                if (br != null)
+                    br.close();
+            } catch (IOException excep) {
+                Log.e(Log.TAG, "can't close file" + excep);
+            }
+        }
+        Log.d("wuhaiwen","gpiocode"+String.valueOf(code));
+        return  code==0|| code==3? false:true;
     }
 }

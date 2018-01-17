@@ -110,6 +110,7 @@ public class FingerprintManagerService extends Service {
     public void onCreate() {
         super.onCreate();
         Log.i(TAG, "service create");
+        device = new FpDeviceFactory(Build.MODEL).getFpDevice();
         HandlerThread mDispatchMessageThread = new HandlerThread("dispatch");
         mDispatchMessageThread.start();
         mDispathMessageHandler = new DispatchMessageHandler(

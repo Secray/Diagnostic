@@ -33,7 +33,7 @@ public class App extends Application implements Application.ActivityLifecycleCal
         new TestItemHandler(this).start();
 
         mApplication = this;
-        //initFpMangerService();
+        initFpMangerService();
     }
 
     @Override

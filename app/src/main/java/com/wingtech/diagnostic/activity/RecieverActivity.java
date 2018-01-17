@@ -8,7 +8,7 @@ import android.media.MediaPlayer;
 import android.view.View;
 import android.widget.TextView;
 
-import com.asus.atd.smmitest.R;
+import com.asusodm.atd.smmitest.R;
 import com.wingtech.diagnostic.util.Log;
 
 import java.io.IOException;

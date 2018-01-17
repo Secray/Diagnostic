@@ -20,7 +20,7 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.asus.atd.smmitest.R;
+import com.asusodm.atd.smmitest.R;
 import com.wingtech.diagnostic.util.Log;
 import com.wingtech.diagnostic.widget.CameraPreview;
 
@@ -163,7 +163,7 @@ public class CameraTestActivity extends TestingActivity {
             BitmapFactory.Options options = new BitmapFactory.Options();
             //options.inSampleSize = 8;//图片的长宽都是原来的1/8
             BufferedInputStream bis = new BufferedInputStream(f);
-            bm = BitmapFactory.decodeStream(bis, null, options);
+            bm = BitmapFactory.decodeStream(bis, null,null);
             mCameralayout.setVisibility(View.GONE);
             mPng.setVisibility(View.VISIBLE);
             if (mCameraId == 0){
@@ -351,6 +351,12 @@ public class CameraTestActivity extends TestingActivity {
                 mCamera.setParameters(p);
                 //add by gaoweili end
                 mPreview = new CameraPreview(CameraTestActivity.this, mCamera);
+                mPreview.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mCamera.autoFocus(mAutoFocusCallback);
+                    }
+                });
                 mCameralayout = (FrameLayout) findViewById(R.id.camera_preview);
                 mCameralayout.addView(mPreview);
                 mCamera.startPreview();
