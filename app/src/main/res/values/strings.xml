@@ -75,6 +75,7 @@
     <string name="test_case_tele_front">Front Tele Camera Capture Test</string>
     <string name="test_case_wide_front">Front WideCamera Capture Test</string>
     <string name="test_case_main_back">Main Camera Capture Test</string>
+    <string name="test_case_main_wide">Main WideCamera Capture Test</string>
     <!-- RepairActivity -->
     <string name="repair_list_item_software_update">Software Update</string>
     <string name="repair_list_item_safe_mode">Safe Mode</string>
@@ -386,6 +387,13 @@
         <item>2. If the light sensor works, this test will finish automatically, else press [FAIL] to terminate this test. </item>
     </string-array>
     <string-array name="TestItem_Des_MainCamCapture_Test">
+        <item>The "Main Camera Capture Test" is used to test the main camera of the device.</item>
+        <item>Test procedure:</item>
+        <item>1. Press [SHUTTER] to capture photo.</item>
+        <item>2. If the photo is captured, press [PASS], else press [FAIL] to terminate this test.</item>
+        <item>Note: This test is to try the camera by opening, taking a picture, and show the photo. This test does not include performance and clarity.</item>
+    </string-array>
+    <string-array name="TestItem_Des_MainWideCamCapture_Test">
         <item>The "Main Camera Capture Test" is used to test the main camera of the device.</item>
         <item>Test procedure:</item>
         <item>1. Press [SHUTTER] to capture photo.</item>

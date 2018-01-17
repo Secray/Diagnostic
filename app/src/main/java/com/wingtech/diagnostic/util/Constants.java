@@ -49,4 +49,5 @@ public class Constants {
     public static final int CALL_REQUEST_CODE = 34;
     public static final int CELLULAR_NETWORK_REQUEST_CODE = 35;
     public static final int VIRTUAL_KEY_REQUEST_CODE = 36;
+    public static final int MAIN_WIDE_CAMERA_REQUEST_CODE = 37;
 }

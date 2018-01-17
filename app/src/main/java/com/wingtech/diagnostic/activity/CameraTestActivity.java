@@ -10,6 +10,7 @@ import android.graphics.PixelFormat;
 import android.hardware.Camera;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
+import android.os.Build;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatImageView;
@@ -32,6 +33,7 @@ import java.util.List;
 
 import static com.wingtech.diagnostic.util.Constants.ASSITSCAMERA_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.CAMERA_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.MAIN_WIDE_CAMERA_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.VGACAMERA_REQUEST_CODE;
 
 
@@ -299,9 +301,12 @@ public class CameraTestActivity extends TestingActivity {
             intent.putExtra("result", mResult);
             if (mCameraId == 0){
                 setResult(CAMERA_REQUEST_CODE, intent);
-            }else if(mCameraId == 1){
+            } else if(mCameraId == 1){
                 setResult(VGACAMERA_REQUEST_CODE, intent);
-            }else if(mCameraId == 2){
+            } else if(mCameraId == 2){
+                setResult(Build.MODEL.equals("ASUS_X017D") ?
+                        MAIN_WIDE_CAMERA_REQUEST_CODE : ASSITSCAMERA_REQUEST_CODE, intent);
+            } else {
                 setResult(ASSITSCAMERA_REQUEST_CODE, intent);
             }
             finish();
@@ -366,9 +371,12 @@ public class CameraTestActivity extends TestingActivity {
         intent.putExtra("result", mResult);
         if (mCameraId == 0){
             setResult(CAMERA_REQUEST_CODE, intent);
-        }else if(mCameraId == 1){
+        } else if(mCameraId == 1){
             setResult(VGACAMERA_REQUEST_CODE, intent);
-        }else if(mCameraId == 2){
+        } else if(mCameraId == 2){
+            setResult(Build.MODEL.equals("ASUS_X017D") ?
+                    MAIN_WIDE_CAMERA_REQUEST_CODE : ASSITSCAMERA_REQUEST_CODE, intent);
+        } else {
             setResult(ASSITSCAMERA_REQUEST_CODE, intent);
         }
         finish();

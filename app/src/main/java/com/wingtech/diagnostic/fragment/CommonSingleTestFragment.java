@@ -2,6 +2,7 @@ package com.wingtech.diagnostic.fragment;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.ImageView;
@@ -57,6 +58,7 @@ import static com.wingtech.diagnostic.util.Constants.HEADSETMIC_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.HEADSET_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.KEYPAD_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.LIGHTSENSOR_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.MAIN_WIDE_CAMERA_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.MIC_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.MODEM_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.MOUSE_REQUEST_CODE;
@@ -485,6 +487,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
             case CALL_REQUEST_CODE:
             case CELLULAR_NETWORK_REQUEST_CODE:
             case VIRTUAL_KEY_REQUEST_CODE:
+            case MAIN_WIDE_CAMERA_REQUEST_CODE:
                 boolean result = data.getBooleanExtra("result", false);
                 Log.d("gaoweili", "gaoweili:");
                 mDiscription.setText(returnDiscription(resultCode));
@@ -670,6 +673,14 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 dis =  discription_cam[0];
                 for (int i = 1; i < discription_cam.length; i++){
                     dis = dis + discription_cam[i];
+                    dis += "\n";
+                }
+                break;
+            case MAIN_WIDE_CAMERA_REQUEST_CODE:
+                String[] discription_wide_cam = getResources().getStringArray(R.array.TestItem_Des_MainWideCamCapture_Test);
+                dis =  discription_wide_cam[0];
+                for (int i = 1; i < discription_wide_cam.length; i++){
+                    dis = dis + discription_wide_cam[i];
                     dis += "\n";
                 }
                 break;
@@ -878,12 +889,27 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 startActivityForResult(i, VGACAMERA_REQUEST_CODE);
                 break;
             case "Front WideCamera Capture Test":
-                camId = 2;
+                if (Build.MODEL.equals("ASUS_X017D")) {
+                    camId = 3;
+                } else {
+                    camId = 2;
+                }
                 i = new Intent(mActivity, CameraTestActivity.class);
                 i.putExtra("isTestAll", mCallback != null);
                 i.putExtra("camId", camId);
                 startActivityForResult(i, ASSITSCAMERA_REQUEST_CODE);
                 break;
+
+            case "Main WideCamera Capture Test":
+                if (Build.MODEL.equals("ASUS_X017D")) {
+                    camId = 2;
+                }
+                i = new Intent(mActivity, CameraTestActivity.class);
+                i.putExtra("isTestAll", mCallback != null);
+                i.putExtra("camId", camId);
+                startActivityForResult(i, MAIN_WIDE_CAMERA_REQUEST_CODE);
+                break;
+
             case "Camera Flash Test":
                 flashId = 0;
                 i = new Intent(mActivity, CameraFlashActivity.class);
