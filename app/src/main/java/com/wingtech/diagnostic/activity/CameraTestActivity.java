@@ -171,6 +171,8 @@ public class CameraTestActivity extends TestingActivity {
             }else if (mCameraId == 1){
                 mPng.setImageBitmap(rotateBitmapByDegree(bm, -90));
             }else if(mCameraId == 2){
+                mPng.setImageBitmap(rotateBitmapByDegree(bm, Build.MODEL.equals("ASUS_X017D") ? 90 : -90));
+            }else if (mCameraId == 3) {
                 mPng.setImageBitmap(rotateBitmapByDegree(bm, -90));
             }
         } catch (Exception e) {
@@ -340,8 +342,13 @@ public class CameraTestActivity extends TestingActivity {
                     Log.v(TAG, "cwWidth =" + lp.get(i).width + "cwHeight =" + lp.get(i).height);
                 }
                 Log.v(TAG, "cWidth =" + cWidth + "cHeight =" + cHeight);
-                p.setPictureSize(1920, 1080);
-                p.setPreviewSize(1920,1080);
+                if (Build.MODEL.equals("ASUS_X017D")) {
+                    p.setPictureSize(1920, 1080);
+                    p.setPreviewSize(2160,1080);
+                } else {
+                    p.setPictureSize(1920, 1080);
+                    p.setPreviewSize(1920, 1080);
+                }
                 p.set("zsl","on");
                 p.setJpegQuality(85);
                 p.setPreviewFrameRate(5);
