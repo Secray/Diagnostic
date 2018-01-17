@@ -183,7 +183,7 @@ public class FingerprintFragment extends TestFragment {
                             FileUtil.intToBytes(3000));
                 }
             });
-        } else {
+        } else if ("0".equals(mType) || isSwfp) {
             mTaskHandler.removeCallbacksAndMessages(null);
             mHandlerThread.quit();
 

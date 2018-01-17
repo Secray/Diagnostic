@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 
-import com.asus.atd.smmitest.R;
+import com.asusodm.atd.smmitest.R;
 
 import java.util.Random;
 

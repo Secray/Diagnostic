@@ -277,6 +277,14 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                     dis += "\n";
                 }
                 break;
+            case "Main WideCamera Capture Test":
+                String[] discription_wide = getResources().getStringArray(R.array.TestItem_Des_MainWideCamCapture_Test);
+                dis =  discription_wide[0];
+                for (int i = 1; i < discription_wide.length; i++){
+                    dis = dis + discription_wide[i];
+                    dis += "\n";
+                }
+                break;
             case "Front Camera Capture Test":
                 String[] discription_vga = getResources().getStringArray(R.array.TestItem_Des_VGACamCapture_Test);
                 dis =  discription_vga[0];

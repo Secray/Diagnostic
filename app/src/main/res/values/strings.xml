@@ -394,7 +394,7 @@
         <item>Note: This test is to try the camera by opening, taking a picture, and show the photo. This test does not include performance and clarity.</item>
     </string-array>
     <string-array name="TestItem_Des_MainWideCamCapture_Test">
-        <item>The "Main Camera Capture Test" is used to test the main camera of the device.</item>
+        <item>The "Main Wide Camera Capture Test" is used to test the main wide camera of the device.</item>
         <item>Test procedure:</item>
         <item>1. Press [SHUTTER] to capture photo.</item>
         <item>2. If the photo is captured, press [PASS], else press [FAIL] to terminate this test.</item>

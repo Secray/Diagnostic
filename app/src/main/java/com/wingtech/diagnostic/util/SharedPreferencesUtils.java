@@ -6,7 +6,7 @@ import android.os.Build;
 import android.os.Environment;
 
 
-import com.asus.atd.smmitest.R;
+import com.asusodm.atd.smmitest.R;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -117,6 +117,9 @@ public class SharedPreferencesUtils {
         } else if (Build.MODEL.contains("ASUS_X00DD")) {
             mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_2_cam_zc553kl);
             mTestCasesErrorCode = context.getResources().getIntArray(R.array.smmi_error_code_2_cam_zc553kl);
+        } else if (Build.MODEL.contains("ASUS_X017D")) {
+            mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_4_cam);
+            mTestCasesErrorCode = context.getResources().getIntArray(R.array.smmi_error_code_4_cam);
         } else {
             mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_2_cam);
             mTestCasesErrorCode = context.getResources().getIntArray(R.array.smmi_error_code_2_cam);
@@ -193,6 +196,9 @@ public class SharedPreferencesUtils {
             mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_3_cam);
         } else if (Build.MODEL.contains("ASUS_X00DD")) {
             mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_2_cam_zc553kl);
+        } else if (Build.MODEL.contains("ASUS_X017D")) {
+            mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_4_cam);
+            mTestCasesErrorCode = context.getResources().getIntArray(R.array.smmi_error_code_4_cam);
         } else {
             mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_2_cam);
         }
