@@ -505,9 +505,15 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                     }
                     mTestBtn.setText(R.string.btn_test_again);
                 }
-                SharedPreferencesUtils.deleteFile();
-    						SharedPreferencesUtils.outputFile(mActivity);
-    						Log.i("gaoweili","file del output");
+                
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        SharedPreferencesUtils.deleteFile();
+                        SharedPreferencesUtils.outputFile(mActivity);
+                        Log.i("gaoweili","file del output");
+                    }
+                }).start();
                 break;
         }
     }

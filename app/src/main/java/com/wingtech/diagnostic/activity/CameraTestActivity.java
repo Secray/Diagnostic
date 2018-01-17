@@ -258,7 +258,7 @@ public class CameraTestActivity extends TestingActivity {
         super.onPause();
         releaseCamera();
         Log.v(TAG, "onPause finish activity");
-		mResult = false;
+        mResult = false;
         sendResult();
     }
 
@@ -341,7 +341,7 @@ public class CameraTestActivity extends TestingActivity {
                 p.setJpegQuality(85);
                 p.setPreviewFrameRate(5);
                 //频闪问题，设置为50HZ
-               // p.set("zsl","Parameters.ANTIBANDING_50HZ = " + Camera.Parameters.ANTIBANDING_50HZ);
+                // p.set("zsl","Parameters.ANTIBANDING_50HZ = " + Camera.Parameters.ANTIBANDING_50HZ);
                 //p.setAntibanding(Camera.Parameters.ANTIBANDING_50HZ);
                 mCamera.setParameters(p);
                 //add by gaoweili end

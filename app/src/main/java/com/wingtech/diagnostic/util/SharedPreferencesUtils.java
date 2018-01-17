@@ -32,7 +32,6 @@ public class SharedPreferencesUtils {
     private static BufferedWriter buf;
     private static String[] mTestCases;
     private static int[] mTestCasesErrorCode;
-    private static String[] mTestCasesErrorTxt;
     private static StringBuffer stringSMMI = null;
     private static boolean isTestAll = false;
 
@@ -115,11 +114,12 @@ public class SharedPreferencesUtils {
         if (Build.MODEL.equals("ASUS_X00LD")) {
             mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_3_cam);
             mTestCasesErrorCode = context.getResources().getIntArray(R.array.smmi_error_code_3_cam);
-            mTestCasesErrorTxt = context.getResources().getStringArray(R.array.smmi_error_txt_3_cam);
+        } else if (Build.MODEL.contains("ASUS_X00DD")) {
+            mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_2_cam_zc553kl);
+            mTestCasesErrorCode = context.getResources().getIntArray(R.array.smmi_error_code_2_cam_zc553kl);
         } else {
             mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_2_cam);
             mTestCasesErrorCode = context.getResources().getIntArray(R.array.smmi_error_code_2_cam);
-            mTestCasesErrorTxt = context.getResources().getStringArray(R.array.smmi_error_txt_2_cam);
         }
         int result = 0;
         isTestAll = true;
@@ -153,7 +153,7 @@ public class SharedPreferencesUtils {
             } else if (result == 1) {
                 stringSMMI.append(mTestCasesErrorCode[i]);
                 stringSMMI.append(",");
-                stringSMMI.append(mTestCasesErrorTxt[i]);
+                stringSMMI.append("Fail");
             } else if (result == 2) {
                 stringSMMI.append("0");
                 stringSMMI.append(",");
@@ -187,4 +187,27 @@ public class SharedPreferencesUtils {
         }
     }
 
+    public static boolean isIsTestAllDone(Context context) {
+        boolean isDone = false;
+        if (Build.MODEL.equals("ASUS_X00LD")) {
+            mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_3_cam);
+        } else if (Build.MODEL.contains("ASUS_X00DD")) {
+            mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_2_cam_zc553kl);
+        } else {
+            mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_2_cam);
+        }
+        for (int i = 0; i < mTestCases.length; i++) {
+            getParam(context, mTestCases[i], NOT_TEST);
+            int result = (int) getParam(context, mTestCases[i], NOT_TEST);
+            if (result == 0) {
+               isDone = false;
+               break;
+            }
+
+            if (i == mTestCases.length - 1) {
+                isDone = true;
+            }
+        }
+        return isDone;
+    }
 }

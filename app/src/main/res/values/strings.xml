@@ -231,6 +231,7 @@
     <string name="wireless">Wireless</string>
     <string name="strength_level_asu">Strength level(asu)</string>
     <string name="strength_level_dbm">Strength level(dbm)</string>
+    <string name="smmi_all_test_done">SMMI All Test Done</string>
 
     <string-array name="TestItem_Des_Battery_Test">
         <item>The "Battery Test" is used to test the battery status.</item>
