@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.asusodm.atd.smmitest.R;
+import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.activity.BoardMicActivity;
 import com.wingtech.diagnostic.activity.CallActivity;
 import com.wingtech.diagnostic.activity.CameraFlashActivity;
@@ -897,7 +897,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 startActivityForResult(i, VGACAMERA_REQUEST_CODE);
                 break;
             case "Front WideCamera Capture Test":
-                if (Build.MODEL.equals("ASUS_X017D")) {
+                if (Build.MODEL.contains("ASUS_X017D")) {
                     camId = 3;
                 } else {
                     camId = 2;
@@ -909,7 +909,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 break;
 
             case "Main WideCamera Capture Test":
-                if (Build.MODEL.equals("ASUS_X017D")) {
+                if (Build.MODEL.contains("ASUS_X017D")) {
                     camId = 2;
                 }
                 i = new Intent(mActivity, CameraTestActivity.class);

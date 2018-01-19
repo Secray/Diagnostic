@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.asusodm.atd.smmitest.R;
+import com.asus.atd.smmitest.R;
 
 
 /**

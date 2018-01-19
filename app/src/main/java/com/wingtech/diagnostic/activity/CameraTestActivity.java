@@ -20,7 +20,7 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.asusodm.atd.smmitest.R;
+import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.util.Log;
 import com.wingtech.diagnostic.widget.CameraPreview;
 
@@ -171,7 +171,7 @@ public class CameraTestActivity extends TestingActivity {
             }else if (mCameraId == 1){
                 mPng.setImageBitmap(rotateBitmapByDegree(bm, -90));
             }else if(mCameraId == 2){
-                mPng.setImageBitmap(rotateBitmapByDegree(bm, Build.MODEL.equals("ASUS_X017D") ? 90 : -90));
+                mPng.setImageBitmap(rotateBitmapByDegree(bm, Build.MODEL.contains("ASUS_X017D") ? 90 : -90));
             }else if (mCameraId == 3) {
                 mPng.setImageBitmap(rotateBitmapByDegree(bm, -90));
             }
@@ -306,7 +306,7 @@ public class CameraTestActivity extends TestingActivity {
             } else if(mCameraId == 1){
                 setResult(VGACAMERA_REQUEST_CODE, intent);
             } else if(mCameraId == 2){
-                setResult(Build.MODEL.equals("ASUS_X017D") ?
+                setResult(Build.MODEL.contains("ASUS_X017D") ?
                         MAIN_WIDE_CAMERA_REQUEST_CODE : ASSITSCAMERA_REQUEST_CODE, intent);
             } else {
                 setResult(ASSITSCAMERA_REQUEST_CODE, intent);
@@ -342,7 +342,7 @@ public class CameraTestActivity extends TestingActivity {
                     Log.v(TAG, "cwWidth =" + lp.get(i).width + "cwHeight =" + lp.get(i).height);
                 }
                 Log.v(TAG, "cWidth =" + cWidth + "cHeight =" + cHeight);
-                if (Build.MODEL.equals("ASUS_X017D")) {
+                if (Build.MODEL.contains("ASUS_X017D")) {
                     p.setPictureSize(1920, 1080);
                     p.setPreviewSize(2160,1080);
                 } else {
@@ -387,7 +387,7 @@ public class CameraTestActivity extends TestingActivity {
         } else if(mCameraId == 1){
             setResult(VGACAMERA_REQUEST_CODE, intent);
         } else if(mCameraId == 2){
-            setResult(Build.MODEL.equals("ASUS_X017D") ?
+            setResult(Build.MODEL.contains("ASUS_X017D") ?
                     MAIN_WIDE_CAMERA_REQUEST_CODE : ASSITSCAMERA_REQUEST_CODE, intent);
         } else {
             setResult(ASSITSCAMERA_REQUEST_CODE, intent);

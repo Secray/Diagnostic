@@ -2,7 +2,7 @@ package com.wingtech.diagnostic.activity;
 
 import android.support.v7.widget.Toolbar;
 
-import com.asusodm.atd.smmitest.R;
+import com.asus.atd.smmitest.R;
 
 
 /**

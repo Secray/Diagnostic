@@ -5,7 +5,7 @@ import android.net.Uri;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.asusodm.atd.smmitest.R;
+import com.asus.atd.smmitest.R;
 
 
 /**

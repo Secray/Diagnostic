@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
-import com.asusodm.atd.smmitest.R;
+import com.asus.atd.smmitest.R;
 
 import static android.graphics.Color.BLACK;
 import static android.graphics.Color.BLUE;

@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.asusodm.atd.smmitest.R;
+import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.widget.TPTestView;
 
 import static com.wingtech.diagnostic.util.Constants.TOUCH_REQUEST_CODE;

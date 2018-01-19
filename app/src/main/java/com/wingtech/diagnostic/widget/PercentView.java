@@ -18,7 +18,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 
-import com.asusodm.atd.smmitest.R;
+import com.asus.atd.smmitest.R;
 
 
 /**

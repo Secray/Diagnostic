@@ -14,7 +14,7 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.asusodm.atd.smmitest.R;
+import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.util.Log;
 
 import static com.wingtech.diagnostic.util.Constants.HEADSETKEY_REQUEST_CODE;

@@ -6,7 +6,7 @@ import android.os.Build;
 import android.os.Environment;
 
 
-import com.asusodm.atd.smmitest.R;
+import com.asus.atd.smmitest.R;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -149,9 +149,9 @@ public class SharedPreferencesUtils {
             stringSMMI.append(mTestCases[i]);
             stringSMMI.append(",");
             if (result == 0) {
-                stringSMMI.append("1000");
-                stringSMMI.append(",");
-                stringSMMI.append("Not Test");
+                //stringSMMI.append("1000");
+                //stringSMMI.append(",");
+                //stringSMMI.append("Not Test");
                 isTestAll = false;
             } else if (result == 1) {
                 stringSMMI.append(mTestCasesErrorCode[i]);

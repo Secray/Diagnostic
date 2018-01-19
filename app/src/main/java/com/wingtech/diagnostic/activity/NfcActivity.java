@@ -13,7 +13,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 
-import com.asusodm.atd.smmitest.R;
+import com.asus.atd.smmitest.R;
 
 import java.nio.charset.Charset;
 import java.util.Locale;

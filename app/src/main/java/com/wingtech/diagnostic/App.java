@@ -3,7 +3,6 @@ package com.wingtech.diagnostic;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
-import android.util.SparseArray;
 
 import com.goodix.service.FingerprintManager;
 import com.wingtech.diagnostic.util.Log;

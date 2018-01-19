@@ -8,7 +8,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.asusodm.atd.smmitest.R;
+import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.listener.OnResultListener;
 
 /**
