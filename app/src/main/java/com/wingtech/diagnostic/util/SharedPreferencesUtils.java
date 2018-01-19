@@ -146,18 +146,17 @@ public class SharedPreferencesUtils {
             getParam(context, mTestCases[i], NOT_TEST);
             result = (int) getParam(context, mTestCases[i], NOT_TEST);
             Log.i(TAG, "mTestCases[i] = " + mTestCases[i] + "," + "result = " + result);
-            stringSMMI.append(mTestCases[i]);
-            stringSMMI.append(",");
             if (result == 0) {
-                //stringSMMI.append("1000");
-                //stringSMMI.append(",");
-                //stringSMMI.append("Not Test");
                 isTestAll = false;
             } else if (result == 1) {
+                stringSMMI.append(mTestCases[i]);
+                stringSMMI.append(",");
                 stringSMMI.append(mTestCasesErrorCode[i]);
                 stringSMMI.append(",");
                 stringSMMI.append("Fail");
             } else if (result == 2) {
+                stringSMMI.append(mTestCases[i]);
+                stringSMMI.append(",");
                 stringSMMI.append("0");
                 stringSMMI.append(",");
                 stringSMMI.append("Pass");
