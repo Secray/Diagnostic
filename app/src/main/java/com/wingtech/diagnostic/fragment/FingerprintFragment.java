@@ -69,7 +69,6 @@ public class FingerprintFragment extends TestFragment {
         mCacheThreadPool = Executors.newCachedThreadPool();
         mType = Helper.getSystemProperties(FINGERPRINT_TYPE, "1");
         Log.i("FingerPrint properties Fingerprint product " + mType);
-        isSwfp = Utils.isSwfp();
         if ("1".equals(mType) && !Build.MODEL.equals("ASUS_X017D")) {
             checkHardwareDetected();
             mFpManager = App.getInstance().getFpServiceManager();
@@ -111,10 +110,10 @@ public class FingerprintFragment extends TestFragment {
 
     @Override
     public void onResume() {
+        isSwfp = Utils.isSwfp();
         super.onResume();
-        if (!isSwfp) {
+        if ("1".equals(mType) && !Build.MODEL.equals("ASUS_X017D")) {
             Log.d("TEST_CHECK_SENSOR_TEST_INFO start");
-            if (!Build.MODEL.equals("ASUS_X017D")) {
             mCacheThreadPool.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -130,8 +129,7 @@ public class FingerprintFragment extends TestFragment {
                     }
                 }
             });
-            } else {
-
+        } else if (!isSwfp) {
             int result = -1;
             try {
                 if (theSensorTestTool != null)
@@ -141,8 +139,6 @@ public class FingerprintFragment extends TestFragment {
                 e.printStackTrace();
             }
             mCallback.onChange(result == 0);
-            }
-
         } else {
             manager.connect();
             doNextJob();

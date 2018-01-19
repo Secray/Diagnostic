@@ -122,6 +122,6 @@ public class Utils {
             }
         }
         Log.d("wuhaiwen","gpiocode"+String.valueOf(code));
-        return  code==0|| code==3? false:true;
+        return !(code == 0 || code == 3);
     }
 }

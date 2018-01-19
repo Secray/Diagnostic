@@ -2,6 +2,7 @@ package com.wingtech.diagnostic;
 
 import android.app.Activity;
 import android.app.Application;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.goodix.service.FingerprintManager;
@@ -32,7 +33,10 @@ public class App extends Application implements Application.ActivityLifecycleCal
         new TestItemHandler(this).start();
 
         mApplication = this;
-        //initFpMangerService();
+
+        if (Build.MODEL.contains("X00LD") || Build.MODEL.equals("ZB553KL")) {
+            initFpMangerService();
+        }
     }
 
     @Override
