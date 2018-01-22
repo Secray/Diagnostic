@@ -73,7 +73,7 @@ public class FingerprintFragment extends TestFragment {
             checkHardwareDetected();
             mFpManager = App.getInstance().getFpServiceManager();
             initDeviceMode();
-        } else if (!isSwfp) {
+        } else if (!isSwfp && Build.MODEL.equals("ASUS_X017D")) {
             Log.d(Log.TAG, "jichuang");
             initJiChuangManager();
         } else {
@@ -129,7 +129,7 @@ public class FingerprintFragment extends TestFragment {
                     }
                 }
             });
-        } else if (!isSwfp) {
+        } else if (!isSwfp && Build.MODEL.equals("ASUS_X017D")) {
             int result = -1;
             try {
                 if (theSensorTestTool != null)
