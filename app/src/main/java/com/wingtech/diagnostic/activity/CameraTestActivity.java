@@ -342,7 +342,7 @@ public class CameraTestActivity extends TestingActivity {
                     Log.v(TAG, "cwWidth =" + lp.get(i).width + "cwHeight =" + lp.get(i).height);
                 }
                 Log.v(TAG, "cWidth =" + cWidth + "cHeight =" + cHeight);
-                if (Build.MODEL.contains("ASUS_X017D")) {
+                if (Build.MODEL.contains("ASUS_X017D")||Build.MODEL.contains("ASUS_X017DA")) {
                     p.setPictureSize(1920, 1080);
                     p.setPreviewSize(2160,1080);
                 } else {
@@ -351,6 +351,7 @@ public class CameraTestActivity extends TestingActivity {
                 }
                 p.set("zsl","on");
                 p.setJpegQuality(85);
+                if(Build.MODEL.contains("ASUS_X017D"))
                 p.setPreviewFrameRate(5);
                 //频闪问题，设置为50HZ
                 // p.set("zsl","Parameters.ANTIBANDING_50HZ = " + Camera.Parameters.ANTIBANDING_50HZ);

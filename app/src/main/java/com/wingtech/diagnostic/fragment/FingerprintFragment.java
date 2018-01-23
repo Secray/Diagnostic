@@ -69,11 +69,11 @@ public class FingerprintFragment extends TestFragment {
         mCacheThreadPool = Executors.newCachedThreadPool();
         mType = Helper.getSystemProperties(FINGERPRINT_TYPE, "1");
         Log.i("FingerPrint properties Fingerprint product " + mType);
-        if ("1".equals(mType) && !Build.MODEL.equals("ASUS_X017D")) {
+        if ("1".equals(mType) && !Build.MODEL.equals("ASUS_X017D") && !Build.MODEL.equals("ASUS_X017DA")) {
             checkHardwareDetected();
             mFpManager = App.getInstance().getFpServiceManager();
             initDeviceMode();
-        } else if (!isSwfp && Build.MODEL.equals("ASUS_X017D")) {
+        } else if (!isSwfp && (Build.MODEL.equals("ASUS_X017D")|| Build.MODEL.equals("ASUS_X017DA"))) {
             Log.d(Log.TAG, "jichuang");
             initJiChuangManager();
         } else {
@@ -111,8 +111,10 @@ public class FingerprintFragment extends TestFragment {
     @Override
     public void onResume() {
         isSwfp = Utils.isSwfp();
+        if(Build.MODEL.equals("ASUS_X017DA"))
+            isSwfp = false;
         super.onResume();
-        if ("1".equals(mType) && !Build.MODEL.equals("ASUS_X017D")) {
+        if ("1".equals(mType) && !Build.MODEL.equals("ASUS_X017D") && !Build.MODEL.equals("ASUS_X017DA")) {
             Log.d("TEST_CHECK_SENSOR_TEST_INFO start");
             mCacheThreadPool.execute(new Runnable() {
                 @Override
@@ -129,7 +131,7 @@ public class FingerprintFragment extends TestFragment {
                     }
                 }
             });
-        } else if (!isSwfp && Build.MODEL.equals("ASUS_X017D")) {
+        } else if (!isSwfp && (Build.MODEL.equals("ASUS_X017D") || Build.MODEL.equals("ASUS_X017DA"))) {
             int result = -1;
             try {
                 if (theSensorTestTool != null)
@@ -171,7 +173,7 @@ public class FingerprintFragment extends TestFragment {
     @Override
     public void onStop() {
         super.onStop();
-        if ("1".equals(mType) && !Build.MODEL.equals("ASUS_X017D")) {
+        if ("1".equals(mType) && !Build.MODEL.equals("ASUS_X017D")&& !Build.MODEL.equals("ASUS_X017DA")) {
             mCacheThreadPool.execute(new Runnable() {
                 @Override
                 public void run() {
