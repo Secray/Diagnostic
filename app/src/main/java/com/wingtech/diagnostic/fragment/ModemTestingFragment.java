@@ -10,6 +10,6 @@ public class ModemTestingFragment extends TestFragment {
     @Override
     protected void onWork() {
         super.onWork();
-        mCallback.onChange(!"".equals(Helper.getSystemProperties("persist.radio.ver_info", "")));
+        mCallback.onChange(!"".equals(Helper.getSystemProperties("persist.radio.ver_info", "value")));
     }
 }

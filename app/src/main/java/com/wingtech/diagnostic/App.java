@@ -34,7 +34,7 @@ public class App extends Application implements Application.ActivityLifecycleCal
 
         mApplication = this;
 
-        if (Build.MODEL.contains("X00LD") || Build.MODEL.equals("ZB553KL")) {
+        if (Build.MODEL.contains("X00LD") || Build.MODEL.equals("ZB553KL") || Build.MODEL.contains("X00D")) {
             initFpMangerService();
         }
     }

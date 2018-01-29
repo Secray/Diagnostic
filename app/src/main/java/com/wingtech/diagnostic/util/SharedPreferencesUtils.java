@@ -114,7 +114,7 @@ public class SharedPreferencesUtils {
         if (Build.MODEL.equals("ASUS_X00LD")) {
             mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_3_cam);
             mTestCasesErrorCode = context.getResources().getIntArray(R.array.smmi_error_code_3_cam);
-        } else if (Build.MODEL.contains("ASUS_X00DD")) {
+        } else if (Build.MODEL.contains("ASUS_X00D")) {
             mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_2_cam_zc553kl);
             mTestCasesErrorCode = context.getResources().getIntArray(R.array.smmi_error_code_2_cam_zc553kl);
         } else if (Build.MODEL.contains("ASUS_X017D")) {
@@ -193,7 +193,7 @@ public class SharedPreferencesUtils {
         boolean isDone = false;
         if (Build.MODEL.equals("ASUS_X00LD")) {
             mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_3_cam);
-        } else if (Build.MODEL.contains("ASUS_X00DD")) {
+        } else if (Build.MODEL.contains("ASUS_X00D")) {
             mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_2_cam_zc553kl);
         } else if (Build.MODEL.contains("ASUS_X017D")) {
             mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_4_cam);

@@ -40,4 +40,5 @@
     <TEST_ITEM Id="37" Name="BoardMic2 Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_boardmic" Img="asus_diagnostic_img_boardmic"/>
     <TEST_ITEM Id="38" Name="Fingerprint Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_fingerprint" Img="asus_diagnostic_img_fingerprint"/>
     <TEST_ITEM Id="39" Name="Virtual Key Test" Disable="1" AutoTest="0" Icon="asus_diagnostic_ic_keypad" Img="asus_diagnostic_img_keypad"/>
+    <TEST_ITEM Id="40" Name="NFC Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_nfc" Img="asus_diagnostic_img_nfc_tagreader"/>
 </CONFIG>

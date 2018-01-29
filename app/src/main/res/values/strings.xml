@@ -179,7 +179,8 @@
     <string name="headsetkey_txt">Headset Key</string>
     <!-- NFC Activity-->
     <string name="nfc_title">If no NFC card found, please tap the fail button.</string>
-    <string name="nfc_txt">NFC card found</string>
+    <string name="nfc_found">NFC card found</string>
+    <string name="nfc_txt">Scan a Tag</string>
     <!-- WireCharg Activity-->
     <string name="wirechargkey_title">If no charging, please tap the fail.</string>
     <string name="wirechargkey_txt">Charging</string>

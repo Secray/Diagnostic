@@ -14,6 +14,8 @@ import com.wingtech.diagnostic.util.Log;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static com.wingtech.diagnostic.util.Constants.RECIEVER_REQUEST_CODE;
 
@@ -66,7 +68,7 @@ public class RecieverActivity extends TestingActivity implements View.OnClickLis
             localAudioManager.setSpeakerphoneOn(false);
         }
         audio_mode = localAudioManager.getMode();
-        localAudioManager.setMode(AudioManager.MODE_IN_CALL);
+        localAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
         oldVolume = localAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
         int maxVolume = localAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, maxVolume,0);
@@ -84,33 +86,46 @@ public class RecieverActivity extends TestingActivity implements View.OnClickLis
             mRes = EN_SOURCE;
         }
 
-        localAudioManager.setMode(AudioManager.MODE_IN_CALL);
+        localAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
 
         player = new MediaPlayer();
         player.reset();
         //player.setVolume(0.0f, 0.000f);/* ajayet invert to match headset */
+        player.setVolume(13.0f, 13.0f);/* ajayet invert to match headset */
         playMelody(getResources(), mRes[mIndex]);
         player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
 
-                localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-                player = new MediaPlayer();
-                player.reset();
-
-                player.setVolume(13.0f, 13.0f);/* ajayet invert to match headset */
-                mTxt.postDelayed(new Runnable() {
+//                localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+//                player = new MediaPlayer();
+//                player.reset();
+//
+//                player.setVolume(13.0f, 13.0f);/* ajayet invert to match headset */
+//                mTxt.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        playMelody(getResources(), mRes[mIndex]);
+//                        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//                            @Override
+//                            public void onCompletion(MediaPlayer mp) {
+//                                isCompleted = true;
+//                            }
+//                        });
+//                    }
+//                }, 550);
+                TimerTask timerTask = new TimerTask() {
                     @Override
                     public void run() {
-                        playMelody(getResources(), mRes[mIndex]);
-                        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                            @Override
-                            public void onCompletion(MediaPlayer mp) {
-                                isCompleted = true;
-                            }
-                        });
+                        try{
+                            if(player!=null)
+                                player.start();
+                        }catch (NullPointerException e){
+                            e.printStackTrace();
+                        }
                     }
-                }, 550);
+                };
+               new Timer().schedule(timerTask,1000);
             }
 
         });
@@ -158,9 +173,9 @@ public class RecieverActivity extends TestingActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        if (!isCompleted) {
-            return;
-        }
+//        if (!isCompleted) {
+//            return;
+//        }
         switch (v.getId()) {
             case R.id.action_one:
                 if (mIndex == 0) {

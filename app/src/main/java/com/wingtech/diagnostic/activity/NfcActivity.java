@@ -1,12 +1,15 @@
 package com.wingtech.diagnostic.activity;
 
 import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.os.Parcelable;
+import android.provider.Settings;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -101,7 +104,7 @@ public class NfcActivity extends TestingActivity {
         super.onResume();
         if (mAdapter != null) {
             if (!mAdapter.isEnabled()) {
-
+                    showWirelessSettingsDialog();
             }
             mAdapter.enableForegroundDispatch(NfcActivity.this, mPendingIntent, null, null);
             mAdapter.enableForegroundNdefPush(NfcActivity.this, mNdefPushMessage);
@@ -109,7 +112,7 @@ public class NfcActivity extends TestingActivity {
         //得到是否检测到ACTION_TECH_DISCOVERED触发
         if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(getIntent().getAction())) {
             //处理该intent
-            startActivity(getIntent());
+            resolveIntent(getIntent());
         }
     }
 
@@ -120,6 +123,12 @@ public class NfcActivity extends TestingActivity {
             mAdapter.disableForegroundDispatch(this);
             mAdapter.disableForegroundNdefPush(this);
         }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        resolveIntent(intent);
     }
 
     private void resolveIntent(Intent intent) {
@@ -188,6 +197,25 @@ public class NfcActivity extends TestingActivity {
         if(String.valueOf(result).length()>0)
             return true;
         return false;
+    }
+
+    private void showWirelessSettingsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.nfc_disabled);
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogInterface, int i) {
+//                finish();
+            }
+        });
+        builder.create().show();
+        return;
     }
 
 }

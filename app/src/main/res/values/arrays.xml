@@ -150,6 +150,7 @@
         <item>@string/test_case_headset_key</item>
         <item>@string/test_case_board_mic2</item>
         <item>@string/test_case_fingerprint</item>
+        <item>@string/test_case_nfc</item>
     </string-array>
 
     <integer-array name="smmi_error_code_4_cam">
@@ -189,6 +190,7 @@
         <item>1935</item>
         <item>1930</item>
         <item>2148</item>
+        <item>1993</item>
     </integer-array>
 
     <string-array name="test_cases_smmi_3_cam">
@@ -317,7 +319,7 @@
         <item>@string/test_case_keypad</item>
         <item>@string/test_case_multi_touch</item>
         <item>@string/test_case_vibrator</item>
-        <item>@string/test_case_vga_front</item>
+        <item>@string/test_case_tele_front</item>
         <item>@string/test_case_main_back</item>
         <item>@string/test_case_display</item>
         <item>@string/test_case_speaker</item>
@@ -354,7 +356,7 @@
         <item>@string/test_case_keypad</item>
         <item>@string/test_case_multi_touch</item>
         <item>@string/test_case_vibrator</item>
-        <item>@string/test_case_vga_front</item>
+        <item>@string/test_case_tele_front</item>
         <item>@string/test_case_main_back</item>
         <item>@string/test_case_display</item>
         <item>@string/test_case_speaker</item>
