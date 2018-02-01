@@ -1,7 +1,6 @@
 package com.wingtech.diagnostic.activity;
 
 
-import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
@@ -32,6 +31,7 @@ public class BoardMicActivity extends TestingActivity {
     CountDownTimer mTimer;
     CountDownTimer mtimer;
     private AudioManager localAudioManager = null;
+
     @Override
     protected int getLayoutResId() {
         return R.layout.content_dialog_test;
@@ -141,7 +141,6 @@ public class BoardMicActivity extends TestingActivity {
 
     public boolean startRecorder(String path) {
         //设置音源为Micphone
-
         mRecorder = new MediaRecorder();
         //mRecorder.setAudioChannels(1);
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -174,23 +173,41 @@ public class BoardMicActivity extends TestingActivity {
     private MediaPlayer mPlayer;
 
     public boolean startPlayer(String path) {
-        try {
-            //设置要播放的文件
-            if(localAudioManager == null){
-                localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-            }
-            localAudioManager.setMode(AudioManager.STREAM_MUSIC);
-            localAudioManager.setSpeakerphoneOn(true);
-            localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
+//        try {
+//            //设置要播放的文件
+//            if(localAudioManager == null){
+//                localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+//            }
+//            localAudioManager.setMode(AudioManager.STREAM_MUSIC);
+//            localAudioManager.setSpeakerphoneOn(true);
+//            localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
+//            mPlayer = new MediaPlayer();
+//            mPlayer.reset();
+//            mPlayer.setVolume(13.0f, 13.0f);
+//            mPlayer.setDataSource(path);
+//            mPlayer.prepare();
+//            //播放
+//            mPlayer.start();
+//        } catch (Exception e) {
+//            Log.e(TAG, "prepare() failed");
+//        }
+        if (mPlayer != null) {
+            Log.e(TAG, "mPlayer = " + mPlayer);
+            stopPlayer();
+        }
+        synchronized (this) {
+            Log.d(TAG, "synchronized mPlayer start");
             mPlayer = new MediaPlayer();
-            mPlayer.reset();
-            mPlayer.setVolume(13.0f, 13.0f);
-            mPlayer.setDataSource(path);
-            mPlayer.prepare();
-            //播放
-            mPlayer.start();
-        } catch (Exception e) {
-            Log.e(TAG, "prepare() failed");
+            try {
+                mPlayer.setDataSource(path);
+                Log.d(TAG, "startplay mPlayer.prepare() start");
+                mPlayer.prepare();
+                mPlayer.start();
+                Log.d(TAG, "startplay mPlayer.start() end");
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.d(TAG, "startplay mPlayer.prepare() fail");
+            }
         }
 
         return false;

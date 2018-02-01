@@ -41,6 +41,8 @@ public class HeadsetMicActivity extends TestingActivity {
     CountDownTimer mTimer;
     CountDownTimer mtimer;
     private static boolean isShow = true;
+    private boolean isRegister = false;
+
     @Override
     protected int getLayoutResId() {
         return R.layout.content_dialog_test;
@@ -50,7 +52,7 @@ public class HeadsetMicActivity extends TestingActivity {
     protected void initViews() {
         mTxt = (TextView) findViewById(R.id.dialog_txt);
         mContentDialog = getIntent().getStringExtra("title_dialog");
-        path = Environment.getExternalStorageDirectory().getAbsolutePath()+"/heassettest.pcm";
+        path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/heassettest.pcm";
     }
 
     @Override
@@ -67,9 +69,13 @@ public class HeadsetMicActivity extends TestingActivity {
         }
     }
 
-    public void onPause()
-    {
+    public void onPause() {
         super.onPause();
+        //注销监听器
+        if (isRegister) {
+            unregisterReceiver(mHPReceiver);
+            isRegister = false;
+        }
 
     }
 
@@ -77,6 +83,7 @@ public class HeadsetMicActivity extends TestingActivity {
     protected void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
+        isRegister = true;
         IntentFilter intentFilter = new IntentFilter();
         mHPReceiver = new HeadsetPlugReceiver();
         intentFilter.addAction("android.intent.action.HEADSET_PLUG");
@@ -84,7 +91,7 @@ public class HeadsetMicActivity extends TestingActivity {
 
     }
 
-    public void showTheDialog(boolean flag){
+    public void showTheDialog(boolean flag) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.content_test_dialog, null);//获取自定义布局
@@ -95,14 +102,14 @@ public class HeadsetMicActivity extends TestingActivity {
         Button pass = (Button) layout.findViewById(R.id.pass);
         Button fail = (Button) layout.findViewById(R.id.fail);
         LinearLayout ll = (LinearLayout) layout.findViewById(R.id.result);
-        if (!flag){
+        if (!flag) {
             mTitle.setText(R.string.headset_context_dialog_title);
             mContent.setText(R.string.headset_context_dialog_conteent);
             ok.setVisibility(View.VISIBLE);
             ll.setVisibility(View.GONE);
-        }else{
+        } else {
             mTitle.setText(R.string.dialog_title);
-            if (mContentDialog != null){
+            if (mContentDialog != null) {
                 String sFormat = getResources().getString(R.string.dialog_context);
                 String s = String.format(sFormat, mContentDialog);
                 mContent.setText(s);
@@ -110,7 +117,6 @@ public class HeadsetMicActivity extends TestingActivity {
             ok.setVisibility(View.GONE);
             ll.setVisibility(View.VISIBLE);
         }
-
 
 
         ok.setOnClickListener(new View.OnClickListener() {
@@ -146,13 +152,13 @@ public class HeadsetMicActivity extends TestingActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if (mTimer != null){
+        if (mTimer != null) {
             mTimer.cancel();
-            mTimer=null;
+            mTimer = null;
         }
-        if (mtimer != null){
+        if (mtimer != null) {
             mtimer.cancel();
-            mtimer=null;
+            mtimer = null;
         }
         stopPlayer();
         stopRecorder();
@@ -160,16 +166,12 @@ public class HeadsetMicActivity extends TestingActivity {
         sendResult();
     }
 
-    private class HeadsetPlugReceiver extends BroadcastReceiver
-    {
+    private class HeadsetPlugReceiver extends BroadcastReceiver {
 
         @Override
-        public void onReceive(Context context, Intent intent)
-        {
-            if (intent.hasExtra("state"))
-            {
-                if (intent.getIntExtra("state", 0) == 0)
-                {
+        public void onReceive(Context context, Intent intent) {
+            if (intent.hasExtra("state")) {
+                if (intent.getIntExtra("state", 0) == 0) {
                     if (dlg != null) {
                         dlg.dismiss();
                     }
@@ -177,9 +179,8 @@ public class HeadsetMicActivity extends TestingActivity {
                     //plug out
                     isPlug = false;
                     showTheDialog(false);
-                }
-                else if (intent.getIntExtra("state", 0) == 1) {
-                    if(dlg!=null) {
+                } else if (intent.getIntExtra("state", 0) == 1) {
+                    if (dlg != null) {
                         dlg.dismiss();
                     }
                     isShow = false;
@@ -197,7 +198,7 @@ public class HeadsetMicActivity extends TestingActivity {
                         public void onFinish() {
                             mTxt.setText(R.string.mic_context_dialog_play);
                             stopRecorder();
-                            if(isPlug) {
+                            if (isPlug) {
                                 startPlayer(path);
                                 mtimer = new CountDownTimer(5000, 1000) {
 
@@ -209,7 +210,7 @@ public class HeadsetMicActivity extends TestingActivity {
                                     @Override
                                     public void onFinish() {
                                         stopPlayer();
-                                        if(isPlug){
+                                        if (isPlug) {
                                             showTheDialog(true);
                                         }
                                     }
@@ -225,6 +226,7 @@ public class HeadsetMicActivity extends TestingActivity {
     }
 
     private MediaRecorder mRecorder;
+
     public boolean startRecorder(String path) {
         //设置音源为Micphone
 
@@ -257,6 +259,7 @@ public class HeadsetMicActivity extends TestingActivity {
     }
 
     private MediaPlayer mPlayer;
+
     public boolean startPlayer(String path) {
         try {
             //设置要播放的文件
@@ -271,14 +274,14 @@ public class HeadsetMicActivity extends TestingActivity {
 
             int max = localAudioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL);
             Log.i(TAG, "max=" + max);
-            localAudioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL,max,0);
+            localAudioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, max, 0);
             mPlayer.setVolume(13.0f, 13.0f);
             mPlayer.setAudioStreamType(AudioManager.STREAM_VOICE_CALL);
             mPlayer.setDataSource(path);
             mPlayer.prepare();
             //播放
             mPlayer.start();
-        }catch(Exception e){
+        } catch (Exception e) {
             Log.e(TAG, "prepare() failed");
         }
 

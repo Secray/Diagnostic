@@ -198,22 +198,41 @@ public class SecondaryMicActivity extends TestingActivity {
     private MediaPlayer mPlayer;
 
     public boolean startPlayer(String path) {
-        try {
-            if(localAudioManager == null){
-                localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-            }
-            localAudioManager.setMode(AudioManager.STREAM_MUSIC);
-            localAudioManager.setSpeakerphoneOn(true);
-            localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
+//        try {
+//            if(localAudioManager == null){
+//                localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+//            }
+//            localAudioManager.setMode(AudioManager.STREAM_MUSIC);
+//            localAudioManager.setSpeakerphoneOn(true);
+//            localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
+//            mPlayer = new MediaPlayer();
+//            mPlayer.reset();
+//            mPlayer.setVolume(13.0f, 13.0f);
+//            mPlayer.setDataSource(path);
+//            mPlayer.prepare();
+//            //播放
+//            mPlayer.start();
+//        } catch (Exception e) {
+//            Log.e(TAG, "prepare() failed");
+//        }
+
+        if (mPlayer != null) {
+            Log.e(TAG, "mPlayer = " + mPlayer);
+            stopPlayer();
+        }
+        synchronized (this) {
+            Log.d(TAG, "synchronized mPlayer start");
             mPlayer = new MediaPlayer();
-            mPlayer.reset();
-            mPlayer.setVolume(13.0f, 13.0f);
-            mPlayer.setDataSource(path);
-            mPlayer.prepare();
-            //播放
-            mPlayer.start();
-        } catch (Exception e) {
-            Log.e(TAG, "prepare() failed");
+            try {
+                mPlayer.setDataSource(path);
+                Log.d(TAG, "startplay mPlayer.prepare() start");
+                mPlayer.prepare();
+                mPlayer.start();
+                Log.d(TAG, "startplay mPlayer.start() end");
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.d(TAG, "startplay mPlayer.prepare() fail");
+            }
         }
 
         return false;
