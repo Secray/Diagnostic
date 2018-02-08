@@ -24,6 +24,9 @@ public class TestItemHandler extends Thread {
         this.mContext = new WeakReference<>(context);
         mConfigName = "config/config_" + Build.MODEL + ".xml";
         Log.i("model name = " + mConfigName);
+        if(Build.MODEL.equals("ZC600KL"))
+            mConfigName = "config/config_ASUS_X017DA.xml";
+        Log.i("model name = " + mConfigName);
     }
 
     @Override

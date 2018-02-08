@@ -67,7 +67,8 @@ public class TestAllActivity extends BaseActivity
     @Override
     protected void onWork() {
         mLen = mCaseList.size();
-        doTest();
+        if (mLen > 0)
+            doTest();
         /*CommonSingleTestFragment fragment = new CommonSingleTestFragment();
         fragment.setTitleChangedListener(this);
         getSupportFragmentManager().beginTransaction().replace(R.id.test_content,
@@ -84,7 +85,7 @@ public class TestAllActivity extends BaseActivity
         }
     }
 
-    private AlertDialog showDialog(){
+    private AlertDialog showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.content_test_dialog, null);//获取自定义布局
@@ -147,7 +148,7 @@ public class TestAllActivity extends BaseActivity
         SharedPreferencesUtils.setParam(this, mTitle,
                 result ? SharedPreferencesUtils.PASS : SharedPreferencesUtils.FAIL);
         Log.i("mCurrent = " + mCurrent + " " + mTitle + " " + result + " mIsFinishing = " + mIsFinishing);
-        mCurrent ++;
+        mCurrent++;
         if (mCurrent > mCaseList.size() - 1) {
             startActivity(new Intent(this, TestResultActivity.class));
             finish();
