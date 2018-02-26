@@ -15,8 +15,6 @@ import android.widget.TextView;
 import com.asus.atd.smmitest.R;
 import com.wingtech.diagnostic.util.Log;
 
-import java.io.IOException;
-
 import static com.wingtech.diagnostic.util.Constants.MIC_REQUEST_CODE;
 
 /**
@@ -31,6 +29,7 @@ public class BoardMicActivity extends TestingActivity {
     CountDownTimer mTimer;
     CountDownTimer mtimer;
     private AudioManager localAudioManager = null;
+    private AlertDialog dlg;
 
     @Override
     protected int getLayoutResId() {
@@ -132,7 +131,7 @@ public class BoardMicActivity extends TestingActivity {
                 sendResult();
             }
         });
-        AlertDialog dlg = builder.create();
+         dlg = builder.create();
         dlg.setCanceledOnTouchOutside(false);
         dlg.show();
     }
@@ -152,11 +151,11 @@ public class BoardMicActivity extends TestingActivity {
 
         try {
             mRecorder.prepare();
-        } catch (IOException e) {
+            mRecorder.start();
+        } catch (Exception e) {
             Log.e(TAG, "prepare() failed");
         }
         //录音
-        mRecorder.start();
         return false;
     }
 
@@ -222,6 +221,12 @@ public class BoardMicActivity extends TestingActivity {
         return false;
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //leaked window DecorView 解决窗口泄露问题
+        if(dlg!=null)
+            dlg.dismiss();
+    }
 }
 

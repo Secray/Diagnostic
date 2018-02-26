@@ -47,7 +47,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             case android.R.id.home:
                 onBackPressed();
                 break;
-            case R.id.clear:
+//            case R.id.clear:
             case R.id.reset:
                 showTheDialog();
                 /*

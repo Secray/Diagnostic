@@ -22,6 +22,7 @@ public class App extends Application implements Application.ActivityLifecycleCal
 
     private FingerprintManager mFingerprintManager;
     private static App mApplication;
+    public static boolean isAllTest = false;
 
     @Override
     public void onCreate() {

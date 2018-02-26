@@ -133,6 +133,7 @@ public class DisplayActivity extends TestingActivity {
             }
         });
         AlertDialog dlg = builder.create();
+        dlg.setCancelable(false);
         dlg.show();
     }
 }

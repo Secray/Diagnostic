@@ -26,6 +26,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.EntryXComparator;
+import com.wingtech.diagnostic.App;
 import com.wingtech.diagnostic.service.TemperatureService;
 import com.wingtech.diagnostic.util.Log;
 import com.wingtech.diagnostic.util.SharedPreferencesUtils;
@@ -144,7 +145,7 @@ public class MainActivity extends BaseActivity
                     @Override
                     public void run() {
                         initCPUPercent(cpuRate);
-                        if (!file.exists()) {
+                        if (!file.exists() && !App.isAllTest) {
                             SharedPreferencesUtils.setNull(MainActivity.this);
                         }
                         if (mService != null) {
@@ -224,6 +225,7 @@ public class MainActivity extends BaseActivity
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.test_all:
+                App.isAllTest = true;
                 startActivity(new Intent(MainActivity.this, TestAllActivity.class));
                 break;
             case R.id.single_test:

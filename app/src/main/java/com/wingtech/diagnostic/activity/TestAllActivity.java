@@ -103,6 +103,7 @@ public class TestAllActivity extends BaseActivity
             public void onClick(View arg0) {
                 dlg.dismiss();
                 mIsFinishing = true;
+                App.isAllTest = false;
                 finish();
             }
         });
@@ -151,10 +152,15 @@ public class TestAllActivity extends BaseActivity
         mCurrent++;
         if (mCurrent > mCaseList.size() - 1) {
             startActivity(new Intent(this, TestResultActivity.class));
+            App.isAllTest = false;
             finish();
         } else {
             if ((mDialog == null || !mDialog.isShowing()) && !mIsFinishing) {
-                doTest();
+                try {
+                    doTest();
+                }catch (IllegalStateException e){
+                    e.printStackTrace();
+                }
             }
         }
     }
