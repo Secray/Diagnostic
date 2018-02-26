@@ -1,6 +1,7 @@
 package com.wingtech.diagnostic.fragment;
 
 import android.hardware.input.InputManager;
+import android.os.Handler;
 import android.view.InputDevice;
 
 import com.wingtech.diagnostic.util.Log;
@@ -14,9 +15,19 @@ import static android.content.Context.INPUT_SERVICE;
 public class CMDMouseTestingFragment extends TestFragment
         implements InputManager.InputDeviceListener {
     private InputManager mIm;
+    private Handler mHandler;
     @Override
     protected void onWork() {
         super.onWork();
+        mHandler = new Handler();
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (mCallback != null) {
+                    mCallback.onChange(false);
+                }
+            }
+        }, 10000);
         mIm = (InputManager) mActivity.getSystemService(INPUT_SERVICE);
         mIm.registerInputDeviceListener(this, null);
         final int[] devices = InputDevice.getDeviceIds();
