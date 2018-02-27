@@ -5,6 +5,8 @@
     <string name="reset_dialog_title">Reset</string>
     <string name="reset_dialog_content">Tap reset to clear all of the test result?</string>
 
+    <string name="clear_dialog_title">Clear</string>
+    <string name="clear_dialog_content">Tap clear to clear all of the test result?</string>
     <!-- MainActivity -->
     <string name="main_cpu_title">CPU Load</string>
     <string name="main_battery_title">Battery Level</string>
