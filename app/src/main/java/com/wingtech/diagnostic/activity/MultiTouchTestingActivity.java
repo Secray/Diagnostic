@@ -102,7 +102,7 @@ public class MultiTouchTestingActivity extends TestingActivity implements
             }
         }
         if (size == 5) {
-            mHandler.sendEmptyMessageDelayed(MESSAGE_WHAT, 1000);
+            mHandler.sendEmptyMessage(MESSAGE_WHAT);
         }
     }
 
