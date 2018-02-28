@@ -32,7 +32,7 @@ public class CallActivity extends TestingActivity implements View.OnClickListene
     private EditText mPhoneNumber;
     private AppCompatButton mCallAction;
     private boolean mIsCalled;
-
+    private AlertDialog dlg;
     @Override
     protected void onWork() {
         mTitle = getIntent().getStringExtra("title");
@@ -65,7 +65,7 @@ public class CallActivity extends TestingActivity implements View.OnClickListene
     public void onClick(View v) {
         String number = mPhoneNumber.getText().toString();
         if (!"".equals(number)) {
-            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number));
+            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)
                     != PackageManager.PERMISSION_GRANTED) {
                 return;
@@ -83,7 +83,11 @@ public class CallActivity extends TestingActivity implements View.OnClickListene
                 case TelephonyManager.CALL_STATE_IDLE:
                     Log.i("state idle");
                     if (mIsCalled) {
-                        showTheDialog();
+                        try {
+                            showTheDialog();
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
                     }
                     mIsCalled = false;
                     break;
@@ -125,7 +129,8 @@ public class CallActivity extends TestingActivity implements View.OnClickListene
                 sendResult();
             }
         });
-        AlertDialog dlg = builder.create();
+        dlg = builder.create();
         dlg.show();
     }
+
 }
