@@ -2,6 +2,8 @@ package com.wingtech.diagnostic.fragment;
 
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 
 import com.wingtech.diagnostic.util.Log;
 
@@ -14,7 +16,12 @@ import static android.content.Context.SENSOR_SERVICE;
 public class MagneticTestingFragment extends TestFragment {
     private SensorManager mSensorManager;
     private Sensor mMagnetic;
-    private boolean mX, mY, mZ;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.i("MagneticTestingFragment onCreate");
+    }
 
     @Override
     protected void onWork() {

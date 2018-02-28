@@ -44,6 +44,7 @@ public class BlueToothFragment extends TestFragment {
                     Log.i("BLUETOOTH DISCOVERY FINISHED");
                     mResult = mDevice != null;
                     mCallback.onChange(mResult);
+                    removeCallbacksAndMessages(null);
                     break;
                 case BluetoothReceiver.BLUETOOTH_DISCOVERY_STARTED:
                     Log.i("BLUETOOTH DISCOVERY STARTED");
@@ -51,6 +52,7 @@ public class BlueToothFragment extends TestFragment {
                     if (!isDiscovering) {
                         mResult = false;
                         mCallback.onChange(mResult);
+                        removeCallbacksAndMessages(null);
                     }
                     break;
                 case BluetoothReceiver.BLUETOOTH_STATE_CHANGED:
@@ -73,7 +75,6 @@ public class BlueToothFragment extends TestFragment {
                 mBluetoothAdapter.disable();
             }
         }
-        mHandler.removeCallbacksAndMessages(null);
     }
 
     protected void onWork() {

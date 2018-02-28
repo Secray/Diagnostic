@@ -32,6 +32,7 @@ public class CMDMouseTestingFragment extends TestFragment
         mIm.registerInputDeviceListener(this, null);
         final int[] devices = InputDevice.getDeviceIds();
         for (int deviceId : devices) {
+            Log.i("CMDMouseTestingFragment deviceId = " + deviceId);
             InputDevice device = InputDevice.getDevice(deviceId);
             if (!device.isVirtual()) {
                 if (device.getName().contains("Mouse")) {
@@ -49,6 +50,7 @@ public class CMDMouseTestingFragment extends TestFragment
 
     @Override
     public void onInputDeviceAdded(int deviceId) {
+        Log.i("CMDMouseTestingFragment onInputDeviceAdded  deviceId = " + deviceId);
         InputDevice device = InputDevice.getDevice(deviceId);
         if (device != null && !device.isVirtual()) {
             if(device.getName().contains("Mouse")) {
