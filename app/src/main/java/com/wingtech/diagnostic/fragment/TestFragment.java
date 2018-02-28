@@ -3,7 +3,7 @@ package com.wingtech.diagnostic.fragment;
 import android.view.View;
 import android.widget.TextView;
 
-import com.asus.atd.smmitest.R;
+import com.asusodm.atd.smmitest.R;
 import com.wingtech.diagnostic.listener.OnResultChangedCallback;
 
 /**

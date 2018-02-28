@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.asus.atd.smmitest.R;
+import com.asusodm.atd.smmitest.R;
 import com.wingtech.diagnostic.util.Log;
 
 import static com.wingtech.diagnostic.util.Constants.MIC_REQUEST_CODE;

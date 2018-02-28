@@ -6,7 +6,7 @@ import android.os.Build;
 import android.os.Environment;
 
 
-import com.asus.atd.smmitest.R;
+import com.asusodm.atd.smmitest.R;
 
 import java.io.BufferedWriter;
 import java.io.File;

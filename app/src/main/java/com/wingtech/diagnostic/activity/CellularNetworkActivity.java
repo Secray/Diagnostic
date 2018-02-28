@@ -10,7 +10,7 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import com.android.helper.Helper;
-import com.asus.atd.smmitest.R;
+import com.asusodm.atd.smmitest.R;
 import com.wingtech.diagnostic.fragment.CellularNetworkTestFragment;
 import com.wingtech.diagnostic.fragment.CellularNetworkTestingFragment;
 import com.wingtech.diagnostic.listener.OnResultListener;

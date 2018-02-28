@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.widget.TextView;
 
-import com.asus.atd.smmitest.R;
+import com.asusodm.atd.smmitest.R;
 
 
 /**

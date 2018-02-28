@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.asus.atd.smmitest.R;
+import com.asusodm.atd.smmitest.R;
 
 
 
