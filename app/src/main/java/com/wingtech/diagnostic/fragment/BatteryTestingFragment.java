@@ -29,6 +29,9 @@ public class BatteryTestingFragment extends TestFragment {
                     mResult = false;
                     break;
             }
+
+            mActivity.unregisterReceiver(mBatteryBroadcastReceiver);
+            mBatteryBroadcastReceiver = null;
             mTxtTitle.postDelayed(new Runnable() {
                 @Override
                 public void run() {
