@@ -57,6 +57,7 @@ public class CameraTestActivity extends TestingActivity {
     private Camera.AutoFocusCallback mAutoFocusCallback = null;
     private ToneGenerator tone;
     private android.hardware.Camera mCamera;
+    private AudioManager mAudioManager;
     //HAL1 version code
     private static final int CAMERA_HAL_API_VERSION_1_0 = 0x100;
 
@@ -90,6 +91,7 @@ public class CameraTestActivity extends TestingActivity {
 
     @Override
     protected void onWork() {
+        mAudioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
         if (!checkCameraHardware(CameraTestActivity.this)) {
             Toast.makeText(CameraTestActivity.this, "Camera does not support", Toast.LENGTH_SHORT)
                     .show();
@@ -231,7 +233,9 @@ public class CameraTestActivity extends TestingActivity {
             if(tone == null)
                 //发出提示用户的声音
                 tone = new ToneGenerator(AudioManager.STREAM_MUSIC,ToneGenerator.MAX_VOLUME);
-            tone.startTone(ToneGenerator.TONE_PROP_BEEP2);
+            if (mAudioManager.getRingerMode() == 2) {
+                tone.startTone(ToneGenerator.TONE_PROP_BEEP2);
+            }
         }
     };
 
