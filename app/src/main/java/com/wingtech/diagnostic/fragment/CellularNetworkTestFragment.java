@@ -200,4 +200,6 @@ public class CellularNetworkTestFragment extends TestFragment implements View.On
             return "Strong signal";
         }
     }
+
+
 }

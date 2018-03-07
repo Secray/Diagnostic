@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Diagnostic_ZC553KL.iml" filepath="$PROJECT_DIR$/Diagnostic_ZC553KL.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Diagnostic.iml" filepath="$PROJECT_DIR$/Diagnostic.iml" />
+      <module fileurl="file://D:\workspace\Diagnostic_zc553\Diagnostic\Diagnostic_ZC553KL.iml" filepath="D:\workspace\Diagnostic_zc553\Diagnostic\Diagnostic_ZC553KL.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

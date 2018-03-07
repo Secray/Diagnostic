@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.asusodm.atd.smmitest"
-    android:sharedUserId="android.uid.system">
+    package="com.asusodm.atd.smmitest">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -44,76 +43,64 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="com.asusodm.atd.smmitest.main.MAIN"
+            android:name=".main.MAIN"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.wingtech.diagnostic.activity.RepairActivity"
             android:label="@string/main_bottom_button_repair"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-
         <activity
             android:name="com.wingtech.diagnostic.activity.HelpActivity"
             android:label="@string/main_bottom_button_help"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-
         <activity
             android:name="com.wingtech.diagnostic.activity.AboutActivity"
             android:label="@string/menu_test_about"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-
         <activity
             android:name="com.wingtech.diagnostic.activity.HotlineServiceActivity"
             android:label="@string/help_list_item_hotline_service"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-
         <activity
             android:name="com.wingtech.diagnostic.activity.SendRepairRequestActivity"
             android:label="@string/repair_request_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
-
         <activity
             android:name="com.wingtech.diagnostic.activity.TestResultActivity"
             android:label="@string/menu_test_result"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-
         <activity
             android:name="com.wingtech.diagnostic.activity.TouchActivity"
             android:label="@string/touch_title"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-
         <activity
             android:name="com.wingtech.diagnostic.activity.SingleTestListActivity"
             android:label="@string/main_bottom_button_single_test"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-
         <activity
             android:name="com.wingtech.diagnostic.activity.SingleTestActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name="com.wingtech.diagnostic.activity.TouchTestActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name="com.wingtech.diagnostic.activity.CameraTestActivity"
             android:screenOrientation="portrait" />
@@ -160,7 +147,6 @@
             android:name="com.wingtech.diagnostic.activity.TestAllActivity"
             android:configChanges="orientation|screenSize|keyboardHidden|keyboard|screenLayout|mcc|mnc"
             android:screenOrientation="portrait" />
-
         <activity
             android:name="com.wingtech.diagnostic.activity.CameraFlashActivity"
             android:screenOrientation="portrait" />
@@ -189,10 +175,15 @@
         <service android:name="com.wingtech.diagnostic.service.TemperatureService" />
         <service android:name="com.goodix.service.FingerprintManagerService">
             <intent-filter>
+
                 <!-- AIDL完整路径名。必须指明，客户端能够通过AIDL类名查找到它的实现类 -->
                 <action android:name="com.goodix.service.FingerprintManagerService" />
             </intent-filter>
         </service>
+        <service
+            android:name="com.wingtech.diagnostic.service.MusicService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
