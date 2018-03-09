@@ -88,8 +88,20 @@ public class BlueToothFragment extends TestFragment {
         mBluetoothReceiver = new BluetoothReceiver(mBluetoothAdapter, mHandler);
         mActivity.registerReceiver(mBluetoothReceiver, intentFilter);
         if (mBluetoothAdapter.isEnabled()) {
-            mIsOpen = true;
-            mBluetoothAdapter.startDiscovery();
+            mBluetoothAdapter.disable();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(50);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    mBluetoothAdapter.enable();
+                    mIsOpen = true;
+                    mBluetoothAdapter.startDiscovery();
+                }
+            }).start();
         } else {
             mBluetoothAdapter.enable();
         }

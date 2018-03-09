@@ -64,7 +64,13 @@ public class WiFiTestingFragment extends TestFragment {
                 || mWiFiState == WifiManager.WIFI_STATE_UNKNOWN) {
             mWiFiEnable = mWiFiManager.setWifiEnabled(true);
         } else {
-            mWiFiEnable = true;
+            mWiFiManager.setWifiEnabled(false);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    mWiFiEnable = mWiFiManager.setWifiEnabled(true);
+                }
+            }).start();
         }
     }
 
