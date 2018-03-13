@@ -41,6 +41,11 @@ captures/
 .idea/libraries
 .idea/.*
 
+#idea
+*.idea
+*.iml
+out/
+
 # Keystore files
 *.jks
 
