@@ -27,7 +27,7 @@
     <TEST_ITEM Id="24" Name="NFC Test" Disable="1" AutoTest="0" Icon="asus_diagnostic_ic_nfc" Img="asus_diagnostic_img_nfc"/>
     <TEST_ITEM Id="25" Name="HDMI Test" Disable="1" AutoTest="0" Icon="asus_diagnostic_ic_hdmi" Img="asus_diagnostic_img_hdmi"/>
     <TEST_ITEM Id="26" Name="SD Card Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_sdcard" Img="asus_diagnostic_img_sdcard"/>
-    <TEST_ITEM Id="27" Name="SIM Card Test" Disable="0" AutoTest="1" Icon="asus_diagnostic_ic_simcard" Img="asus_diagnostic_img_simcard"/>
+    <TEST_ITEM Id="27" Name="SIM Card1 Test" Disable="0" AutoTest="1" Icon="asus_diagnostic_ic_simcard" Img="asus_diagnostic_img_simcard"/>
     <TEST_ITEM Id="28" Name="SIM Card2 Test" Disable="0" AutoTest="1" Icon="asus_diagnostic_ic_simcard" Img="asus_diagnostic_img_simcard"/>
     <TEST_ITEM Id="29" Name="Wireless Charging Test" Disable="1" AutoTest="0" Icon="asus_diagnostic_ic_wireless_charging" Img="asus_diagnostic_img_wireless_charging"/>
     <TEST_ITEM Id="30" Name="AC Charging Test" Disable="0" AutoTest="0" Icon="asus_diagnosticself_ic_accharger" Img="ac_charger"/>

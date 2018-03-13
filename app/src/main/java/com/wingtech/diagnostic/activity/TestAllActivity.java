@@ -27,6 +27,8 @@ import com.wingtech.diagnostic.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @author xiekui
@@ -51,6 +53,8 @@ public class TestAllActivity extends BaseActivity
     private AlertDialog mDialog;
     private List<Fragment> mTestFragments;
     private TestAdapter mTestAdapter;
+
+    ExecutorService mCachedThreadPool = Executors.newCachedThreadPool();
 
     @Override
     protected int getLayoutResId() {
@@ -150,6 +154,13 @@ public class TestAllActivity extends BaseActivity
             mTestFragments.clear();
             mTestFragments.add(fragment);
             mTestAdapter.update(mTestFragments);
+            mCachedThreadPool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    SharedPreferencesUtils.deleteFile();
+                    SharedPreferencesUtils.outputFile(TestAllActivity.this);
+                }
+            });
         } else {
             CommonSingleTestFragment commonFragment = new CommonSingleTestFragment();
             commonFragment.setOnResultChangedCallback(this);
@@ -165,7 +176,7 @@ public class TestAllActivity extends BaseActivity
         SharedPreferencesUtils.setParam(this, mTitle,
                 result ? SharedPreferencesUtils.PASS : SharedPreferencesUtils.FAIL);
         Log.i("mCurrent = " + mCurrent + " " + mTitle + " " + result + " mIsFinishing = " + mIsFinishing);
-        if (mCurrent > mCaseList.size() - 1) {
+        if (mCurrent >= mCaseList.size() - 1) {
             startActivity(new Intent(this, TestResultActivity.class));
             App.isAllTest = false;
             finish();

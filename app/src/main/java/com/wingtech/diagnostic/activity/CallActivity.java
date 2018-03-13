@@ -130,6 +130,7 @@ public class CallActivity extends TestingActivity implements View.OnClickListene
             }
         });
         dlg = builder.create();
+        dlg.setCanceledOnTouchOutside(false);
         dlg.show();
     }
 

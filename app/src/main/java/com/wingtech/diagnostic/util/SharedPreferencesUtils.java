@@ -124,10 +124,9 @@ public class SharedPreferencesUtils {
             mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_2_cam);
             mTestCasesErrorCode = context.getResources().getIntArray(R.array.smmi_error_code_2_cam);
         }
-        int result = 0;
+        int result;
         isTestAll = true;
         for (int i = 0; i < mTestCases.length; i++) {
-            getParam(context, mTestCases[i], NOT_TEST);
             result = (int) getParam(context, mTestCases[i], NOT_TEST);
             Log.i(TAG, "mTestCases[i] = " + mTestCases[i] + "," + "result = " + result);
             stringSMMI.append(mTestCases[i]);
@@ -143,7 +142,6 @@ public class SharedPreferencesUtils {
         }
 
         for (int i = 0; i < mTestCases.length; i++) {
-            getParam(context, mTestCases[i], NOT_TEST);
             result = (int) getParam(context, mTestCases[i], NOT_TEST);
             Log.i(TAG, "mTestCases[i] = " + mTestCases[i] + "," + "result = " + result);
             if (result == 0) {

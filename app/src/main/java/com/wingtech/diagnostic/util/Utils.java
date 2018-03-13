@@ -71,7 +71,7 @@ public class Utils {
             case "SD Card Test":
                 fragment = new SDCardTestingFragment();
                 break;
-            case "SIM Card Test":
+            case "SIM Card1 Test":
                 fragment = new SIMCardTestingFragment(1);
                 break;
             case "SIM Card2 Test":

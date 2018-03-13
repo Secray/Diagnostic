@@ -58,7 +58,7 @@
     <string name="test_case_light_sensor">LightSensor Test</string>
     <string name="test_case_cmd_mouse">CMD Mouse Test</string>
     <string name="test_case_sd_card">SD Card Test</string>
-    <string name="test_case_sim_card">SIM Card Test</string>
+    <string name="test_case_sim_card">SIM Card1 Test</string>
     <string name="test_case_sim_card2">SIM Card2 Test</string>
     <string name="test_case_nfc">NFC Test</string>
     <string name="test_case_fingerprint">Fingerprint Test</string>
@@ -482,7 +482,7 @@
         <item>2. This test procedure will automatically start without any manual operation.</item>
     </string-array>
     <string-array name="TestItem_Des_SIMcard_Test">
-        <item>The "SIM Card Test" is used to test the SIM card on the SIM card slot of the device.</item>
+        <item>The "SIM Card1 Test" is used to test the SIM card on the SIM card slot of the device.</item>
         <item>Test procedure:</item>
         <item>1. Insert the SIM card in SIM card slot of the device. </item>
         <item>2. This test procedure will automatically start without any manual operation.</item>

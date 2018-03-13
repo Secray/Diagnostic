@@ -144,7 +144,7 @@ public class MainActivity extends BaseActivity
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        initCPUPercent(cpuRate);
+                        initCPUPercent(cpuRate < 0 ? 0 : cpuRate);
                         if (!file.exists() && !App.isAllTest) {
                             SharedPreferencesUtils.setNull(MainActivity.this);
                         }

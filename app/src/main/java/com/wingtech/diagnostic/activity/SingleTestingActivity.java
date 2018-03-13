@@ -99,7 +99,7 @@ public class SingleTestingActivity extends BaseActivity implements OnResultChang
                 mRequestCode = SDCARD_REQUEST_CODE;
                 mFragment = new SDCardTestingFragment();
                 break;
-            case "SIM Card Test":
+            case "SIM Card1 Test":
                 mRequestCode = SIMCARD_REQUEST_CODE;
                 mFragment = new SIMCardTestingFragment(1);
                 break;

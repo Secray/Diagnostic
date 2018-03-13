@@ -7,6 +7,7 @@ import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
 import android.os.Build;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.Log;
@@ -62,6 +63,10 @@ public class CameraFlashActivity extends TestingActivity implements View.OnClick
     protected void onWork() {
         ((TextView) findViewById(R.id.test_title)).setText(getIntent().getStringExtra("title"));
         com.wingtech.diagnostic.util.Log.i("index = " + mIndex);
+        Camera cam = Camera.open();
+        Camera.Parameters p = cam.getParameters();
+        Log.i(TAG, " mode = " + p.getFlashMode());
+        cam.release();
         if (mFlashId == 1)
             setFlashlight(0, false);
         mHandler.postDelayed(new Runnable() {

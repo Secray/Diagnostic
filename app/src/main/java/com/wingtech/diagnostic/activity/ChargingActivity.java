@@ -148,6 +148,7 @@ public class ChargingActivity extends TestingActivity {
                 if (!connected && mMessageBox.isChecked()) {
                     mNotChargingBox.setVisibility(View.VISIBLE);
                     mNotChargingBox.setChecked(true);
+                    notCharger.setText(R.string.not_charging);
                     mResult = true;
                     sendResult();
                 }
