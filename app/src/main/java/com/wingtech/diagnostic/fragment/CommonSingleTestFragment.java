@@ -39,6 +39,11 @@ import com.wingtech.diagnostic.util.Log;
 import com.wingtech.diagnostic.util.SharedPreferencesUtils;
 import com.wingtech.diagnostic.util.TestItem;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+
 import static com.wingtech.diagnostic.util.Constants.ASSITSCAMERA_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.BATTERY_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.BLUETOOTH_REQUEST_CODE;
@@ -95,6 +100,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
     private TestItem mTestItem;
     private int flashId = 0;
     private int camId = 0;
+    private ExecutorService mCacheThreadPool = Executors.newCachedThreadPool();
 
     public void setOnTestItemListener(OnTestItemListener listener) {
         this.mTestItemListener = listener;
@@ -517,14 +523,14 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                     mTestBtn.setText(R.string.btn_test_again);
                 }
                 
-                new Thread(new Runnable() {
+                mCacheThreadPool.execute(new Runnable() {
                     @Override
                     public void run() {
                         SharedPreferencesUtils.deleteFile();
                         SharedPreferencesUtils.outputFile(mActivity);
-                        Log.i("gaoweili","file del output");
                     }
-                }).start();
+                });
+
                 break;
         }
     }

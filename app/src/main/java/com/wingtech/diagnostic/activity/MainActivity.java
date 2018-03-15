@@ -173,7 +173,7 @@ public class MainActivity extends BaseActivity
     private void setData(LinkedList<Integer> cpuTemps, LinkedList<Integer> batteryTemps) {
         int cpuLen = cpuTemps.size();
         int batteryLen = batteryTemps.size();
-        Log.i("cpuLen = " + cpuLen + " batteryLen " + batteryLen);
+        //Log.i("cpuLen = " + cpuLen + " batteryLen " + batteryLen);
         ArrayList<Entry> values1 = new ArrayList<>();
         ArrayList<Entry> values2 = new ArrayList<>();
         int remainLen = MAX_SIZE - cpuLen;

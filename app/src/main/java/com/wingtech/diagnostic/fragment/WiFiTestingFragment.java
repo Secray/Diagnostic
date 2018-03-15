@@ -8,6 +8,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
+import android.os.Handler;
+import android.os.Message;
 
 import com.wingtech.diagnostic.util.Log;
 
@@ -26,6 +28,38 @@ public class WiFiTestingFragment extends TestFragment {
     private boolean mWiFiEnable;
     private boolean mLastState;
     private List<ScanResult> mScanResults;
+    private boolean mIsRegister;
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            mWiFiState = mWiFiManager.getWifiState();
+            Log.i("state = " + mWiFiState + " " + mWiFiEnable);
+            if (mWiFiEnable) {
+                if (mWiFiState == WIFI_STATE_ENABLED) {
+                    mWiFiManager.startScan();
+                    mTxtTitle.postDelayed(() -> {
+                        mScanResults = mWiFiManager.getScanResults();
+
+                        Log.i("WiFi Scan results = " + mScanResults.size());
+                        if (isWiFi(mActivity)) {
+                            Log.e("It's not WiFi");
+                        }
+
+                        mResult = mScanResults.size() > 0 && mWiFiEnable;
+                        mCallback.onChange(mResult);
+                    }, 2000);
+                    if (mIsRegister) {
+                        mActivity.unregisterReceiver(mWiFiReceiver);
+                        mIsRegister = false;
+                    }
+                }
+            } else {
+                mResult = false;
+                mCallback.onChange(mResult);
+            }
+        }
+    };;
 
     @Override
     protected void onWork() {
@@ -35,6 +69,7 @@ public class WiFiTestingFragment extends TestFragment {
         IntentFilter filter = new IntentFilter();
         filter.addAction(WIFI_STATE_CHANGED);
         mActivity.registerReceiver(mWiFiReceiver, filter);
+        mIsRegister = true;
         enableWiFi();
     }
 
@@ -44,7 +79,12 @@ public class WiFiTestingFragment extends TestFragment {
         if (!mLastState) {
             mWiFiManager.setWifiEnabled(false);
         }
-        mActivity.unregisterReceiver(mWiFiReceiver);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 
     private boolean isWiFi(Context context) {
@@ -65,12 +105,7 @@ public class WiFiTestingFragment extends TestFragment {
             mWiFiEnable = mWiFiManager.setWifiEnabled(true);
         } else {
             mWiFiManager.setWifiEnabled(false);
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    mWiFiEnable = mWiFiManager.setWifiEnabled(true);
-                }
-            }).start();
+            mWiFiEnable = mWiFiManager.setWifiEnabled(true);
         }
     }
 
@@ -78,27 +113,7 @@ public class WiFiTestingFragment extends TestFragment {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            mWiFiState = mWiFiManager.getWifiState();
-            Log.i("state = " + mWiFiState + " " + mWiFiEnable);
-            if (mWiFiEnable) {
-                if (mWiFiState == WIFI_STATE_ENABLED) {
-                    mWiFiManager.startScan();
-                    mTxtTitle.postDelayed(() -> {
-                        mScanResults = mWiFiManager.getScanResults();
-
-                        Log.i("WiFi Scan results = " + mScanResults.size());
-                        if (isWiFi(mActivity)) {
-                            Log.e("It's not WiFi");
-                        }
-
-                        mResult = mScanResults.size() > 0 && mWiFiEnable;
-                        mCallback.onChange(mResult);
-                    }, 2000);
-                }
-            } else {
-                mResult = false;
-                mCallback.onChange(mResult);
-            }
+            mHandler.sendEmptyMessage(0);
         }
     };
 }
