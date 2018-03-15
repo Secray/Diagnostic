@@ -222,10 +222,17 @@ public class SecondaryMicActivity extends TestingActivity {
         }
         synchronized (this) {
             Log.d(TAG, "synchronized mPlayer start");
+                        if(localAudioManager == null){
+                localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+            }
+            localAudioManager.setMode(AudioManager.STREAM_MUSIC);
+            localAudioManager.setSpeakerphoneOn(true);
+            localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
             mPlayer = new MediaPlayer();
             try {
                 mPlayer.setDataSource(path);
                 Log.d(TAG, "startplay mPlayer.prepare() start");
+                mPlayer.setVolume(13.0f, 13.0f);
                 mPlayer.prepare();
                 mPlayer.start();
                 Log.d(TAG, "startplay mPlayer.start() end");
