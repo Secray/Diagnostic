@@ -16,6 +16,7 @@ public class CMDMouseTestingFragment extends TestFragment
         implements InputManager.InputDeviceListener {
     private InputManager mIm;
     private Handler mHandler;
+    private boolean mIsSent;
     @Override
     protected void onWork() {
         super.onWork();
@@ -23,7 +24,7 @@ public class CMDMouseTestingFragment extends TestFragment
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (mCallback != null) {
+                if (mCallback != null && !mIsSent) {
                     mCallback.onChange(false);
                 }
             }
@@ -40,6 +41,7 @@ public class CMDMouseTestingFragment extends TestFragment
                     Log.d("device.getName()=" + device.getName() + " device.getId() "
                             + device.getId() + " getDescriptor " + device.getDescriptor());
                     mCallback.onChange(mResult);
+                    mIsSent = true;
                     break;
                 } else {
                     mTxtTitle.setText("Please insert the mouse...");
@@ -59,6 +61,7 @@ public class CMDMouseTestingFragment extends TestFragment
                         + " device.getId() " + device.getId()
                         + " getDescriptor " + device.getDescriptor());
                 mCallback.onChange(mResult);
+                mIsSent = true;
             }
         }
     }
@@ -77,5 +80,11 @@ public class CMDMouseTestingFragment extends TestFragment
     public void onPause() {
         super.onPause();
         mIm.unregisterInputDeviceListener(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 }
