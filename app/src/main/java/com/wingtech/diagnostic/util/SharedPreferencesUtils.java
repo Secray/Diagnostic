@@ -152,14 +152,15 @@ public class SharedPreferencesUtils {
                 stringSMMI.append(mTestCasesErrorCode[i]);
                 stringSMMI.append(",");
                 stringSMMI.append("Fail");
+                stringSMMI.append("\n");
             } else if (result == 2) {
                 stringSMMI.append(mTestCases[i]);
                 stringSMMI.append(",");
                 stringSMMI.append("0");
                 stringSMMI.append(",");
                 stringSMMI.append("Pass");
+                stringSMMI.append("\n");
             }
-            stringSMMI.append("\n");
             initfileAndWriteData(stringSMMI.toString());
             stringSMMI.setLength(0);
         }
