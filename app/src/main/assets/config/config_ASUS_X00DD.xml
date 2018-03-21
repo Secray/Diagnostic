@@ -11,7 +11,7 @@
     <TEST_ITEM Id="8" Name="Keypad Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_keypad" Img="asus_diagnostic_img_keypad"/>
     <TEST_ITEM Id="9" Name="MultiTouch Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_multitouch" Img="asus_diagnostic_img_multitouch"/>
     <TEST_ITEM Id="10" Name="Vibrator Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_vibrator" Img="asus_diagnostic_img_vibrator"/>
-    <TEST_ITEM Id="11" Name="Front Tele Camera Capture Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_fronttelecamera_test" Img="asus_diagnostic_img_telecamera_front"/>
+    <TEST_ITEM Id="11" Name="Front Camera Capture Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_vgacamcapture" Img="asus_diagnostic_img_vgacamcapture"/>
     <TEST_ITEM Id="12" Name="Main Camera Capture Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_maincamcapture" Img="asus_diagnostic_img_maincamcapture"/>
     <TEST_ITEM Id="13" Name="Front WideCamera Capture Test" Disable="1" AutoTest="0" Icon="asus_diagnostic_ic_frontwidecamera_test" Img="asus_diagnostic_img_widecamera_front"/>
     <TEST_ITEM Id="14" Name="Display Test" Disable="0" AutoTest="0" Icon="asus_diagnostic_ic_display" Img="asus_diagnostic_img_display"/>
