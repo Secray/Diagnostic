@@ -1,5 +1,6 @@
 package com.wingtech.diagnostic.activity;
 
+import android.os.Build;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.view.Window;
@@ -19,12 +20,12 @@ public class TouchTestActivity extends TestingActivity {
 
     private TPTestView lpwv;
     public static AppCompatButton mFail = null;
-    public static boolean mBtnVisiable ;
+    public static boolean mBtnVisiable;
 
     @Override
     protected int getLayoutResId() {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         return R.layout.tpscreen;
     }
 
@@ -33,6 +34,7 @@ public class TouchTestActivity extends TestingActivity {
         //findViewById(R.id.touch_fail_btn).setOnClickListener(this);
         lpwv = (TPTestView) findViewById(R.id.mLocusViewTP);
         mFail = (AppCompatButton) findViewById(R.id.touch_fail_btn);
+        hideVirtulKey(View.GONE);
     }
 
     @Override
@@ -64,5 +66,23 @@ public class TouchTestActivity extends TestingActivity {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        hideVirtulKey(View.VISIBLE);
+    }
 
+    private void hideVirtulKey(int visibility) {
+        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) {
+            View v = this.getWindow().getDecorView();
+            v.setSystemUiVisibility(visibility);
+        } else if (Build.VERSION.SDK_INT >= 19) {
+            View decorView = getWindow().getDecorView();
+            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
+
+            decorView.setSystemUiVisibility(uiOptions);
+        }
+    }
 }
