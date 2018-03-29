@@ -66,10 +66,6 @@ public class WiFiTestingFragment extends TestFragment {
         super.onWork();
         mWiFiManager = (WifiManager) mActivity.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         mLastState = mWiFiManager.isWifiEnabled();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(WIFI_STATE_CHANGED);
-        mActivity.registerReceiver(mWiFiReceiver, filter);
-        mIsRegister = true;
         enableWiFi();
     }
 
@@ -103,9 +99,17 @@ public class WiFiTestingFragment extends TestFragment {
         if (mWiFiState == WifiManager.WIFI_STATE_DISABLED
                 || mWiFiState == WifiManager.WIFI_STATE_UNKNOWN) {
             mWiFiEnable = mWiFiManager.setWifiEnabled(true);
+            register();
         } else {
             mWiFiManager.setWifiEnabled(false);
-            mWiFiEnable = mWiFiManager.setWifiEnabled(true);
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mWiFiEnable = mWiFiManager.setWifiEnabled(true);
+
+                    register();
+                }
+            }, 500);
         }
     }
 
@@ -116,4 +120,11 @@ public class WiFiTestingFragment extends TestFragment {
             mHandler.sendEmptyMessage(0);
         }
     };
+
+    private void register() {
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(WIFI_STATE_CHANGED);
+        mActivity.registerReceiver(mWiFiReceiver, filter);
+        mIsRegister = true;
+    }
 }

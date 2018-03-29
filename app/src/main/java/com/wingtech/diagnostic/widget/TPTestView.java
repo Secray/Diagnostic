@@ -70,7 +70,7 @@ public class TPTestView extends View {
     float startY = 0.0f;
     float stopX = 0.0f;
     float stopY = 0.0f;
-    int iRetryTimes = 5;
+    int iRetryTimes = 100;
     int window_width = 0;
     int window_height = 0;
     int state_height = 0;//状态栏高度
@@ -221,7 +221,7 @@ public class TPTestView extends View {
                     m_eventup = true;
                     m_bCheckLineState = checkLine();
                     if (m_bCheckLineState) {
-                        iRetryTimes = 5;
+                        iRetryTimes = 100;
                         if (m_RecType != RECTYPE.H_LINE5) {
                             //add by xieqin for probabilistic error finish test start
                             m_finish = false;

@@ -211,12 +211,13 @@
     <string name="test_all_dialog_content">You have not finished all of the test items.Do you want to continue to finish it?</string>
     <string name="btn_continue">Continue</string>
 
-    <!-- Diaplay Activity-->
+    <!-- SIM signal Activity-->
     <string name="nfc_disabled">NFC disable</string>
     <string name="phone_number">Phone number</string>
     <string name="call_phone_action">call</string>
     <string name="sim_not_found_msg">please plug SIM card in the device and continue to test again.</string>
     <string name="no_sim_find_title">No SIM card found</string>
+    <string name="no_network_find_title">No NETWORK found</string>
     <string name="network">NetWork:</string>
     <string name="cellular_network">Cellular Network:</string>
     <string name="please_plug_sim_card">please plug sim card</string>
