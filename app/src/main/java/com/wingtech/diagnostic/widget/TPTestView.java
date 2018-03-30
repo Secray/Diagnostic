@@ -42,9 +42,7 @@ public class TPTestView extends View {
         //-H_LINE4,
         H_LINE5,
         NULL,
-    }
-
-    ;
+    };
 
     private final String TAG = "TPTEST";
     private Path m_path;
@@ -82,14 +80,18 @@ public class TPTestView extends View {
     private OnCompleteListenerTP mCompleteListener;
     public Hashtable m_HT_Pointers = new Hashtable();
     private int flag1, flag2, flag3, flag4, flag5, flag6;
+    OnCallback callback;
 
+    public void setCallback(OnCallback callback) {
+        this.callback = callback;
+    }
 
     public TPTestView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setFocusable(true);
         m_Context = context;
 
-        WindowManager manager = ((Activity) m_Context).getWindowManager();
+        WindowManager manager = (WindowManager) m_Context.getSystemService(Context.WINDOW_SERVICE);
         window_width = manager.getDefaultDisplay().getWidth();
         window_height = manager.getDefaultDisplay().getHeight();
         if (android.os.Build.MODEL.contains("ASUS_X017D"))
@@ -198,7 +200,7 @@ public class TPTestView extends View {
 
             switch (action) {
                 case MotionEvent.ACTION_DOWN:
-                    TouchTestActivity.mFail.setVisibility(View.GONE);
+                    callback.callback(true);
                     m_eventup = false;
                     //add by xieqin for probabilistic error finish test start
                     m_finish = false;
@@ -217,7 +219,7 @@ public class TPTestView extends View {
                     }
                     break;
                 case MotionEvent.ACTION_UP:
-                    TouchTestActivity.mFail.setVisibility(View.VISIBLE);
+                    callback.callback(false);
                     m_eventup = true;
                     m_bCheckLineState = checkLine();
                     if (m_bCheckLineState) {
@@ -1380,4 +1382,7 @@ public class TPTestView extends View {
         private final ArrayList<Float> mYs = new ArrayList<Float>();
     }
 
+    public interface OnCallback {
+        void callback(boolean callback);
+    }
 }
