@@ -1,13 +1,10 @@
 package com.wingtech.diagnostic.activity;
 
-import android.app.Service;
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.content.res.Resources;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.view.menu.MenuWrapperFactory;
 import android.telephony.PhoneStateListener;
 import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
@@ -53,7 +50,7 @@ public class CellularNetworkActivity extends TestingActivity implements OnResult
                         sendResult();
                     }).create().show();
         } else {
-            if (!isNetworkAvailable(telephonyManager)) {
+            if (!isNetworkAvailable()) {
                 Log.i("Mobile Network is not available");
                 new AlertDialog.Builder(this)
                         .setMessage(R.string.no_network_find_title)
@@ -179,42 +176,30 @@ public class CellularNetworkActivity extends TestingActivity implements OnResult
         return Helper.getSystemProperties(key, defaultValue);
     }
 
-    private int getSimNum() {
-        int simNum;
-        String simConfig = getSystemProperties("persist.radio.multisim.config", null);
-        if ("dsds".equals(simConfig) || "dsda".equals(simConfig)) {
-            simNum = 2;
-        } else if ("tsts".equals(simConfig)) {
-            simNum = 3;
-        } else {
-            simNum = 1;
-        }
-        Log.d("simNum = " + simNum);
-        return simNum;
-    }
-
-    private boolean getSimStatus(int index, TelephonyManager telephonyManager) {
-        if (telephonyManager == null) {
+    private boolean isNetworkAvailable() {
+        String emergency = getText(Helper.getEmergencyResource()).toString();
+        String noService = getText(Helper.getNoServiceResource()).toString();
+        Log.i(emergency + " " + noService);
+        boolean sim1State = mSim1 != null && (mSim1.getCarrierName()
+                .equals(emergency) || mSim1.getCarrierName().equals(noService));
+        boolean sim2State = mSim2 != null && (mSim2.getCarrierName().equals(emergency)
+                || mSim2.getCarrierName().equals(noService));
+        if (mSim2 == null && sim1State) {
             return false;
         }
 
-        int state = Helper.getSimState(telephonyManager, index);
-        Log.d("SIM state=" + state);
-        if (state == TelephonyManager.SIM_STATE_READY) {
-            return true;
+        if (mSim1 == null && sim2State) {
+            return false;
         }
-        return false;
-    }
 
-    private boolean isNetworkAvailable(TelephonyManager telephonyManager) {
+        if (sim1State && sim2State) {
+            return false;
+        }
+
         if (Settings.System.getInt(getContentResolver(),
                 Settings.Global.AIRPLANE_MODE_ON, 0) == 1) {
             return false;
         }
-        int sum = getSimNum();
-        for (int i = 1; i <= sum; i++) {
-            if (getSimStatus(i, telephonyManager)) return true;
-        }
-        return false;
+        return true;
     }
 }
