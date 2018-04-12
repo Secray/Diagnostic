@@ -6,6 +6,8 @@ import android.telephony.TelephonyManager;
 import com.android.helper.Helper;
 import com.wingtech.diagnostic.util.Log;
 
+import static com.android.helper.Helper.getSystemProperties;
+
 /**
  * Created by xiekui on 17-8-2.
  */
@@ -37,10 +39,11 @@ public class SIMCardTestingFragment extends TestFragment {
             simNum = 2;
         } else if ("tsts".equals(simConfig)) {
             simNum = 3;
-        } else {
+        } else if ("none".equals(simConfig)){
             simNum = 1;
+        } else {
+            simNum = 2;
         }
-        Log.d("simNum = " + simNum);
         return simNum;
     }
 

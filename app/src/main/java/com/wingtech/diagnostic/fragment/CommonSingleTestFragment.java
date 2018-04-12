@@ -188,6 +188,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 }
                 break;
             case "SIM Card1 Test":
+            case "SIM Card Test":
                 String[] discription_sim1 = getResources().getStringArray(R.array.TestItem_Des_SIMcard_Test);
                 dis =  discription_sim1[0];
                 for (int i = 1; i < discription_sim1.length; i++){
@@ -856,6 +857,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
             case "Gyroscope Test":
             case "SD Card Test":
             case "SIM Card1 Test":
+            case "SIM Card Test":
             case "SIM Card2 Test":
             case "CMD Mouse Test":
             case "Fingerprint Test":

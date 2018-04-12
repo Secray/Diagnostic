@@ -81,6 +81,12 @@ public class TouchDialog extends Dialog implements TPTestView.OnCallback {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        callback.onCallback(false);
+    }
+
     public interface ResultCallback {
         void onCallback(boolean result);
     }

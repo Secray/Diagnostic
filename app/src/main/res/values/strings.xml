@@ -217,7 +217,7 @@
     <string name="call_phone_action">call</string>
     <string name="sim_not_found_msg">please plug SIM card in the device and continue to test again.</string>
     <string name="no_sim_find_title">No SIM card found</string>
-    <string name="no_network_find_title">No NETWORK found</string>
+    <string name="no_network_find_title">No Network found</string>
     <string name="network">NetWork:</string>
     <string name="cellular_network">Cellular Network:</string>
     <string name="please_plug_sim_card">please plug sim card</string>
@@ -237,6 +237,7 @@
     <string name="strength_level_asu">Strength level(asu)</string>
     <string name="strength_level_dbm">Strength level(dbm)</string>
     <string name="smmi_all_test_done">SMMI All Test Done</string>
+    <string name="sim_card">SIM Card:</string>
 
     <string-array name="TestItem_Des_Battery_Test">
         <item>The "Battery Test" is used to test the battery status.</item>

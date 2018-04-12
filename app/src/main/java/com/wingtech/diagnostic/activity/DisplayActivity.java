@@ -15,7 +15,9 @@ import com.asusodm.atd.smmitest.R;
 
 import static android.graphics.Color.BLACK;
 import static android.graphics.Color.BLUE;
+import static android.graphics.Color.DKGRAY;
 import static android.graphics.Color.GREEN;
+import static android.graphics.Color.LTGRAY;
 import static android.graphics.Color.RED;
 import static android.graphics.Color.GRAY;
 import static android.graphics.Color.WHITE;
@@ -73,13 +75,13 @@ public class DisplayActivity extends TestingActivity {
                 mLayout.setBackgroundColor(WHITE);
                 break;
             case 5:
-                mLayout.setBackgroundColor(GRAY);
+                mLayout.setBackgroundColor(DKGRAY);
                 break;
             //case 6:
              //   mLayout.setBackgroundResource(R.drawable.lcd_tiaowen);
              //   break;
             default:
-                mLayout.setBackgroundColor(RED);
+                mLayout.setBackgroundColor(LTGRAY);
                 break;
         }
     }
@@ -90,11 +92,11 @@ public class DisplayActivity extends TestingActivity {
         int action = event.getAction();
         switch(action){
             case MotionEvent.ACTION_DOWN:
-                if(mtick <= 5) {
+                if(mtick <= 6) {
                     mtick++;
                     changeColor(mtick);
                 }
-                if(mtick >= 6) {
+                if(mtick > 6) {
                     showTheDialog();
                 }
 

@@ -184,15 +184,8 @@ public class CellularNetworkActivity extends TestingActivity implements OnResult
                 .equals(emergency) || mSim1.getCarrierName().equals(noService));
         boolean sim2State = mSim2 != null && (mSim2.getCarrierName().equals(emergency)
                 || mSim2.getCarrierName().equals(noService));
-        if (mSim2 == null && sim1State) {
-            return false;
-        }
 
-        if (mSim1 == null && sim2State) {
-            return false;
-        }
-
-        if (sim1State && sim2State) {
+        if (sim1State || sim2State) {
             return false;
         }
 

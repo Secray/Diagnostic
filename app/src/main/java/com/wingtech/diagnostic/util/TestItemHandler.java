@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
 
+import static com.android.helper.Helper.getSystemProperties;
+
 /**
  * Created by xiekui on 17-8-23.
  */
@@ -52,7 +54,12 @@ public class TestItemHandler extends Thread {
                         if ("TEST_ITEM".equals(xmlPullParser.getName())) {
                             item = new TestItem();
                             item.setId(Integer.parseInt(xmlPullParser.getAttributeValue(0)));
-                            item.setName(xmlPullParser.getAttributeValue(1));
+                            if ("SIM Card1 Test".equals(xmlPullParser.getAttributeValue(1))
+                                    && getSimNum() == 1) {
+                                item.setName("SIM Card Test");
+                            } else {
+                                item.setName(xmlPullParser.getAttributeValue(1));
+                            }
                             item.setDisable("1".equals(xmlPullParser.getAttributeValue(2)));
                             item.setAutoTest("1".equals(xmlPullParser.getAttributeValue(3)));
                             item.setIcon(getId(xmlPullParser.getAttributeValue(4)));
@@ -62,7 +69,11 @@ public class TestItemHandler extends Thread {
                     case XmlPullParser.END_TAG:
                         if ("TEST_ITEM".equals(xmlPullParser.getName())
                                 && item != null && !item.isDisable()) {
-                            App.addItems(item);
+                            if ("SIM Card2 Test".equals(item.getName()) && getSimNum() == 1) {
+                                // do nothing here
+                            } else {
+                                App.addItems(item);
+                            }
                         }
                         break;
                 }
@@ -83,5 +94,20 @@ public class TestItemHandler extends Thread {
 
     private int getId(String name) {
         return mContext.get().getResources().getIdentifier(name, "drawable", mContext.get().getPackageName());
+    }
+
+    private int getSimNum() {
+        int simNum;
+        String simConfig = getSystemProperties("persist.radio.multisim.config", null);
+        if ("dsds".equals(simConfig) || "dsda".equals(simConfig)) {
+            simNum = 2;
+        } else if ("tsts".equals(simConfig)) {
+            simNum = 3;
+        } else if ("none".equals(simConfig)){
+            simNum = 1;
+        } else {
+            simNum = 2;
+        }
+        return simNum;
     }
 }

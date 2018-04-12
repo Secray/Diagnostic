@@ -1,5 +1,6 @@
 package com.wingtech.diagnostic.fragment;
 
+import android.annotation.SuppressLint;
 import android.support.v7.widget.AppCompatButton;
 import android.telephony.SubscriptionInfo;
 import android.telephony.TelephonyManager;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 import com.asusodm.atd.smmitest.R;
 import com.wingtech.diagnostic.listener.OnResultListener;
+
+import static com.android.helper.Helper.getSystemProperties;
 
 /**
  * Created by xiekui on 2017/9/29 0029.
@@ -78,6 +81,7 @@ public class CellularNetworkTestFragment extends TestFragment implements View.On
         mFail.setOnClickListener(this);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onWork() {
         if (mSim1 == null) {
@@ -108,6 +112,10 @@ public class CellularNetworkTestFragment extends TestFragment implements View.On
             mCellularInfo2.setVisibility(View.GONE);
             mNetworkInfo2.setVisibility(View.GONE);
             mInfo1.setVisibility(View.GONE);
+            if (getSimNum() == 1) {
+                mSim2Content.setVisibility(View.GONE);
+                mSimId.setText(R.string.sim_card);
+            }
         } else {
             mSimMsg1.setVisibility(View.GONE);
             mNetWork1.setText(mSim2.getCarrierName());
@@ -201,5 +209,18 @@ public class CellularNetworkTestFragment extends TestFragment implements View.On
         }
     }
 
-
+    private int getSimNum() {
+        int simNum;
+        String simConfig = getSystemProperties("persist.radio.multisim.config", null);
+        if ("dsds".equals(simConfig) || "dsda".equals(simConfig)) {
+            simNum = 2;
+        } else if ("tsts".equals(simConfig)) {
+            simNum = 3;
+        } else if ("none".equals(simConfig)){
+            simNum = 1;
+        } else {
+            simNum = 2;
+        }
+        return simNum;
+    }
 }
