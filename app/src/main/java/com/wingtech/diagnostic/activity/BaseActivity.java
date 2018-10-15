@@ -48,8 +48,10 @@ public abstract class BaseActivity extends AppCompatActivity {
                 onBackPressed();
                 break;
             case R.id.clear:
+                showTheDialog(R.string.clear_dialog_title,R.string.clear_dialog_content);
+                break;
             case R.id.reset:
-                showTheDialog();
+                showTheDialog(R.string.reset_dialog_title,R.string.reset_dialog_content);
                 /*
                 new AlertDialog.Builder(this).setTitle(getString(R.string.reset_dialog_title))
                         .setMessage(getString(R.string.reset_dialog_content))
@@ -89,7 +91,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         SharedPreferencesUtils.deleteFile();
     }
 
-    public void showTheDialog(){
+    public void showTheDialog(int res_title,int res_content){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.content_test_dialog, null);//获取自定义布局
@@ -97,8 +99,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         AlertDialog dlg = builder.create();
         TextView mContent = (TextView) layout.findViewById(R.id.dialog_context);
         TextView mTitle = (TextView) layout.findViewById(R.id.dialog_title);
-        mTitle.setText(getString(R.string.reset_dialog_title));
-        mContent.setText(getString(R.string.reset_dialog_content));
+        mTitle.setText(getString(res_title));
+        mContent.setText(getString(res_content));
         Button pass = (Button) layout.findViewById(R.id.pass);
         pass.setText(R.string.headset_context_dialog_btn);
         pass.setOnClickListener(new View.OnClickListener() {

@@ -26,6 +26,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.EntryXComparator;
+import com.wingtech.diagnostic.App;
 import com.wingtech.diagnostic.service.TemperatureService;
 import com.wingtech.diagnostic.util.Log;
 import com.wingtech.diagnostic.util.SharedPreferencesUtils;
@@ -143,8 +144,8 @@ public class MainActivity extends BaseActivity
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        initCPUPercent(cpuRate);
-                        if (!file.exists()) {
+                        initCPUPercent(cpuRate < 0 ? 0 : cpuRate);
+                        if (!file.exists() && !App.isAllTest) {
                             SharedPreferencesUtils.setNull(MainActivity.this);
                         }
                         if (mService != null) {
@@ -172,7 +173,7 @@ public class MainActivity extends BaseActivity
     private void setData(LinkedList<Integer> cpuTemps, LinkedList<Integer> batteryTemps) {
         int cpuLen = cpuTemps.size();
         int batteryLen = batteryTemps.size();
-        Log.i("cpuLen = " + cpuLen + " batteryLen " + batteryLen);
+        //Log.i("cpuLen = " + cpuLen + " batteryLen " + batteryLen);
         ArrayList<Entry> values1 = new ArrayList<>();
         ArrayList<Entry> values2 = new ArrayList<>();
         int remainLen = MAX_SIZE - cpuLen;
@@ -224,6 +225,7 @@ public class MainActivity extends BaseActivity
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.test_all:
+                App.isAllTest = true;
                 startActivity(new Intent(MainActivity.this, TestAllActivity.class));
                 break;
             case R.id.single_test:

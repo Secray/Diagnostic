@@ -7,6 +7,7 @@ package com.wingtech.diagnostic.widget;
 
 import android.content.Context;
 import android.hardware.Camera;
+import android.graphics.PixelFormat;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -22,6 +23,7 @@ public class CameraPreview extends SurfaceView implements
         mCamera = camera;
         mHolder = getHolder();
         mHolder.addCallback(this);
+        mHolder.setFormat(PixelFormat.TRANSPARENT);
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
     }
 

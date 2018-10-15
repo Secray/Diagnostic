@@ -115,7 +115,17 @@ public class FingerprintManagerService extends Service {
         mDispatchMessageThread.start();
         mDispathMessageHandler = new DispatchMessageHandler(
                 mDispatchMessageThread.getLooper());
-        device.setDispathcMessageHandler(mDispathMessageHandler);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                device = new FpDeviceFactory(Build.MODEL).getFpDevice();
+                if (device != null) {
+                    device.setDispathcMessageHandler(mDispathMessageHandler);
+                }
+            }
+        }).start();
+
         registerScreenActionReceiver();
     }
     
@@ -199,7 +209,9 @@ public class FingerprintManagerService extends Service {
                     && mManagerStatus == ManagerStatus.MANAGER_VERIFY) {
                 //L.d("UpdateStatus set FF mode");
                 mManagerStatus = ManagerStatus.MANAGER_IDLE;
-                device.cancelRecognize();
+                if (device != null) {
+                    device.cancelRecognize();
+                }
                 //device.setMode(CommandType.GOODIX_ENGTEST_CMD_SET_MODE_FF);
                 mEventStatus = EventStatus.EVENT_IDLE;
             }
@@ -211,12 +223,16 @@ public class FingerprintManagerService extends Service {
             case MANAGER_ENROLL:
                 L.v("device.cancelRegister()");
                 mManagerStatus = ManagerStatus.MANAGER_IDLE;
-                device.cancelRegister();
+                if (device != null) {
+                    device.cancelRegister();
+                }
             break;
             case MANAGER_VERIFY:
                 L.d("device.cancelRecognize()");
                 mManagerStatus = ManagerStatus.MANAGER_IDLE;
-                device.cancelRecognize();
+                if (device != null) {
+                    device.cancelRecognize();
+                }
                 if (nextStatus != ManagerStatus.MANAGER_ENROLL
                         && nextStatus != ManagerStatus.MANAGER_VERIFY) {
                     //L.d("set key mode");
@@ -224,7 +240,9 @@ public class FingerprintManagerService extends Service {
                 }
             break;
             case MANAGER_HEARTBEAT:
-                device.disableHbRetrieve();
+                if (device != null) {
+                    device.disableHbRetrieve();
+                }
                 // device.setMode(CommandType.GOODIX_ENGTEST_CMD_SET_MODE_KEY);
                 mManagerStatus = ManagerStatus.MANAGER_IDLE;
             break;
@@ -255,15 +273,19 @@ public class FingerprintManagerService extends Service {
             case MANAGER_IDLE:
             break;
             case MANAGER_ENROLL:
-                device.getPermission("1234");
-                device.register();
+                if (device != null) {
+                    device.getPermission("1234");
+                    device.register();
+                }
             break;
             case MANAGER_VERIFY:
                 L.v("device.recognize();");
                 if (bScreenOn == true) {
                     //L.d("set imag mode");
                     //device.setMode(CommandType.GOODIX_ENGTEST_CMD_SET_MODE_IMG);
-                    device.recognize();
+                    if (device != null) {
+                        device.recognize();
+                    }
                 } else {
                     //L.d("set FF mode");
                     mManagerStatus = ManagerStatus.MANAGER_IDLE;
@@ -275,7 +297,9 @@ public class FingerprintManagerService extends Service {
             case MANAGER_HEARTBEAT: {
                 L.v("device.enableHeatBeat();");
                 // device.setMode(CommandType.GOODIX_ENGTEST_CMD_SET_MODE_HB);
-                device.enableHbRetrieve();
+                if (device != null) {
+                    device.enableHbRetrieve();
+                }
             }
             break;
             case MANAGER_REGISTER:
@@ -390,7 +414,9 @@ public class FingerprintManagerService extends Service {
                 if (mClientList.size() > 0) {
                     if (mClientList.lastElement().token == token) {
                         /* reset device enroll */
-                        device.resetRegister();
+                        if (device != null) {
+                            device.resetRegister();
+                        }
                     }
                 }
                 return 0;
@@ -433,7 +459,9 @@ public class FingerprintManagerService extends Service {
                 if (mClientList.size() > 0) {
                     Client client = mClientList.lastElement();
                     if (client.token == token) {
-                        result = device.saveRegister(index);
+                        if (device != null) {
+                            result = device.saveRegister(index);
+                        }
                         UpdateStatus();
                     }
                     /* ignore the request of client which not on top of stack */
@@ -477,7 +505,10 @@ public class FingerprintManagerService extends Service {
             synchronized (mLock) {
                 L.v("FingerprintManagerService : query template.");
                 // device.getPermission("1234");
-                return device.query();
+                if (device != null) {
+                    return device.query();
+                }
+                return 0;
             }
         }
         
@@ -486,13 +517,20 @@ public class FingerprintManagerService extends Service {
                 L.v("FingerprintManagerService : delete template.");
                 if (mManagerStatus == ManagerStatus.MANAGER_VERIFY) {
                     mManagerStatus = ManagerStatus.MANAGER_IDLE;
-                    device.cancelRecognize();
+                    if (device != null) {
+                        device.cancelRecognize();
+                    }
                 }
                 if (mManagerStatus != ManagerStatus.MANAGER_ENROLL) {
-                    device.cancelRegister();
+                    if (device != null) {
+                        device.cancelRegister();
+                    }
                 }
-                device.getPermission("1234");
-                int result = device.delete(i);
+                int result = 0;
+                if (device != null) {
+                    device.getPermission("1234");
+                    result = device.delete(i);
+                }
                 UpdateStatus();
                 return result;
             }
@@ -502,22 +540,29 @@ public class FingerprintManagerService extends Service {
         public String getInfo() throws RemoteException {
             Log.d(TAG, "milanService ***** getInfo()");
             synchronized (mLock) {
-                return device.getInfo();
+                if (device != null) {
+                    return device.getInfo();
+                }
+                return "";
             }
         }
         
         @Override
         public int enableGsc(int index) throws RemoteException {
-            return device.enableGsc(index);
-            //return 0;
+            if (device != null) {
+                return device.enableGsc(index);
+            }
+            return 0;
         }
         
         @Override
         public int enableKeyMode(int enable, int keyType)
                 throws RemoteException {
             L.v(" Framework : enableKeyMode , enable = " + enable + "keyType = " + keyType);
-            return device.enableKeyMode(enable, keyType);
-            //return 0;
+            if (device != null) {
+                return device.enableKeyMode(enable, keyType);
+            }
+            return 0;
         }
         
         @Override
@@ -599,12 +644,17 @@ public class FingerprintManagerService extends Service {
         @Override
         public byte[] SendCmd(int cmd, byte[] data) throws RemoteException {
             Log.d(TAG, "FingerprintManagerService : SendCmd cmd = " + cmd);
-            return device.sendCmd(cmd, data);
+            if (device != null) {
+                return device.sendCmd(cmd, data);
+            }
+            return null;
         }
         
         @Override
         public int setMode(int cmd) throws RemoteException {
-            device.setMode(cmd);
+            if (device != null) {
+                device.setMode(cmd);
+            }
             return 0;
         }
         
@@ -612,14 +662,19 @@ public class FingerprintManagerService extends Service {
         public void setEnrollNum(int num) throws RemoteException {
             mCount_Register = String.valueOf(num);
             byte[] bytes = int2byte(num);
-            device.sendCmd(MessageType.FINGERPRINT_CMD_SET_ENROLL_CNT, bytes);
+            if (device != null) {
+                device.sendCmd(MessageType.FINGERPRINT_CMD_SET_ENROLL_CNT, bytes);
+            }
         }
         
         @Override
         public byte[] getEnrollNum() throws RemoteException {
             Log.d(TAG, "MilanService ---- getEnrollNum()");
-            return device.sendCmd(MessageType.FINGERPRINT_CMD_GET_ENROLL_CNT,
-                    null);
+            if (device != null) {
+                return device.sendCmd(MessageType.FINGERPRINT_CMD_GET_ENROLL_CNT,
+                        null);
+            }
+            return null;
         }
         
         @Override
@@ -737,7 +792,9 @@ public class FingerprintManagerService extends Service {
             if (mEventStatus == EventStatus.EVENT_COMPLETE) {
                 mEventStatus = EventStatus.EVENT_IDLE;
                 L.d("EVENT_COMPLETE : device.recognize()");
-                device.recognize();
+                if (device != null) {
+                    device.recognize();
+                }
             }
         }
         

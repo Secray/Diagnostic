@@ -1,7 +1,9 @@
 package com.wingtech.diagnostic.activity;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.telephony.PhoneStateListener;
 import android.telephony.SignalStrength;
@@ -48,43 +50,53 @@ public class CellularNetworkActivity extends TestingActivity implements OnResult
                         sendResult();
                     }).create().show();
         } else {
-            SignalListener s1;
-            if (mSim1 != null) {
-                s1 = new SignalListener(mSim1.getSubscriptionId());
+            if (!isNetworkAvailable()) {
+                Log.i("Mobile Network is not available");
+                new AlertDialog.Builder(this)
+                        .setMessage(R.string.no_network_find_title)
+                        .setNegativeButton(android.R.string.ok, (dialog, which) -> {
+                            mResult = false;
+                            sendResult();
+                        }).create().show();
             } else {
-                s1 = null;
-            }
-            SignalListener s2;
+                SignalListener s1;
+                if (mSim1 != null) {
+                    s1 = new SignalListener(mSim1.getSubscriptionId());
+                } else {
+                    s1 = null;
+                }
+                SignalListener s2;
 
-            if (mSim2 != null) {
-                s2 = new SignalListener(mSim2.getSubscriptionId());
-            } else {
-                s2 = null;
-            }
+                if (mSim2 != null) {
+                    s2 = new SignalListener(mSim2.getSubscriptionId());
+                } else {
+                    s2 = null;
+                }
 
-            if (s1 != null) {
-                telephonyManager.listen(s1,
-                        LISTEN_SIGNAL_STRENGTHS | LISTEN_DATA_CONNECTION_STATE);
+                if (s1 != null) {
+                    telephonyManager.listen(s1,
+                            LISTEN_SIGNAL_STRENGTHS | LISTEN_DATA_CONNECTION_STATE);
+                }
+                if (s2 != null) {
+                    telephonyManager.listen(s2,
+                            LISTEN_SIGNAL_STRENGTHS | LISTEN_DATA_CONNECTION_STATE);
+                }
+                mHandler.postDelayed(() -> {
+                    CellularNetworkTestFragment fragment = new CellularNetworkTestFragment();
+                    fragment.setListener(CellularNetworkActivity.this);
+                    fragment.setSim1(mSim1);
+                    fragment.setSim2(mSim2);
+                    fragment.setSim1Level(s1 != null ? s1.getLevel() : 0);
+                    fragment.setSim2Level(s2 != null ? s2.getLevel() : 0);
+                    fragment.setSim1State(s1 != null ? s1.getState() : 0);
+                    fragment.setSim2State(s2 != null ? s2.getState() : 0);
+                    fragment.setSim1AsuLevel(s1 != null ? s1.getAsu() : 0);
+                    fragment.setSim2AsuLevel(s2 != null ? s2.getAsu() : 0);
+                    fragment.setSim1Dbm(s1 != null ? s1.getDbm() : 0);
+                    fragment.setSim2Dbm(s2 != null ? s2.getDbm() : 0);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
+                }, 1000);
             }
-            if (s2 != null) {
-                telephonyManager.listen(s2,
-                        LISTEN_SIGNAL_STRENGTHS | LISTEN_DATA_CONNECTION_STATE);
-            }
-            mHandler.postDelayed(() -> {
-                CellularNetworkTestFragment fragment = new CellularNetworkTestFragment();
-                fragment.setListener(CellularNetworkActivity.this);
-                fragment.setSim1(mSim1);
-                fragment.setSim2(mSim2);
-                fragment.setSim1Level(s1 != null ? s1.getLevel() : 0);
-                fragment.setSim2Level(s2 != null ? s2.getLevel() : 0);
-                fragment.setSim1State(s1 != null ? s1.getState() : 0);
-                fragment.setSim2State(s2 != null ? s2.getState() : 0);
-                fragment.setSim1AsuLevel(s1 != null ? s1.getAsu() : 0);
-                fragment.setSim2AsuLevel(s2 != null ? s2.getAsu() : 0);
-                fragment.setSim1Dbm(s1 != null ? s1.getDbm() : 0);
-                fragment.setSim2Dbm(s2 != null ? s2.getDbm() : 0);
-                getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
-            }, 1000);
         }
     }
 
@@ -118,6 +130,7 @@ public class CellularNetworkActivity extends TestingActivity implements OnResult
         private int mState;
         private int mAsu;
         private int mDbm;
+
         public SignalListener(int subId) {
             super();
             ReflectUtil.setFieldValue(this, "mSubId", subId);
@@ -154,5 +167,32 @@ public class CellularNetworkActivity extends TestingActivity implements OnResult
         public int getDbm() {
             return mDbm;
         }
+    }
+
+
+    private String getSystemProperties(String key, String defaultValue) {
+        if (key == null)
+            return null;
+        return Helper.getSystemProperties(key, defaultValue);
+    }
+
+    private boolean isNetworkAvailable() {
+        String emergency = getText(Helper.getEmergencyResource()).toString();
+        String noService = getText(Helper.getNoServiceResource()).toString();
+        Log.i(emergency + " " + noService);
+        boolean sim1State = mSim1 != null && (mSim1.getCarrierName()
+                .equals(emergency) || mSim1.getCarrierName().equals(noService));
+        boolean sim2State = mSim2 != null && (mSim2.getCarrierName().equals(emergency)
+                || mSim2.getCarrierName().equals(noService));
+
+        if (sim1State || sim2State) {
+            return false;
+        }
+
+        if (Settings.System.getInt(getContentResolver(),
+                Settings.Global.AIRPLANE_MODE_ON, 0) == 1) {
+            return false;
+        }
+        return true;
     }
 }

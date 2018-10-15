@@ -6,6 +6,8 @@ import android.telephony.TelephonyManager;
 import com.android.helper.Helper;
 import com.wingtech.diagnostic.util.Log;
 
+import static com.android.helper.Helper.getSystemProperties;
+
 /**
  * Created by xiekui on 17-8-2.
  */
@@ -37,33 +39,28 @@ public class SIMCardTestingFragment extends TestFragment {
             simNum = 2;
         } else if ("tsts".equals(simConfig)) {
             simNum = 3;
-        } else {
+        } else if ("none".equals(simConfig)){
             simNum = 1;
+        } else {
+            simNum = 2;
         }
-        Log.d("simNum = " + simNum);
         return simNum;
     }
 
-    private void getSimStatus(int index){
+    private void getSimStatus(int index) {
         TelephonyManager mTelephonyManager =
                 (TelephonyManager) mActivity.getSystemService(Service.TELEPHONY_SERVICE);
         if (mTelephonyManager == null) {
             mResult = false;
         }
 
-        if(mCurrentIndex == 1){
-            if (mTelephonyManager.getSimState() > TelephonyManager.SIM_STATE_ABSENT
-                    && mTelephonyManager.getSimState() < Helper.SIM_STATE_NOT_READY) {
-                mResult = true;
-            }
-        } else {
-            int state = Helper.getSimState(mTelephonyManager, index);
-            Log.d("SIM state=" + state);
-            if (state > TelephonyManager.SIM_STATE_ABSENT
-                    && state < Helper.SIM_STATE_NOT_READY) {
-                mResult = true;
-            }
+        int state = Helper.getSimState(mTelephonyManager, index);
+        Log.d("SIM state=" + state);
+        if (state > TelephonyManager.SIM_STATE_ABSENT
+                && state < Helper.SIM_STATE_NOT_READY) {
+            mResult = true;
         }
+
         mCallback.onChange(mResult);
     }
 }

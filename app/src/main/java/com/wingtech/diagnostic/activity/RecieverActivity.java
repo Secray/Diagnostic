@@ -11,9 +11,10 @@ import android.widget.TextView;
 import com.asusodm.atd.smmitest.R;
 import com.wingtech.diagnostic.util.Log;
 
-import java.io.IOException;
 import java.util.Locale;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static com.wingtech.diagnostic.util.Constants.RECIEVER_REQUEST_CODE;
 
@@ -66,7 +67,7 @@ public class RecieverActivity extends TestingActivity implements View.OnClickLis
             localAudioManager.setSpeakerphoneOn(false);
         }
         audio_mode = localAudioManager.getMode();
-        localAudioManager.setMode(AudioManager.MODE_IN_CALL);
+        localAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
         oldVolume = localAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
         int maxVolume = localAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         localAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, maxVolume,0);
@@ -84,36 +85,31 @@ public class RecieverActivity extends TestingActivity implements View.OnClickLis
             mRes = EN_SOURCE;
         }
 
-        localAudioManager.setMode(AudioManager.MODE_IN_CALL);
+        localAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
 
-        player = new MediaPlayer();
-        player.reset();
-        //player.setVolume(0.0f, 0.000f);/* ajayet invert to match headset */
-        playMelody(getResources(), mRes[mIndex]);
-        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
+        try {
+            player = new MediaPlayer();
+            player.reset();
+            //player.setVolume(0.0f, 0.000f);/* ajayet invert to match headset */
+            player.setVolume(13.0f, 13.0f);/* ajayet invert to match headset */
+            playMelody(getResources(), mRes[mIndex]);
+            player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    TimerTask timerTask = new TimerTask() {
+                        @Override
+                        public void run() {
+                            if(player!=null)
+                                player.start();
+                        }
+                    };
+                    new Timer().schedule(timerTask,1000);
+                }
 
-                localAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-                player = new MediaPlayer();
-                player.reset();
-
-                player.setVolume(13.0f, 13.0f);/* ajayet invert to match headset */
-                mTxt.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        playMelody(getResources(), mRes[mIndex]);
-                        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                            @Override
-                            public void onCompletion(MediaPlayer mp) {
-                                isCompleted = true;
-                            }
-                        });
-                    }
-                }, 550);
-            }
-
-        });
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void playMelody(Resources resources, int res) {
@@ -128,7 +124,7 @@ public class RecieverActivity extends TestingActivity implements View.OnClickLis
             //player.setLooping(true);
             player.prepare();
             player.start();
-        } catch (IOException e) {
+        } catch (Exception e) {
             Log.e(TAG, "can't play melody cause:" + e);
         }
     }
@@ -158,9 +154,9 @@ public class RecieverActivity extends TestingActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        if (!isCompleted) {
-            return;
-        }
+//        if (!isCompleted) {
+//            return;
+//        }
         switch (v.getId()) {
             case R.id.action_one:
                 if (mIndex == 0) {

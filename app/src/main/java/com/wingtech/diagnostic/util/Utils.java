@@ -1,7 +1,6 @@
 package com.wingtech.diagnostic.util;
 
 import android.content.Context;
-import android.util.SparseArray;
 import android.util.TypedValue;
 
 import com.wingtech.diagnostic.fragment.BatteryTestingFragment;
@@ -16,16 +15,10 @@ import com.wingtech.diagnostic.fragment.SIMCardTestingFragment;
 import com.wingtech.diagnostic.fragment.TestFragment;
 import com.wingtech.diagnostic.fragment.WiFiTestingFragment;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * @author xiekui
@@ -78,6 +71,7 @@ public class Utils {
             case "SD Card Test":
                 fragment = new SDCardTestingFragment();
                 break;
+            case "SIM Card1 Test":
             case "SIM Card Test":
                 fragment = new SIMCardTestingFragment(1);
                 break;
@@ -95,33 +89,26 @@ public class Utils {
     }
 
     public static boolean isSwfp() {
-        int code = 0;
-        BufferedReader br = null;
+        String chiponeCode = getProperty("chipone.fp.hardware.ready","-1");
+        Log.d("Diagnostic chiponeCode",chiponeCode);
+        if(chiponeCode.equals("0"))
+            return false;
+        else if(chiponeCode.equals("1"))
+            return true;
+        return false;
+    }
+
+    public static String getProperty(String key, String defaultValue) {
+        String value = defaultValue;
         try {
-            Runtime runtime = Runtime.getRuntime();
-            Process process = runtime.exec("cat  /proc/asus/gpiostatus"); // 这儿进行的度操作
-            InputStream is = process.getInputStream();
-            InputStreamReader isr = new InputStreamReader(is);
-            br = new BufferedReader(isr);
-            String line = br.readLine();
-            int current = 0;
-            try {
-                current = Integer.parseInt(line);
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
-            code = current;
-        } catch (IOException e) {
-            code = -1;
+            Class<?> c = Class.forName("android.os.SystemProperties");
+            Method get = c.getMethod("get", String.class, String.class);
+            Method get1 = c.getMethod("get", String.class);
+            value = (String) (get.invoke(c, key, "unknown"));
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
-            try {
-                if (br != null)
-                    br.close();
-            } catch (IOException excep) {
-                Log.e(Log.TAG, "can't close file" + excep);
-            }
+            return value;
         }
-        Log.d("wuhaiwen","gpiocode"+String.valueOf(code));
-        return  code==0|| code==3? false:true;
     }
 }

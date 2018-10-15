@@ -50,8 +50,10 @@ public class TestResultActivity extends BaseActivity {
 
     @Override
     protected void onWork() {
-    		SharedPreferencesUtils.deleteFile();
-    		SharedPreferencesUtils.outputFile(this);
+        SharedPreferencesUtils.deleteFile();
+        SharedPreferencesUtils.outputFile(this);
+        SharedPreferencesUtils.deleteFile();
+        SharedPreferencesUtils.outputFile(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration itemDecoration =
                 new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);

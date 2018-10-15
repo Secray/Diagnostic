@@ -1,6 +1,12 @@
 package com.wingtech.diagnostic.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -19,7 +25,10 @@ import com.wingtech.diagnostic.util.SharedPreferencesUtils;
 import com.wingtech.diagnostic.util.TestItem;
 import com.wingtech.diagnostic.util.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @author xiekui
@@ -34,6 +43,7 @@ public class TestAllActivity extends BaseActivity
     View mRlPrevious;
     View mRlNext;
     TextView mIndicator;
+    ViewPager mViewPager;
 
     int mCurrent = 0;
     String mTitle;
@@ -41,6 +51,10 @@ public class TestAllActivity extends BaseActivity
     int mLen;
     private List<TestItem> mCaseList;
     private AlertDialog mDialog;
+    private List<Fragment> mTestFragments;
+    private TestAdapter mTestAdapter;
+
+    ExecutorService mCachedThreadPool = Executors.newCachedThreadPool();
 
     @Override
     protected int getLayoutResId() {
@@ -55,7 +69,11 @@ public class TestAllActivity extends BaseActivity
         mRlPrevious = findViewById(R.id.rl_previous);
         mRlNext = findViewById(R.id.rl_next);
         mIndicator = (TextView) findViewById(R.id.text_indicator);
+        mViewPager = (ViewPager) findViewById(R.id.test_viewpager);
         mCaseList = Utils.getTestAllCases(App.mItems);
+        mTestFragments = new ArrayList<>();
+        mTestAdapter = new TestAdapter(getSupportFragmentManager(), this, mTestFragments);
+        mViewPager.setAdapter(mTestAdapter);
     }
 
     @Override
@@ -67,7 +85,8 @@ public class TestAllActivity extends BaseActivity
     @Override
     protected void onWork() {
         mLen = mCaseList.size();
-        doTest();
+        if (mLen > 0)
+            doTest();
         /*CommonSingleTestFragment fragment = new CommonSingleTestFragment();
         fragment.setTitleChangedListener(this);
         getSupportFragmentManager().beginTransaction().replace(R.id.test_content,
@@ -84,7 +103,7 @@ public class TestAllActivity extends BaseActivity
         }
     }
 
-    private AlertDialog showDialog(){
+    private AlertDialog showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.content_test_dialog, null);//获取自定义布局
@@ -102,6 +121,7 @@ public class TestAllActivity extends BaseActivity
             public void onClick(View arg0) {
                 dlg.dismiss();
                 mIsFinishing = true;
+                App.isAllTest = false;
                 finish();
             }
         });
@@ -131,14 +151,23 @@ public class TestAllActivity extends BaseActivity
         if (fragment != null) {
             fragment.setOnResultChangedCallback(this);
             fragment.setTitle(mTitle);
-            getSupportFragmentManager().beginTransaction().replace(R.id.test_content,
-                    fragment).commit();
+            mTestFragments.clear();
+            mTestFragments.add(fragment);
+            mTestAdapter.update(mTestFragments);
+            mCachedThreadPool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    SharedPreferencesUtils.deleteFile();
+                    SharedPreferencesUtils.outputFile(TestAllActivity.this);
+                }
+            });
         } else {
             CommonSingleTestFragment commonFragment = new CommonSingleTestFragment();
             commonFragment.setOnResultChangedCallback(this);
             commonFragment.setOnTestItemListener(this);
-            getSupportFragmentManager().beginTransaction().replace(R.id.test_content,
-                    commonFragment).commit();
+            mTestFragments.clear();
+            mTestFragments.add(commonFragment);
+            mTestAdapter.update(mTestFragments);
         }
     }
 
@@ -147,13 +176,23 @@ public class TestAllActivity extends BaseActivity
         SharedPreferencesUtils.setParam(this, mTitle,
                 result ? SharedPreferencesUtils.PASS : SharedPreferencesUtils.FAIL);
         Log.i("mCurrent = " + mCurrent + " " + mTitle + " " + result + " mIsFinishing = " + mIsFinishing);
-        mCurrent ++;
-        if (mCurrent > mCaseList.size() - 1) {
+        if (mCurrent >= mCaseList.size() - 1) {
             startActivity(new Intent(this, TestResultActivity.class));
+            App.isAllTest = false;
             finish();
         } else {
             if ((mDialog == null || !mDialog.isShowing()) && !mIsFinishing) {
-                doTest();
+                try {
+                    mViewPager.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mCurrent++;
+                            doTest();
+                        }
+                    }, 500);
+                }catch (IllegalStateException e){
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -161,5 +200,40 @@ public class TestAllActivity extends BaseActivity
     @Override
     public TestItem getTestItem() {
         return mCaseList.get(mCurrent);
+    }
+
+
+    class TestAdapter extends FragmentStatePagerAdapter {
+        Context mContext;
+        List<Fragment> mFragments;
+
+        public TestAdapter(FragmentManager fm, Context context, List<Fragment> fragments) {
+            super(fm);
+            this.mContext = context;
+            this.mFragments = fragments;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragments.get(position);
+        }
+
+        @Override
+        public int getItemPosition(Object object) {
+            // TODO Auto-generated method stub
+            return PagerAdapter.POSITION_NONE;
+        }
+
+
+
+        @Override
+        public int getCount() {
+            return mFragments.size();
+        }
+
+        public void update(List<Fragment> fragments) {
+            this.mFragments = fragments;
+            notifyDataSetChanged();
+        }
     }
 }

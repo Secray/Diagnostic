@@ -296,7 +296,7 @@ public class FpDeviceExt implements IDevice {
         }
         daemon = IFpService.Stub.asInterface(mIBinder);
         try {
-                  // Log.d(TAG, "remote service = " + mIBinder.getInterfaceDescriptor());
+            Log.d(TAG, "remote service = " + mIBinder.getInterfaceDescriptor());
             IBinder client = daemon.connect(callback, 1);
             mFingerPrint = FingerPrint.Stub.asInterface(client);
             if (mFingerPrint == null) {

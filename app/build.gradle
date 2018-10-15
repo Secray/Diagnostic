@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "26.0.1"
+    buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "com.asusodm.atd.smmitest"
         minSdkVersion 15
@@ -10,9 +10,6 @@ android {
         versionCode 712
         versionName "7.1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        jackOptions {
-            enabled true
-        }
     }
 
     buildTypes {
@@ -27,6 +24,11 @@ android {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
+    lintOptions{
+        abortOnError false
+        checkReleaseBuilds false
+    }
+
 }
 
 dependencies {

@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.asusodm.atd.smmitest.R;
+import com.wingtech.diagnostic.service.MusicService;
 import com.wingtech.diagnostic.util.Log;
 
 import java.io.IOException;
@@ -78,7 +79,8 @@ public class SpeakerActivity extends TestingActivity {
 
     public void onPause() {
         super.onPause();
-
+        //停止服务
+        stopService(new Intent(this, MusicService.class));
     }
 
     @Override
@@ -102,7 +104,8 @@ public class SpeakerActivity extends TestingActivity {
         mHPReceiver = new HeadsetPlugReceiver();
         intentFilter.addAction("android.intent.action.HEADSET_PLUG");
         registerReceiver(mHPReceiver, intentFilter);
-
+        //启动服务停止其他音乐播放
+        startService(new Intent(this, MusicService.class));
     }
 
     public void showTheDialog(boolean flag) {

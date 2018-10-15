@@ -22,6 +22,7 @@ import java.util.LinkedList;
  */
 
 public class TemperatureService extends Service {
+    private static final boolean ISDEBUG = false;
     private HandlerThread mTemperatureThread;
     private Handler mTemperatureHandler;
 
@@ -68,7 +69,9 @@ public class TemperatureService extends Service {
                         readTemperature("cat /sys/devices/virtual/thermal/thermal_zone11/temp");
                 int batteryTemp =
                         readTemperature("cat /sys/class/power_supply/battery/temp");
-                Log.i("cpu temperature = " + cpuTemp + " battery temperature = " + batteryTemp);
+                if (ISDEBUG) {
+                    Log.i("cpu temperature = " + cpuTemp + " battery temperature = " + batteryTemp);
+                }
                 if (mBatteryList.size() >= 24) {
                     mBatteryList.poll();
                     mCPUList.poll();

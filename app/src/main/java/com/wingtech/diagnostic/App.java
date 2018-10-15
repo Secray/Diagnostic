@@ -2,8 +2,8 @@ package com.wingtech.diagnostic;
 
 import android.app.Activity;
 import android.app.Application;
+import android.os.Build;
 import android.os.Bundle;
-import android.util.SparseArray;
 
 import com.goodix.service.FingerprintManager;
 import com.wingtech.diagnostic.util.Log;
@@ -22,6 +22,7 @@ public class App extends Application implements Application.ActivityLifecycleCal
 
     private FingerprintManager mFingerprintManager;
     private static App mApplication;
+    public static boolean isAllTest = false;
 
     @Override
     public void onCreate() {
@@ -33,8 +34,10 @@ public class App extends Application implements Application.ActivityLifecycleCal
         new TestItemHandler(this).start();
 
         mApplication = this;
-        //ZD600KL没有汇顶指纹，注释掉汇顶指纹的初始化
-//        initFpMangerService();
+
+        if (Build.MODEL.contains("X00LD") || Build.MODEL.equals("ZB553KL") || Build.MODEL.contains("X00D")) {
+            initFpMangerService();
+        }
     }
 
     @Override

@@ -61,19 +61,20 @@ public class FingerprintFragment extends TestFragment {
     public static final int MSG_IRQ = 1001;
     public static final int MSG_PASS = 1;
     public static final int MSG_FAIL = 0;
+    public static final int MSG_TEST_DISCONNECTED = 6666;
 
     @Override
     protected void onWork() {
         super.onWork();
-
-//        mType = Helper.getSystemProperties(FINGERPRINT_TYPE, "-1");
-//        Log.i("FingerPrint properties Fingerprint product " + mType);
-        isSwfp = Utils.isSwfp();
-        if (!isSwfp) {
+        mCacheThreadPool = Executors.newCachedThreadPool();
+        mType = Helper.getSystemProperties(FINGERPRINT_TYPE, "1");
+        Log.i("FingerPrint properties Fingerprint product " + mType);
+        if ("1".equals(mType) && !Build.MODEL.equals("ASUS_X017D") && !Build.MODEL.equals("ASUS_X017DA")) {
+            checkHardwareDetected();
+            mFpManager = App.getInstance().getFpServiceManager();
+            initDeviceMode();
+        } else if (!isSwfp && (Build.MODEL.equals("ASUS_X017D")|| Build.MODEL.equals("ASUS_X017DA"))) {
             Log.d(Log.TAG, "jichuang");
-//            checkHardwareDetected();
-//            mFpManager = App.getInstance().getFpServiceManager();
-//            initDeviceMode();
             initJiChuangManager();
         } else {
             Log.d(Log.TAG, "xinwei");
@@ -109,9 +110,28 @@ public class FingerprintFragment extends TestFragment {
 
     @Override
     public void onResume() {
+        isSwfp = Utils.isSwfp();
+        if(Build.MODEL.equals("ASUS_X017DA"))
+            isSwfp = false;
         super.onResume();
-        if (!isSwfp) {
+        if ("1".equals(mType) && !Build.MODEL.equals("ASUS_X017D") && !Build.MODEL.equals("ASUS_X017DA")) {
             Log.d("TEST_CHECK_SENSOR_TEST_INFO start");
+            mCacheThreadPool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    byte[] init = mFpManager.sendCmd(
+                            FINGERPRINT_CMD_MP_TEST_INIT,
+                            FileUtil.intToBytes(3000));
+                    if (init == null) {
+                        mHandler.sendEmptyMessage(MSG_TEST_DISCONNECTED);
+                    } else {
+                        mFpManager.sendCmd(
+                                FINGERPRINT_CMD_MP_TEST_SELFTEST,
+                                FileUtil.intToBytes(3000));
+                    }
+                }
+            });
+        } else if (!isSwfp && (Build.MODEL.equals("ASUS_X017D") || Build.MODEL.equals("ASUS_X017DA"))) {
             int result = -1;
             try {
                 if (theSensorTestTool != null)
@@ -153,7 +173,15 @@ public class FingerprintFragment extends TestFragment {
     @Override
     public void onStop() {
         super.onStop();
-        if (isSwfp) {
+        if ("1".equals(mType) && !Build.MODEL.equals("ASUS_X017D")&& !Build.MODEL.equals("ASUS_X017DA")) {
+            mCacheThreadPool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    mFpManager.sendCmd(FINGERPRINT_CMD_MP_TEST_EXIT,
+                            FileUtil.intToBytes(3000));
+                }
+            });
+        } else if ("0".equals(mType) || isSwfp) {
             mTaskHandler.removeCallbacksAndMessages(null);
             mHandlerThread.quit();
 
@@ -167,7 +195,7 @@ public class FingerprintFragment extends TestFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        mCacheThreadPool.shutdown();
+        mCacheThreadPool.shutdown();
     }
 
     private void doNextJob() {
@@ -213,7 +241,25 @@ public class FingerprintFragment extends TestFragment {
                     mCallback.onChange(mIsIRQPass && mIsSPIPass);
                     break;
                 case MSG_GOODIX_SPI:
-                    mCallback.onChange(msg.arg2 == 0);
+                    if (msg.arg1 == 0) {
+                        Log.i("msg.arg2 = " + msg.arg2);
+                        boolean result = msg.arg2 == 0;
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                mCallback.onChange(result);
+                            }
+                        }, 1000);
+                    }
+                    break;
+                case MSG_TEST_DISCONNECTED:
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mCallback.onChange(false);
+
+                        }
+                    }, 1000);
                     break;
 
             }

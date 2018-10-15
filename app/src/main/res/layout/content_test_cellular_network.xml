@@ -8,6 +8,7 @@
         android:paddingTop="@dimen/about_text_padding"
         android:layout_width="match_parent"
         android:layout_weight="1"
+        android:gravity="center"
         android:layout_height="wrap_content">
 
         <TableRow
@@ -116,112 +117,132 @@
 
     <TableLayout
         android:id="@+id/sim2_content"
-        android:paddingTop="@dimen/about_text_padding"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_height="wrap_content">
+        android:gravity="center"
+        android:paddingTop="@dimen/about_text_padding">
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
                 android:id="@+id/sim_id2"
-                android:textColor="@color/main_text_color"
                 android:layout_column="1"
                 android:layout_weight="1"
-                android:text="@string/sim_2_card"/>
+                android:text="@string/sim_2_card"
+                android:textColor="@color/main_text_color" />
+
             <TextView
                 android:id="@+id/sim_msg2"
                 android:layout_column="1"
-                android:textColor="@color/main_text_color"
                 android:layout_weight="1"
-                android:text="@string/please_plug_sim_card"/>
+                android:text="@string/please_plug_sim_card"
+                android:textColor="@color/main_text_color" />
         </TableRow>
 
         <TableRow
             android:id="@+id/network_info2"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <TextView android:layout_column="1"
+
+            <TextView
+                android:layout_column="1"
                 android:layout_weight="1"
-                android:textColor="@color/main_text_color"
-                android:text="@string/network"/>
+                android:text="@string/network"
+                android:textColor="@color/main_text_color" />
+
             <TextView
                 android:id="@+id/network2"
                 android:layout_column="1"
                 android:layout_weight="1"
-                android:textColor="@color/main_text_color"/>
+                android:textColor="@color/main_text_color" />
         </TableRow>
 
         <TableRow
             android:id="@+id/cellular_info2"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <TextView android:layout_column="1"
+
+            <TextView
+                android:layout_column="1"
                 android:layout_weight="1"
-                android:textColor="@color/main_text_color"
-                android:text="@string/cellular_network"/>
+                android:text="@string/cellular_network"
+                android:textColor="@color/main_text_color" />
+
             <TextView
                 android:id="@+id/cellular_network_state2"
                 android:layout_column="1"
                 android:layout_weight="1"
-                android:textColor="@color/main_text_color"/>
+                android:textColor="@color/main_text_color" />
         </TableRow>
 
         <TableRow
             android:id="@+id/signal_info2"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <TextView android:layout_column="1"
+
+            <TextView
+                android:layout_column="1"
                 android:layout_weight="1"
-                android:textColor="@color/main_text_color"
-                android:text="@string/signal_level"/>
+                android:text="@string/signal_level"
+                android:textColor="@color/main_text_color" />
+
             <TextView
                 android:id="@+id/signal_level2"
                 android:layout_column="1"
                 android:layout_weight="1"
-                android:textColor="@color/main_text_color"/>
+                android:textColor="@color/main_text_color" />
         </TableRow>
 
         <TableRow
             android:id="@+id/asu_info2"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <TextView android:layout_column="1"
-                android:textColor="@color/main_text_color"
+
+            <TextView
+                android:layout_column="1"
                 android:layout_weight="1"
-                android:text="@string/strength_level_asu"/>
+                android:text="@string/strength_level_asu"
+                android:textColor="@color/main_text_color" />
+
             <TextView
                 android:id="@+id/asu_level2"
                 android:layout_column="1"
-                android:textColor="@color/main_text_color"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:textColor="@color/main_text_color" />
         </TableRow>
 
         <TableRow
             android:id="@+id/dbm_info2"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <TextView android:layout_column="1"
-                android:textColor="@color/main_text_color"
+
+            <TextView
+                android:layout_column="1"
                 android:layout_weight="1"
-                android:text="@string/strength_level_dbm"/>
+                android:text="@string/strength_level_dbm"
+                android:textColor="@color/main_text_color" />
+
             <TextView
                 android:id="@+id/dbm_level2"
                 android:layout_column="1"
-                android:textColor="@color/main_text_color"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:textColor="@color/main_text_color" />
         </TableRow>
 
         <TableRow
             android:id="@+id/sim2_info"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <TextView android:layout_column="1"
+
+            <TextView
+                android:layout_column="1"
                 android:layout_span="1"
-                android:textColor="@color/main_text_color"
                 android:layout_weight="1"
-                android:text="@string/please_open_cellular_network_and_try_again"/>
+                android:text="@string/please_open_cellular_network_and_try_again"
+                android:textColor="@color/main_text_color" />
         </TableRow>
     </TableLayout>
 

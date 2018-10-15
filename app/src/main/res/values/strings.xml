@@ -5,6 +5,8 @@
     <string name="reset_dialog_title">Reset</string>
     <string name="reset_dialog_content">Tap reset to clear all of the test result?</string>
 
+    <string name="clear_dialog_title">Clear</string>
+    <string name="clear_dialog_content">Tap clear to clear all of the test result?</string>
     <!-- MainActivity -->
     <string name="main_cpu_title">CPU Load</string>
     <string name="main_battery_title">Battery Level</string>
@@ -56,7 +58,7 @@
     <string name="test_case_light_sensor">LightSensor Test</string>
     <string name="test_case_cmd_mouse">CMD Mouse Test</string>
     <string name="test_case_sd_card">SD Card Test</string>
-    <string name="test_case_sim_card">SIM Card Test</string>
+    <string name="test_case_sim_card">SIM Card1 Test</string>
     <string name="test_case_sim_card2">SIM Card2 Test</string>
     <string name="test_case_nfc">NFC Test</string>
     <string name="test_case_fingerprint">Fingerprint Test</string>
@@ -75,6 +77,7 @@
     <string name="test_case_tele_front">Front Tele Camera Capture Test</string>
     <string name="test_case_wide_front">Front WideCamera Capture Test</string>
     <string name="test_case_main_back">Main Camera Capture Test</string>
+    <string name="test_case_main_wide">Main WideCamera Capture Test</string>
     <!-- RepairActivity -->
     <string name="repair_list_item_software_update">Software Update</string>
     <string name="repair_list_item_safe_mode">Safe Mode</string>
@@ -178,7 +181,8 @@
     <string name="headsetkey_txt">Headset Key</string>
     <!-- NFC Activity-->
     <string name="nfc_title">If no NFC card found, please tap the fail button.</string>
-    <string name="nfc_txt">NFC card found</string>
+    <string name="nfc_found">NFC card found</string>
+    <string name="nfc_txt">Scan a Tag</string>
     <!-- WireCharg Activity-->
     <string name="wirechargkey_title">If no charging, please tap the fail.</string>
     <string name="wirechargkey_txt">Charging</string>
@@ -207,12 +211,13 @@
     <string name="test_all_dialog_content">You have not finished all of the test items.Do you want to continue to finish it?</string>
     <string name="btn_continue">Continue</string>
 
-    <!-- Diaplay Activity-->
+    <!-- SIM signal Activity-->
     <string name="nfc_disabled">NFC disable</string>
     <string name="phone_number">Phone number</string>
     <string name="call_phone_action">call</string>
     <string name="sim_not_found_msg">please plug SIM card in the device and continue to test again.</string>
     <string name="no_sim_find_title">No SIM card found</string>
+    <string name="no_network_find_title">No Network found</string>
     <string name="network">NetWork:</string>
     <string name="cellular_network">Cellular Network:</string>
     <string name="please_plug_sim_card">please plug sim card</string>
@@ -231,6 +236,8 @@
     <string name="wireless">Wireless</string>
     <string name="strength_level_asu">Strength level(asu)</string>
     <string name="strength_level_dbm">Strength level(dbm)</string>
+    <string name="smmi_all_test_done">SMMI All Test Done</string>
+    <string name="sim_card">SIM Card:</string>
 
     <string-array name="TestItem_Des_Battery_Test">
         <item>The "Battery Test" is used to test the battery status.</item>
@@ -391,6 +398,13 @@
         <item>2. If the photo is captured, press [PASS], else press [FAIL] to terminate this test.</item>
         <item>Note: This test is to try the camera by opening, taking a picture, and show the photo. This test does not include performance and clarity.</item>
     </string-array>
+    <string-array name="TestItem_Des_MainWideCamCapture_Test">
+        <item>The "Main Wide Camera Capture Test" is used to test the main wide camera of the device.</item>
+        <item>Test procedure:</item>
+        <item>1. Press [SHUTTER] to capture photo.</item>
+        <item>2. If the photo is captured, press [PASS], else press [FAIL] to terminate this test.</item>
+        <item>Note: This test is to try the camera by opening, taking a picture, and show the photo. This test does not include performance and clarity.</item>
+    </string-array>
     <string-array name="TestItem_Des_WideCamCapture_Test">
         <item>The Wide-angled Camera Capture Test is used to test if the main camera is working</item>
         <item>Test Procedure:</item>
@@ -470,7 +484,7 @@
         <item>2. This test procedure will automatically start without any manual operation.</item>
     </string-array>
     <string-array name="TestItem_Des_SIMcard_Test">
-        <item>The "SIM Card Test" is used to test the SIM card on the SIM card slot of the device.</item>
+        <item>The "SIM Card1 Test" is used to test the SIM card on the SIM card slot of the device.</item>
         <item>Test procedure:</item>
         <item>1. Insert the SIM card in SIM card slot of the device. </item>
         <item>2. This test procedure will automatically start without any manual operation.</item>

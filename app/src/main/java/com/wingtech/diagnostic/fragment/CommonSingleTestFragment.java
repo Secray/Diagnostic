@@ -2,6 +2,7 @@ package com.wingtech.diagnostic.fragment;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.ImageView;
@@ -38,6 +39,11 @@ import com.wingtech.diagnostic.util.Log;
 import com.wingtech.diagnostic.util.SharedPreferencesUtils;
 import com.wingtech.diagnostic.util.TestItem;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+
 import static com.wingtech.diagnostic.util.Constants.ASSITSCAMERA_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.BATTERY_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.BLUETOOTH_REQUEST_CODE;
@@ -57,6 +63,7 @@ import static com.wingtech.diagnostic.util.Constants.HEADSETMIC_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.HEADSET_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.KEYPAD_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.LIGHTSENSOR_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.MAIN_WIDE_CAMERA_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.MIC_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.MODEM_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.MOUSE_REQUEST_CODE;
@@ -93,6 +100,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
     private TestItem mTestItem;
     private int flashId = 0;
     private int camId = 0;
+    private ExecutorService mCacheThreadPool = Executors.newCachedThreadPool();
 
     public void setOnTestItemListener(OnTestItemListener listener) {
         this.mTestItemListener = listener;
@@ -179,6 +187,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                     dis += "\n";
                 }
                 break;
+            case "SIM Card1 Test":
             case "SIM Card Test":
                 String[] discription_sim1 = getResources().getStringArray(R.array.TestItem_Des_SIMcard_Test);
                 dis =  discription_sim1[0];
@@ -272,6 +281,14 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 dis =  discription_cam[0];
                 for (int i = 1; i < discription_cam.length; i++){
                     dis = dis + discription_cam[i];
+                    dis += "\n";
+                }
+                break;
+            case "Main WideCamera Capture Test":
+                String[] discription_wide = getResources().getStringArray(R.array.TestItem_Des_MainWideCamCapture_Test);
+                dis =  discription_wide[0];
+                for (int i = 1; i < discription_wide.length; i++){
+                    dis = dis + discription_wide[i];
                     dis += "\n";
                 }
                 break;
@@ -485,6 +502,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
             case CALL_REQUEST_CODE:
             case CELLULAR_NETWORK_REQUEST_CODE:
             case VIRTUAL_KEY_REQUEST_CODE:
+            case MAIN_WIDE_CAMERA_REQUEST_CODE:
                 boolean result = data.getBooleanExtra("result", false);
                 Log.d("gaoweili", "gaoweili:");
                 mDiscription.setText(returnDiscription(resultCode));
@@ -505,9 +523,15 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                     }
                     mTestBtn.setText(R.string.btn_test_again);
                 }
-                SharedPreferencesUtils.deleteFile();
-    						SharedPreferencesUtils.outputFile(mActivity);
-    						Log.i("gaoweili","file del output");
+                
+                mCacheThreadPool.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        SharedPreferencesUtils.deleteFile();
+                        SharedPreferencesUtils.outputFile(mActivity);
+                    }
+                });
+
                 break;
         }
     }
@@ -664,6 +688,14 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 dis =  discription_cam[0];
                 for (int i = 1; i < discription_cam.length; i++){
                     dis = dis + discription_cam[i];
+                    dis += "\n";
+                }
+                break;
+            case MAIN_WIDE_CAMERA_REQUEST_CODE:
+                String[] discription_wide_cam = getResources().getStringArray(R.array.TestItem_Des_MainWideCamCapture_Test);
+                dis =  discription_wide_cam[0];
+                for (int i = 1; i < discription_wide_cam.length; i++){
+                    dis = dis + discription_wide_cam[i];
                     dis += "\n";
                 }
                 break;
@@ -824,6 +856,7 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
             case "E-Compass Test":
             case "Gyroscope Test":
             case "SD Card Test":
+            case "SIM Card1 Test":
             case "SIM Card Test":
             case "SIM Card2 Test":
             case "CMD Mouse Test":
@@ -872,12 +905,27 @@ public class CommonSingleTestFragment extends BaseFragment implements View.OnCli
                 startActivityForResult(i, VGACAMERA_REQUEST_CODE);
                 break;
             case "Front WideCamera Capture Test":
-                camId = 2;
+                if (Build.MODEL.contains("ASUS_X017D")) {
+                    camId = 3;
+                } else {
+                    camId = 2;
+                }
                 i = new Intent(mActivity, CameraTestActivity.class);
                 i.putExtra("isTestAll", mCallback != null);
                 i.putExtra("camId", camId);
                 startActivityForResult(i, ASSITSCAMERA_REQUEST_CODE);
                 break;
+
+            case "Main WideCamera Capture Test":
+                if (Build.MODEL.contains("ASUS_X017D")) {
+                    camId = 2;
+                }
+                i = new Intent(mActivity, CameraTestActivity.class);
+                i.putExtra("isTestAll", mCallback != null);
+                i.putExtra("camId", camId);
+                startActivityForResult(i, MAIN_WIDE_CAMERA_REQUEST_CODE);
+                break;
+
             case "Camera Flash Test":
                 flashId = 0;
                 i = new Intent(mActivity, CameraFlashActivity.class);

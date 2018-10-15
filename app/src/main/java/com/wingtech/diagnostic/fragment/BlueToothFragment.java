@@ -22,6 +22,7 @@ import static com.wingtech.diagnostic.util.Constants.BLUETOOTH_STATE_CHANGED;
 public class BlueToothFragment extends TestFragment {
     BluetoothReceiver mBluetoothReceiver;
     BluetoothDevice mDevice;
+    boolean mIsOpen;
 
     BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -43,6 +44,7 @@ public class BlueToothFragment extends TestFragment {
                     Log.i("BLUETOOTH DISCOVERY FINISHED");
                     mResult = mDevice != null;
                     mCallback.onChange(mResult);
+                    removeCallbacksAndMessages(null);
                     break;
                 case BluetoothReceiver.BLUETOOTH_DISCOVERY_STARTED:
                     Log.i("BLUETOOTH DISCOVERY STARTED");
@@ -50,6 +52,7 @@ public class BlueToothFragment extends TestFragment {
                     if (!isDiscovering) {
                         mResult = false;
                         mCallback.onChange(mResult);
+                        removeCallbacksAndMessages(null);
                     }
                     break;
                 case BluetoothReceiver.BLUETOOTH_STATE_CHANGED:
@@ -68,9 +71,10 @@ public class BlueToothFragment extends TestFragment {
         super.onPause();
         if (mBluetoothReceiver != null) {
             mActivity.unregisterReceiver(mBluetoothReceiver);
-            mBluetoothAdapter.disable();
+            if (!mIsOpen) {
+                mBluetoothAdapter.disable();
+            }
         }
-        mHandler.removeCallbacksAndMessages(null);
     }
 
     protected void onWork() {
@@ -84,7 +88,20 @@ public class BlueToothFragment extends TestFragment {
         mBluetoothReceiver = new BluetoothReceiver(mBluetoothAdapter, mHandler);
         mActivity.registerReceiver(mBluetoothReceiver, intentFilter);
         if (mBluetoothAdapter.isEnabled()) {
-            mBluetoothAdapter.startDiscovery();
+            mBluetoothAdapter.disable();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(50);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    mBluetoothAdapter.enable();
+                    mIsOpen = true;
+                    mBluetoothAdapter.startDiscovery();
+                }
+            }).start();
         } else {
             mBluetoothAdapter.enable();
         }

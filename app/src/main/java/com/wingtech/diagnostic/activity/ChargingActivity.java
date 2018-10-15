@@ -29,6 +29,7 @@ public class ChargingActivity extends TestingActivity {
 
     TextView mVoltage;
     TextView mMessage;
+    TextView notCharger;
     CheckBox mMessageBox;
     CheckBox mNotChargingBox;
 
@@ -48,6 +49,7 @@ public class ChargingActivity extends TestingActivity {
         mMessageBox = (CheckBox) findViewById(R.id.box_txt_1);
         mNotChargingBox = (CheckBox) findViewById(R.id.box_txt_2);
         mTouchFailBtn = (AppCompatButton) findViewById(R.id.fail_btn);
+        notCharger = (TextView) findViewById(R.id.not_charger);
     }
 
     @Override
@@ -125,12 +127,14 @@ public class ChargingActivity extends TestingActivity {
                     Log.i(TAG, " pass pbatParam1 = " + pbatParam1 + "," + "mPlugged = " + mPlugged);
                     mMessageBox.setVisibility(View.VISIBLE);
                     mMessageBox.setChecked(true);
+                    notCharger.setText(R.string.charging);
                 }
 
                 if (pbatParam1 == 0 && mPlugged != 2) {
                     if (mMessageBox.isChecked()) {
                         mNotChargingBox.setVisibility(View.VISIBLE);
                         mNotChargingBox.setChecked(true);
+                        notCharger.setText(R.string.not_charging);
                         mResult = true;
                         sendResult();
                     }
@@ -144,6 +148,7 @@ public class ChargingActivity extends TestingActivity {
                 if (!connected && mMessageBox.isChecked()) {
                     mNotChargingBox.setVisibility(View.VISIBLE);
                     mNotChargingBox.setChecked(true);
+                    notCharger.setText(R.string.not_charging);
                     mResult = true;
                     sendResult();
                 }

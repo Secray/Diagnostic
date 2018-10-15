@@ -8,6 +8,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
+import android.os.Handler;
+import android.os.Message;
 
 import com.wingtech.diagnostic.util.Log;
 
@@ -24,25 +26,61 @@ public class WiFiTestingFragment extends TestFragment {
     private WifiManager mWiFiManager;
     private int mWiFiState;
     private boolean mWiFiEnable;
+    private boolean mLastState;
     private List<ScanResult> mScanResults;
+    private boolean mIsRegister;
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            mWiFiState = mWiFiManager.getWifiState();
+            Log.i("state = " + mWiFiState + " " + mWiFiEnable);
+            if (mWiFiEnable) {
+                if (mWiFiState == WIFI_STATE_ENABLED) {
+                    mWiFiManager.startScan();
+                    mTxtTitle.postDelayed(() -> {
+                        mScanResults = mWiFiManager.getScanResults();
+
+                        Log.i("WiFi Scan results = " + mScanResults.size());
+                        if (isWiFi(mActivity)) {
+                            Log.e("It's not WiFi");
+                        }
+
+                        mResult = mScanResults.size() > 0 && mWiFiEnable;
+                        mCallback.onChange(mResult);
+                    }, 2000);
+                    if (mIsRegister) {
+                        mActivity.unregisterReceiver(mWiFiReceiver);
+                        mIsRegister = false;
+                    }
+                }
+            } else {
+                mResult = false;
+                mCallback.onChange(mResult);
+            }
+        }
+    };;
 
     @Override
     protected void onWork() {
         super.onWork();
         mWiFiManager = (WifiManager) mActivity.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(WIFI_STATE_CHANGED);
-        mActivity.registerReceiver(mWiFiReceiver, filter);
+        mLastState = mWiFiManager.isWifiEnabled();
         enableWiFi();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (mWiFiEnable) {
+        if (!mLastState) {
             mWiFiManager.setWifiEnabled(false);
         }
-        mActivity.unregisterReceiver(mWiFiReceiver);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 
     private boolean isWiFi(Context context) {
@@ -61,8 +99,17 @@ public class WiFiTestingFragment extends TestFragment {
         if (mWiFiState == WifiManager.WIFI_STATE_DISABLED
                 || mWiFiState == WifiManager.WIFI_STATE_UNKNOWN) {
             mWiFiEnable = mWiFiManager.setWifiEnabled(true);
+            register();
         } else {
-            mWiFiEnable = true;
+            mWiFiManager.setWifiEnabled(false);
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mWiFiEnable = mWiFiManager.setWifiEnabled(true);
+
+                    register();
+                }
+            }, 500);
         }
     }
 
@@ -70,27 +117,14 @@ public class WiFiTestingFragment extends TestFragment {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            mWiFiState = mWiFiManager.getWifiState();
-            Log.i("state = " + mWiFiState + " " + mWiFiEnable);
-            if (mWiFiEnable) {
-                if (mWiFiState == WIFI_STATE_ENABLED) {
-                    mWiFiManager.startScan();
-                    mTxtTitle.postDelayed(() -> {
-                        mScanResults = mWiFiManager.getScanResults();
-
-                        Log.i("WiFi Scan results = " + mScanResults.size());
-                        if (isWiFi(mActivity)) {
-                            Log.e("It's not WiFi");
-                        }
-
-                        mResult = mScanResults.size() > 0 && mWiFiEnable;
-                        mCallback.onChange(mResult);
-                    }, 2000);
-                }
-            } else {
-                mResult = false;
-                mCallback.onChange(mResult);
-            }
+            mHandler.sendEmptyMessage(0);
         }
     };
+
+    private void register() {
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(WIFI_STATE_CHANGED);
+        mActivity.registerReceiver(mWiFiReceiver, filter);
+        mIsRegister = true;
+    }
 }

@@ -10,6 +10,7 @@ import android.graphics.PixelFormat;
 import android.hardware.Camera;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
+import android.os.Build;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatImageView;
@@ -32,6 +33,7 @@ import java.util.List;
 
 import static com.wingtech.diagnostic.util.Constants.ASSITSCAMERA_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.CAMERA_REQUEST_CODE;
+import static com.wingtech.diagnostic.util.Constants.MAIN_WIDE_CAMERA_REQUEST_CODE;
 import static com.wingtech.diagnostic.util.Constants.VGACAMERA_REQUEST_CODE;
 
 
@@ -55,6 +57,7 @@ public class CameraTestActivity extends TestingActivity {
     private Camera.AutoFocusCallback mAutoFocusCallback = null;
     private ToneGenerator tone;
     private android.hardware.Camera mCamera;
+    private AudioManager mAudioManager;
     //HAL1 version code
     private static final int CAMERA_HAL_API_VERSION_1_0 = 0x100;
 
@@ -88,6 +91,7 @@ public class CameraTestActivity extends TestingActivity {
 
     @Override
     protected void onWork() {
+        mAudioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
         if (!checkCameraHardware(CameraTestActivity.this)) {
             Toast.makeText(CameraTestActivity.this, "Camera does not support", Toast.LENGTH_SHORT)
                     .show();
@@ -98,22 +102,22 @@ public class CameraTestActivity extends TestingActivity {
             }
 
         }
+        mAutoFocusCallback = new Camera.AutoFocusCallback() {
+
+            public void onAutoFocus(boolean success, Camera camera) {
+                // TODO Auto-generated method stub
+                if(success){
+                    //mCamera.setOneShotPreviewCallback(null);
+                    Log.i("auto focus");
+                }
+            }
+        };
+
 
         mCapture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //mCamera.autoFocus(null);
-                mAutoFocusCallback = new Camera.AutoFocusCallback() {
-
-                    public void onAutoFocus(boolean success, Camera camera) {
-                        // TODO Auto-generated method stub
-                        if(success){
-                            //mCamera.setOneShotPreviewCallback(null);
-
-                        }
-                    }
-                };
-                mCamera.autoFocus(mAutoFocusCallback);
                 mCamera.takePicture(shutterCallback, null, jpegCallback);
                 mCapture.setVisibility(View.GONE);
                 mPass.setVisibility(View.VISIBLE);
@@ -152,8 +156,8 @@ public class CameraTestActivity extends TestingActivity {
 
             FileInputStream f = new FileInputStream(image);
             Bitmap bm = null;
-//            BitmapFactory.Options options = new BitmapFactory.Options();
-//            options.inSampleSize = 8;//图片的长宽都是原来的1/8
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            //options.inSampleSize = 8;//图片的长宽都是原来的1/8
             BufferedInputStream bis = new BufferedInputStream(f);
             bm = BitmapFactory.decodeStream(bis, null,null);
             mCameralayout.setVisibility(View.GONE);
@@ -163,6 +167,8 @@ public class CameraTestActivity extends TestingActivity {
             }else if (mCameraId == 1){
                 mPng.setImageBitmap(rotateBitmapByDegree(bm, -90));
             }else if(mCameraId == 2){
+                mPng.setImageBitmap(rotateBitmapByDegree(bm, Build.MODEL.contains("ASUS_X017D") ? 90 : -90));
+            }else if (mCameraId == 3) {
                 mPng.setImageBitmap(rotateBitmapByDegree(bm, -90));
             }
         } catch (Exception e) {
@@ -227,7 +233,9 @@ public class CameraTestActivity extends TestingActivity {
             if(tone == null)
                 //发出提示用户的声音
                 tone = new ToneGenerator(AudioManager.STREAM_MUSIC,ToneGenerator.MAX_VOLUME);
-            tone.startTone(ToneGenerator.TONE_PROP_BEEP2);
+            if (mAudioManager.getRingerMode() == 2) {
+                tone.startTone(ToneGenerator.TONE_PROP_BEEP2);
+            }
         }
     };
 
@@ -252,7 +260,7 @@ public class CameraTestActivity extends TestingActivity {
         super.onPause();
         releaseCamera();
         Log.v(TAG, "onPause finish activity");
-		mResult = false;
+        mResult = false;
         sendResult();
     }
 
@@ -293,9 +301,12 @@ public class CameraTestActivity extends TestingActivity {
             intent.putExtra("result", mResult);
             if (mCameraId == 0){
                 setResult(CAMERA_REQUEST_CODE, intent);
-            }else if(mCameraId == 1){
+            } else if(mCameraId == 1){
                 setResult(VGACAMERA_REQUEST_CODE, intent);
-            }else if(mCameraId == 2){
+            } else if(mCameraId == 2){
+                setResult(Build.MODEL.contains("ASUS_X017D") ?
+                        MAIN_WIDE_CAMERA_REQUEST_CODE : ASSITSCAMERA_REQUEST_CODE, intent);
+            } else {
                 setResult(ASSITSCAMERA_REQUEST_CODE, intent);
             }
             finish();
@@ -329,12 +340,20 @@ public class CameraTestActivity extends TestingActivity {
                     Log.v(TAG, "cwWidth =" + lp.get(i).width + "cwHeight =" + lp.get(i).height);
                 }
                 Log.v(TAG, "cWidth =" + cWidth + "cHeight =" + cHeight);
-                p.setPictureSize(1920, 1080);
-                p.setPreviewSize(1920,1080);
+                if (Build.MODEL.contains("ASUS_X017D")) {
+                    p.setPictureSize(1920, 1080);
+                    p.setPreviewSize(2160,1080);
+                } else {
+                    p.setPictureSize(1920, 1080);
+                    p.setPreviewSize(1920, 1080);
+                }
                 p.set("zsl","on");
+                p.setJpegQuality(85);
+                if(Build.MODEL.equals("ASUS_X017D"))
+                p.setPreviewFrameRate(5);
                 //频闪问题，设置为50HZ
-               // p.set("zsl","Parameters.ANTIBANDING_50HZ = " + Camera.Parameters.ANTIBANDING_50HZ);
-                p.setAntibanding(Camera.Parameters.ANTIBANDING_50HZ);
+                // p.set("zsl","Parameters.ANTIBANDING_50HZ = " + Camera.Parameters.ANTIBANDING_50HZ);
+                //p.setAntibanding(Camera.Parameters.ANTIBANDING_50HZ);
                 mCamera.setParameters(p);
                 //add by gaoweili end
                 mPreview = new CameraPreview(CameraTestActivity.this, mCamera);
@@ -364,9 +383,12 @@ public class CameraTestActivity extends TestingActivity {
         intent.putExtra("result", mResult);
         if (mCameraId == 0){
             setResult(CAMERA_REQUEST_CODE, intent);
-        }else if(mCameraId == 1){
+        } else if(mCameraId == 1){
             setResult(VGACAMERA_REQUEST_CODE, intent);
-        }else if(mCameraId == 2){
+        } else if(mCameraId == 2){
+            setResult(Build.MODEL.contains("ASUS_X017D") ?
+                    MAIN_WIDE_CAMERA_REQUEST_CODE : ASSITSCAMERA_REQUEST_CODE, intent);
+        } else {
             setResult(ASSITSCAMERA_REQUEST_CODE, intent);
         }
         finish();

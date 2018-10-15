@@ -7,6 +7,7 @@ import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
 import android.os.Build;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.Log;
@@ -25,7 +26,7 @@ import java.util.Random;
 
 public class CameraFlashActivity extends TestingActivity implements View.OnClickListener {
 
-    Camera  camera = null;
+    Camera camera = null;
     private Camera.Parameters parameter;
     private CameraManager mCameraManager;
     public static final String TAG = "CameraFlashActivity";
@@ -41,7 +42,7 @@ public class CameraFlashActivity extends TestingActivity implements View.OnClick
 
     @Override
     protected void initViews() {
-        mCameraManager = (CameraManager)getSystemService(Context.CAMERA_SERVICE);
+        mCameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         findViewById(R.id.action_one).setOnClickListener(this);
         findViewById(R.id.action_two).setOnClickListener(this);
         findViewById(R.id.action_three).setOnClickListener(this);
@@ -58,22 +59,29 @@ public class CameraFlashActivity extends TestingActivity implements View.OnClick
     }
 
     @Override
+    @RequiresApi(api = Build.VERSION_CODES.M)
     protected void onWork() {
         ((TextView) findViewById(R.id.test_title)).setText(getIntent().getStringExtra("title"));
         com.wingtech.diagnostic.util.Log.i("index = " + mIndex);
+        Camera cam = Camera.open();
+        Camera.Parameters p = cam.getParameters();
+        Log.i(TAG, " mode = " + p.getFlashMode());
+        cam.release();
+        if (mFlashId == 1)
+            setFlashlight(0, false);
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                setFlashlight(true);
+                setFlashlight(mFlashId,true);
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                setFlashlight(false);
+                setFlashlight(mFlashId,false);
 
                 mHandler.postDelayed(this, 500);
-                mCount ++;
+                mCount++;
 
                 if (mCount == mIndex) {
                     mHandler.removeCallbacks(this);
@@ -90,12 +98,12 @@ public class CameraFlashActivity extends TestingActivity implements View.OnClick
             CameraCharacteristics c = mCameraManager.getCameraCharacteristics(id);
             Boolean flashAvailable = c.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
             Integer lensFacing = c.get(CameraCharacteristics.LENS_FACING);
-            if(1 == mFlashId){
+            if (1 == flashId) {
                 if (flashAvailable != null && flashAvailable && lensFacing != null
-                    && lensFacing == CameraCharacteristics.LENS_FACING_FRONT) {
+                        && lensFacing == CameraCharacteristics.LENS_FACING_FRONT) {
                     return id;
                 }
-            }else if(0 == mFlashId){
+            } else if (0 == flashId) {
                 if (flashAvailable != null && flashAvailable && lensFacing != null
                         && lensFacing == CameraCharacteristics.LENS_FACING_BACK) {
                     return id;
@@ -106,15 +114,15 @@ public class CameraFlashActivity extends TestingActivity implements View.OnClick
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public void setFlashlight(boolean enabled) {
+    public void setFlashlight(int flashId, boolean enabled) {
         synchronized (this) {
             try {
-                String cameraId = getCameraId(mFlashId);
-                if(TextUtils.isEmpty(cameraId))
-                {
-                    Log.e(TAG,"cameraID is null");
+                String cameraId = getCameraId(flashId);
+                if (TextUtils.isEmpty(cameraId)) {
+                    Log.e(TAG, "cameraID is null");
                     return;
-                }
+                } else
+                    Log.e(TAG, "wuhaiwen cameraID: " + flashId + " " + cameraId);
                 mCameraManager.setTorchMode(cameraId, enabled);
             } catch (CameraAccessException e) {
             }
@@ -127,12 +135,11 @@ public class CameraFlashActivity extends TestingActivity implements View.OnClick
         // TODO Auto-generated method stub
         super.onPause();
         mHandler.removeCallbacksAndMessages(null);
-        setFlashlight(false);
+        setFlashlight(mFlashId, false);
     }
 
     @Override
-    public void onDestroy()
-    {
+    public void onDestroy() {
         super.onDestroy();
     }
 

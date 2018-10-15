@@ -32,7 +32,6 @@ public class SharedPreferencesUtils {
     private static BufferedWriter buf;
     private static String[] mTestCases;
     private static int[] mTestCasesErrorCode;
-    private static String[] mTestCasesErrorTxt;
     private static StringBuffer stringSMMI = null;
     private static boolean isTestAll = false;
 
@@ -115,16 +114,19 @@ public class SharedPreferencesUtils {
         if (Build.MODEL.equals("ASUS_X00LD")) {
             mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_3_cam);
             mTestCasesErrorCode = context.getResources().getIntArray(R.array.smmi_error_code_3_cam);
-            mTestCasesErrorTxt = context.getResources().getStringArray(R.array.smmi_error_txt_3_cam);
+        } else if (Build.MODEL.contains("ASUS_X00D")) {
+            mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_2_cam_zc553kl);
+            mTestCasesErrorCode = context.getResources().getIntArray(R.array.smmi_error_code_2_cam_zc553kl);
+        } else if (Build.MODEL.contains("ASUS_X017D")) {
+            mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_4_cam);
+            mTestCasesErrorCode = context.getResources().getIntArray(R.array.smmi_error_code_4_cam);
         } else {
             mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_2_cam);
             mTestCasesErrorCode = context.getResources().getIntArray(R.array.smmi_error_code_2_cam);
-            mTestCasesErrorTxt = context.getResources().getStringArray(R.array.smmi_error_txt_2_cam);
         }
-        int result = 0;
+        int result;
         isTestAll = true;
         for (int i = 0; i < mTestCases.length; i++) {
-            getParam(context, mTestCases[i], NOT_TEST);
             result = (int) getParam(context, mTestCases[i], NOT_TEST);
             Log.i(TAG, "mTestCases[i] = " + mTestCases[i] + "," + "result = " + result);
             stringSMMI.append(mTestCases[i]);
@@ -140,26 +142,25 @@ public class SharedPreferencesUtils {
         }
 
         for (int i = 0; i < mTestCases.length; i++) {
-            getParam(context, mTestCases[i], NOT_TEST);
             result = (int) getParam(context, mTestCases[i], NOT_TEST);
             Log.i(TAG, "mTestCases[i] = " + mTestCases[i] + "," + "result = " + result);
-            stringSMMI.append(mTestCases[i]);
-            stringSMMI.append(",");
             if (result == 0) {
-                stringSMMI.append("1000");
-                stringSMMI.append(",");
-                stringSMMI.append("Not Test");
                 isTestAll = false;
             } else if (result == 1) {
+                stringSMMI.append(mTestCases[i]);
+                stringSMMI.append(",");
                 stringSMMI.append(mTestCasesErrorCode[i]);
                 stringSMMI.append(",");
-                stringSMMI.append(mTestCasesErrorTxt[i]);
+                stringSMMI.append("Fail");
+                stringSMMI.append("\n");
             } else if (result == 2) {
+                stringSMMI.append(mTestCases[i]);
+                stringSMMI.append(",");
                 stringSMMI.append("0");
                 stringSMMI.append(",");
                 stringSMMI.append("Pass");
+                stringSMMI.append("\n");
             }
-            stringSMMI.append("\n");
             initfileAndWriteData(stringSMMI.toString());
             stringSMMI.setLength(0);
         }
@@ -187,4 +188,30 @@ public class SharedPreferencesUtils {
         }
     }
 
+    public static boolean isIsTestAllDone(Context context) {
+        boolean isDone = false;
+        if (Build.MODEL.equals("ASUS_X00LD")) {
+            mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_3_cam);
+        } else if (Build.MODEL.contains("ASUS_X00D")) {
+            mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_2_cam_zc553kl);
+        } else if (Build.MODEL.contains("ASUS_X017D")) {
+            mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_4_cam);
+            mTestCasesErrorCode = context.getResources().getIntArray(R.array.smmi_error_code_4_cam);
+        } else {
+            mTestCases = context.getResources().getStringArray(R.array.test_cases_smmi_2_cam);
+        }
+        for (int i = 0; i < mTestCases.length; i++) {
+            getParam(context, mTestCases[i], NOT_TEST);
+            int result = (int) getParam(context, mTestCases[i], NOT_TEST);
+            if (result == 0) {
+               isDone = false;
+               break;
+            }
+
+            if (i == mTestCases.length - 1) {
+                isDone = true;
+            }
+        }
+        return isDone;
+    }
 }

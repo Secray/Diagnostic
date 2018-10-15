@@ -20,7 +20,8 @@ public class FpDevice implements IDevice {
                 mFpDevice = new FpDevice();
             } catch (RuntimeException e) {
                 Log.w(TAG, "FpDeviceExt Init failed");
-                throw e;
+                //throw e;
+                mFpDevice = null;
             }
         }
         return mFpDevice;
